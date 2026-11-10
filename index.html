@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tin học vui – Lớp 4, Lớp 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/core.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="ico" id="brand-ico"></span>Tin học vui</a>
+    <div class="topbar-right">
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap home-cols">
+  <div class="home-side">
+    <section class="hero">
+      <h1>Chào em! Mình là Bíp.</h1>
+      <p>Cùng Bíp học Tin học lớp 4 và lớp 5 bằng cách chạm, xếp, thử và chơi nha.</p>
+    </section>
+
+    <section class="card profile-box" aria-labelledby="who-title">
+      <h2 id="who-title">Ai đang học?</h2>
+      <p class="who">Đang học: <b data-current-name>Khách</b>. Mỗi bạn có sao riêng.</p>
+      <div class="names" id="names"></div>
+      <form id="add-name" autocomplete="off">
+        <input class="input" id="new-name" maxlength="20" placeholder="Nhập tên em, ví dụ: Bông" aria-label="Tên của em">
+        <button class="btn btn-primary" type="submit">Thêm tên</button>
+      </form>
+    </section>
+
+    <div class="grade-tabs" role="group" aria-label="Chọn lớp">
+      <button class="btn" data-grade="4" aria-pressed="true">Lớp 4</button>
+      <button class="btn" data-grade="5" aria-pressed="false">Lớp 5</button>
+    </div>
+  </div>
+
+  <div class="home-main">
+    <div id="lessons"></div>
+    <p class="footer">Bài học bám theo chương trình Tin học lớp 4, lớp 5 (bộ Kết nối tri thức). Nội dung và hình vẽ được soạn lại cho web, không sao chép sách.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  /* href set = lesson is ready; stars = number of activities that give a star */
+  var GRADES = {
+    '4': [
+      { topic: 'Chủ đề 1. Máy tính và em', lessons: [
+        { n: 1, t: 'Phần cứng và phần mềm máy tính', id: 'l4-b01', href: 'lop4/bai01.html', stars: 5 },
+        { n: 2, t: 'Gõ bàn phím đúng cách' } ] },
+      { topic: 'Chủ đề 2. Mạng máy tính và Internet', lessons: [ { n: 3, t: 'Thông tin trên trang web' } ] },
+      { topic: 'Chủ đề 3. Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin', lessons: [
+        { n: 4, t: 'Tìm kiếm thông tin trên Internet' }, { n: 5, t: 'Thao tác với tệp và thư mục' } ] },
+      { topic: 'Chủ đề 4. Đạo đức, pháp luật và văn hoá trong môi trường số', lessons: [ { n: 6, t: 'Sử dụng phần mềm khi được phép' } ] },
+      { topic: 'Chủ đề 5. Ứng dụng tin học', lessons: [
+        { n: 7, t: 'Tạo bài trình chiếu' }, { n: 8, t: 'Định dạng văn bản trên trang chiếu' }, { n: 9, t: 'Hiệu ứng chuyển trang' },
+        { n: 10, t: 'Phần mềm soạn thảo văn bản' }, { n: 11, t: 'Chỉnh sửa văn bản' },
+        { n: '12A', t: 'Thực hành sử dụng công cụ đa phương tiện' }, { n: '12B', t: 'Phần mềm luyện gõ bàn phím' } ] },
+      { topic: 'Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính', lessons: [
+        { n: 13, t: 'Chơi với máy tính' }, { n: 14, t: 'Khám phá môi trường lập trình trực quan' },
+        { n: 15, t: 'Tạo chương trình máy tính để diễn tả ý tưởng' }, { n: 16, t: 'Chương trình của em' } ] }
+    ],
+    '5': [
+      { topic: 'Chủ đề 1. Máy tính và em', lessons: [ { n: 1, t: 'Em có thể làm gì với máy tính?' } ] },
+      { topic: 'Chủ đề 2. Mạng máy tính và Internet', lessons: [ { n: 2, t: 'Tìm kiếm thông tin trên website' } ] },
+      { topic: 'Chủ đề 3. Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin', lessons: [
+        { n: 3, t: 'Tìm kiếm thông tin trong giải quyết vấn đề' }, { n: 4, t: 'Cây thư mục' } ] },
+      { topic: 'Chủ đề 4. Đạo đức, pháp luật và văn hoá trong môi trường số', lessons: [ { n: 5, t: 'Bản quyền nội dung thông tin' } ] },
+      { topic: 'Chủ đề 5. Ứng dụng tin học', lessons: [
+        { n: 6, t: 'Định dạng kí tự và bố trí hình ảnh trong văn bản' }, { n: 7, t: 'Thực hành soạn thảo văn bản' },
+        { n: '8A', t: 'Làm quen với phần mềm đồ hoạ' }, { n: '9A', t: 'Sử dụng phần mềm đồ hoạ tạo sản phẩm số' },
+        { n: '8B', t: 'Làm sản phẩm thủ công theo video hướng dẫn' }, { n: '9B', t: 'Thực hành tạo đồ dùng gia đình theo video hướng dẫn' } ] },
+      { topic: 'Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính', lessons: [
+        { n: 10, t: 'Cấu trúc tuần tự' },
+        { n: 11, t: 'Cấu trúc lặp', id: 'l5-b11', href: 'lop5/bai11.html', stars: 6 },
+        { n: 12, t: 'Thực hành sử dụng lệnh lặp' }, { n: 13, t: 'Cấu trúc rẽ nhánh' },
+        { n: 14, t: 'Sử dụng biến trong chương trình' }, { n: 15, t: 'Sử dụng biểu thức trong chương trình' },
+        { n: 16, t: 'Từ kịch bản đến chương trình' } ] }
+    ]
+  };
+  var GRADE_KEY = 'whth-grade';
+
+  function renderLessons(grade) {
+    var host = document.getElementById('lessons');
+    var html = '';
+    var topics = GRADES[grade];
+    for (var i = 0; i < topics.length; i++) {
+      html += '<div class="topic-group"><h2 class="topic">' + topics[i].topic + '</h2><ul class="lesson-list">';
+      var ls = topics[i].lessons;
+      for (var j = 0; j < ls.length; j++) {
+        var l = ls[j];
+        if (l.href) {
+          html += '<li><a class="lesson-item" href="' + l.href + '"><span class="lesson-num">' + l.n + '</span>' +
+            '<span class="t">' + l.t + '</span><span class="stars" data-stars-for="' + l.id + '" data-stars-total="' + l.stars + '"></span></a></li>';
+        } else {
+          html += '<li><div class="lesson-item soon"><span class="lesson-num">' + l.n + '</span>' +
+            '<span class="t">' + l.t + '</span><span class="tag-soon">Sắp có</span></div></li>';
+        }
+      }
+      html += '</ul></div>';
+    }
+    host.innerHTML = html;
+    var tabs = document.querySelectorAll('[data-grade]');
+    for (var k = 0; k < tabs.length; k++) tabs[k].setAttribute('aria-pressed', tabs[k].getAttribute('data-grade') === grade ? 'true' : 'false');
+    try { localStorage.setItem(GRADE_KEY, grade); } catch (e) {}
+    Core.renderStars();
+  }
+
+  function renderNames() {
+    var p = Core.profiles();
+    var box = document.getElementById('names');
+    box.innerHTML = '';
+    for (var i = 0; i < p.list.length; i++) {
+      (function (name) {
+        var b = Core.el('button', 'btn', '');
+        b.appendChild(document.createTextNode(name));
+        b.setAttribute('aria-pressed', name === p.current ? 'true' : 'false');
+        Core.on(b, function () {
+          if (name === Core.currentName() && confirm('Xoá tên "' + name + '" và toàn bộ sao của bạn ấy?')) {
+            Core.removeProfile(name);
+          } else {
+            Core.useProfile(name);
+          }
+          refresh();
+        });
+        box.appendChild(b);
+      })(p.list[i]);
+    }
+    if (p.list.length) box.appendChild(Core.el('span', 'who', '(Chạm tên đang chọn lần nữa để xoá)'));
+    var who = document.querySelectorAll('[data-current-name]');
+    for (var j = 0; j < who.length; j++) who[j].innerHTML = '';
+    for (j = 0; j < who.length; j++) who[j].appendChild(document.createTextNode(p.current || 'Khách'));
+  }
+
+  function refresh() { renderNames(); Core.renderStars(); }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+    var grade = '4';
+    try { grade = localStorage.getItem(GRADE_KEY) || '4'; } catch (e) {}
+    renderLessons(grade);
+    renderNames();
+    var tabs = document.querySelectorAll('[data-grade]');
+    for (var k = 0; k < tabs.length; k++) {
+      (function (t) { Core.on(t, function () { renderLessons(t.getAttribute('data-grade')); }); })(tabs[k]);
+    }
+    document.getElementById('add-name').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = document.getElementById('new-name');
+      if (Core.addProfile(input.value)) { input.value = ''; refresh(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+# Textbook scans are copyrighted and large: keep them out of the public repo
+*.pdf
+.claude/settings.local.json

@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 1. Phần cứng và phần mềm máy tính – Tin học 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<style>
+  /* --- two phones (Khởi động) --- */
+  .phones { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .phone {
+    width: 220px; border: 4px solid var(--ink); border-radius: 28px; padding: 14px 10px 18px; background: var(--paper);
+  }
+  .phone-name { text-align: center; font-weight: 800; margin-bottom: 8px; }
+  .phone-screen { border: 2px solid var(--line); border-radius: 14px; padding: 10px 6px; min-height: 230px; position: relative; }
+  .apps { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .app-tile {
+    width: 60px; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    border: 0; background: none; font-size: 12px; font-weight: 700; cursor: pointer; padding: 4px 0; line-height: 1.2;
+  }
+  .app-tile .ico { width: 40px; height: 40px; color: var(--sw); }
+  .phone-msg { margin-top: 10px; font-size: 15px; border-top: 2px dashed var(--line); padding-top: 8px; min-height: 52px; }
+
+  /* --- camera simulator --- */
+  .cam { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .cam-controls { flex: 1; min-width: 240px; }
+  .cam-row { margin-bottom: 14px; }
+  .cam-row h3 { font-size: 17px; margin-bottom: 6px; }
+  .seg { display: flex; gap: 6px; flex-wrap: wrap; }
+  .seg .btn[aria-pressed="true"] { background: var(--primary); color: var(--primary-ink); border-color: var(--primary); }
+  html.eink .seg .btn[aria-pressed="true"] { background: #000; color: #fff; }
+  .viewfinder {
+    width: 230px; height: 230px; border: 4px solid var(--ink); border-radius: 18px; background: var(--paper);
+    display: flex; align-items: center; justify-content: center; text-align: center; padding: 12px; font-weight: 700;
+  }
+  .viewfinder svg { width: 100%; height: 100%; }
+  .combo-list { list-style: none; padding: 0; margin: 8px 0 0; font-size: 15px; }
+  .combo-list li { padding: 4px 0; display: flex; gap: 6px; align-items: center; }
+  .combo-list .ico { width: 20px; height: 20px; }
+  .combo-list li.done { font-weight: 800; }
+
+  /* --- shutdown simulator --- */
+  .pc { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+  .desk {
+    position: relative; width: 340px; max-width: 100%; height: 230px; border: 4px solid var(--ink); border-radius: 10px;
+    background: #dbe9ff; overflow: hidden;
+  }
+  html.eink .desk { background: #fff; }
+  .desk.off { background: #111; }
+  .desk-msg { position: absolute; left: 0; right: 0; top: 40%; text-align: center; font-weight: 800; padding: 0 10px; }
+  .desk.off .desk-msg { color: #fff; }
+  .taskbar { position: absolute; left: 0; right: 0; bottom: 0; height: 46px; background: var(--paper); border-top: 2px solid var(--ink); display: flex; align-items: center; padding: 0 6px; }
+  .start-btn { min-height: 38px; padding: 2px 10px; border-radius: 8px; }
+  .start-btn .ico { width: 22px; height: 22px; color: var(--hw); }
+  .menu {
+    position: absolute; left: 6px; bottom: 50px; width: 170px; background: var(--paper); border: 2px solid var(--ink); border-radius: 10px; padding: 6px;
+  }
+  .menu .btn { width: 100%; justify-content: flex-start; border-radius: 8px; min-height: 44px; margin-bottom: 4px; }
+  .case { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .case .ico { width: 64px; height: 88px; color: var(--hw); }
+  .case .btn .ico { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 4 · Chủ đề 1. Máy tính và em</div>
+      <h1>Bài 1. Phần cứng và phần mềm máy tính</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l4-b01" data-stars-total="5"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Kể tên được một số phần cứng và phần mềm.</li>
+            <li>Biết phần cứng và phần mềm cần nhau như thế nào.</li>
+            <li>Biết những việc làm sai có thể làm hỏng máy tính.</li>
+          </ul>
+        </div>
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Bé Na muốn tra nghĩa chữ <b>"apple"</b>. Na có hai chiếc điện thoại: của bố và của mẹ. Hai chiếc <b>trông giống hệt nhau</b>. Em chạm vào biểu tượng <b>Từ điển</b> trên từng máy thử nha!</div>
+        </div>
+        <details class="reveal">
+          <summary>Vì sao hai máy giống nhau mà dùng lại khác nhau?</summary>
+          <div>Vỏ máy, màn hình, ống kính của hai chiếc giống nhau. Nhưng <b>ứng dụng</b> bên trong thì khác: máy của bố có cài <b>Từ điển</b>, máy của mẹ thì chưa. Hãy cùng Bíp tìm hiểu tiếp nha!</div>
+        </details>
+      </div>
+      <div class="col-auto phones">
+        <div class="phone"><div class="phone-name">Điện thoại của bố</div>
+          <div class="phone-screen"><div class="apps" data-phone="bo"></div><div class="phone-msg" id="msg-bo">Chạm vào một ứng dụng.</div></div></div>
+        <div class="phone"><div class="phone-name">Điện thoại của mẹ</div>
+          <div class="phone-screen"><div class="apps" data-phone="me"></div><div class="phone-msg" id="msg-me">Chạm vào một ứng dụng.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PHẦN CỨNG HAY PHẦN MỀM -->
+  <section class="step" data-title="Phần cứng hay phần mềm?">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Phần cứng hay phần mềm?</h2>
+      <span class="step-sub"><b>Thử thách:</b> xếp từng thẻ vào đúng ô nha.</span></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="card">
+          <p><b>Phần cứng</b> là những bộ phận em <b>nhìn thấy, cầm được</b>, có hình dạng: bàn phím, chuột, màn hình...</p>
+          <p style="margin:0"><b>Phần mềm</b> là các chương trình, ứng dụng chạy bên trong máy. Em <b>không cầm được</b> phần mềm, chỉ thấy nó làm việc qua màn hình, loa...</p>
+        </div>
+        <div class="remember">Máy tính gồm phần cứng và phần mềm.</div>
+      </div>
+      <div class="col">
+        <div id="sort-hwsw"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MỐI QUAN HỆ -->
+  <section class="step" data-title="Phần cứng cần phần mềm">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Ống kính và ứng dụng chụp ảnh</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <p>Điện thoại chụp được ảnh nhờ hai thứ: <b>ống kính</b> (phần cứng) và <b>ứng dụng chụp ảnh</b> (phần mềm). Em đổi từng thứ rồi bấm <b>Chụp ảnh</b> xem chuyện gì xảy ra. Thử đủ <b>4 cách</b> nha!</p>
+        <div class="remember"><ul>
+          <li>Phần mềm được lưu trong phần cứng và điều khiển phần cứng làm việc.</li>
+          <li>Máy tính cần có cả phần cứng và phần mềm mới làm việc được.</li>
+        </ul></div>
+      </div>
+      <div class="col">
+        <div class="card cam">
+          <div class="cam-controls">
+            <div class="cam-row"><h3>Ống kính (phần cứng)</h3>
+              <div class="seg" data-seg="lens"><button class="btn" data-v="1" aria-pressed="true">Còn tốt</button><button class="btn" data-v="0" aria-pressed="false">Bị hỏng</button></div></div>
+            <div class="cam-row"><h3>Ứng dụng chụp ảnh (phần mềm)</h3>
+              <div class="seg" data-seg="app"><button class="btn" data-v="1" aria-pressed="true">Đã cài</button><button class="btn" data-v="0" aria-pressed="false">Chưa có</button></div></div>
+            <button class="btn btn-primary" id="shoot"><span class="ico" data-icon="camera"></span>Chụp ảnh</button>
+            <ul class="combo-list" id="combos"></ul>
+          </div>
+          <div class="viewfinder" id="viewfinder">Bấm "Chụp ảnh" để thử.</div>
+        </div>
+        <div class="feedback" id="cam-fb" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. DÙNG ĐÚNG CÁCH -->
+  <section class="step" data-title="Dùng máy tính đúng cách">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 3</span><h2>Dùng máy tính đúng cách</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p><b>Thử thách 1:</b> Việc nào <b>nên</b> làm, việc nào <b>không nên</b>?</p>
+        <div id="sort-dos"></div>
+      </div>
+      <div class="col">
+        <p><b>Thử thách 2:</b> Tắt máy tính đúng cách. Em thử tắt máy bên dưới nha.</p>
+        <div class="pc">
+          <div class="desk" id="desk">
+            <div class="desk-msg" id="desk-msg">Máy đang bật</div>
+            <div class="menu" id="menu" style="display:none"></div>
+            <div class="taskbar"><button class="btn start-btn" id="start-btn"><span class="ico" data-icon="windows"></span>Start</button></div>
+          </div>
+          <div class="case"><span class="ico" data-icon="tower"></span>
+            <button class="btn btn-small" id="hold-power">Nhấn giữ nút nguồn</button>
+            <button class="btn btn-small" id="pc-reset"><span class="ico" data-icon="reset"></span>Bật lại máy</button></div>
+        </div>
+        <div class="feedback" id="pc-fb" aria-live="polite"></div>
+        <div class="remember">Dùng máy tính không đúng cách có thể gây lỗi, làm máy chạy không bình thường.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Em trả lời nhanh nha</h2></div>
+    <div id="quiz"></div>
+  </section>
+
+  <!-- 6. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Học trực tuyến cần gì?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p>Em nghĩ trước câu trả lời, rồi chạm để xem gợi ý của Bíp.</p>
+        <details class="reveal"><summary>Kể tên vài phần cứng giúp em học trực tuyến.</summary>
+          <div>Máy tính hoặc máy tính bảng, màn hình, <b>webcam</b> (camera), <b>tai nghe</b>, <b>micro</b>, loa, bộ phát wifi...</div></details>
+        <details class="reveal"><summary>Kể tên một phần mềm giúp em học trực tuyến.</summary>
+          <div>Phần mềm họp trực tuyến như Zoom, Google Meet, Microsoft Teams; trình duyệt web để mở trang học tập...</div></details>
+        <details class="reveal"><summary>Thử thách ở nhà</summary>
+          <div>Đi quanh nhà, tìm <b>3 phần cứng</b> (ví dụ: tivi, điều khiển, loa) và <b>3 phần mềm</b> (ví dụ: ứng dụng xem phim trên tivi, trò chơi trên điện thoại). Kể cho bố mẹ nghe nha!</div></details>
+      </div>
+      <div class="col-side">
+        <div class="card" style="text-align:center">
+          <p><b>Em đã học xong Bài 1!</b></p>
+          <p class="stars" data-stars-for="l4-b01" data-stars-total="5"></p>
+          <p style="margin:0"><a class="btn btn-primary" href="../index.html"><span class="ico" data-icon="home"></span>Về trang chính</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l4-b01';
+
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+
+  /* ---------- Khởi động: two phones ---------- */
+  function phones() {
+    var apps = {
+      bo: [['camera', 'Chụp ảnh'], ['video', 'Video'], ['game', 'Trò chơi'], ['dictionary', 'Từ điển'], ['meet', 'Gọi video'], ['slides', 'Trình chiếu']],
+      me: [['camera', 'Chụp ảnh'], ['video', 'Video'], ['game', 'Trò chơi'], ['meet', 'Gọi video'], ['slides', 'Trình chiếu']]
+    };
+    var say = {
+      camera: 'Ứng dụng chụp ảnh mở ra.', video: 'Ứng dụng xem video mở ra.', game: 'Trò chơi mở ra.',
+      meet: 'Ứng dụng gọi video mở ra.', slides: 'Phần mềm trình chiếu mở ra.',
+      dictionary: '<b>apple</b> nghĩa là <b>quả táo</b>.'
+    };
+    var hosts = document.querySelectorAll('[data-phone]');
+    for (var h = 0; h < hosts.length; h++) {
+      (function (host) {
+        var who = host.getAttribute('data-phone');
+        var msg = document.getElementById('msg-' + who);
+        var list = apps[who];
+        for (var i = 0; i < list.length; i++) {
+          (function (a) {
+            var b = Core.el('button', 'app-tile', Core.icon(a[0]) + '<span>' + a[1] + '</span>');
+            Core.on(b, function () { msg.innerHTML = say[a[0]]; });
+            host.appendChild(b);
+          })(list[i]);
+        }
+        if (who === 'me') {
+          var miss = Core.el('button', 'btn btn-small', 'Hông thấy Từ điển?');
+          miss.style.marginTop = '8px';
+          Core.on(miss, function () { msg.innerHTML = 'Máy của mẹ <b>chưa cài</b> ứng dụng Từ điển nên hông tra được.'; });
+          host.appendChild(miss);
+        }
+      })(hosts[h]);
+    }
+  }
+
+  /* ---------- Khám phá 1: sort hardware / software ---------- */
+  function sortHwSw() {
+    Core.sort(document.getElementById('sort-hwsw'), {
+      lesson: L, id: 'sort-hwsw',
+      bins: [{ id: 'hw', label: 'Phần cứng' }, { id: 'sw', label: 'Phần mềm' }],
+      items: [
+        { label: 'Bàn phím', icon: 'keyboard', bin: 'hw', explain: 'Bàn phím cầm được, có hình dạng.' },
+        { label: 'Trò chơi', icon: 'game', bin: 'sw', explain: 'Trò chơi là chương trình chạy trong máy.' },
+        { label: 'Chuột', icon: 'mouse', bin: 'hw' },
+        { label: 'Phần mềm trình chiếu', icon: 'slides', bin: 'sw' },
+        { label: 'Màn hình', icon: 'monitor', bin: 'hw' },
+        { label: 'Từ điển trên điện thoại', icon: 'dictionary', bin: 'sw' },
+        { label: 'Thân máy', icon: 'tower', bin: 'hw' },
+        { label: 'Ứng dụng xem video', icon: 'video', bin: 'sw' },
+        { label: 'Máy in', icon: 'printer', bin: 'hw' },
+        { label: 'Luyện gõ bàn phím', icon: 'typing', bin: 'sw', hint: 'Đây là chương trình giúp em tập gõ, em có cầm được nó hông?' },
+        { label: 'Loa', icon: 'speaker', bin: 'hw' },
+        { label: 'Ổ đĩa cứng', icon: 'harddisk', bin: 'hw', hint: 'Ổ đĩa nằm trong thân máy, tháo ra cầm được đó.' }
+      ],
+      doneText: 'Giỏi quá! Em phân biệt được phần cứng và phần mềm rồi.'
+    });
+  }
+
+  /* ---------- Khám phá 2: camera simulator ---------- */
+  function camera() {
+    var state = { lens: 1, app: 1 };
+    var tried = {};
+    var combos = [
+      { k: '11', t: 'Ống kính tốt + có ứng dụng' },
+      { k: '01', t: 'Ống kính hỏng + có ứng dụng' },
+      { k: '10', t: 'Ống kính tốt + chưa có ứng dụng' },
+      { k: '00', t: 'Ống kính hỏng + chưa có ứng dụng' }
+    ];
+    var list = document.getElementById('combos');
+    var view = document.getElementById('viewfinder');
+    var fb = document.getElementById('cam-fb');
+    var photo = '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">' +
+      '<rect x="4" y="4" width="92" height="92" rx="6"/><circle cx="72" cy="28" r="10" fill="currentColor"/>' +
+      '<path d="M4 80l28-34 18 20 14-12 32 26" stroke-linejoin="round"/></svg>';
+
+    function drawList() {
+      var html = '';
+      for (var i = 0; i < combos.length; i++) {
+        var ok = tried[combos[i].k];
+        html += '<li class="' + (ok ? 'done' : '') + '">' + Core.icon(ok ? 'check' : 'starEmpty') + combos[i].t + '</li>';
+      }
+      list.innerHTML = html;
+    }
+    var segs = document.querySelectorAll('[data-seg]');
+    for (var s = 0; s < segs.length; s++) {
+      (function (seg) {
+        var key = seg.getAttribute('data-seg');
+        var bs = seg.querySelectorAll('button');
+        for (var i = 0; i < bs.length; i++) {
+          (function (b) {
+            Core.on(b, function () {
+              state[key] = parseInt(b.getAttribute('data-v'), 10);
+              for (var j = 0; j < bs.length; j++) bs[j].setAttribute('aria-pressed', bs[j] === b ? 'true' : 'false');
+            });
+          })(bs[i]);
+        }
+      })(segs[s]);
+    }
+    Core.on(document.getElementById('shoot'), function () {
+      var k = '' + state.lens + state.app;
+      tried[k] = 1;
+      if (k === '11') {
+        view.innerHTML = photo;
+        Core.say(fb, 'Chụp được rồi! Ứng dụng (phần mềm) điều khiển ống kính (phần cứng) để chụp ảnh.', 'good');
+      } else if (k === '01') {
+        view.innerHTML = 'Màn hình tối thui.<br>Ống kính hỏng nên máy hông nhận được hình ảnh.';
+        Core.say(fb, 'Có phần mềm mà thiếu phần cứng thì hông chụp được.', 'bad');
+      } else if (k === '10') {
+        view.innerHTML = 'Hông có nút chụp nào để bấm.<br>Chưa có ứng dụng điều khiển ống kính.';
+        Core.say(fb, 'Có phần cứng mà thiếu phần mềm thì cũng hông chụp được.', 'bad');
+      } else {
+        view.innerHTML = 'Thiếu cả hai thứ.<br>Hông chụp được gì hết.';
+        Core.say(fb, 'Thiếu cả phần cứng lẫn phần mềm.', 'bad');
+      }
+      drawList();
+      if (tried['11'] && tried['01'] && tried['10'] && tried['00']) {
+        Core.celebrate(fb, L, 'camera', 'Em thử đủ 4 cách rồi! Phải có CẢ phần cứng và phần mềm mới chụp được.');
+      }
+    });
+    drawList();
+  }
+
+  /* ---------- Khám phá 3: do / don't + shutdown ---------- */
+  function dos() {
+    Core.sort(document.getElementById('sort-dos'), {
+      lesson: L, id: 'sort-dos',
+      bins: [{ id: 'yes', label: 'Nên làm' }, { id: 'no', label: 'Không nên' }],
+      items: [
+        { label: 'Vừa dùng máy vừa uống nước', bin: 'no', explain: 'Nước đổ vào bàn phím làm hỏng máy.' },
+        { label: 'Đặt máy nơi khô ráo, thoáng mát', bin: 'yes' },
+        { label: 'Nhấn giữ nút nguồn để tắt máy', bin: 'no', explain: 'Máy tắt đột ngột dễ bị lỗi.' },
+        { label: 'Start → Power → Shut down', bin: 'yes', explain: 'Đây là cách tắt máy đúng.' },
+        { label: 'Lau màn hình bằng khăn ướt', bin: 'no', explain: 'Nước vào máy rất nguy hiểm, còn dễ bị điện giật.' },
+        { label: 'Dùng dao cạo vết bẩn trên màn hình', bin: 'no' },
+        { label: 'Để cặp sách lên bàn phím', bin: 'no' },
+        { label: 'Tự ý cài trò chơi lạ', bin: 'no', explain: 'Phần mềm lạ có thể chứa virus.' },
+        { label: 'Hỏi người lớn trước khi vào trang web lạ', bin: 'yes' }
+      ],
+      doneText: 'Em biết giữ gìn máy tính rồi đó!'
+    });
+  }
+
+  function shutdown() {
+    var desk = document.getElementById('desk');
+    var msg = document.getElementById('desk-msg');
+    var menu = document.getElementById('menu');
+    var fb = document.getElementById('pc-fb');
+    var start = document.getElementById('start-btn');
+    var on = true;
+
+    function setMenu(items) {
+      menu.innerHTML = '';
+      for (var i = 0; i < items.length; i++) {
+        (function (it) {
+          var b = Core.el('button', 'btn btn-small', (it.icon ? Core.icon(it.icon) : '') + it.t);
+          Core.on(b, it.fn);
+          menu.appendChild(b);
+        })(items[i]);
+      }
+      menu.style.display = items.length ? '' : 'none';
+    }
+    function powerMenu() {
+      setMenu([
+        { t: 'Sleep', fn: function () { setMenu([]); Core.say(fb, 'Sleep chỉ cho máy "ngủ" thôi, máy vẫn chưa tắt.', 'bad'); } },
+        { t: 'Shut down', fn: turnOff },
+        { t: 'Restart', fn: function () { setMenu([]); Core.say(fb, 'Restart là khởi động lại, máy sẽ bật lên lại đó.', 'bad'); } }
+      ]);
+      Core.say(fb, 'Giờ chọn lệnh để tắt máy.', 'info');
+    }
+    function turnOff() {
+      setMenu([]);
+      msg.innerHTML = 'Đang tắt máy...';
+      start.disabled = true;
+      setTimeout(function () {
+        Core.addClass(desk, 'off');
+        msg.innerHTML = 'Máy đã tắt an toàn';
+        on = false;
+        Core.celebrate(fb, L, 'shutdown', 'Đúng rồi: Start → Power → Shut down.');
+      }, Core.tick() * 2);
+    }
+    Core.on(start, function () {
+      if (!on) return;
+      if (menu.style.display === 'none') {
+        setMenu([{ t: 'Power', icon: 'power', fn: powerMenu }, { t: 'Settings', fn: function () { Core.say(fb, 'Settings là cài đặt, hông phải để tắt máy.', 'bad'); } }]);
+        Core.say(fb, 'Menu Start mở ra rồi. Chạm vào Power.', 'info');
+      } else setMenu([]);
+    });
+    Core.on(document.getElementById('hold-power'), function () {
+      if (!on) return;
+      setMenu([]);
+      Core.addClass(desk, 'off');
+      msg.innerHTML = 'Tắt phụt!';
+      on = false;
+      Core.say(fb, 'Ối! Máy tắt đột ngột có thể làm hỏng phần mềm, mất bài đang làm. Bấm "Bật lại máy" và thử cách đúng nha.', 'bad');
+    });
+    Core.on(document.getElementById('pc-reset'), function () {
+      Core.removeClass(desk, 'off');
+      msg.innerHTML = 'Máy đang bật';
+      start.disabled = false;
+      on = true;
+      setMenu([]);
+      Core.say(fb, 'Máy bật lại rồi.', 'info');
+    });
+  }
+
+  /* ---------- Luyện tập ---------- */
+  function quiz() {
+    Core.quiz(document.getElementById('quiz'), {
+      lesson: L, id: 'quiz',
+      questions: [
+        { q: 'Câu nào dưới đây <b>SAI</b>?',
+          options: ['Trò chơi trên máy tính là phần mềm.', 'Thân máy tính là phần cứng.', 'Chương trình luyện gõ bàn phím là phần cứng.', 'Ứng dụng xem video là phần mềm.'],
+          answer: 2, explain: 'Chương trình luyện gõ là phần mềm, em hông cầm được nó.' },
+        { q: 'Màn hình máy tính xách tay là gì?', options: ['Phần cứng', 'Phần mềm'], answer: 0 },
+        { q: 'Ổ đĩa cứng nằm trong thân máy là gì?', options: ['Phần cứng', 'Phần mềm'], answer: 0, explain: 'Nó nằm khuất bên trong nhưng vẫn có hình dạng.' },
+        { q: 'Câu nào dưới đây <b>ĐÚNG</b>?',
+          options: ['Phần cứng tự làm việc được, hông cần phần mềm.', 'Phần mềm tự làm được mọi việc, hông cần phần cứng.', 'Máy tính cần cả phần cứng và phần mềm mới hoạt động được.'],
+          answer: 2 },
+        { q: 'Điện thoại của mẹ chưa có Từ điển. Muốn có thì làm sao?',
+          options: ['Phải mua điện thoại mới.', 'Cài thêm phần mềm Từ điển (khi được người lớn cho phép).', 'Hông có cách nào.'],
+          answer: 1, explain: 'Phần mềm có thể cài thêm hoặc xoá bớt.' },
+        { q: 'Việc nào là dùng máy tính <b>đúng cách</b>?',
+          options: ['Đặt máy tính ở nơi thoáng mát, khô ráo, sạch sẽ.', 'Để cặp sách lên trên bàn phím.', 'Dùng bút bi viết lên màn hình điện thoại.', 'Tuỳ ý vào bất kì trang web nào.'],
+          answer: 0 }
+      ]
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    phones();
+    sortHwSw();
+    camera();
+    dos();
+    shutdown();
+    quiz();
+  });
+})();
+</script>
+</body>
+</html>
