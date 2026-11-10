@@ -478,7 +478,7 @@ html.eink .quiz-pip.active { background: #000; color: #fff; }
   .lab-slot-title { font-size: 12px; }
   .blk-foot { height: 8px; }
   .lab-palette .blk { min-height: 46px; }
-  .lab-prog-col .lab-program { max-height: calc(100vh - 290px); overflow-y: auto; }
+  .lab-prog-col .lab-program { max-height: 410px; overflow-y: auto; }
 
   /* home page: names on the left, lessons in two columns on the right */
   .home-cols { display: flex; gap: 24px; align-items: flex-start; }
@@ -500,4 +500,25 @@ html.eink .quiz-pip.active { background: #000; color: #fff; }
   .lesson-num { width: 32px; height: 32px; border-radius: 9px; font-size: 15px; }
   .tag-soon { font-size: 12px; padding: 1px 6px; }
   .lesson-item .star-ico { width: 18px; height: 18px; }
+}
+
+/* ===== Fixed stage: on wide screens the app is always exactly 1300x700 =====
+   Bigger windows (PC) show it centred at real size; a slightly smaller window
+   shrinks it to fit (core.js sets --stage-scale), so nothing gets cut off.
+   Narrow screens (phones, Kindle portrait) keep the normal scrolling layout. */
+@media (min-width: 900px) {
+  html { height: 100%; overflow: hidden; background: #cfc8b8; }
+  html.eink { background: #ffffff; }
+  body {
+    position: absolute; left: 50%; top: 50%; margin: 0;
+    width: 1300px; height: 700px; overflow: hidden;
+    display: flex; flex-direction: column;
+    -webkit-transform: translate(-50%, -50%) scale(var(--stage-scale, 1));
+    transform: translate(-50%, -50%) scale(var(--stage-scale, 1));
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  }
+  html.eink body { box-shadow: none; outline: 3px solid #000; }
+  body > header { flex: none; }
+  body > main { flex: 1 1 auto; min-height: 0; overflow-y: auto; width: 100%; }
+  body > .step-nav { flex: none; position: static; }
 }

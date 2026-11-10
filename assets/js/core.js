@@ -122,6 +122,23 @@
     }
   };
 
+  /* ---------- fixed 1300x700 stage (wide screens, see main.css) ---------- */
+  Core.STAGE_W = 1300;
+  Core.STAGE_H = 700;
+  Core.isStage = function () {
+    if (window.matchMedia) return window.matchMedia('(min-width: 900px)').matches;
+    return window.innerWidth >= 900;
+  };
+  /* shrink the stage when the window is smaller than 1300x700; never enlarge it */
+  function fitStage() {
+    var s = 1;
+    if (Core.isStage()) s = Math.min(1, window.innerWidth / Core.STAGE_W, window.innerHeight / Core.STAGE_H);
+    var st = document.documentElement.style;
+    if (st.setProperty) st.setProperty('--stage-scale', String(s));
+  }
+  fitStage();
+  window.addEventListener('resize', fitStage, false);
+
   /* ---------- tiny DOM helpers ---------- */
   Core.el = function (tag, cls, html) {
     var e = document.createElement(tag);
@@ -201,6 +218,8 @@
       if (label) label.innerHTML = steps[idx].getAttribute('data-title') || '';
       if (history.replaceState) history.replaceState(null, '', '#step-' + (idx + 1));
       window.scrollTo(0, 0);
+      var mainEl = document.querySelector('main');
+      if (mainEl) mainEl.scrollTop = 0; /* on the stage, main is the scroll box */
     }
     show(current);
   };

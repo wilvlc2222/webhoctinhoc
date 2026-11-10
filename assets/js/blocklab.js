@@ -75,7 +75,7 @@
     host.appendChild(top);
     host.appendChild(layout);
 
-    function isWide() { return window.innerWidth >= 900; }
+    function isWide() { return Core.isStage(); }
     /* Run buttons and feedback sit under the board on wide screens,
        and after the program on narrow ones (where everything is stacked). */
     function place() {
@@ -210,9 +210,9 @@
     function cellAt(x, y) { return document.getElementById('cell-' + x + '-' + y); }
     function renderBoard() {
       board.innerHTML = '';
-      /* on wide screens the board must also fit the height (about 280px at 700px tall) */
+      /* on wide screens the app is a fixed 1300x700 stage: the board gets 280px of height */
       var cell = 64;
-      if (isWide()) cell = Math.min(64, Math.floor(Math.max(240, window.innerHeight - 420) / level.rows));
+      if (isWide()) cell = Math.min(64, Math.floor(280 / level.rows));
       board.style.maxWidth = Math.min(level.cols * cell, 460) + 'px';
       for (var y = 0; y < level.rows; y++) {
         var row = E('div', 'lab-row');
