@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hướng dẫn – Tin học vui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/core.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="ico" id="brand-ico"></span>Tin học vui</a>
+    <div class="topbar-right">
+      <a class="btn btn-small btn-primary" href="index.html">&lsaquo; Về trang chủ</a>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<!-- How to add a topic later:
+     1) add a button in .guide-menu:  <button class="btn" data-topic="ten-muc">Tên mục</button>
+     2) add a section:                <section class="guide-topic" id="ten-muc"> ... </section>
+     The script at the bottom shows one topic at a time. Do not use the class "step" here:
+     pages with .step are lessons and need a learner's name (core.js). -->
+<main class="wrap guide-cols">
+  <nav class="guide-side" aria-label="Các mục hướng dẫn">
+    <h1>Hướng dẫn</h1>
+    <div class="guide-menu">
+      <button class="btn" data-topic="dang-nhap" aria-pressed="true">Đăng nhập</button>
+    </div>
+    <a class="btn guide-home" href="index.html">&lsaquo; Về trang chủ</a>
+  </nav>
+
+  <div class="guide-main">
+    <section class="guide-topic" id="dang-nhap">
+      <h2>Đăng nhập để học</h2>
+      <p class="guide-lead">Mỗi bạn có <b>tên</b> và <b>mã số</b> riêng. Nhờ đó máy nhớ sao của từng bạn.</p>
+
+      <div class="guide-grid">
+        <div class="card guide-card">
+          <h3><span class="lesson-num">1</span>Nhập tên của em</h3>
+          <p>Ở trang chủ, em gõ tên vào ô rồi bấm <b>Vào học</b>.</p>
+          <div class="gp" aria-hidden="true">
+            <div class="gp-title">Ai đang học?</div>
+            <div class="gp-row"><span class="gp-input">Bông</span><span class="gp-btn gp-tap">Vào học</span></div>
+          </div>
+        </div>
+
+        <div class="card guide-card">
+          <h3><span class="lesson-num">2</span>Ghi nhớ mã số</h3>
+          <p>Máy cho em một mã số có 4 chữ số. Em <b>chép vào vở</b> và ghi nhớ.</p>
+          <div class="gp gp-center" aria-hidden="true">
+            <div>Mã số của em là</div>
+            <div class="gp-code">4827</div>
+            <div class="gp-small">(4827 chỉ là ví dụ, mã của em sẽ khác)</div>
+          </div>
+        </div>
+
+        <div class="card guide-card">
+          <h3><span class="lesson-num">3</span>Lần sau học tiếp</h3>
+          <p>Em chạm vào <b>tên của mình</b>, nhập <b>mã số</b> rồi bấm <b>Vào học</b>.</p>
+          <div class="gp" aria-hidden="true">
+            <div class="gp-row"><span class="gp-btn plain gp-tap">Bông</span><span class="gp-btn plain">Lan</span><span class="gp-btn plain">Minh</span></div>
+            <div class="gp-row gp-gap"><span>Mã số của <b>Bông</b>:</span><span class="gp-input gp-short">4827</span><span class="gp-btn">Vào học</span></div>
+          </div>
+        </div>
+
+        <div class="card guide-card">
+          <h3><span class="lesson-num">4</span>Học ở máy khác</h3>
+          <p>Em bấm <b>Em đã có mã số</b>, rồi nhập tên và mã số để lấy lại sao.</p>
+          <div class="gp" aria-hidden="true">
+            <div class="gp-row"><span class="gp-btn plain gp-tap">Em đã có mã số (học ở máy khác)</span></div>
+            <div class="gp-row gp-gap"><span class="gp-input">Bông</span><span class="gp-input gp-short">4827</span><span class="gp-btn">Lấy lại bài học</span></div>
+          </div>
+          <p class="gp-small">Nút này chỉ có khi thầy cô đã bật lưu kết quả lên mạng.</p>
+        </div>
+      </div>
+
+      <ul class="guide-tips">
+        <li>Học xong, em bấm <b>Bạn khác vào học</b> để bạn sau dùng máy.</li>
+        <li>Quên mã số? Mã số luôn hiện ở khung <b>Ai đang học?</b> khi em đang học. Nếu vẫn không nhớ, em hỏi thầy cô.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<script>
+(function () {
+  /* one topic at a time; the address keeps the topic (huongdan.html#dang-nhap) */
+  function show(id) {
+    var topics = document.querySelectorAll('.guide-topic'), tabs = document.querySelectorAll('[data-topic]'), found = false, i;
+    for (i = 0; i < topics.length; i++) if (topics[i].id === id) found = true;
+    if (!found) id = topics[0].id;
+    for (i = 0; i < topics.length; i++) topics[i].style.display = topics[i].id === id ? '' : 'none';
+    for (i = 0; i < tabs.length; i++) tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-topic') === id ? 'true' : 'false');
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+    var tabs = document.querySelectorAll('[data-topic]');
+    for (var i = 0; i < tabs.length; i++) {
+      (function (t) {
+        Core.on(t, function () {
+          var id = t.getAttribute('data-topic');
+          show(id);
+          try { history.replaceState(null, '', '#' + id); } catch (e) { location.hash = id; }
+        });
+      })(tabs[i]);
+    }
+    show(location.hash.replace('#', ''));
+  });
+})();
+</script>
+</body>
+</html>

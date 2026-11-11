@@ -44,7 +44,7 @@
     var used = E('div', 'lab-used');
     var progHost = E('div', 'lab-program');
     var controls = E('div', 'lab-controls');
-    var fb = E('div', 'feedback');
+    var fb = E('div', 'feedback'); fb.setAttribute('data-react', '1');
     fb.setAttribute('aria-live', 'polite');
 
     var runBtn = E('button', 'btn btn-primary', Core.icon('play') + 'Chạy');

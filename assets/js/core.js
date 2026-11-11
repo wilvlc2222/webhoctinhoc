@@ -49,18 +49,38 @@
 
   /* ---------- learner profiles: several kids can share one device ---------- */
   var PROFILE_KEY = 'whth-profiles';
+  /* Each learner has a name and a random 4-digit code. The learner must give the
+     name to start, and the code to come back to that name later. */
+  function newCode() { return String(1000 + Math.floor(Math.random() * 9000)); }
+  Core.cleanName = function (name) { return String(name || '').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '').slice(0, 20); };
   Core.profiles = function () {
-    return readJSON(PROFILE_KEY, { list: [], current: null });
+    var p = readJSON(PROFILE_KEY, { list: [], current: null }), changed = false;
+    p.list = p.list || [];
+    p.codes = p.codes || {};
+    for (var i = 0; i < p.list.length; i++) if (!p.codes[p.list[i]]) { p.codes[p.list[i]] = newCode(); changed = true; }  /* names made before codes existed */
+    if (changed) writeJSON(PROFILE_KEY, p);
+    return p;
   };
   Core.currentName = function () {
     return Core.profiles().current;
   };
+  Core.hasProfile = function (name) {
+    var p = Core.profiles();
+    for (var i = 0; i < p.list.length; i++) if (p.list[i] === name) return true;
+    return false;
+  };
+  Core.codeOf = function (name) { return Core.profiles().codes[name] || ''; };
+  Core.checkCode = function (name, code) {
+    var c = Core.codeOf(name);
+    return !!c && c === String(code || '').replace(/\D/g, '');
+  };
   Core.addProfile = function (name) {
-    name = String(name || '').replace(/^\s+|\s+$/g, '').slice(0, 20);
+    name = Core.cleanName(name);
     if (!name) return false;
     var p = Core.profiles();
     for (var i = 0; i < p.list.length; i++) if (p.list[i] === name) { p.current = name; writeJSON(PROFILE_KEY, p); return true; }
     p.list.push(name);
+    p.codes[name] = newCode();
     p.current = name;
     writeJSON(PROFILE_KEY, p);
     return true;
@@ -70,12 +90,37 @@
     p.current = name;
     writeJSON(PROFILE_KEY, p);
   };
+  /* nobody is learning: the next learner has to give a name (and code) again */
+  Core.logout = function () { Core.useProfile(null); };
+  /* used by sync.js: a learner's stars as plain data, and adding stars that came from another device */
+  Core.exportProgress = function (name) {
+    return readJSON(STORE_KEY, {})['@' + name] || {};
+  };
+  Core.importProgress = function (name, progress) {
+    var all = readJSON(STORE_KEY, {}), mine = all['@' + name] = all['@' + name] || {}, l, a;
+    for (l in progress) if (progress.hasOwnProperty(l) && progress[l]) {
+      mine[l] = mine[l] || {};
+      for (a in progress[l]) if (progress[l].hasOwnProperty(a) && progress[l][a]) mine[l][a] = 1;
+    }
+    writeJSON(STORE_KEY, all);
+  };
+  /* a learner who started on another device: same name, same code, stars from the server */
+  Core.restoreProfile = function (name, code, progress) {
+    var p = Core.profiles(), found = false;
+    for (var i = 0; i < p.list.length; i++) if (p.list[i] === name) found = true;
+    if (!found) p.list.push(name);
+    p.codes[name] = String(code);
+    p.current = name;
+    writeJSON(PROFILE_KEY, p);
+    Core.importProgress(name, progress || {});
+  };
   Core.removeProfile = function (name) {
     var p = Core.profiles();
     var keep = [];
     for (var i = 0; i < p.list.length; i++) if (p.list[i] !== name) keep.push(p.list[i]);
     p.list = keep;
-    if (p.current === name) p.current = keep.length ? keep[0] : null;
+    delete p.codes[name];
+    if (p.current === name) p.current = null;
     writeJSON(PROFILE_KEY, p);
     var all = readJSON(STORE_KEY, {});
     delete all['@' + name];
@@ -174,6 +219,11 @@
     /* restart the pop/shake animation even when the type did not change */
     box.style.animation = 'none'; void box.offsetWidth; box.style.animation = '';
     if (type === 'good') Core.burst(box, 6, 30);
+    /* answer widgets mark their feedback line so Bíp (mascot.js) reacts */
+    if (box.getAttribute('data-react') && (type === 'good' || type === 'bad')) {
+      if (Core.react) Core.react(type);
+      if (Core.sound) Core.sound(type);
+    }
   };
   /* motion is off on e-ink and for reduced-motion users: skip the extra elements too */
   Core.motionOK = function () {
@@ -198,6 +248,8 @@
   Core.celebrate = function (box, lessonId, activityId, text) {
     var isNew = Core.award(lessonId, activityId);
     Core.say(box, (text || 'Hoàn thành!') + (isNew ? ' Em được thêm 1 sao.' : ''), 'good');
+    if (Core.react) Core.react('win', isNew);
+    if (Core.sound) Core.sound('win');
     if (!isNew) return;
     Core.burst(box);
     var have = Core.countStars(lessonId), els = document.querySelectorAll('[data-stars-for="' + lessonId + '"]');
@@ -313,7 +365,7 @@
         var labelled = /^\s*(<b>\s*)?(Câu|Bài|Luyện tập|Vận dụng)\s+\d/i.test(q.q);
         card.appendChild(Core.el('p', 'quiz-text', (labelled ? '' : '<b>Câu ' + (qi + 1) + '.</b> ') + q.q));
         var list = Core.el('div', 'quiz-options');
-        var fb = Core.el('div', 'feedback');
+        var fb = Core.el('div', 'feedback'); fb.setAttribute('data-react', '1');
         fb.setAttribute('aria-live', 'polite');
         var next = Core.el('button', 'btn btn-primary quiz-next', 'Câu tiếp &rsaquo;');
         next.style.display = 'none';
@@ -370,7 +422,7 @@
     tray.setAttribute('aria-label', 'Các thẻ cần xếp');
     var bins = Core.el('div', 'sort-bins');
     host.appendChild(Core.howto('Chạm vào một thẻ, rồi chạm vào ô hợp với nó. Xếp sai thì thẻ rung lên, em thử ô khác.'));
-    var fb = Core.el('div', 'feedback');
+    var fb = Core.el('div', 'feedback'); fb.setAttribute('data-react', '1');
     fb.setAttribute('aria-live', 'polite');
 
     var binEls = {};
@@ -443,6 +495,15 @@
   /* ---------- page boot ---------- */
   document.addEventListener('DOMContentLoaded', function () {
     applyEink();
+    /* a lesson needs a learner: without a name, go to the home page to enter one.
+       (Pages shown inside a frame, like tools/fit.html, are left alone.) */
+    var framed = false;
+    try { framed = window.self !== window.top; } catch (e) { framed = true; }
+    if (!Core.currentName() && !framed && document.querySelector('.step')) {
+      var home = document.querySelector('a.brand');
+      window.location.replace((home ? home.getAttribute('href') : '../index.html').replace(/#.*$/, '') + '#ten');
+      return;
+    }
     var t = document.getElementById('eink-toggle');
     if (t) Core.on(t, function () { Core.setEink(!Core.isEink()); });
     var who = document.querySelectorAll('[data-current-name]');
@@ -453,4 +514,21 @@
     Core.renderStars();
     Core.initSteps();
   });
+
+  /* load Bíp the mascot (mascot.js), the game sounds (sound.js) and the results sync (sync.js) from the same folder as this file, on every page */
+  (function () {
+    var s = document.getElementsByTagName('script'), extra = ['mascot.js', 'sound.js', 'sync.js'];
+    for (var i = s.length - 1; i >= 0; i--) {
+      var src = s[i].getAttribute('src') || '';
+      if (/(^|\/)core\.js(\?|$)/.test(src)) {
+        for (var k = 0; k < extra.length; k++) {
+          var m = document.createElement('script');
+          m.src = src.replace(/core\.js/, extra[k]);
+          m.async = false;
+          (document.head || document.documentElement).appendChild(m);
+        }
+        return;
+      }
+    }
+  })();
 })();

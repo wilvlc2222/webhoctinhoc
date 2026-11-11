@@ -46,7 +46,7 @@
     if (cfg.leftTitle) colL.appendChild(E('div', 'match-title', cfg.leftTitle));
     if (cfg.rightTitle) colR.appendChild(E('div', 'match-title', cfg.rightTitle));
     host.appendChild(Core.howto('Chạm một ô bên trái, rồi chạm ô hợp với nó bên phải. Cặp đúng sẽ có cùng con số.'));
-    var fb = E('div', 'feedback');
+    var fb = E('div', 'feedback'); fb.setAttribute('data-react', '1');
     fb.setAttribute('aria-live', 'polite');
     var sel = null, done = 0, n = cfg.pairs.length;
 
@@ -107,7 +107,7 @@
     var pool = E('div', 'order-pool');
     var list = E('ol', 'order-list');
     host.appendChild(Core.howto('Chạm vào việc làm <b>trước tiên</b>, rồi tới việc tiếp theo, cho đến hết.'));
-    var fb = E('div', 'feedback');
+    var fb = E('div', 'feedback'); fb.setAttribute('data-react', '1');
     fb.setAttribute('aria-live', 'polite');
     var idx = [];
     for (var i = 0; i < n; i++) idx.push(i);
@@ -144,7 +144,7 @@
   Core.truefalse = function (host, cfg) {
     host.appendChild(Core.howto('Đọc từng câu, rồi chạm <b>Đúng</b> hoặc <b>Sai</b>. Chọn chưa đúng thì chọn lại.'));
     var list = E('div', 'tf');
-    var fb = E('div', 'feedback');
+    var fb = E('div', 'feedback'); fb.setAttribute('data-react', '1');
     fb.setAttribute('aria-live', 'polite');
     var done = 0, n = cfg.items.length;
     for (var i = 0; i < n; i++) {
@@ -178,7 +178,7 @@
     host.appendChild(Core.howto('Chạm một từ ở hàng dưới, rồi chạm vào chỗ trống hợp với nó.'));
     var para = E('div', 'fill-text');
     var bank = E('div', 'fill-bank');
-    var fb = E('div', 'feedback');
+    var fb = E('div', 'feedback'); fb.setAttribute('data-react', '1');
     fb.setAttribute('aria-live', 'polite');
     var parts = cfg.text.split(/\[([^\]]+)\]/), words = [], blanks = [], sel = null, done = 0;
     for (var i = 0; i < parts.length; i++) {
@@ -226,7 +226,7 @@
     for (var li = 0; li < cfg.items.length; li++) if (cfg.items[li].icon || String(cfg.items[li].label).replace(/<[^>]+>/g, '').length < 28) longText = false;
     if (cfg.rows || longText) Core.addClass(wrap, 'pick-rows');
     host.appendChild(Core.howto('Chạm để chọn <b>tất cả</b> ý đúng (chạm lần nữa để bỏ chọn), rồi bấm <b>Kiểm tra</b>.'));
-    var fb = E('div', 'feedback');
+    var fb = E('div', 'feedback'); fb.setAttribute('data-react', '1');
     fb.setAttribute('aria-live', 'polite');
     var cards = [];
     for (var i = 0; i < cfg.items.length; i++) {

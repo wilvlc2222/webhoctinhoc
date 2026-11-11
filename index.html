@@ -15,6 +15,7 @@
   <div class="wrap">
     <a class="brand" href="index.html"><span class="ico" id="brand-ico"></span>Tin học vui</a>
     <div class="topbar-right">
+      <a class="btn btn-small" href="huongdan.html">Hướng dẫn</a>
       <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
     </div>
   </div>
@@ -29,23 +30,20 @@
 
     <section class="card profile-box" aria-labelledby="who-title">
       <h2 id="who-title">Ai đang học?</h2>
-      <p class="who">Đang học: <b data-current-name>Khách</b>. Mỗi bạn có sao riêng.</p>
-      <div class="names" id="names"></div>
-      <form id="add-name" autocomplete="off">
-        <input class="input" id="new-name" maxlength="20" placeholder="Nhập tên em, ví dụ: Bông" aria-label="Tên của em">
-        <button class="btn btn-primary" type="submit">Thêm tên</button>
-      </form>
+      <div id="who-box"></div>
     </section>
 
     <div class="grade-tabs" role="group" aria-label="Chọn lớp">
       <button class="btn" data-grade="4" aria-pressed="true">Lớp 4</button>
       <button class="btn" data-grade="5" aria-pressed="false">Lớp 5</button>
     </div>
+    <ul class="topic-legend" id="topic-legend" aria-label="Các chủ đề"></ul>
+    <p class="footer home-note">Bài học bám theo chương trình Tin học lớp 4, lớp 5 (bộ Kết nối tri thức). Nội dung và hình vẽ được soạn lại cho web, không sao chép sách.</p>
   </div>
 
   <div class="home-main">
     <div id="lessons"></div>
-    <p class="footer">Bài học bám theo chương trình Tin học lớp 4, lớp 5 (bộ Kết nối tri thức). Nội dung và hình vẽ được soạn lại cho web, không sao chép sách.</p>
+    <button class="gate-note" id="gate-note" type="button">Em nhập tên ở bên trái để bắt đầu học nha.</button>
   </div>
 </main>
 
@@ -89,56 +87,157 @@
   };
   var GRADE_KEY = 'whth-grade';
 
-  function renderLessons(grade) {
+  /* the wide stage shows two columns (see main.css); narrow screens show one list */
+  function isWide() { return !!(window.matchMedia && window.matchMedia('(min-width: 900px)').matches); }
+  var shownGrade = null;
+  window.addEventListener('resize', function () {
     var host = document.getElementById('lessons');
-    var html = '';
-    var topics = GRADES[grade];
+    if (shownGrade && host.getAttribute('data-wide') !== (isWide() ? '1' : '0')) renderLessons(shownGrade);
+  });
+
+  function renderLessons(grade) {
+    shownGrade = grade;
+    var host = document.getElementById('lessons');
+    /* A grid of equal cards: every row counts as one lesson (9A and 9B are two).
+       On the wide stage the first half is the left column and the rest the right
+       column, row by row, so both sides line up. Each card carries a small
+       "Chủ đề N" tag; the legend on the left gives the topic names. */
+    var topics = GRADES[grade], cards = [], legend = '';
     for (var i = 0; i < topics.length; i++) {
-      html += '<div class="topic-group"><h2 class="topic">' + topics[i].topic + '</h2><ul class="lesson-list">';
-      var ls = topics[i].lessons;
+      var ls = topics[i].lessons, tp = i + 1;
+      legend += '<li><span class="topic-tag tp-' + tp + '">Chủ đề ' + tp + '</span><span>' + topics[i].topic.replace(/^Chủ đề \d+\.\s*/, '') + '</span></li>';
       for (var j = 0; j < ls.length; j++) {
-        var l = ls[j];
+        var l = ls[j], tag = '<span class="topic-tag tp-' + tp + '">Chủ đề ' + tp + '</span>';
         if (l.href) {
-          html += '<li><a class="lesson-item" href="' + l.href + '"><span class="lesson-num">' + l.n + '</span>' +
-            '<span class="t">' + l.t + '</span><span class="stars" data-stars-for="' + l.id + '" data-stars-total="' + l.stars + '"></span></a></li>';
+          cards.push('<a class="lesson-item" href="' + l.href + '" title="' + topics[i].topic + '"><span class="lesson-num tp-' + tp + '">' + l.n + '</span>' +
+            '<span class="lesson-body"><span class="t">' + l.t + '</span><span class="lesson-meta">' + tag +
+            '<span class="stars" data-stars-for="' + l.id + '" data-stars-total="' + l.stars + '"></span></span></span></a>');
         } else {
-          html += '<li><div class="lesson-item soon"><span class="lesson-num">' + l.n + '</span>' +
-            '<span class="t">' + l.t + '</span><span class="tag-soon">Sắp có</span></div></li>';
+          cards.push('<div class="lesson-item soon"><span class="lesson-num">' + l.n + '</span>' +
+            '<span class="lesson-body"><span class="t">' + l.t + '</span><span class="lesson-meta">' + tag + '<span class="tag-soon">Sắp có</span></span></span></div>');
         }
       }
-      html += '</ul></div>';
+    }
+    var html = '', half = Math.ceil(cards.length / 2);
+    if (isWide()) {
+      for (var r = 0; r < half; r++) html += '<div class="lesson-row">' + cards[r] + (cards[half + r] || '<span class="lesson-gap"></span>') + '</div>';
+    } else {
+      html = '<div class="lesson-flat">' + cards.join('') + '</div>';
     }
     host.innerHTML = html;
+    host.setAttribute('data-wide', isWide() ? '1' : '0');
+    var lg = document.getElementById('topic-legend');
+    if (lg) lg.innerHTML = legend;
     var tabs = document.querySelectorAll('[data-grade]');
     for (var k = 0; k < tabs.length; k++) tabs[k].setAttribute('aria-pressed', tabs[k].getAttribute('data-grade') === grade ? 'true' : 'false');
     try { localStorage.setItem(GRADE_KEY, grade); } catch (e) {}
     Core.renderStars();
   }
 
+  /* ---------- who is learning: a name is needed to start, and each name has a 4-digit code ---------- */
+  function esc(s) { var d = document.createElement('div'); d.appendChild(document.createTextNode(s)); return d.innerHTML; }
+
+  /* big card shown once, right after a new name is made */
+  function showCode(name) {
+    var m = Core.el('div', 'bip-modal', '<div class="bip-card code-card" role="dialog" aria-modal="true">' +
+      '<h2>Chào ' + esc(name) + '!</h2>' +
+      '<p>Mã số của em là</p>' +
+      '<div class="code-big" aria-label="Mã số ' + Core.codeOf(name).split('').join(' ') + '">' + Core.codeOf(name) + '</div>' +
+      '<p><b>Em hãy ghi nhớ mã số này</b> (chép vào vở cho chắc). Lần sau em cần <b>tên</b> và <b>mã số</b> để học tiếp và giữ sao của mình.</p>' +
+      '<button class="btn btn-primary" type="button">Em đã ghi nhớ rồi</button></div>');
+    document.body.appendChild(m);
+    Core.on(m.querySelector('button'), function () { document.body.removeChild(m); });
+  }
+
+  /* a name that is already on this device opens only with its code */
+  function askCode(name, note) {
+    var box = document.getElementById('who-box');
+    box.innerHTML = '<div id="code-ask"><form id="code-form" autocomplete="off"><label for="code-in">Mã số của <b>' + esc(name) + '</b>:</label>' +
+      '<div class="who-row"><input class="input" id="code-in" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="4 chữ số" aria-label="Mã số 4 chữ số">' +
+      '<button class="btn btn-primary" type="submit">Vào học</button></div></form></div>' +
+      '<button class="btn btn-small" id="code-back" type="button">&lsaquo; Tên khác</button><div class="feedback" id="who-fb"></div>';
+    var input = document.getElementById('code-in'), fb = document.getElementById('who-fb');
+    if (note) Core.say(fb, note, 'info');
+    Core.on(document.getElementById('code-back'), renderNames);
+    input.focus();
+    document.getElementById('code-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (Core.checkCode(name, input.value)) { Core.useProfile(name); refresh(); }
+      else { Core.say(fb, 'Mã số chưa đúng. Em nhớ lại, hoặc hỏi thầy cô nha.', 'bad'); input.value = ''; input.focus(); }
+    });
+  }
+
+  /* a learner who started on another device gets the stars back from the teacher's sheet (sync.js) */
+  function askRestore() {
+    var box = document.getElementById('who-box');
+    box.innerHTML = '<div id="code-ask"><form id="restore-form" autocomplete="off"><label for="re-name">Tên và mã số của em:</label>' +
+      '<div class="who-row"><input class="input" id="re-name" maxlength="20" placeholder="Tên em" aria-label="Tên của em">' +
+      '<input class="input" id="re-code" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="Mã số" aria-label="Mã số 4 chữ số"></div>' +
+      '<button class="btn btn-primary" type="submit" id="re-go">Lấy lại bài học</button></form></div>' +
+      '<button class="btn btn-small" id="code-back" type="button">&lsaquo; Quay lại</button><div class="feedback" id="who-fb"></div>';
+    var fb = document.getElementById('who-fb'), go = document.getElementById('re-go');
+    Core.on(document.getElementById('code-back'), renderNames);
+    document.getElementById('re-name').focus();
+    document.getElementById('restore-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      go.disabled = true;
+      Core.say(fb, 'Đang tìm bài học của em...', 'info');
+      Core.sync.restore(document.getElementById('re-name').value, document.getElementById('re-code').value, function (err) {
+        go.disabled = false;
+        if (!err) { refresh(); return; }
+        Core.say(fb, err === 'bad' ? 'Em nhập đủ tên và mã số 4 chữ số nha.' :
+          err === 'notfound' ? 'Không tìm thấy tên và mã số này. Em kiểm tra lại từng chữ, từng số nha.' :
+          'Chưa kết nối được mạng. Em thử lại sau, hoặc nhờ thầy cô.', err === 'bad' ? 'info' : 'bad');
+      });
+    });
+  }
+
   function renderNames() {
-    var p = Core.profiles();
-    var box = document.getElementById('names');
-    box.innerHTML = '';
-    for (var i = 0; i < p.list.length; i++) {
-      (function (name) {
-        var b = Core.el('button', 'btn', '');
-        b.appendChild(document.createTextNode(name));
-        b.setAttribute('aria-pressed', name === p.current ? 'true' : 'false');
-        Core.on(b, function () {
-          if (name === Core.currentName() && confirm('Xoá tên "' + name + '" và toàn bộ sao của bạn ấy?')) {
-            Core.removeProfile(name);
-          } else {
-            Core.useProfile(name);
-          }
-          refresh();
-        });
-        box.appendChild(b);
-      })(p.list[i]);
+    var p = Core.profiles(), cur = p.current, box = document.getElementById('who-box');
+    if (cur) {
+      box.innerHTML = '<p class="who who-now">Đang học: <b>' + esc(cur) + '</b><br>Mã số của em: <b class="who-code">' + Core.codeOf(cur) + '</b></p>' +
+        '<div class="who-row"><button class="btn btn-small" id="who-out" type="button">Bạn khác vào học</button>' +
+        '<button class="btn btn-small" id="who-del" type="button">Xoá tên này</button></div><p class="who sync-state" data-sync-state></p>';
+      if (Core.sync) Core.sync.paint();
+      Core.on(document.getElementById('who-out'), function () { Core.logout(); refresh(); });
+      Core.on(document.getElementById('who-del'), function () {
+        if (confirm('Xoá tên "' + cur + '" và toàn bộ sao của bạn ấy?')) { Core.removeProfile(cur); refresh(); }
+      });
+    } else {
+      box.innerHTML = '<p class="who">Em <b>nhập tên</b> để vào học.' + (p.list.length ? ' Bạn nào học rồi thì chạm vào tên của mình.' : '') + '</p>' +
+        '<div class="names" id="names"></div>' +
+        '<form id="add-name" autocomplete="off"><div class="who-row"><input class="input" id="new-name" maxlength="20" placeholder="Tên em, ví dụ: Bông" aria-label="Tên của em">' +
+        '<button class="btn btn-primary" type="submit">Vào học</button></div></form>' +
+        '<button class="btn btn-small" id="who-restore" type="button" data-sync-only' + (Core.sync && Core.sync.on ? '' : ' style="display:none"') + '>Em đã có mã số (học ở máy khác)</button><div class="feedback" id="who-fb"></div>' +
+        '<a class="help-link" href="huongdan.html#dang-nhap">Xem hướng dẫn đăng nhập &rsaquo;</a>';
+      var names =document.getElementById('names'), fb = document.getElementById('who-fb');
+      for (var i = 0; i < p.list.length; i++) {
+        (function (name) {
+          var b = Core.el('button', 'btn btn-small', esc(name));
+          b.type = 'button';
+          Core.on(b, function () { askCode(name); });
+          names.appendChild(b);
+        })(p.list[i]);
+      }
+      Core.on(document.getElementById('who-restore'), askRestore);
+      document.getElementById('add-name').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = Core.cleanName(document.getElementById('new-name').value);
+        if (!name) { Core.say(fb, 'Em gõ tên của mình vào ô trước nha.', 'info'); return; }
+        if (Core.hasProfile(name)) {
+          askCode(name, 'Tên này đã có trên máy. Nếu là em, hãy nhập mã số. Nếu em là bạn khác trùng tên, hãy thêm một chữ vào tên, ví dụ: ' + esc(name) + ' B.');
+          return;
+        }
+        Core.addProfile(name);
+        refresh();
+        showCode(name);
+      });
     }
-    if (p.list.length) box.appendChild(Core.el('span', 'who', '(Chạm tên đang chọn lần nữa để xoá)'));
-    var who = document.querySelectorAll('[data-current-name]');
-    for (var j = 0; j < who.length; j++) who[j].innerHTML = '';
-    for (j = 0; j < who.length; j++) who[j].appendChild(document.createTextNode(p.current || 'Khách'));
+    /* lessons open only when someone is learning */
+    var main = document.querySelector('.home-main'), note = document.getElementById('gate-note');
+    main.className = 'home-main' + (cur ? '' : ' is-locked');
+    document.querySelector('.home-side').className = 'home-side' + (cur ? '' : ' no-learner');
+    note.style.display = cur ? 'none' : '';
   }
 
   function refresh() { renderNames(); Core.renderStars(); }
@@ -153,11 +252,15 @@
     for (var k = 0; k < tabs.length; k++) {
       (function (t) { Core.on(t, function () { renderLessons(t.getAttribute('data-grade')); }); })(tabs[k]);
     }
-    document.getElementById('add-name').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var input = document.getElementById('new-name');
-      if (Core.addProfile(input.value)) { input.value = ''; refresh(); }
-    });
+    /* a locked lesson card, or a lesson page opened without a name (#ten), points to the name box */
+    function nudge() {
+      var input = document.getElementById('new-name'), fb = document.getElementById('who-fb');
+      if (!input) return;
+      Core.say(fb, 'Em nhập tên trước rồi mới vào học được nha.', 'info');
+      input.focus();
+    }
+    document.getElementById('gate-note').addEventListener('click', nudge, false);
+    if (location.hash === '#ten' && !Core.currentName()) nudge();
   });
 })();
 </script>
