@@ -243,7 +243,7 @@ html.eink .sort-item.is-selected { background: #000; color: #fff; transform: non
   .sort-item { width: calc(33.33% - 7px); min-height: 96px; font-size: 14px; }
   .sort-bins { flex-direction: column; }
 }
-@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+@keyframes shake { 0%,100% { transform: translateX(0); } 12% { transform: translateX(-9px); } 28% { transform: translateX(8px); } 44% { transform: translateX(-6px); } 60% { transform: translateX(5px); } 76% { transform: translateX(-3px); } 90% { transform: translateX(2px); } }
 
 /* ===== Home page ===== */
 .hero { padding: 24px 0 8px; }
@@ -1177,3 +1177,58 @@ html.eink .fill-blank.is-done { color: #000; border-bottom-style: double; }
 html.eink .fill-word.is-selected { background: #000; color: #fff; }
 .pick-rows { flex-direction: column; flex-wrap: nowrap; gap: 5px; }
 .pick-rows .pick-item { width: 100%; min-height: 40px; flex-direction: row; justify-content: flex-start; text-align: left; padding: 6px 12px; font-size: 16px; }
+
+/* ===== Game feel: chunky buttons, pops, bursts (e-ink and reduced-motion turn all motion off above) ===== */
+.btn {
+  box-shadow: 0 3px 0 var(--edge, #d3c8b2);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+.btn-primary { --edge: #134a8e; }
+.btn.is-right, .btn.is-done, .btn.is-on { --edge: #1f6b30; }
+.btn.is-wrong { --edge: #a51d1d; }
+.btn.is-selected { --edge: #134a8e; }
+@media (hover: hover) {
+  .btn:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 5px 0 var(--edge, #d3c8b2), 0 8px 14px rgba(29, 36, 51, 0.12); }
+}
+.btn:not(:disabled):active { transform: translateY(3px); box-shadow: 0 0 0 var(--edge, #d3c8b2); transition-duration: 0.05s; }
+.btn:disabled { box-shadow: none; }
+html.eink .btn, html.eink .btn:hover, html.eink .btn:active { box-shadow: none; transform: none; }
+
+@keyframes pop { 0% { transform: scale(1); } 35% { transform: scale(1.08); } 70% { transform: scale(0.98); } 100% { transform: scale(1); } }
+.quiz-opt.is-right, .match-item.is-done, .tf-btn.is-on, .fill-blank.is-done, .sort-item.is-placed, .order-step { animation: pop 0.38s ease-out; }
+.tf-row.is-done { animation: pop 0.38s ease-out; }
+
+@keyframes fb-in { 0% { opacity: 0; transform: translateY(6px) scale(0.96); } 60% { opacity: 1; transform: translateY(-2px) scale(1.02); } 100% { transform: none; } }
+.feedback { position: relative; }
+.feedback-good { animation: fb-in 0.4s ease-out; }
+.feedback-bad { animation: shake 0.4s; }
+.feedback-good > .ico { animation: pop 0.5s 0.1s ease-out both; }
+
+/* star burst from the feedback line when a new star is earned */
+.burst { position: absolute; left: 22px; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 5; }
+.burst > span { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; color: var(--star); opacity: 0;
+  animation: burst 0.9s ease-out forwards; }
+.burst .ico { width: 22px; height: 22px; display: block; }
+@keyframes burst {
+  0% { opacity: 1; transform: translate(0, 0) scale(0.4) rotate(0); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--r)); }
+}
+@keyframes star-pop { 0% { transform: scale(1); } 40% { transform: scale(1.7) rotate(-12deg); } 100% { transform: scale(1); } }
+.star-ico.star-pop { animation: star-pop 0.6s ease-out; }
+
+/* step change: slide in */
+@keyframes step-in { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+.step { animation: step-in 0.28s ease-out; }
+.step-dot { transition: transform 0.15s, background-color 0.15s; }
+.step-dot.active { transform: scale(1.12); }
+html.eink .step-dot.active { transform: none; }
+
+/* right / wrong answers: green ring + pop, red flash + shake */
+@keyframes ring-good { 0% { box-shadow: 0 3px 0 var(--edge, #1f6b30), 0 0 0 0 rgba(43, 138, 62, 0.55); } 100% { box-shadow: 0 3px 0 var(--edge, #1f6b30), 0 0 0 16px rgba(43, 138, 62, 0); } }
+@keyframes flash-bad { 0%, 100% { background-color: var(--bad-bg); } 25% { background-color: #ffa8a8; } }
+.quiz-opt.is-right, .match-item.is-done, .tf-btn.is-on, .sort-item.is-placed { animation: pop 0.38s ease-out, ring-good 0.7s ease-out; }
+.fill-blank.is-done { animation: pop 0.38s ease-out; }
+.quiz-opt.is-wrong, .match-item.is-wrong, .order-item.is-wrong, .pick-item.is-wrong, .sort-item.is-wrong, .tf-btn.is-wrong, .fill-blank.is-wrong { animation: shake 0.5s, flash-bad 0.6s; }
+.burst.small > span { width: 16px; height: 16px; margin: -8px 0 0 -8px; }
+.burst.small .ico { width: 16px; height: 16px; }

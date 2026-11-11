@@ -171,10 +171,40 @@
     box.className = 'feedback feedback-' + (type || 'info');
     var ico = type === 'good' ? Core.icon('check') : type === 'bad' ? Core.icon('cross') : '';
     box.innerHTML = ico + '<span>' + text + '</span>';
+    /* restart the pop/shake animation even when the type did not change */
+    box.style.animation = 'none'; void box.offsetWidth; box.style.animation = '';
+    if (type === 'good') Core.burst(box, 6, 30);
+  };
+  /* motion is off on e-ink and for reduced-motion users: skip the extra elements too */
+  Core.motionOK = function () {
+    if (/\beink\b/.test(document.documentElement.className)) return false;
+    return !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  };
+  /* stars flying out of the feedback line: n stars, about `dist` px away (small sparkle when n is low) */
+  Core.burst = function (box, n, dist) {
+    if (!Core.motionOK()) return;
+    n = n || 10; dist = dist || 45;
+    var b = Core.el('span', n < 10 ? 'burst small' : 'burst'), html = '';
+    for (var i = 0; i < n; i++) {
+      var a = (i / n) * Math.PI * 2 + Math.random() * 0.5, d = dist + Math.random() * dist * 0.8;
+      html += '<span style="--dx:' + Math.round(Math.cos(a) * d) + 'px;--dy:' + Math.round(Math.sin(a) * d) +
+        'px;--r:' + Math.round(Math.random() * 360 - 180) + 'deg;animation-delay:' + (Math.random() * 0.12).toFixed(2) + 's">' +
+        Core.icon('star') + '</span>';
+    }
+    b.innerHTML = html;
+    box.appendChild(b);
+    setTimeout(function () { if (b.parentNode) b.parentNode.removeChild(b); }, 1200);
   };
   Core.celebrate = function (box, lessonId, activityId, text) {
     var isNew = Core.award(lessonId, activityId);
     Core.say(box, (text || 'Hoàn thành!') + (isNew ? ' Em được thêm 1 sao.' : ''), 'good');
+    if (!isNew) return;
+    Core.burst(box);
+    var have = Core.countStars(lessonId), els = document.querySelectorAll('[data-stars-for="' + lessonId + '"]');
+    for (var i = 0; i < els.length; i++) {
+      var ic = els[i].querySelectorAll('.star-ico')[have - 1];
+      if (ic) ic.setAttribute('class', (ic.getAttribute('class') || '') + ' star-pop');
+    }
   };
 
   /* ---------- stepper: one section at a time ---------- */
