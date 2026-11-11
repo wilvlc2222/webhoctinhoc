@@ -321,6 +321,7 @@
   /* cfg = { lesson, id, questions: [{ q, options: [], answer: index, explain }] } */
   /* One question is shown at a time, with numbered pips to jump between them. */
   Core.quiz = function (host, cfg) {
+    (Core.quizBank = Core.quizBank || []).push({ type: 'quiz', questions: cfg.questions });   /* thuthach.html reuses these questions */
     var solved = 0;
     var total = cfg.questions.length;
     var cards = [], pips = [], isSolved = [];
@@ -517,7 +518,7 @@
 
   /* load Bíp the mascot (mascot.js), the game sounds (sound.js) and the results sync (sync.js) from the same folder as this file, on every page */
   (function () {
-    var s = document.getElementsByTagName('script'), extra = ['mascot.js', 'sound.js', 'sync.js'];
+    var s = document.getElementsByTagName('script'), extra = ['mascot.js', 'sound.js', 'sync.js', 'game.js'];
     for (var i = s.length - 1; i >= 0; i--) {
       var src = s[i].getAttribute('src') || '';
       if (/(^|\/)core\.js(\?|$)/.test(src)) {

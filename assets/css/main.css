@@ -1452,15 +1452,15 @@ html.eink .home-main.is-locked #lessons { opacity: 1; }
 .guide-menu { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .guide-menu .btn { justify-content: flex-start; }
 .guide-menu .btn[aria-pressed="true"] { --edge: #134a8e; background: var(--primary); border-color: var(--primary); color: var(--primary-ink); }
-.guide-topic h2 { margin: 10px 0 2px; font-size: 24px; }
-.guide-lead { margin: 0 0 10px; font-size: 17px; }
+.guide-topic h2 { margin: 6px 0 2px; font-size: 24px; }
+.guide-lead { margin: 0 0 8px; font-size: 17px; }
 .guide-grid { display: flex; flex-wrap: wrap; gap: 12px; }
 .guide-card { flex: 1 1 300px; min-width: 0; margin: 0; padding: 10px 14px 12px; }
 .guide-card h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; font-size: 19px; }
 .guide-card h3 .lesson-num { width: 30px; height: 30px; border-radius: 9px; font-size: 16px; }
 .guide-card p { margin: 0 0 8px; font-size: 16px; line-height: 1.35; }
-.guide-tips { margin: 10px 0 0; padding-left: 22px; font-size: 16px; line-height: 1.4; }
-.guide-tips li { margin-bottom: 2px; }
+.guide-tips { margin: 8px 0 0; padding-left: 22px; font-size: 15px; line-height: 1.35; }
+.guide-tips li { margin-bottom: 1px; }
 .help-link { font-weight: 700; }
 #who-box .help-link { display: inline-block; margin-top: 8px; font-size: 14px; }
 /* small still pictures of the real screens: not controls, nobody can tap them */
@@ -1492,3 +1492,154 @@ html.eink .guide-menu .btn[aria-pressed="true"] { background: #000; color: #fff;
   .guide-main { flex: 1 1 0; min-width: 0; }
   .guide-card { flex: 1 1 40%; }
 }
+/* guide page footer: where to send feedback */
+.guide-foot { padding: 8px 0; border-top: 2px solid var(--line); background: var(--paper); font-size: 15px; color: var(--muted); }
+.guide-foot a { font-weight: 800; }
+html.eink .guide-foot { border-color: #000; color: #000; }
+@media (min-width: 900px) { body > .guide-foot { flex: none; } }
+.who-forgot { margin-top: 10px; padding-top: 8px; border-top: 2px dashed var(--line); font-size: 14px; line-height: 1.35; color: var(--muted); }
+.who-forgot .btn { display: flex; margin-top: 6px; color: var(--bad); border-color: var(--bad); --edge: #a51d1d; }
+html.eink .who-forgot .btn { color: #000; border-color: #000; }
+
+/* ===== Game layer (game.js): gems, combo, medals, lesson result, badges, toast ===== */
+.gem-ico { display: inline-block; width: 20px; height: 20px; vertical-align: -4px; margin-right: 4px; }
+.medal-ico { display: inline-block; flex: none; width: 20px; height: 20px; margin-right: 4px; vertical-align: -4px; }
+.medal-ico.big { width: 84px; height: 84px; margin: 0; }
+.step-head .result-btn { margin-left: auto; }
+.result-card { width: 480px; text-align: center; }
+.result-card h2 { margin: 2px 0 6px; font-size: 26px; }
+.result-card p { margin: 6px 0; font-size: 17px; }
+.result-medal { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 22px; }
+.result-none { padding: 14px 0; color: var(--muted); }
+.result-line { font-size: 20px !important; }
+.result-line .star-ico { display: inline-block; width: 22px; height: 22px; vertical-align: -4px; margin-right: 4px; }
+.result-gem { margin-left: 18px; }
+.result-hint { font-size: 13px !important; color: var(--muted); }
+.result-card .bip-actions { flex-wrap: wrap; }
+.badge-card { width: 900px; }
+.badge-card h2 small { font-size: 16px; color: var(--muted); }
+.badge-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge-cell { flex: 1 1 22%; min-width: 150px; display: flex; flex-direction: column; align-items: center; padding: 6px 6px 8px; border: 2px solid var(--line); border-radius: 14px;
+  text-align: center; font-size: 15px; line-height: 1.25; color: var(--muted); }
+.badge-cell.is-on { border-color: var(--star); background: #fff9db; color: var(--ink); }
+.badge-cell small { font-size: 12px; }
+.badge-ico { width: 48px; height: 56px; }
+.game-toast { position: fixed; left: 50%; top: 70px; z-index: 120; display: flex; align-items: center; gap: 10px; margin-left: -150px; width: 300px; padding: 8px 14px;
+  border: 3px solid var(--star); border-radius: 16px; background: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); opacity: 0; transform: translateY(-20px); transition: opacity 0.2s, transform 0.3s; }
+.game-toast.is-on { opacity: 1; transform: none; }
+.game-toast span { display: flex; flex-direction: column; font-size: 14px; color: var(--muted); }
+.game-toast b { font-size: 18px; color: var(--ink); }
+.game-toast .badge-ico { flex: none; }
+html.eink .badge-cell.is-on { background: #fff; border-color: #000; border-width: 3px; }
+html.eink .game-toast { border-color: #000; box-shadow: none; }
+
+/* home page: gems, badges, challenge, class goal */
+.who-game { margin-top: 8px; }
+.who-gems { display: inline-flex; align-items: center; font-size: 18px; }
+.class-goal { margin: 6px 0 0; font-size: 13px; line-height: 1.35; }
+.class-goal:empty { display: none; }
+.goal-bar { display: block; height: 10px; margin-top: 3px; overflow: hidden; border: 2px solid var(--line); border-radius: 99px; background: #fff; }
+.goal-bar span { display: block; height: 100%; background: linear-gradient(90deg, #ffd43b, #f59f00); }
+html.eink .goal-bar span { background: #000; }
+.boss-menu { width: 640px; }
+.boss-menu p { margin: 0 0 8px; font-size: 16px; }
+.boss-list { list-style: none; margin: 0; padding: 0; }
+.boss-list li { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-top: 2px solid var(--line); font-size: 16px; }
+.boss-name { flex: 1 1 0; min-width: 0; }
+.boss-won { color: var(--good); font-size: 14px; }
+#view-toggle { display: none; }
+
+/* adventure map (wide stage only) */
+.lesson-map { position: relative; }
+.map-path { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.map-path polyline { fill: none; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.map-road { stroke: #e9dfc8; stroke-width: 22; }
+.map-dash { stroke: #fff; stroke-width: 3; stroke-dasharray: 2 12; }
+.map-node { position: absolute; width: 138px; margin-left: -69px; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: var(--ink); }
+.map-dot { width: 60px; height: 60px; border: 4px solid #fff; border-radius: 50%; font-size: 22px; box-shadow: 0 4px 0 rgba(29, 36, 51, 0.25); transition: transform 0.15s; }
+.map-node:hover .map-dot { transform: translateY(-3px) scale(1.06); }
+.map-node.is-current .map-dot { border-color: var(--star); box-shadow: 0 0 0 4px rgba(245, 159, 0, 0.35), 0 4px 0 rgba(29, 36, 51, 0.25); }
+.map-t { margin-top: 4px; padding: 0 4px; border-radius: 6px; background: rgba(251, 246, 236, 0.9); font-size: 14px; font-weight: 800; line-height: 1.2; }
+.map-stars { margin-top: 1px; font-size: 13px; }
+.map-stars .star-ico { display: none; }
+.map-stars .star-count { margin-left: 0; font-size: 13px; }
+.map-stars .star-count::before { content: "★ "; color: var(--star); }
+.map-stars .medal-ico { width: 18px; height: 18px; }
+.map-bip { position: absolute; left: 50%; top: -14px; margin-left: 20px; z-index: 2; pointer-events: none; }
+.map-bip .bip-mini { width: 46px; height: 52px; }
+html.eink .map-road { stroke: #ccc; }
+html.eink .map-dot { border-color: #000; box-shadow: none; }
+html.eink .map-node.is-current .map-dot { border-width: 6px; box-shadow: none; }
+html.eink .map-t { background: #fff; }
+html.eink .map-stars .star-count::before { color: #000; }
+@media (min-width: 900px) {
+  #view-toggle { display: inline-flex; }
+  .home-side:not(.no-learner) .hero p { display: none; }
+}
+
+/* ===== Boss challenge (thuthach.html) ===== */
+.boss-side { text-align: center; }
+.boss-bug svg { width: 150px; height: 138px; }
+.boss-bug.is-hit svg { animation: shake 0.5s; }
+.boss-bug.is-down svg { transform: rotate(180deg); opacity: 0.6; }
+.boss-title { margin: 0; font-size: 26px; }
+.boss-topic { margin: 0 0 8px; color: var(--muted); }
+.boss-stat { margin-top: 10px; font-weight: 700; font-size: 15px; }
+.boss-hp { display: flex; gap: 4px; justify-content: center; margin-top: 4px; min-height: 18px; }
+.boss-hp span { width: 26px; height: 18px; border: 2px solid var(--ink); border-radius: 5px; background: #fff; }
+.boss-hp span.on { background: #845ef7; }
+.boss-hearts { margin-top: 4px; }
+.heart-ico { width: 30px; height: 30px; margin: 0 2px; }
+.boss-card { margin: 0; }
+.boss-card h2 { margin: 0 0 6px; font-size: 26px; }
+.boss-lead, .boss-rules { font-size: 18px; }
+.boss-rules { margin: 6px 0 12px; padding-left: 24px; line-height: 1.5; }
+.boss-count { margin: 0 0 4px; color: var(--muted); font-size: 15px; }
+.boss-q { margin-bottom: 10px; font-size: 20px; font-weight: 700; line-height: 1.35; }
+.boss-reward { font-size: 20px; color: #0b7285; }
+.boss-next { margin-top: 10px; }
+.boss-frame { position: fixed; left: -3000px; top: 0; width: 1300px; height: 700px; border: 0; visibility: hidden; }
+html.eink .boss-hp span.on { background: #000; }
+html.eink .boss-reward { color: #000; }
+@media (min-width: 900px) {
+  .boss-cols { display: flex; gap: 20px; align-items: flex-start; padding-top: 14px; }
+  .boss-side { flex: 0 0 260px; margin: 0; }
+  .boss-main { flex: 1 1 0; min-width: 0; }
+}
+.hero { overflow: hidden; }
+/* floating labels on the feedback line: combo and gem (game.js) */
+.fb-chips { position: absolute; right: 8px; top: -13px; display: flex; gap: 6px; pointer-events: none; }
+.combo-chip, .gem-chip { padding: 0 10px; border: 2px solid #fff; border-radius: 99px; font-size: 14px; font-weight: 800; line-height: 1.5; white-space: nowrap; animation: pop 0.38s ease-out; }
+.combo-chip { background: var(--star); color: #fff; }
+.gem-chip { background: #e3fafc; border-color: #0b7285; color: #0b7285; }
+.gem-chip .gem-ico { width: 16px; height: 16px; vertical-align: -3px; }
+html.eink .combo-chip { background: #000; border-color: #000; }
+html.eink .gem-chip { background: #fff; border-color: #000; color: #000; }
+
+/* ===== Teacher page (giaovien.html) ===== */
+.teach { max-width: none; }
+.teach-login { max-width: 560px; margin: 30px auto 0; }
+.teach-login h1, .teach-bar h1 { margin: 0 0 6px; font-size: 26px; }
+.teach-note { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+.teach-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 8px; }
+.teach-bar h1 { margin: 0 auto 0 0; }
+.teach-tabs { margin: 0; }
+.teach-tabs .btn[aria-pressed="true"] { --edge: #134a8e; background: var(--primary); border-color: var(--primary); color: var(--primary-ink); }
+.teach-find { flex: 0 1 200px; min-height: 40px; }
+.teach-sum { margin: 6px 0; font-size: 15px; }
+.teach-scroll { overflow-x: auto; border: 2px solid var(--line); border-radius: 12px; background: var(--paper); }
+.teach-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.teach-table th, .teach-table td { padding: 4px 6px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); text-align: center; white-space: nowrap; }
+.teach-table th { position: sticky; top: 0; background: var(--info-bg); cursor: pointer; font-size: 13px; }
+.teach-table th.is-sort { background: #d0ebff; }
+.teach-table .t-name { text-align: left; font-weight: 700; }
+.teach-table .t-empty { padding: 18px; color: var(--muted); }
+.tc.gold { background: #ffe066; }
+.tc.silver { background: #dee2e6; }
+.tc.bronze { background: #f3c79b; }
+span.tc { padding: 0 6px; border-radius: 4px; }
+html.eink .teach-tabs .btn[aria-pressed="true"] { background: #000; color: #fff; }
+html.eink .tc.gold { background: #000; color: #fff; }
+html.eink .tc.silver { background: #bbb; }
+html.eink .tc.bronze { background: #fff; outline: 2px solid #000; outline-offset: -2px; }
+.guide-teacher { margin-top: 8px; }

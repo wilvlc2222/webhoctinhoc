@@ -56,7 +56,9 @@ function countStars(progress) {
   for (l in progress) {
     n = 0;
     for (k in progress[l]) n++;
-    c.lessons[l] = n; c.total += n;
+    c.lessons[l] = n;
+    if (!/^l\d/.test(l)) continue;   /* "gems" (kim cương) and other extras are not stars */
+    c.total += n;
     if (l.indexOf('l4-') === 0) c.g4 += n;
     if (l.indexOf('l5-') === 0) c.g5 += n;
   }
@@ -86,7 +88,47 @@ function findRow(sh, name, code) {
   return 0;
 }
 
+/* totals for the class goal on the home page: how many learners and how many stars, no names */
+function stats() {
+  var sh = getSheet(), last = sh.getLastRow(), stars = 0;
+  if (last < 2) return { ok: true, learners: 0, stars: 0 };
+  var v = sh.getRange(2, 3, last - 1, 1).getValues();
+  for (var i = 0; i < v.length; i++) stars += Number(v[i][0]) || 0;
+  return { ok: true, learners: last - 1, stars: stars };
+}
+
+/* ---------- teacher page (giaovien.html) ----------
+   The teacher's password is typed by the teacher into cell B1 of the sheet "CaiDat".
+   It is checked here, on Google's side, and is never part of the web page. */
+var SETTINGS_NAME = 'CaiDat';
+function teacherKey() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(), sh = ss.getSheetByName(SETTINGS_NAME);
+  if (!sh) {
+    sh = ss.insertSheet(SETTINGS_NAME);
+    sh.getRange(1, 1, 1, 2).setValues([['Mật khẩu giáo viên (gõ vào ô B1 bên cạnh)', '']]);
+    sh.setColumnWidth(1, 320);
+  }
+  return String(sh.getRange(1, 2).getValue() || '').replace(/^\s+|\s+$/g, '');
+}
+function list(req) {
+  var key = teacherKey();
+  if (!key) return { ok: false, error: 'no key set' };
+  if (String(req.key || '') !== key) { Utilities.sleep(1500); return { ok: false, error: 'bad key' }; }   /* slow down guessing */
+  var sh = getSheet(), last = sh.getLastRow(), cols = sh.getLastColumn(), rows = [];
+  if (last >= 2) {
+    var head = sh.getRange(1, 1, 1, cols).getValues()[0], v = sh.getRange(2, 1, last - 1, cols).getValues();
+    for (var i = 0; i < v.length; i++) {
+      var r = v[i], lessons = {};
+      for (var c = FIXED.length; c < head.length; c++) if (r[c] !== '' && r[c] != null) lessons[head[c]] = Number(r[c]) || 0;
+      rows.push({ name: String(r[0]), code: String(r[1]), total: Number(r[2]) || 0, started: r[5], last: r[6], lessons: lessons });
+    }
+  }
+  return { ok: true, rows: rows };
+}
+
 function handle(req) {
+  if (req.action === "stats") return stats();
+  if (req.action === "list") return list(req);
   var name = cleanName(req.name), code = String(req.code || '');
   if (!name || !/^\d{4}$/.test(code)) return { ok: false, error: 'bad name or code' };
   var lock = LockService.getScriptLock();

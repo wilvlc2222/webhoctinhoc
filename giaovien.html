@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dành cho giáo viên – Tin học vui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/core.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="ico" id="brand-ico"></span>Tin học vui</a>
+    <div class="topbar-right">
+      <a class="btn btn-small btn-primary" href="index.html">&lsaquo; Về trang chủ</a>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<!-- Teacher page: every learner's results, read from the Google Sheet.
+     The password is checked by the sheet script (tools/sheet-sync.gs, action "list"),
+     never here: this page holds no password and no learner data of its own.
+     The password stays in memory only, so reloading the page asks for it again. -->
+<main class="wrap teach">
+  <div id="teach-login" class="card teach-login">
+    <h1>Dành cho giáo viên</h1>
+    <p>Thầy cô nhập mật khẩu giáo viên để xem kết quả của học sinh.</p>
+    <form id="teach-form" autocomplete="off">
+      <div class="who-row">
+        <input class="input" id="teach-key" type="password" placeholder="Mật khẩu giáo viên" aria-label="Mật khẩu giáo viên">
+        <button class="btn btn-primary" type="submit" id="teach-go">Xem kết quả</button>
+      </div>
+    </form>
+    <div class="feedback" id="teach-fb"></div>
+    <p class="teach-note">Mật khẩu do thầy cô tự đặt trong bảng tính Google: trang tính <b>CaiDat</b>, ô <b>B1</b>. Cách làm có trong tệp <code>tools/HUONG-DAN-GOOGLE-SHEET.md</code>.</p>
+  </div>
+
+  <div id="teach-board" style="display:none">
+    <div class="teach-bar">
+      <h1>Kết quả học sinh</h1>
+      <div class="grade-tabs teach-tabs" role="group" aria-label="Chọn lớp">
+        <button class="btn btn-small" data-g="4" aria-pressed="true" type="button">Lớp 4</button>
+        <button class="btn btn-small" data-g="5" aria-pressed="false" type="button">Lớp 5</button>
+      </div>
+      <input class="input teach-find" id="teach-find" placeholder="Tìm theo tên" aria-label="Tìm theo tên">
+      <button class="btn btn-small" id="teach-reload" type="button">Tải lại</button>
+      <button class="btn btn-small" id="teach-csv" type="button">Tải tệp CSV</button>
+    </div>
+    <p class="teach-sum" id="teach-sum"></p>
+    <div class="teach-scroll"><table class="teach-table" id="teach-table"></table></div>
+    <p class="teach-note">Mỗi ô bài học là số sao đã đạt. Màu ô: <span class="tc gold">vàng</span> đủ sao, <span class="tc silver">bạc</span> từ 70%, <span class="tc bronze">đồng</span> từ 40%. Bấm vào tiêu đề cột để sắp xếp.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var key = '', rows = [], grade = 4, sort = { k: 'last', dir: -1 }, started = false;
+
+  function esc(s) { var d = document.createElement('div'); d.appendChild(document.createTextNode(s == null ? '' : String(s))); return d.innerHTML; }
+  function when(v) {
+    var d = v ? new Date(v) : null;
+    if (!d || isNaN(d.getTime())) return '';
+    function p(n) { return (n < 10 ? '0' : '') + n; }
+    return p(d.getDate()) + '/' + p(d.getMonth() + 1) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+  /* "bong" finds "Bông": lower case, no tone marks */
+  function fold(s) {
+    s = String(s || '').toLowerCase();
+    if (s.normalize) s = s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    return s.replace(/đ/g, 'd').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+  }
+  function lessons() { var out = [], L = Core.LESSONS, id; for (id in L) if (L.hasOwnProperty(id) && L[id][0] === grade) out.push(id); return out; }
+  function label(id) { return id.replace(/^l\d-b0?/, '').toUpperCase(); }
+  /* one learner's numbers for the chosen grade */
+  function view(r) {
+    var ls = lessons(), v = { stars: 0, gold: 0, silver: 0, bronze: 0, cells: [] }, i, n, m;
+    for (i = 0; i < ls.length; i++) {
+      n = (r.lessons && r.lessons[ls[i]]) || 0; m = Core.medal(n, Core.LESSONS[ls[i]][2]);
+      v.stars += n; if (m) v[m]++;
+      v.cells.push({ id: ls[i], n: n, m: m });
+    }
+    v.gems = (r.lessons && r.lessons.gems) || 0;
+    return v;
+  }
+  function shown() {
+    var find = fold(document.getElementById('teach-find').value), out = [], i;
+    for (i = 0; i < rows.length; i++) {
+      var nm = fold(rows[i].name);
+      if (!find || nm.indexOf(find) >= 0) out.push({ r: rows[i], v: view(rows[i]) });
+    }
+    out.sort(function (a, b) {
+      var x, y;
+      if (sort.k === 'name') { x = a.r.name.toLowerCase(); y = b.r.name.toLowerCase(); return (x < y ? -1 : x > y ? 1 : 0) * sort.dir; }
+      if (sort.k === 'last') { x = new Date(a.r.last || 0).getTime() || 0; y = new Date(b.r.last || 0).getTime() || 0; }
+      else if (sort.k === 'gems') { x = a.v.gems; y = b.v.gems; }
+      else if (sort.k === 'gold') { x = a.v.gold * 10000 + a.v.silver * 100 + a.v.bronze; y = b.v.gold * 10000 + b.v.silver * 100 + b.v.bronze; }
+      else if (sort.k.indexOf('l') === 0) { x = (a.r.lessons && a.r.lessons[sort.k]) || 0; y = (b.r.lessons && b.r.lessons[sort.k]) || 0; }
+      else { x = a.v.stars; y = b.v.stars; }
+      return (x - y) * sort.dir;
+    });
+    return out;
+  }
+  function th(k, text, title) {
+    return '<th data-k="' + k + '"' + (title ? ' title="' + esc(title) + '"' : '') + (sort.k === k ? ' class="is-sort"' : '') + '>' + text + (sort.k === k ? (sort.dir > 0 ? ' ▲' : ' ▼') : '') + '</th>';
+  }
+  function draw() {
+    var ls = lessons(), list = shown(), i, j, total = 0, gems = 0, active = 0, max = 0;
+    for (i = 0; i < ls.length; i++) max += Core.LESSONS[ls[i]][2];
+    var h = '<thead><tr>' + th('name', 'Tên') + '<th>Mã số</th>' + th('stars', 'Sao', 'Tổng sao của lớp ' + grade + ' (tối đa ' + max + ')') + th('gems', 'KC', 'Kim cương: làm đúng ngay lần đầu') +
+      th('gold', 'Huy chương', 'Số huy chương vàng · bạc · đồng') + th('last', 'Học gần nhất');
+    for (i = 0; i < ls.length; i++) h += th(ls[i], label(ls[i]), 'Bài ' + label(ls[i]) + ' (tối đa ' + Core.LESSONS[ls[i]][2] + ' sao)');
+    h += '</tr></thead><tbody>';
+    for (i = 0; i < list.length; i++) {
+      var r = list[i].r, v = list[i].v;
+      total += v.stars; gems += v.gems; if (v.stars) active++;
+      h += '<tr><td class="t-name">' + esc(r.name) + '</td><td>' + esc(r.code) + '</td><td class="t-num"><b>' + v.stars + '</b></td><td class="t-num">' + (v.gems || '') + '</td>' +
+        '<td class="t-num">' + (v.gold || v.silver || v.bronze ? v.gold + ' · ' + v.silver + ' · ' + v.bronze : '') + '</td><td>' + when(r.last) + '</td>';
+      for (j = 0; j < v.cells.length; j++) h += '<td class="tc ' + v.cells[j].m + '">' + (v.cells[j].n || '') + '</td>';
+      h += '</tr>';
+    }
+    if (!list.length) h += '<tr><td colspan="' + (6 + ls.length) + '" class="t-empty">' + (rows.length ? 'Không có học sinh nào khớp với tên đang tìm.' : 'Chưa có học sinh nào trong bảng tính.') + '</td></tr>';
+    document.getElementById('teach-table').innerHTML = h + '</tbody>';
+    document.getElementById('teach-sum').innerHTML = 'Tất cả: <b>' + rows.length + '</b> học sinh. Đang hiện <b>' + list.length + '</b> em, trong đó <b>' + active + '</b> em đã có sao ở lớp ' + grade +
+      '. Tổng: <b>' + total + '</b> sao, <b>' + gems + '</b> kim cương.';
+    var tabs = document.querySelectorAll('[data-g]');
+    for (i = 0; i < tabs.length; i++) tabs[i].setAttribute('aria-pressed', +tabs[i].getAttribute('data-g') === grade ? 'true' : 'false');
+  }
+
+  function load(first) {
+    var fb = document.getElementById('teach-fb'), go = document.getElementById('teach-go');
+    if (!Core.sync || !Core.sync.on) { Core.say(fb, 'Trang web chưa nối với bảng tính Google, nên chưa có kết quả để xem.', 'bad'); return; }
+    go.disabled = true;
+    if (first) Core.say(fb, 'Đang lấy kết quả...', 'info');
+    Core.sync.call({ action: 'list', key: key }, function (err, res) {
+      go.disabled = false;
+      if (err) {
+        var why = res && res.error;
+        key = '';
+        document.getElementById('teach-board').style.display = 'none';
+        document.getElementById('teach-login').style.display = '';
+        Core.say(fb, why === 'bad key' ? 'Mật khẩu chưa đúng.' :
+          why === 'no key set' ? 'Chưa đặt mật khẩu giáo viên. Thầy cô mở bảng tính Google, vào trang tính <b>CaiDat</b>, gõ mật khẩu vào ô <b>B1</b>, rồi thử lại.' :
+          why === 'unknown action' || why === 'bad name or code' ? 'Bảng tính đang chạy bản script cũ. Thầy cô dán lại tệp <code>tools/sheet-sync.gs</code> và triển khai phiên bản mới.' :
+          'Chưa kết nối được với bảng tính. Thầy cô kiểm tra mạng rồi thử lại.', 'bad');
+        return;
+      }
+      rows = res.rows || [];
+      document.getElementById('teach-key').value = '';
+      document.getElementById('teach-login').style.display = 'none';
+      document.getElementById('teach-board').style.display = '';
+      draw();
+    });
+  }
+
+  /* CSV for a spreadsheet program; the leading mark makes Excel read the Vietnamese letters */
+  function csv() {
+    var ls = lessons(), list = shown(), out = [['Tên', 'Mã số', 'Sao lớp ' + grade, 'Kim cương', 'Vàng', 'Bạc', 'Đồng', 'Học gần nhất']], i, j;
+    for (i = 0; i < ls.length; i++) out[0].push('Bài ' + label(ls[i]));
+    for (i = 0; i < list.length; i++) {
+      /* a name starting with = + - @ would run as a formula in a spreadsheet: put a quote in front */
+      var nm = /^[=+\-@]/.test(list[i].r.name) ? "'" + list[i].r.name : list[i].r.name;
+      var line = [nm, list[i].r.code, list[i].v.stars, list[i].v.gems, list[i].v.gold, list[i].v.silver, list[i].v.bronze, when(list[i].r.last)];
+      for (j = 0; j < list[i].v.cells.length; j++) line.push(list[i].v.cells[j].n);
+      out.push(line);
+    }
+    var text = '﻿';
+    for (i = 0; i < out.length; i++) {
+      for (j = 0; j < out[i].length; j++) out[i][j] = '"' + String(out[i][j]).replace(/"/g, '""') + '"';
+      text += out[i].join(',') + '\r\n';
+    }
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'ket-qua-lop-' + grade + '.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }
+
+  function start() {
+    if (started || !Core.LESSONS) return;
+    started = true;
+    document.getElementById('teach-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      key = document.getElementById('teach-key').value;
+      if (!key) { Core.say(document.getElementById('teach-fb'), 'Thầy cô nhập mật khẩu trước.', 'info'); return; }
+      load(true);
+    });
+    var tabs = document.querySelectorAll('[data-g]');
+    for (var i = 0; i < tabs.length; i++) Core.on(tabs[i], function () { grade = +this.getAttribute('data-g'); if (sort.k.indexOf('l') === 0 && sort.k !== 'last') sort = { k: 'last', dir: -1 }; draw(); });
+    document.getElementById('teach-find').addEventListener('input', draw, false);
+    Core.on(document.getElementById('teach-reload'), function () { load(false); });
+    Core.on(document.getElementById('teach-csv'), csv);
+    document.getElementById('teach-table').addEventListener('click', function (e) {
+      var t = e.target;
+      while (t && t.tagName !== 'TH') t = t.parentNode;
+      if (!t || !t.getAttribute('data-k')) return;
+      var k = t.getAttribute('data-k');
+      sort = { k: k, dir: sort.k === k ? -sort.dir : (k === 'name' ? 1 : -1) };
+      draw();
+    }, false);
+  }
+  /* game.js (lesson table, medals) is loaded by core.js a moment after this page */
+  Core.onGameReady = start;
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+    start();
+  });
+})();
+</script>
+</body>
+</html>

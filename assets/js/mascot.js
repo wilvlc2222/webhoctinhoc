@@ -71,7 +71,7 @@
   function who() { return '@' + (Core.currentName() || 'khach'); }
   function totalStars() {
     var mine = read('whth-progress')[who()] || {}, n = 0, l, a;
-    for (l in mine) if (mine.hasOwnProperty(l)) for (a in mine[l]) if (mine[l].hasOwnProperty(a) && mine[l][a]) n++;
+    for (l in mine) if (mine.hasOwnProperty(l) && /^l\d/.test(l)) for (a in mine[l]) if (mine[l].hasOwnProperty(a) && mine[l][a]) n++;
     return n;
   }
   function levelOf(stars) { var lv = 1; for (var i = 1; i < LEVELS.length; i++) if (stars >= LEVELS[i]) lv = i + 1; return lv; }
@@ -150,7 +150,7 @@
     kind = kind === 'bad' ? 'bad' : kind === 'win' ? 'win' : 'good';
     if (!pop) { pop = E('div', 'bip-pop'); pop.setAttribute('aria-hidden', 'true'); document.body.appendChild(pop); }
     var anim = kind === 'bad' ? pick(['no', 'sad', 'dizzy']) : pickAnim();
-    var text = pick(SAY[kind]) + (kind === 'win' && newStar ? ' +1 ★' : '');
+    var text = (Core.bubbleText && Core.bubbleText(kind)) || (pick(SAY[kind]) + (kind === 'win' && newStar ? ' +1 ★' : ''));
     pop.className = 'bip-pop';
     pop.innerHTML = '<div class="bip-bubble' + (kind === 'bad' ? ' is-bad' : '') + '">' + text + '</div><div class="bip-holder"></div>';
     play(pop.lastChild, wearNow(), anim, kind === 'bad' ? 'bad' : kind === 'win' ? 'win' : 'ok');

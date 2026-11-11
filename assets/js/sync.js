@@ -94,7 +94,9 @@
     for (var i = 0; i < els.length; i++) els[i].innerHTML = text;
   }
 
-  Core.sync = { on: !!url, push: push, restore: restore, paint: paint };
+  Core.sync = { on: !!url, push: push, restore: restore, paint: paint, soon: function (name) { soon(name, 2500); }, stats: function (cb) { if (!url) return cb('off'); post({ action: 'stats' }, cb); },
+    /* any other request to the sheet script (the teacher page uses this); cb(err, answer) */
+    call: function (data, cb) { if (!url) return cb('off', null); post(data, cb); } };
   if (!url) return;
 
   /* a new star → send a little later (several stars in a row go as one message) */

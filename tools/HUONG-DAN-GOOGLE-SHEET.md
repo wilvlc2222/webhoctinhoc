@@ -52,3 +52,25 @@ Thử nhanh: dán URL đó vào trình duyệt. Nếu hiện dòng "Tin học vu
 - Nếu sau này sửa script: vào **Triển khai › Quản lý các tuỳ chọn triển khai**, bấm bút chì, chọn **Phiên bản mới**, rồi **Triển khai**. URL giữ nguyên.
 - Ai có URL đều gửi được dữ liệu vào bảng. URL nằm trong mã nguồn trang web, nên đừng dùng bảng này cho việc gì khác quan trọng.
 - Đây là dữ liệu của trẻ em: nên dùng tên gọi ở lớp hoặc biệt danh, không dùng họ tên đầy đủ, và báo cho phụ huynh hoặc nhà trường biết.
+
+## Cập nhật script (bản có kim cương và mục tiêu chung của lớp)
+
+Tệp `tools/sheet-sync.gs` đã có thêm hai thứ. Muốn dùng thì dán lại toàn bộ tệp này vào Apps Script, rồi triển khai **Phiên bản mới** như phần Lưu ý ở trên (URL giữ nguyên).
+
+- **Kim cương** (học sinh làm đúng ngay lần đầu) được ghi vào cột `gems` ở cuối bảng, và không còn bị cộng vào cột **Tổng sao**.
+- **Mục tiêu chung của lớp**: trang chủ hiện "Cả lớp: … bạn · … sao". Trang chỉ nhận tổng số, không nhận tên của ai.
+
+Nếu chưa cập nhật: trang web vẫn chạy bình thường, nhưng cột **Tổng sao** sẽ gồm cả kim cương, và dòng mục tiêu chung của lớp không hiện.
+
+## Trang giáo viên
+
+Trang `giaovien.html` (có đường dẫn "Dành cho giáo viên" ở trang Hướng dẫn) hiện kết quả của mọi học sinh: tên, mã số, số sao, kim cương, huy chương, lần học gần nhất và số sao từng bài. Có lọc theo lớp, tìm theo tên, sắp xếp theo cột và tải tệp CSV.
+
+Cần làm một lần:
+
+1. Cập nhật script như mục trên (dán lại `tools/sheet-sync.gs`, triển khai **Phiên bản mới**).
+2. Mở `giaovien.html`, gõ đại một mật khẩu rồi bấm **Xem kết quả**. Trang sẽ báo chưa đặt mật khẩu, và bảng tính có thêm trang tính **CaiDat**.
+3. Trong bảng tính, mở trang tính **CaiDat**, gõ mật khẩu thầy cô muốn dùng vào ô **B1**. Nên dài từ 8 kí tự.
+4. Quay lại `giaovien.html`, nhập đúng mật khẩu đó.
+
+Mật khẩu chỉ nằm trong bảng tính của thầy cô. Trang web không lưu mật khẩu: tải lại trang là phải nhập lại. Muốn đổi mật khẩu thì sửa ô B1.

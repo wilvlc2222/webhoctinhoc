@@ -15,6 +15,7 @@
   <div class="wrap">
     <a class="brand" href="index.html"><span class="ico" id="brand-ico"></span>Tin học vui</a>
     <div class="topbar-right">
+      <button class="btn btn-small" id="view-toggle" type="button">Xem danh sách</button>
       <a class="btn btn-small" href="huongdan.html">Hướng dẫn</a>
       <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
     </div>
@@ -118,8 +119,10 @@
         }
       }
     }
-    var html = '', half = Math.ceil(cards.length / 2);
-    if (isWide()) {
+    var html = '', half = Math.ceil(cards.length / 2), view = getView();
+    if (isWide() && view === 'map') {
+      html = mapHTML(topics);
+    } else if (isWide()) {
       for (var r = 0; r < half; r++) html += '<div class="lesson-row">' + cards[r] + (cards[half + r] || '<span class="lesson-gap"></span>') + '</div>';
     } else {
       html = '<div class="lesson-flat">' + cards.join('') + '</div>';
@@ -131,7 +134,71 @@
     var tabs = document.querySelectorAll('[data-grade]');
     for (var k = 0; k < tabs.length; k++) tabs[k].setAttribute('aria-pressed', tabs[k].getAttribute('data-grade') === grade ? 'true' : 'false');
     try { localStorage.setItem(GRADE_KEY, grade); } catch (e) {}
+    var vt = document.getElementById('view-toggle');
+    if (vt) vt.innerHTML = view === 'map' ? 'Xem danh sách' : 'Xem bản đồ';
     Core.renderStars();
+    if (Core.refreshBip) Core.refreshBip();
+  }
+
+  /* ---------- adventure map (wide stage only): the lessons along a winding road, Bíp at the next lesson to do ---------- */
+  var VIEW_KEY = 'whth-view';
+  function getView() { var v = 'map'; try { v = localStorage.getItem(VIEW_KEY) || 'map'; } catch (e) {} return v; }
+  function mapHTML(topics) {
+    var nodes = [], i, j, n, cols = 6, rowH = 204, pts = [], html = '', cur = -1;
+    for (i = 0; i < topics.length; i++) for (j = 0; j < topics[i].lessons.length; j++) nodes.push({ l: topics[i].lessons[j], tp: i + 1 });
+    if (Core.currentName()) for (n = 0; n < nodes.length && cur < 0; n++) if (Core.countStars(nodes[n].l.id) < nodes[n].l.stars) cur = n;
+    for (n = 0; n < nodes.length; n++) {
+      var r = Math.floor(n / cols), c = n % cols, l = nodes[n].l;
+      if (r % 2) c = cols - 1 - c;
+      var x = (c + 0.5) * 100, y = 46 + r * rowH;
+      pts.push(x + ',' + y);
+      html += '<a class="map-node' + (n === cur ? ' is-current' : '') + '" href="' + l.href + '" title="' + topics[nodes[n].tp - 1].topic + '" style="left:' + (x / 6).toFixed(2) + '%;top:' + (y - 30) + 'px">' +
+        (n === cur ? '<span class="map-bip" data-bip="1"><span class="bip-mini"></span></span>' : '') +
+        '<span class="map-dot lesson-num tp-' + nodes[n].tp + '">' + l.n + '</span><span class="map-t">' + l.t + '</span>' +
+        '<span class="stars map-stars" data-stars-for="' + l.id + '" data-stars-total="' + l.stars + '"></span></a>';
+    }
+    var H = Math.ceil(nodes.length / cols) * rowH;
+    return '<div class="lesson-map" style="height:' + H + 'px"><svg class="map-path" viewBox="0 0 600 ' + H + '" preserveAspectRatio="none" aria-hidden="true">' +
+      '<polyline class="map-road" points="' + pts.join(' ') + '"/><polyline class="map-dash" points="' + pts.join(' ') + '"/></svg>' + html + '</div>';
+  }
+
+  /* ---------- boss challenges: one per topic (thuthach.html) ---------- */
+  function bossMenu() {
+    var g = shownGrade || '4', rows = '';
+    for (var t = 1; t <= 6; t++) {
+      var won = Core.gems && Core.gems.bossWon(g, t);
+      rows += '<li><span class="topic-tag tp-' + t + '">Chủ đề ' + t + '</span><span class="boss-name">' + GRADES[g][t - 1].topic.replace(/^Chủ đề \d+\.\s*/, '') + '</span>' +
+        (won ? '<b class="boss-won">Đã thắng</b>' : '') + '<a class="btn btn-small' + (won ? '' : ' btn-primary') + '" href="thuthach.html?g=' + g + '&amp;t=' + t + '">' + (won ? 'Đấu lại' : 'Vào đấu') + '</a></li>';
+    }
+    var m = Core.el('div', 'bip-modal', '<div class="bip-card boss-menu" role="dialog" aria-modal="true"><div class="bip-card-head"><h2>Thử thách diệt Bọ Lỗi · Lớp ' + g + '</h2>' +
+      '<button class="btn btn-small" type="button" id="boss-close">Đóng ✕</button></div>' +
+      '<p>Mỗi chủ đề có một con Bọ Lỗi. Em trả lời đúng các câu hỏi của chủ đề để đánh bại nó. Thắng lần đầu được 3 kim cương.</p><ul class="boss-list">' + rows + '</ul></div>');
+    document.body.appendChild(m);
+    function close() { if (m.parentNode) document.body.removeChild(m); }
+    Core.on(document.getElementById('boss-close'), close);
+    Core.on(m, function (e) { if (e && e.target === m) close(); });
+  }
+
+  /* ---------- class goal: totals from the teacher's sheet (needs the "stats" action in tools/sheet-sync.gs) ---------- */
+  function classGoal() {
+    var el = document.getElementById('class-goal');
+    if (!el || !Core.sync || !Core.sync.on) return;
+    function paint(d) {
+      if (!d || !(d.learners > 0)) { el.innerHTML = ''; return; }
+      var goal = Math.max(100, Math.ceil((d.stars + 1) / 100) * 100);
+      el.innerHTML = 'Cả lớp: <b>' + d.learners + '</b> bạn · <b>' + d.stars + '</b> sao. Mục tiêu chung: <b>' + goal + '</b> sao!' +
+        '<span class="goal-bar"><span style="width:' + Math.round(d.stars / goal * 100) + '%"></span></span>';
+    }
+    var cached = null;
+    try { cached = JSON.parse(localStorage.getItem('whth-class') || 'null'); } catch (e) {}
+    if (cached) paint(cached);
+    if (cached && new Date().getTime() - cached.at < 5 * 60 * 1000) return;
+    Core.sync.stats(function (err, res) {
+      if (err || !res) return;
+      var d = { learners: res.learners, stars: res.stars, at: new Date().getTime() };
+      try { localStorage.setItem('whth-class', JSON.stringify(d)); } catch (e) {}
+      paint(d);
+    });
   }
 
   /* ---------- who is learning: a name is needed to start, and each name has a 4-digit code ---------- */
@@ -155,10 +222,22 @@
     box.innerHTML = '<div id="code-ask"><form id="code-form" autocomplete="off"><label for="code-in">Mã số của <b>' + esc(name) + '</b>:</label>' +
       '<div class="who-row"><input class="input" id="code-in" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="4 chữ số" aria-label="Mã số 4 chữ số">' +
       '<button class="btn btn-primary" type="submit">Vào học</button></div></form></div>' +
-      '<button class="btn btn-small" id="code-back" type="button">&lsaquo; Tên khác</button><div class="feedback" id="who-fb"></div>';
+      '<button class="btn btn-small" id="code-back" type="button">&lsaquo; Tên khác</button><div class="feedback" id="who-fb"></div>' +
+      '<div class="who-forgot"><b>Quên mã số?</b> Em hỏi thầy cô trước. Nếu không tìm lại được thì xoá tên này, rồi nhập tên lại để nhận mã số mới.' +
+      '<button class="btn btn-small" id="code-del" type="button">Xoá tên này khỏi máy</button></div>';
     var input = document.getElementById('code-in'), fb = document.getElementById('who-fb');
     if (note) Core.say(fb, note, 'info');
     Core.on(document.getElementById('code-back'), renderNames);
+    /* a forgotten code: the name can be removed from this device (asked twice, because the stars kept on this device go with it) */
+    Core.on(document.getElementById('code-del'), function () {
+      var online = Core.sync && Core.sync.on;
+      if (!confirm('Xoá tên "' + name + '" khỏi máy này?\n\nSao của bạn ấy lưu trên máy này sẽ mất' +
+        (online ? '. Kết quả đã gửi lên mạng thì vẫn còn, thầy cô tra được mã số.' : ' và không lấy lại được.'))) return;
+      Core.removeProfile(name);
+      refresh();
+      var fb2 = document.getElementById('who-fb');
+      if (fb2) Core.say(fb2, 'Đã xoá tên "' + esc(name) + '" khỏi máy này.', 'info');
+    });
     input.focus();
     document.getElementById('code-form').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -197,8 +276,17 @@
     if (cur) {
       box.innerHTML = '<p class="who who-now">Đang học: <b>' + esc(cur) + '</b><br>Mã số của em: <b class="who-code">' + Core.codeOf(cur) + '</b></p>' +
         '<div class="who-row"><button class="btn btn-small" id="who-out" type="button">Bạn khác vào học</button>' +
-        '<button class="btn btn-small" id="who-del" type="button">Xoá tên này</button></div><p class="who sync-state" data-sync-state></p>';
+        '<button class="btn btn-small" id="who-del" type="button">Xoá tên này</button></div>' +
+        (Core.gems ? '<div class="who-row who-game"><span class="who-gems" title="Kim cương: làm đúng ngay lần đầu">' + Core.gemIcon + '<b>' + Core.gems.count() + '</b></span>' +
+          '<button class="btn btn-small" id="who-badges" type="button">Huy hiệu ' + Core.badgeCount() + '</button>' +
+          '<button class="btn btn-small" id="who-boss" type="button">Thử thách</button></div>' : '') +
+        '<p class="who sync-state" data-sync-state></p><p class="who class-goal" id="class-goal"></p>';
       if (Core.sync) Core.sync.paint();
+      if (Core.gems) {
+        Core.on(document.getElementById('who-badges'), Core.badges);
+        Core.on(document.getElementById('who-boss'), bossMenu);
+      }
+      classGoal();
       Core.on(document.getElementById('who-out'), function () { Core.logout(); refresh(); });
       Core.on(document.getElementById('who-del'), function () {
         if (confirm('Xoá tên "' + cur + '" và toàn bộ sao của bạn ấy?')) { Core.removeProfile(cur); refresh(); }
@@ -240,7 +328,8 @@
     note.style.display = cur ? 'none' : '';
   }
 
-  function refresh() { renderNames(); Core.renderStars(); }
+  function refresh() { renderNames(); if (shownGrade) renderLessons(shownGrade); else Core.renderStars(); }
+  Core.onGameReady = function () { refresh(); };   /* game.js loads after the first draw: medals, gems and badges appear then */
 
   document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('brand-ico').innerHTML = Icons.robot;
@@ -260,6 +349,10 @@
       input.focus();
     }
     document.getElementById('gate-note').addEventListener('click', nudge, false);
+    Core.on(document.getElementById('view-toggle'), function () {
+      try { localStorage.setItem(VIEW_KEY, getView() === 'map' ? 'list' : 'map'); } catch (e) {}
+      renderLessons(shownGrade);
+    });
     if (location.hash === '#ten' && !Core.currentName()) nudge();
   });
 })();

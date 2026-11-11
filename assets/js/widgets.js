@@ -142,6 +142,7 @@
   /* ---------- true / false: one row per statement with two buttons ----------
      cfg = { lesson, id, items: [{ t: 'statement', ok: true|false, why: 'explanation' }], doneText } */
   Core.truefalse = function (host, cfg) {
+    (Core.quizBank = Core.quizBank || []).push({ type: 'tf', items: cfg.items });   /* thuthach.html reuses these */
     host.appendChild(Core.howto('Đọc từng câu, rồi chạm <b>Đúng</b> hoặc <b>Sai</b>. Chọn chưa đúng thì chọn lại.'));
     var list = E('div', 'tf');
     var fb = E('div', 'feedback'); fb.setAttribute('data-react', '1');
