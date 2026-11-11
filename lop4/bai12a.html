@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 12A. Thực hành sử dụng công cụ đa phương tiện – Tin học 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/player.js"></script>
+<style>
+  .desk2 { position: relative; height: 200px; border: 3px solid var(--ink); border-radius: 10px; background: #1971c2; overflow: hidden; }
+  html.eink .desk2 { background: #fff; }
+  .vfile { position: absolute; left: 24px; top: 20px; width: 96px; display: flex; flex-direction: column; align-items: center; gap: 2px; border: 2px solid transparent; border-radius: 6px; background: none; color: #fff; font: inherit; font-size: 13px; cursor: pointer; padding: 4px; }
+  .vfile .ico { width: 44px; height: 44px; }
+  .vfile.is-sel { background: rgba(255,255,255,0.25); border-color: #fff; }
+  html.eink .vfile { color: #000; }
+  .cmenu { position: absolute; left: 110px; top: 40px; width: 190px; background: #fff; color: #222; border: 1px solid #868e96; box-shadow: 2px 2px 8px rgba(0,0,0,0.3); font-size: 14px; }
+  .cmenu button { display: block; width: 100%; text-align: left; border: 0; background: #fff; padding: 6px 10px; font: inherit; cursor: pointer; color: #222; }
+  .cmenu button:active, .cmenu button.on { background: #d0ebff; }
+  .cmenu.sub { left: 300px; top: 70px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 4 · Chủ đề 5. Ứng dụng tin học (bài tự chọn A)</div>
+      <h1>Bài 12A. Thực hành sử dụng công cụ đa phương tiện</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l4-b12a" data-stars-total="5"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Mở được video bằng phần mềm xem video (Windows Media Player).</li>
+            <li>Dùng các nút để <b>phát, tạm dừng, dừng, tua</b>, chỉnh âm lượng, xem toàn màn hình.</li>
+            <li>Xem video để tìm hiểu <b>lịch sử, văn hoá</b> và kể lại điều em biết.</li>
+          </ul>
+        </div>
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Video vừa có hình, vừa có tiếng, là một <b>sản phẩm đa phương tiện</b>. Xem video giúp em hiểu bài nhanh và nhớ lâu hơn. Mình cùng tập mở video nha!</div>
+        </div>
+      </div>
+      <div class="col">
+        <p class="mt0"><b>Mở video:</b> nháy <b>nút phải chuột</b> vào biểu tượng video trên màn hình nền, chọn <b>Open with</b> rồi chọn <b>Windows Media Player</b>. (Trên tablet: chạm vào biểu tượng.)</p>
+        <div class="desk2" id="desk"></div>
+        <div class="feedback" id="fb-open"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CÁC NÚT ĐIỀU KHIỂN -->
+  <section class="step" data-title="Các nút điều khiển">
+    <div class="step-head"><span class="phase phase-explore">Khám phá</span><h2>Các nút điều khiển khi xem video</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Em bấm thử từng nút bên dưới video. Rồi ghép mỗi nút với việc nó làm.</p>
+        <div id="pl-demo"></div>
+      </div>
+      <div class="col"><div id="match-ctr"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. NHIỆM VỤ 1: TẾT BA MIỀN -->
+  <section class="step" data-title="Nhiệm vụ 1: Tết ba miền">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Nhiệm vụ 1. Xem video "Tết ba miền"</h2></div>
+    <div class="cols">
+      <div class="col"><div id="pl-tet"></div></div>
+      <div class="col"><div id="quiz-tet"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. NHIỆM VỤ 2: SỰ TÍCH QUẢ DƯA HẤU -->
+  <section class="step" data-title="Nhiệm vụ 2: Quả dưa hấu">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Nhiệm vụ 2. Xem video "Sự tích quả dưa hấu"</h2></div>
+    <div class="cols">
+      <div class="col"><div id="pl-dua"></div></div>
+      <div class="col">
+        <p class="mt0">Xem xong, em <b>kể lại</b> câu chuyện bằng cách xếp các sự việc theo đúng thứ tự.</p>
+        <div id="order-dua"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BÀI TẬP (Vở bài tập) -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Xem video "Khởi nghĩa Hai Bà Trưng"</h2></div>
+    <div class="cols">
+      <div class="col"><div id="bt-pl"></div></div>
+      <div class="col"><div id="bt-q"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. LUYỆN TẬP, VẬN DỤNG -->
+  <section class="step" data-title="Luyện tập, vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Luyện tập · Vận dụng</span><h2>Em đã xem video gì?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <details class="reveal"><summary>Luyện tập 1. Kể tên một video về truyền thống chống giặc ngoại xâm của dân tộc ta.</summary>
+          <div>Ví dụ: video về <b>Ngô Quyền và chiến thắng Bạch Đằng năm 938</b>: Ngô Quyền cho cắm cọc nhọn dưới lòng sông Bạch Đằng, chờ nước triều lên thì nhử thuyền giặc vào, khi triều rút thuyền giặc mắc cọc và bị đánh tan. Em kể cho bạn nghe điều em thấy mới mẻ nha.</div></details>
+        <details class="reveal"><summary>Luyện tập 2. Em đã dùng ứng dụng nào để xem video?</summary>
+          <div>Ví dụ: <b>Windows Media Player</b>, <b>Movies &amp; TV</b> trên máy tính; ứng dụng xem video trên điện thoại, máy tính bảng. Em nhớ xem video <b>cùng người lớn</b> và không xem quá lâu nha.</div></details>
+        <details class="reveal"><summary>Vận dụng. Kể tên một sản phẩm đa phương tiện về lịch sử hoặc văn hoá quê hương em.</summary>
+          <div>Ví dụ: video giới thiệu lễ hội, món ăn, danh lam ở quê em; bài trình chiếu có ảnh và tiếng về một di tích lịch sử. Em hỏi thầy cô, bố mẹ để cùng tìm xem nha.</div></details>
+      </div>
+      <div class="col-side">
+        <div class="card done-mini"><b>Học xong Bài 12A!</b><span class="stars" data-stars-for="l4-b12a" data-stars-total="5"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l4-b12a';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  function S(body, bg) { return '<svg viewBox="0 0 160 90"><rect width="160" height="90" fill="' + (bg || '#fff4e6') + '"/>' + body + '</svg>'; }
+  var CHUNG = '<rect x="52" y="30" width="40" height="40" fill="#2f9e44" stroke="#1b5e20" stroke-width="2"/><path d="M52 50h40M72 30v40" stroke="#ffe066" stroke-width="2"/>';
+  var TET_ROLL = '<rect x="96" y="44" width="44" height="18" rx="9" fill="#2f9e44" stroke="#1b5e20" stroke-width="2"/><path d="M106 44v18M118 44v18M130 44v18" stroke="#ffe066" stroke-width="2"/>';
+  function blossom(x, y, c) { return '<circle cx="' + x + '" cy="' + y + '" r="5" fill="' + c + '"/><circle cx="' + (x + 6) + '" cy="' + (y + 4) + '" r="4" fill="' + c + '"/><circle cx="' + (x - 6) + '" cy="' + (y + 4) + '" r="4" fill="' + c + '"/>'; }
+  function branch(c) { return '<path d="M20 86L40 40M40 40l14-16M40 40l-10-14" stroke="#7a5230" stroke-width="3" fill="none"/>' + blossom(54, 22, c) + blossom(30, 24, c) + blossom(40, 38, c); }
+  var TET = [
+    { art: S('<rect width="160" height="90" fill="#c92a2a"/><text x="80" y="44" fill="#ffe066" font-size="16" font-weight="700" text-anchor="middle">TẾT BA MIỀN</text><circle cx="24" cy="18" r="9" fill="#ffd43b"/><circle cx="136" cy="18" r="9" fill="#ffd43b"/>'), text: '<b>Tết Nguyên đán</b> là Tết cổ truyền, đón năm mới theo âm lịch.' },
+    { art: S('<rect x="30" y="34" width="100" height="40" fill="#ffe8cc" stroke="#a0611a" stroke-width="2"/><path d="M24 36l56-22 56 22z" fill="#c92a2a"/><circle cx="60" cy="58" r="7" fill="#ffd8a8"/><circle cx="80" cy="56" r="8" fill="#ffd8a8"/><circle cx="100" cy="58" r="7" fill="#ffd8a8"/>'), text: 'Tết là dịp <b>gia đình sum họp</b>, nhớ ơn tổ tiên, chúc nhau năm mới bình an.' },
+    { art: S(branch('#f783ac') + CHUNG, '#fff0f6'), text: '<b>Miền Bắc</b>: nhà nhà gói <b>bánh chưng</b> hình vuông, chưng cành <b>hoa đào</b> hồng.' },
+    { art: S(branch('#fcc419') + TET_ROLL + CHUNG.replace(/52|72|92/g, function (m) { return String(+m - 30); }), '#fff9db'), text: '<b>Miền Trung</b>: có nơi gói bánh chưng, có nơi gói <b>bánh tét</b>; nhiều nhà chưng <b>hoa mai</b> vàng.' },
+    { art: S(branch('#fcc419') + '<ellipse cx="110" cy="62" rx="30" ry="8" fill="#c4a484"/><circle cx="96" cy="52" r="8" fill="#82c91e"/><circle cx="110" cy="46" r="9" fill="#a5d8a5"/><circle cx="124" cy="52" r="8" fill="#ffa94d"/><circle cx="110" cy="58" r="7" fill="#fab005"/>', '#fff9db'), text: '<b>Miền Nam</b>: gói <b>bánh tét</b>, chưng <b>hoa mai</b>; mâm ngũ quả có mãng cầu, dừa, đu đủ, xoài, mong năm mới "cầu vừa đủ xài".' },
+    { art: S('<rect x="60" y="22" width="40" height="52" rx="4" fill="#e03131"/><circle cx="80" cy="44" r="10" fill="#ffd43b"/>', '#ffe3e3'), text: 'Ở cả ba miền, các em được <b>mừng tuổi</b> (lì xì) và đi <b>chúc Tết</b> ông bà, cha mẹ.' },
+    { art: S('<text x="80" y="50" fill="#c92a2a" font-size="15" font-weight="700" text-anchor="middle">Chúc mừng năm mới!</text>', '#fff9db'), text: 'Hết video. Em kể lại cho bạn nghe điều em mới biết nha!' }
+  ];
+  var SEA = '<path d="M0 64h160v26H0z" fill="#4dabf7"/>';
+  var DUA = [
+    { art: S('<ellipse cx="80" cy="48" rx="34" ry="24" fill="#2f9e44"/><path d="M50 46q30-14 60 0" stroke="#8ce99a" stroke-width="3" fill="none"/><text x="80" y="86" fill="#c92a2a" font-size="10" font-weight="700" text-anchor="middle">SỰ TÍCH QUẢ DƯA HẤU</text>', '#ebfbee'), text: 'Truyện cổ tích <b>Sự tích quả dưa hấu</b>, kể về thời các vua Hùng.' },
+    { art: S('<rect x="40" y="34" width="80" height="40" fill="#ffe8cc" stroke="#a0611a" stroke-width="2"/><path d="M34 36l46-20 46 20z" fill="#c92a2a"/><circle cx="80" cy="56" r="8" fill="#ffd8a8"/>'), text: 'Ngày xưa, <b>Mai An Tiêm</b> là con nuôi của vua Hùng, rất chăm chỉ, giỏi giang.' },
+    { art: S(SEA + '<path d="M60 64l20-6 20 6z" fill="#a0611a"/><path d="M80 58V30l16 20z" fill="#fff" stroke="#495057"/>', '#e7f5ff'), text: 'Vì một lời nói bị hiểu lầm, vua giận, đày An Tiêm cùng vợ con ra một <b>hòn đảo hoang</b>.' },
+    { art: S(SEA + '<path d="M30 64q50-30 100 0z" fill="#ffe066"/><path d="M70 50l10-10 10 10v14H70z" fill="#c4a484" stroke="#7a5230"/>', '#e7f5ff'), text: 'Trên đảo, An Tiêm <b>không nản lòng</b>: dựng nhà, tìm thức ăn, chăm chỉ làm lụng.' },
+    { art: S(SEA + '<path d="M30 64q50-30 100 0z" fill="#ffe066"/><path d="M40 30q6-6 12 0q6-6 12 0" stroke="#212529" stroke-width="2" fill="none"/><circle cx="56" cy="44" r="2" fill="#212529"/><ellipse cx="100" cy="54" rx="14" ry="9" fill="#2f9e44"/>', '#e7f5ff'), text: 'Một hôm, chim thả xuống những <b>hạt lạ</b>. An Tiêm đem gieo, cây ra quả vỏ xanh, ruột đỏ, ăn ngọt mát.' },
+    { art: S(SEA + '<ellipse cx="60" cy="70" rx="12" ry="7" fill="#2f9e44"/><path d="M100 64l20-6 20 6z" fill="#a0611a"/><path d="M120 58V34l14 18z" fill="#fff" stroke="#495057"/>', '#e7f5ff'), text: 'An Tiêm khắc tên lên quả, thả xuống biển. <b>Thuyền buôn</b> nhặt được, tìm đến đảo đổi lấy gạo, vải.' },
+    { art: S('<rect x="40" y="34" width="80" height="40" fill="#ffe8cc" stroke="#a0611a" stroke-width="2"/><path d="M34 36l46-20 46 20z" fill="#c92a2a"/><ellipse cx="80" cy="64" rx="16" ry="9" fill="#2f9e44"/>'), text: 'Vua biết chuyện, hiểu lòng An Tiêm, <b>đón cả nhà về</b>. Từ đó quả <b>dưa hấu</b> được trồng khắp nơi.' }
+  ];
+
+  /* right-click -> Open with -> Windows Media Player */
+  function desk() {
+    var host = document.getElementById('desk'), fb = document.getElementById('fb-open');
+    var file = Core.el('button', 'vfile', Core.icon('video') + '<span>Tet ba mien.mp4</span>');
+    host.appendChild(file);
+    var menu = null, sub = null;
+    function close() { if (menu) host.removeChild(menu); if (sub) host.removeChild(sub); menu = sub = null; }
+    function openMenu() {
+      close(); Core.addClass(file, 'is-sel');
+      menu = Core.el('div', 'cmenu');
+      var items = [['Open', function () { Core.say(fb, '"Open" mở bằng phần mềm mặc định. Bài này mình chọn <b>Open with</b> nha.', 'info'); }],
+                   ['Open with  ›', openSub], ['Copy', function () { Core.say(fb, 'Copy là sao chép tệp, chưa mở video.', 'bad'); }], ['Delete', function () { Core.say(fb, 'Ối, Delete là xoá tệp đó! Chọn Open with.', 'bad'); }]];
+      for (var i = 0; i < items.length; i++) { var b = Core.el('button', '', items[i][0]); Core.on(b, items[i][1]); menu.appendChild(b); }
+      host.appendChild(menu);
+      Core.say(fb, 'Menu hiện ra rồi. Chọn <b>Open with</b>.', 'info');
+    }
+    function openSub(ev) {
+      if (ev) ev.stopPropagation();
+      if (sub) host.removeChild(sub);
+      sub = Core.el('div', 'cmenu sub');
+      var wmp = Core.el('button', '', 'Windows Media Player'), ph = Core.el('button', '', 'Photos'), pa = Core.el('button', '', 'Paint');
+      Core.on(wmp, function () { close(); Core.celebrate(fb, L, 'open', 'Video đã mở bằng Windows Media Player! (Sang phần tiếp theo để xem video.)'); });
+      Core.on(ph, function () { Core.say(fb, 'Photos dùng xem ảnh. Chọn phần mềm xem video nha.', 'bad'); });
+      Core.on(pa, function () { Core.say(fb, 'Paint là phần mềm vẽ, không mở được video.', 'bad'); });
+      sub.appendChild(wmp); sub.appendChild(ph); sub.appendChild(pa);
+      host.appendChild(sub);
+    }
+    Core.on(file, function (ev) { ev.stopPropagation(); openMenu(); });
+    file.addEventListener('contextmenu', function (ev) { ev.preventDefault(); ev.stopPropagation(); openMenu(); }, false);
+    Core.on(host, function () { close(); Core.removeClass(file, 'is-sel'); });
+    Core.say(fb, 'Nháy nút phải chuột (hoặc chạm) vào biểu tượng video.', 'info');
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    desk();
+    Player(document.getElementById('pl-demo'), { title: 'Tet ba mien.mp4', frames: TET });
+    function cb(icon, name) { return '<span class="ibtn" style="display:inline-flex;gap:6px;align-items:center"><span class="pl-btn" style="display:inline-block;width:34px;height:30px">' + Icons[icon] + '</span>' + name + '</span>'; }
+    Core.match(document.getElementById('match-ctr'), {
+      lesson: L, id: 'ctr', leftTitle: 'Nút', rightTitle: 'Việc nó làm',
+      pairs: [[cb('play', 'Play'), 'Phát video (bấm lần nữa để tạm dừng)'], [cb('stopSq', 'Stop'), 'Dừng hẳn, quay về đầu video'], [cb('nextBar', 'Next'), 'Tua tới đoạn sau'],
+              [cb('vol', 'Volume'), 'Bật, tắt hoặc chỉnh âm lượng'], [cb('fullscr', 'Full screen'), 'Xem toàn màn hình']]
+    });
+    Player(document.getElementById('pl-tet'), { title: 'Tet ba mien.mp4', frames: TET });
+    Core.quiz(document.getElementById('quiz-tet'), {
+      lesson: L, id: 'tet',
+      questions: [
+        { q: 'Tết Nguyên đán là dịp gì?', options: ['Đón năm mới theo âm lịch, gia đình sum họp', 'Ngày khai giảng năm học', 'Tết của riêng thiếu nhi'], answer: 0 },
+        { q: 'Miền Bắc thường gói bánh gì và chưng hoa gì?', options: ['Bánh tét và hoa mai', 'Bánh chưng và hoa đào', 'Bánh dẻo và hoa sen'], answer: 1 },
+        { q: 'Mâm ngũ quả miền Nam mong năm mới "cầu vừa đủ xài" có những quả nào?', options: ['Mãng cầu, dừa, đu đủ, xoài', 'Táo, lê, nho, cam', 'Dưa hấu, chuối, bưởi, ổi'], answer: 0 }
+      ]
+    });
+    Player(document.getElementById('pl-dua'), { title: 'Su tich qua dua hau.mp4', frames: DUA });
+    Core.order(document.getElementById('order-dua'), {
+      lesson: L, id: 'dua',
+      items: ['An Tiêm là con nuôi của vua Hùng, rất chăm chỉ.', 'An Tiêm bị đày ra đảo hoang.', 'An Tiêm dựng nhà, chăm chỉ làm lụng.', 'An Tiêm gieo hạt chim thả, trồng được dưa hấu.', 'Thuyền buôn đến đổi hàng, vua đón An Tiêm về.'],
+      doneText: 'Em kể lại câu chuyện đúng thứ tự rồi!'
+    });
+    window.__solve = function () {
+      document.querySelector('#desk .vfile').click();
+      var b = [].filter.call(document.querySelectorAll('#desk .cmenu button'), function (x) { return /Open with/.test(x.textContent); })[0]; b.click();
+      [].filter.call(document.querySelectorAll('#desk .cmenu button'), function (x) { return /Media Player/.test(x.textContent); })[0].click();
+    };
+  });
+})();
+</script>
+<script>
+/* Bài tập from the workbook (Vở bài tập Tin học 4): a short drawn video, then the questions */
+document.addEventListener('DOMContentLoaded', function () {
+  var L = 'l4-b12a';
+  function S(inner, bg) { return '<svg viewBox="0 0 160 90"><rect width="160" height="90" fill="' + (bg || '#fff4e6') + '"/>' + inner + '</svg>'; }
+  var ELE = '<ellipse cx="80" cy="55" rx="30" ry="18" fill="#868e96"/><rect x="58" y="62" width="8" height="18" fill="#868e96"/><rect x="92" y="62" width="8" height="18" fill="#868e96"/><path d="M50 50q-14 6-8 24" stroke="#868e96" stroke-width="6" fill="none"/><path d="M70 30h20l-4 8H74z" fill="#f59f00"/>';
+  var FLAG = '<path d="M40 20v60" stroke="#5c3b1e" stroke-width="3"/><path d="M42 20h40l-8 10 8 10H42z" fill="#e03131"/>';
+  Player(document.getElementById('bt-pl'), { title: 'Khoi nghia Hai Ba Trung.mp4', frames: [
+    { art: S(FLAG + '<text x="96" y="58" font-size="14" font-weight="700">Năm 40</text>'), text: 'Năm 40, Hai Bà Trưng phất cờ khởi nghĩa chống ách đô hộ của nhà Đông Hán.' },
+    { art: S(ELE), text: 'Hai Bà cưỡi voi, chỉ huy nghĩa quân đánh chiếm các thành trì của giặc.' },
+    { art: S('<path d="M110 70l20-30" stroke="#495057" stroke-width="4"/><circle cx="132" cy="36" r="6" fill="#ffd8a8"/><text x="20" y="50" font-size="13">Tô Định bỏ chạy</text>', '#e7f5ff'), text: 'Thái thú Tô Định hoảng sợ, phải cắt tóc, cạo râu, trốn về phương Bắc.' },
+    { art: S('<path d="M50 70h60l-6-20H56z" fill="#ffd43b"/><text x="40" y="38" font-size="13">Mê Linh</text>'), text: 'Trưng Trắc lên làm vua, đóng đô ở Mê Linh. Hai Bà cai quản đất nước trong 3 năm.' },
+    { art: S('<text x="18" y="50" font-size="13">Năm 43: Mã Viện sang</text>', '#f1f3f5'), text: 'Năm 43, nhà Hán sai Mã Viện đem quân sang đàn áp. Hai Bà chiến đấu anh dũng và hi sinh. Nhân dân đời đời ghi nhớ công ơn Hai Bà.' }
+  ] });
+  Core.quiz(document.getElementById('bt-q'), {
+    lesson: L, id: 'bt-q',
+    questions: [
+      { q: 'Hai Bà Trưng khởi nghĩa chống lại triều đình phong kiến phương Bắc nào?', options: ['Nhà Hán', 'Nhà Tống', 'Nhà Tuỳ', 'Nhà Minh'], answer: 0 },
+      { q: 'Thái thú phải cắt tóc, cạo râu, bỏ chạy về phương Bắc là ai?', options: ['Sĩ Nhiếp', 'Sầm Nghi Đống', 'Thoát Hoan', 'Tô Định'], answer: 3 },
+      { q: 'Hai Bà Trưng cai quản đất nước trong bao lâu?', options: ['1 năm', '2 năm', '3 năm', '4 năm'], answer: 2 },
+      { q: 'Viên tướng nào được nhà Hán cử sang đàn áp cuộc khởi nghĩa?', options: ['Lưu Hoằng Tháo', 'Mã Viện', 'Ô Mã Nhi', 'Sầm Nghi Đống'], answer: 1 }
+    ]
+  });
+});
+</script>
+</body>
+</html>

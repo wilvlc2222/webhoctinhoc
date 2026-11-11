@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 10. Cấu trúc tuần tự – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/sprites.js"></script>
+<script src="../assets/js/scratch.js"></script>
+<script src="../assets/js/scratchlesson.js"></script>
+<style>
+  .q-scripts .quiz-opt { width: calc(33.33% - 6px); flex-direction: column; align-items: flex-start; }
+  .order .sc-blk, .order-pool .sc-blk { display: inline-block; }
+  .path { border: 2px solid var(--line); border-radius: 10px; background: #fff; line-height: 0; }
+  .path svg { width: 100%; height: auto; display: block; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính</div>
+      <h1>Bài 10. Cấu trúc tuần tự</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b10" data-stars-total="10"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Làm lần lượt từng bước</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Hiểu <b>cấu trúc tuần tự</b>: các việc được làm lần lượt theo thứ tự.</li>
+            <li>Tạo được chương trình Scratch có cấu trúc tuần tự.</li>
+          </ul>
+        </div>
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Khi định dạng văn bản, em làm Bước 1, rồi Bước 2, Bước 3... Làm <b>lần lượt từng bước theo thứ tự</b> như vậy gọi là thực hiện <b>tuần tự</b>.</div>
+        </div>
+      </div>
+      <div class="col">
+        <p class="mt0">Hoạt động nào em thực hiện theo <b>cấu trúc tuần tự</b>? Chọn tất cả.</p>
+        <div id="pick-seq"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. HOẠT ĐỘNG -->
+  <section class="step" data-title="Chương trình Xin chào">
+    <div class="step-head"><span class="phase phase-explore">Khám phá</span><h2>Chương trình "Xin chào"</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0"><b>Ý tưởng:</b> mèo di chuyển 100 bước, nói "Xin chào!" trong 3 giây, kêu meo, rồi nói "Rất vui được gặp các bạn." Sắp xếp các lệnh theo đúng thứ tự.</p>
+        <div id="order-hi"></div>
+      </div>
+      <div class="col">
+        <div class="remember">Trong <b>cấu trúc tuần tự</b>, các lệnh được thực hiện lần lượt theo thứ tự, từ trên xuống dưới.</div>
+        <div id="quiz-wrong"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. NHIỆM VỤ 1 -->
+  <section class="step" data-title="Nhiệm vụ 1">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Nhiệm vụ 1: tạo chương trình "Xin chào"</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-hi"></div></div>
+      <div class="col"><div id="sc-hi"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. NHIỆM VỤ 2 -->
+  <section class="step" data-title="Nhiệm vụ 2">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Nhiệm vụ 2: chim bay</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-bird"></div></div>
+      <div class="col"><div id="sc-bird"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Chương trình điều khiển mèo</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="lt-prog"></div></div>
+      <div class="col"><div id="quiz-lt"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Tuần tự là gì?</h2></div>
+    <div class="cols">
+      <div class="col"><div id="fill-1"></div></div>
+      <div class="col">
+        <p class="mt0"><b>Sắp xếp lệnh:</b> rô-bốt di chuyển 80 bước, nói "Xin chào bạn!" trong 2 giây, phát một âm thanh, rồi nói "Chúng ta cùng khám phá Scratch nhé!"</p>
+        <div id="order-robot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Đường đi của bọ dừa</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="path" id="path-pic"></div>
+        <p class="small-note">Bọ dừa bắt đầu ở điểm A, đang hướng sang <b>phải</b>. Mỗi đoạn dài <b>100 bước</b>.</p>
+      </div>
+      <div class="col"><div id="quiz-path" class="q-scripts"></div></div>
+    </div>
+  </section>
+
+  <!-- 8. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Chương trình "Tạm biệt"</h2></div>
+    <div class="cols">
+      <div class="col-tasks">
+        <div id="tasks-vd"></div>
+        <div class="card done-mini"><b>Học xong Bài 10!</b><span class="stars" data-stars-for="l5-b10" data-stars-total="10"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="sc-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b10';
+  var SL = ScratchLesson, apps = {};
+  var MY = 'D:/Lop 5A/Thu An', FOLDERS = [MY, 'D:/Lop 5A', 'D:'];
+  function P(s) { return Core.plain(String(s)).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  /* the first script that starts with the green flag, as specs */
+  function flagScript(a, sp) { var ss = a.scripts(sp); for (var i = 0; i < ss.length; i++) if (ss[i][0] && ss[i][0][0] === 'flag') return ss[i]; return null; }
+  /* does the script match the wanted list exactly (ops in order; args compared loosely) */
+  function same(script, want) {
+    if (!script || script.length !== want.length) return false;
+    for (var i = 0; i < want.length; i++) {
+      if (script[i][0] !== want[i][0]) return false;
+      for (var k = 1; k < want[i].length; k++) { var x = script[i][k], y = want[i][k]; if (typeof y === 'number' ? Number(x) !== y : P(x) !== P(y)) return false; }
+    }
+    return true;
+  }
+  var HI = [['flag'], ['move', 100], ['sayFor', 'Xin chào!', 3], ['playUntil', 'meo'], ['say', 'Rất vui được gặp các bạn.']];
+  var BIRD = [['flag'], ['move', 10], ['nextCostume'], ['wait', 1], ['move', 10], ['nextCostume'], ['wait', 1]];
+  var BYE = [['flag'], ['move', 100], ['sayFor', 'Tạm biệt!', 3], ['playUntil', 'meo'], ['say', 'Hẹn gặp lại!']];
+  function B(spec) { return SL.blockHTML(spec); }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    SL.icons();
+    Core.pick(document.getElementById('pick-seq'), {
+      lesson: L, id: 'seq',
+      items: [
+        { label: 'Làm bài tập lần lượt từ bài thứ nhất đến hết.', ok: true },
+        { label: 'Làm lần lượt các bước để tạo một thư mục mới.', ok: true },
+        { label: 'Chải răng nhiều lần, đến khi răng sạch thì dừng.', ok: false },
+        { label: 'Tập lần lượt 8 động tác thể dục, từ động tác 1 đến hết.', ok: true }
+      ],
+      doneText: 'Đúng rồi! Chải răng "nhiều lần, đến khi sạch" là làm đi làm lại, không phải chỉ lần lượt một lượt.'
+    });
+    Core.order(document.getElementById('order-hi'), { lesson: L, id: 'order', items: HI.map(B) });
+    Core.quiz(document.getElementById('quiz-wrong'), {
+      lesson: L, id: 'wrong',
+      questions: [{ q: 'Về cấu trúc tuần tự, chọn phát biểu <b>sai</b>.', options: ['Các lệnh được thực hiện theo thứ tự ngẫu nhiên.', 'Các lệnh được thực hiện lần lượt theo thứ tự.', 'Các việc được làm lần lượt theo thứ tự.'], answer: 0 }]
+    });
+
+    apps.hi = Scratch(document.getElementById('sc-hi'), {
+      project: { backdrop: 'trang', sprites: [{ art: 'meo', name: 'Mèo', x: -120, y: -40 }] }, folders: FOLDERS, fileName: 'XinChao', cats: ['motion', 'looks', 'sound', 'events', 'control'],
+      tasksHost: document.getElementById('tasks-hi'), lesson: L, id: 'nv1',
+      tasks: [
+        { text: 'Kéo các lệnh theo thứ tự: <b>khi bấm cờ</b> › <b>di chuyển 100 bước</b> › <b>nói Xin chào! trong 3 giây</b> › <b>phát âm thanh Meo đến hết</b> › <b>nói Rất vui được gặp các bạn.</b>', ok: function (a) { return same(flagScript(a), HI); } },
+        { text: 'Bấm cờ xanh để chạy, quan sát mèo làm lần lượt từng việc.', ok: function (a) { return a.runs() > 0 && same(flagScript(a), HI); } },
+        { text: 'Lưu tệp tên <b>XinChao</b>.', ok: function (a) { return SL.savedIn(a, MY, 'XinChao'); } }
+      ],
+      doneText: 'Chương trình có cấu trúc tuần tự: mèo làm lần lượt từng lệnh từ trên xuống.'
+    });
+    apps.bird = Scratch(document.getElementById('sc-bird'), {
+      project: { backdrop: 'troi', sprites: [{ art: 'chim', name: 'Chim', x: -150, y: 20 }] }, folders: FOLDERS, fileName: 'ChimBay', cats: ['motion', 'looks', 'events', 'control'],
+      tasksHost: document.getElementById('tasks-bird'), lesson: L, id: 'nv2',
+      tasks: [
+        { text: 'Tạo chương trình: <b>khi bấm cờ</b> › di chuyển 10 bước › <b>trang phục tiếp theo</b> › đợi 1 giây › di chuyển 10 bước › trang phục tiếp theo › đợi 1 giây.', ok: function (a) { return same(flagScript(a), BIRD); } },
+        { text: 'Bấm cờ xanh: chim vỗ cánh và bay lên phía trước.', ok: function (a) { return a.runs() > 0 && same(flagScript(a), BIRD); } }
+      ],
+      doneText: 'Lệnh "trang phục tiếp theo" đổi động tác, nên chim như đang vỗ cánh!'
+    });
+
+    var LT = [['flag'], ['move', 50], ['sayFor', 'Xin chào bạn!', 2], ['nextCostume'], ['say', 'Chúc bạn vui vẻ!']];
+    document.getElementById('lt-prog').innerHTML = SL.scriptHTML(LT);
+    Core.quiz(document.getElementById('quiz-lt'), {
+      lesson: L, id: 'lt',
+      questions: [
+        { q: '<b>a)</b> Chương trình bên trái có cấu trúc tuần tự hay không?', options: ['Có: các lệnh được thực hiện lần lượt từ trên xuống.', 'Không: các lệnh được thực hiện ngẫu nhiên.'], answer: 0 },
+        { q: '<b>b)</b> Sau khi nói "Xin chào bạn!", mèo làm gì <b>tiếp theo</b>?', options: ['Di chuyển 50 bước', 'Đổi sang trang phục tiếp theo', 'Nói "Chúc bạn vui vẻ!"'], answer: 1 },
+        { q: '<b>b)</b> Việc mèo làm <b>cuối cùng</b> là gì?', options: ['Nói "Chúc bạn vui vẻ!"', 'Di chuyển 50 bước', 'Nói "Xin chào bạn!"'], answer: 0 },
+        { q: 'Chim bồ câu có hai động tác (trang phục). Lệnh nào đổi động tác để chim như đang bay?', options: [B(['nextCostume']), B(['nextBackdrop']), B(['changeSize', 10])], answer: 0 }
+      ]
+    });
+
+    Core.fill(document.getElementById('fill-1'), {
+      lesson: L, id: 'fill1',
+      text: 'a) Trong cấu trúc tuần tự, các việc được thực hiện [lần lượt] theo thứ tự.\nb) Trong chương trình có cấu trúc tuần tự, các [lệnh] hoặc nhóm lệnh được thực hiện lần lượt theo [thứ tự].'
+    });
+    Core.order(document.getElementById('order-robot'), { lesson: L, id: 'robot', items: [['flag'], ['move', 80], ['sayFor', 'Xin chào bạn!', 2], ['playUntil', 'chuong'], ['say', 'Chúng ta cùng khám phá Scratch nhé!']].map(B) });
+
+    document.getElementById('path-pic').innerHTML = '<svg viewBox="0 0 260 180"><path d="M30 150H130V50H230" fill="none" stroke="#1c7ed6" stroke-width="5" stroke-dasharray="10 6"/><circle cx="30" cy="150" r="7" fill="#e03131"/><text x="20" y="175" font-size="16" font-weight="800">A</text><path d="M232 50l-14-8v16z" fill="#1c7ed6"/><text x="70" y="142" font-size="13">100</text><text x="136" y="104" font-size="13">100</text><text x="170" y="42" font-size="13">100</text></svg>';
+    var OK = [['flag'], ['move', 100], ['turnL', 90], ['move', 100], ['turnR', 90], ['move', 100]];
+    Core.quiz(document.getElementById('quiz-path'), {
+      lesson: L, id: 'path',
+      questions: [{ q: 'Khối lệnh nào điều khiển bọ dừa đi đúng như hình?', options: [SL.scriptHTML(OK), SL.scriptHTML([['flag'], ['move', 100], ['turnR', 90], ['move', 100], ['turnL', 90], ['move', 100]]), SL.scriptHTML([['flag'], ['move', 100], ['turnL', 90], ['move', 100], ['turnL', 90], ['move', 100]])], answer: 0,
+        explain: 'Đi 100 bước, xoay trái 90 độ để đi lên, đi 100 bước, xoay phải 90 độ để đi tiếp sang phải, đi 100 bước.' }]
+    });
+
+    apps.vd = Scratch(document.getElementById('sc-vd'), {
+      project: { backdrop: 'trang', sprites: [{ art: 'meo', name: 'Mèo', x: -120, y: -40 }] }, folders: FOLDERS, fileName: 'TamBiet', cats: ['motion', 'looks', 'sound', 'events', 'control'],
+      tasksHost: document.getElementById('tasks-vd'), lesson: L, id: 'vd',
+      tasks: [
+        { text: 'Tạo chương trình như "Xin chào" nhưng mèo nói <b>Tạm biệt!</b> trong 3 giây, kêu meo, rồi nói <b>Hẹn gặp lại!</b>', ok: function (a) { return same(flagScript(a), BYE); } },
+        { text: 'Chạy thử, rồi lưu tệp tên <b>TamBiet</b>.', ok: function (a) { return a.runs() > 0 && SL.savedIn(a, MY, 'TamBiet'); } }
+      ]
+    });
+
+    window.__solve = function () {
+      var a = apps.hi; a.setScripts('Mèo', [HI]); a.flag(); a.simulate(5); a.save('XinChao', MY);
+      a = apps.bird; a.setScripts('Chim', [BIRD]); a.flag(); a.simulate(3);
+      a = apps.vd; a.setScripts('Mèo', [BYE]); a.flag(); a.simulate(5); a.save('TamBiet', MY);
+    };
+  });
+})();
+</script>
+</body>
+</html>

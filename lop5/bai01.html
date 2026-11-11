@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 1. Em có thể làm gì với máy tính? – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<style>
+  .sort-bins .sort-bin-title { font-size: 15px; }
+  .maze-wrap { display: flex; gap: 16px; align-items: flex-start; }
+  .maze { display: grid; grid-template-columns: repeat(13, 32px); grid-template-rows: repeat(11, 32px); border: 3px solid var(--ink); background: #fff; }
+  .maze .w { background: #343a40; }
+  .maze .p { background: #fff; }
+  .maze .e { background: #ffe066; }
+  .maze .s { background: #a5d8ff; }
+  html.eink .maze .e, html.eink .maze .s { background: #ddd; }
+  .maze .c { position: relative; }
+  .mouse { position: absolute; left: 2px; top: 2px; width: 28px; height: 28px; }
+  .mouse svg { width: 100%; height: 100%; }
+  .mz-side { flex: 1; }
+  .mz-time { font-size: 30px; font-weight: 800; font-family: Consolas, monospace; display: inline-block; background: #f08c00; color: #fff; border-radius: 8px; padding: 0 12px; }
+  html.eink .mz-time { background: #000; }
+  .mz-pad { display: grid; grid-template-columns: 56px 56px 56px; grid-template-rows: 56px 56px; gap: 6px; margin: 10px 0; }
+  .mz-pad button { font-size: 24px; font-weight: 800; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); cursor: pointer; color: var(--ink); }
+  .mz-pad .up { grid-column: 2; grid-row: 1; background: #b2f2bb; } .mz-pad .left { grid-column: 1; grid-row: 2; background: #fcc2d7; }
+  .mz-pad .down { grid-column: 2; grid-row: 2; background: #b2f2bb; } .mz-pad .right { grid-column: 3; grid-row: 2; background: #a5d8ff; }
+  html.eink .mz-pad button { background: #fff !important; border-color: #000; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 1. Máy tính và em</div>
+      <h1>Bài 1. Em có thể làm gì với máy tính?</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b01" data-stars-total="6"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Nêu ví dụ máy tính giúp <b>học tập, giải trí, tìm kiếm, trao đổi thông tin, hợp tác</b> với bạn bè và <b>tạo ra sản phẩm số</b>.</li>
+            <li>Mong muốn dùng máy tính <b>thành thạo</b> để làm được nhiều việc hơn.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Lên lớp 5, An đã biết dùng chuột, bàn phím đúng cách, tắt máy an toàn, tìm thông tin trên Internet, tạo văn bản, bài trình chiếu và quản lí tệp. Máy tính còn giúp được gì nữa nhỉ?</div>
+        </div>
+        <details class="reveal"><summary>Hoạt động. Em đã dùng phần mềm nào? Phần mềm đó giúp em làm gì?</summary>
+          <div>Ví dụ: phần mềm <b>luyện gõ bàn phím</b> giúp em gõ nhanh, đúng cách; phần mềm <b>trình chiếu</b> giúp em chia sẻ thông tin sinh động; <b>Scratch</b> giúp em làm trò chơi...</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. MÁY TÍNH GIÚP GÌ -->
+  <section class="step" data-title="Máy tính giúp em">
+    <div class="step-head"><span class="phase phase-explore">Khám phá</span><h2>Máy tính giúp em làm gì?</h2><span class="step-sub">Xếp mỗi việc vào đúng nhóm.</span></div>
+    <div id="sort-use"></div>
+    <div class="remember"><ul><li>Máy tính có thể giúp em học tập, giải trí, tìm kiếm, trao đổi thông tin, hợp tác với bạn bè và tạo ra sản phẩm số theo ý tưởng của mình.</li><li>Sử dụng máy tính thành thạo, em sẽ làm được nhiều việc hơn.</li></ul></div>
+  </section>
+
+  <!-- 3. PHẦN MỀM -->
+  <section class="step" data-title="Phần mềm nào?">
+    <div class="step-head"><span class="phase phase-explore">Câu hỏi</span><h2>Phần mềm nào giúp em việc gì?</h2></div>
+    <div class="cols">
+      <div class="col"><div id="match-sw"></div></div>
+      <div class="col-side">
+        <details class="reveal"><summary>Kể về một phần mềm trên máy tính hoặc điện thoại mà em thấy thích.</summary>
+          <div>Ví dụ: "Em thích phần mềm <b>Scratch</b> vì em tự làm được trò chơi có nhân vật biết chạy, biết nói." Em kể cho bạn nghe: phần mềm tên gì, dùng để làm gì, vì sao em thích.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. MÊ CUNG -->
+  <section class="step" data-title="Trò chơi Mê cung">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Chơi trò chơi Mê cung</h2></div>
+    <div class="maze-wrap">
+      <div class="maze" id="maze" aria-label="Mê cung"></div>
+      <div class="mz-side">
+        <p class="mt0">Chú chuột xuất phát ở <b>Lối vào</b> (ô xanh bên trái). Dùng <b>các phím mũi tên</b> (hoặc các nút bên dưới) để đưa chuột tới <b>Lối ra</b> (ô vàng bên phải).</p>
+        <p><button class="btn btn-primary" id="mz-start"><span class="ico" data-icon="flag"></span>Bắt đầu chơi</button> Thời gian: <span class="mz-time" id="mz-time">0</span> giây</p>
+        <div class="mz-pad"><button class="up" data-d="up" aria-label="Lên">↑</button><button class="left" data-d="left" aria-label="Trái">←</button><button class="down" data-d="down" aria-label="Xuống">↓</button><button class="right" data-d="right" aria-label="Phải">→</button></div>
+        <p class="note">Trên bàn phím thật: dùng ngón <b>trỏ</b> tay phải bấm ←, ngón <b>giữa</b> bấm ↑ ↓, ngón <b>áp út</b> bấm →. Trò chơi như thế này em cũng tự làm được bằng <b>Scratch</b> đó!</p>
+        <div class="feedback" id="mz-fb"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BÀI TẬP (Vở bài tập) -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Dùng phần mềm nào?</h2></div>
+    <div class="cols">
+      <div class="col"><div id="bt-q1"></div></div>
+      <div class="col"><div id="bt-q2"></div></div>
+    </div>
+  </section>
+
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Máy tính giúp em những gì?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Với máy tính có kết nối Internet, em có thể làm những việc nào? Chọn tất cả.</p>
+        <div id="bt-pick"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. LUYỆN TẬP, VẬN DỤNG -->
+  <section class="step" data-title="Luyện tập, vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Luyện tập · Vận dụng</span><h2>Máy tính và em</h2></div>
+    <div class="cols">
+      <div class="col">
+        <details class="reveal"><summary>Luyện tập. Nêu một ví dụ máy tính giúp em học tập, giải trí hoặc hợp tác với bạn. Em đã dùng phần mềm nào?</summary>
+          <div>Ví dụ: cả nhóm cùng làm bài trình chiếu giới thiệu quê hương bằng <b>PowerPoint</b>, thảo luận với nhau qua <b>Google Meet</b>.</div></details>
+        <details class="reveal"><summary>Vận dụng. Kể tên một sản phẩm số em có thể cùng bạn tạo ra. Máy tính giúp như thế nào?</summary>
+          <div>Ví dụ: <b>thiệp chúc mừng sinh nhật</b>. Máy tính giúp em vẽ, chèn ảnh, gõ lời chúc có dấu, đổi màu chữ và in ra để tặng bạn. Hoặc một <b>đoạn video</b> nhóm em hát: máy tính giúp quay, ghép và thêm chữ vào video.</div></details>
+      </div>
+      <div class="col-side">
+        <div class="card done-mini"><b>Học xong Bài 1!</b><span class="stars" data-stars-for="l5-b01" data-stars-total="6"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b01';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  var MAP = [
+    '#############',
+    'S...#.......#',
+    '###.#.#####.#',
+    '#...#.#...#.#',
+    '#.###.#.#.#.#',
+    '#.....#.#...#',
+    '#####.#.###.#',
+    '#...#...#...#',
+    '#.#.#####.###',
+    '#.#.........E',
+    '#############'
+  ];
+  var MOUSE = '<svg viewBox="0 0 32 32"><ellipse cx="14" cy="18" rx="10" ry="7" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><circle cx="24" cy="15" r="5" fill="#adb5bd" stroke="#495057" stroke-width="1.5"/><circle cx="21" cy="10" r="3" fill="#ffc9c9" stroke="#495057"/><circle cx="26" cy="14" r="1.2" fill="#000"/><path d="M4 18q-4 2-2 8" stroke="#495057" stroke-width="1.5" fill="none"/></svg>';
+  function maze() {
+    var host = document.getElementById('maze'), fb = document.getElementById('mz-fb'), timeEl = document.getElementById('mz-time');
+    var cells = [], pos = { x: 0, y: 1 }, playing = false, t0 = 0, timer = null, won = false;
+    for (var y = 0; y < MAP.length; y++) for (var x = 0; x < MAP[y].length; x++) {
+      var ch = MAP[y].charAt(x);
+      var c = Core.el('div', 'c ' + (ch === '#' ? 'w' : ch === 'S' ? 's' : ch === 'E' ? 'e' : 'p'));
+      host.appendChild(c); cells.push(c);
+    }
+    var mouse = Core.el('span', 'mouse', MOUSE);
+    function draw() { cells[pos.y * 13 + pos.x].appendChild(mouse); }
+    function move(d) {
+      if (!playing) { Core.say(fb, 'Bấm <b>Bắt đầu chơi</b> trước nha.', 'info'); return; }
+      var nx = pos.x + (d === 'left' ? -1 : d === 'right' ? 1 : 0), ny = pos.y + (d === 'up' ? -1 : d === 'down' ? 1 : 0);
+      if (nx < 0 || nx > 12 || ny < 0 || ny > 10 || MAP[ny].charAt(nx) === '#') return;
+      pos.x = nx; pos.y = ny;
+      mouse.style.transform = d === 'left' ? 'scaleX(-1)' : '';
+      draw();
+      if (MAP[ny].charAt(nx) === 'E') {
+        playing = false; clearInterval(timer);
+        var sec = Math.round((new Date() - t0) / 1000);
+        won = true;
+        Core.celebrate(fb, L, 'maze', 'Chú chuột thoát khỏi mê cung trong ' + sec + ' giây! Chơi lại để phá kỉ lục nha.');
+      }
+    }
+    Core.on(document.getElementById('mz-start'), function () {
+      pos = { x: 0, y: 1 }; draw(); playing = true; t0 = new Date(); timeEl.innerHTML = '0';
+      if (timer) clearInterval(timer);
+      timer = setInterval(function () { timeEl.innerHTML = String(Math.round((new Date() - t0) / 1000)); }, 500);
+      Core.say(fb, 'Bắt đầu! Tìm đường tới Lối ra nào.', 'info');
+    });
+    var pads = document.querySelectorAll('.mz-pad button');
+    for (var i = 0; i < pads.length; i++) (function (b) { Core.on(b, function () { move(b.getAttribute('data-d')); }); })(pads[i]);
+    document.addEventListener('keydown', function (e) {
+      var m = { 37: 'left', 38: 'up', 39: 'right', 40: 'down' }[e.keyCode];
+      if (m && host.offsetParent) { e.preventDefault(); move(m); }
+    }, false);
+    draw();
+    return { solve: function () { document.getElementById('mz-start').click(); var path = 'right right right down down left left down down right right right right up up up up right right right right right right down down down down down down left left down down right right right'.split(' '); for (var k = 0; k < path.length; k++) move(path[k]); } };
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    Core.sort(document.getElementById('sort-use'), {
+      lesson: L, id: 'use',
+      bins: [{ id: 'hoc', label: 'Học tập' }, { id: 'giai', label: 'Giải trí' }, { id: 'trao', label: 'Trao đổi thông tin' }, { id: 'hop', label: 'Hợp tác với bạn' }, { id: 'tao', label: 'Tạo sản phẩm số' }],
+      items: [
+        { label: 'Tìm hiểu thế giới tự nhiên bằng phần mềm', icon: 'lens', bin: 'hoc' },
+        { label: 'Dịch từ tiếng Anh chưa biết', icon: 'dictionary', bin: 'hoc' },
+        { label: 'Xem video, nghe nhạc', icon: 'video', bin: 'giai' },
+        { label: 'Chơi trò chơi thiếu nhi', icon: 'game', bin: 'giai' },
+        { label: 'Gửi thư điện tử, nhắn tin', icon: 'chat', bin: 'trao' },
+        { label: 'Gọi video cho ông bà', icon: 'meet', bin: 'trao' },
+        { label: 'Thảo luận nhóm qua Zoom, Meet', icon: 'people', bin: 'hop' },
+        { label: 'Tham gia CLB học tập trên mạng', icon: 'globe', bin: 'hop' },
+        { label: 'Viết truyện bằng phần mềm soạn thảo', icon: 'text', bin: 'tao' },
+        { label: 'Viết trò chơi bằng Scratch', icon: 'play', bin: 'tao' }
+      ],
+      doneText: 'Giỏi quá! Máy tính giúp em rất nhiều việc.'
+    });
+    Core.match(document.getElementById('match-sw'), {
+      lesson: L, id: 'sw', leftTitle: 'Phần mềm', rightTitle: 'Giúp em',
+      pairs: [['Kids Games Learning Science', 'Tìm hiểu thế giới tự nhiên'], ['Google Translate', 'Dịch những từ tiếng Anh chưa biết'], ['Zoom, Google Meet, Microsoft Teams', 'Thảo luận, học nhóm trực tuyến'], ['Phần mềm trình chiếu', 'Chuẩn bị báo cáo, làm album ảnh'], ['Scratch', 'Viết chương trình trò chơi']]
+    });
+    var mz = maze();
+    window.__solve = function () { mz.solve(); };
+  });
+})();
+</script>
+<script>
+/* Bài tập from the workbook (Vở bài tập Tin học 5) */
+document.addEventListener('DOMContentLoaded', function () {
+  var L = 'l5-b01';
+  Core.quiz(document.getElementById('bt-q1'), {
+    lesson: L, id: 'bt-q1',
+    questions: [
+      { q: 'Muốn tạo nội dung có chữ, hình ảnh và trình bày sinh động trên màn hình, em dùng loại phần mềm nào?', options: ['Phần mềm luyện gõ bàn phím', 'Phần mềm xem video', 'Phần mềm trình chiếu', 'Phần mềm trò chơi'], answer: 2 },
+      { q: 'Muốn tìm nội dung em quan tâm trên các trang web khắp thế giới, em dùng gì?', options: ['Phần mềm trình chiếu', 'Máy tìm kiếm', 'Từ điển trên máy tính'], answer: 1 }
+    ]
+  });
+  Core.quiz(document.getElementById('bt-q2'), {
+    lesson: L, id: 'bt-q2',
+    questions: [
+      { q: '"... có bài kiểm tra tốc độ gõ, trò chơi và hoạt động giúp em luyện gõ nhanh, gõ đúng." Chỗ trống là phần mềm nào?', options: ['Phần mềm luyện gõ phím', 'Phần mềm trò chơi', 'Phần mềm xem video', 'Phần mềm trình chiếu'], answer: 0 },
+      { q: 'Muốn trình bày nội dung trên màn hình máy tính cho người ở xa cùng xem qua Internet, em dùng phần mềm nào?', options: ['Phần mềm trình chiếu', 'Phần mềm soạn thảo văn bản', 'Phần mềm họp trực tuyến', 'Máy tìm kiếm'], answer: 2 }
+    ]
+  });
+  Core.pick(document.getElementById('bt-pick'), {
+    lesson: L, id: 'bt-pick',
+    items: [
+      { label: 'Tìm và xem video bài giảng, phim hoạt hình', ok: true },
+      { label: 'Học trực tuyến cùng thầy cô, bạn bè', ok: true },
+      { label: 'Tìm thông tin cho bài tập', ok: true },
+      { label: 'Gửi thư điện tử cho người thân (cùng người lớn)', ok: true },
+      { label: 'Nấu cơm thay em', ok: false }
+    ]
+  });
+});
+</script>
+</body>
+</html>

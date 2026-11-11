@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 3. Thông tin trên trang web – Tin học 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<style>
+  .web1 .br-page { display: flex; gap: 12px; height: 300px; }
+  .web1 .w-left { flex: 1 1 0; }
+  .web1 .w-right { flex: 1 1 0; display: flex; flex-direction: column; gap: 6px; }
+  .web1 .vid { height: 170px; }
+  .grid4 { display: flex; flex-wrap: wrap; gap: 4px; }
+  .grid4 .pic { width: calc(50% - 2px); height: 70px; }
+  .small { font-size: 13px; color: #555; }
+  .web2 .br-page { height: 330px; }
+  .web2 [data-pt] { cursor: pointer; }
+  .web2 .row { display: flex; gap: 10px; margin-top: 8px; }
+  .web2 .pic { width: 150px; height: 96px; flex: none; }
+  .web2 .vid { width: 150px; height: 96px; flex: none; }
+  .web2 .menu { display: flex; gap: 14px; border-bottom: 1px solid #dee2e6; padding-bottom: 6px; margin-bottom: 8px; font-weight: 700; }
+  .found-list { list-style: none; padding: 0; margin: 6px 0 0; font-size: 16px; }
+  .found-list li { display: flex; gap: 6px; align-items: center; }
+  .found-list .ico { width: 20px; height: 20px; }
+  /* cursor demos used in quiz / pick */
+  .cd { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 130px; height: 52px; background: #e7f5ff; border-radius: 6px; font-size: 15px; color: #222; }
+  .cd .ico { position: absolute; width: 30px; height: 30px; left: 54%; top: 40%; color: #000; }
+  .cd .u { color: #1a0dab; text-decoration: underline; }
+  .cd .pic { width: 130px; height: 52px; }
+  html.eink .cd { background: #fff; border: 2px solid #000; }
+  .q-cursor .quiz-opt { width: calc(33.33% - 6px); }
+  .pick .cd-card { width: 160px; }
+  .lt-item { display: flex; align-items: center; gap: 10px; }
+  .lt-item .vid, .lt-item .pic { width: 120px; height: 56px; flex: none; }
+  .lt-item .aud { width: 150px; flex: none; }
+  .lt-item .quote { font-size: 13px; line-height: 1.3; font-style: italic; }
+  .harms { margin: 0; padding-left: 22px; }
+  .harms li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 4 · Chủ đề 2. Mạng máy tính và Internet</div>
+      <h1>Bài 3. Thông tin trên trang web</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l4-b03" data-stars-total="11"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Nhận biết các loại thông tin trên trang web: <b>văn bản, hình ảnh, âm thanh</b> và <b>siêu liên kết</b>.</li>
+            <li>Biết tác hại khi cố tình vào trang web <b>không phù hợp</b> lứa tuổi.</li>
+          </ul>
+        </div>
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Em đã xem những gì trên Internet? Những thứ đó thuộc <b>dạng thông tin</b> nào? Em xếp thử các thẻ bên phải nha.</div>
+        </div>
+      </div>
+      <div class="col"><div id="sort-start"></div></div>
+    </div>
+  </section>
+
+  <!-- 2. XEM THÔNG TIN TRÊN TRANG WEB -->
+  <section class="step" data-title="Thông tin trên trang web">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Thông tin trên trang web</h2>
+      <span class="step-sub">Mỗi vị trí đánh số thể hiện thông tin dạng nào?</span></div>
+    <div class="cols">
+      <div class="col">
+        <div class="browser web1">
+          <div class="br-bar"><span class="ico" data-icon="back"></span><span class="ico" data-icon="forward"></span><span class="br-addr">https://www.timkiem.vn/?q=Tết+Trung+thu</span></div>
+          <div class="br-page">
+            <span class="spot spot-1" style="left:8px;top:70px">01</span>
+            <span class="spot spot-2" style="right:12px;top:40px">02</span>
+            <span class="spot spot-3" style="right:12px;top:210px">03</span>
+            <div class="w-left">
+              <div class="br-h">Video</div>
+              <div class="vid"><span class="ico" data-icon="play"></span></div>
+              <div class="br-link" style="margin-top:6px">Tết Trung thu cho thiếu nhi</div>
+              <div class="small">Kênh thiếu nhi · 3 phút</div>
+            </div>
+            <div class="w-right">
+              <div class="br-h">Hình ảnh Tết Trung thu</div>
+              <div class="grid4" id="grid4"></div>
+              <div><b>Giới thiệu</b><br><span class="small">Tết Trung thu vào ngày Rằm tháng Tám âm lịch. Đây là ngày tết của thiếu nhi, còn gọi là Tết trông Trăng hay Tết hoa đăng.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div id="match-spots"></div>
+        <div class="card tight" style="margin-top:12px">
+          <p>Em đã biết ba dạng thông tin thường gặp là <b>chữ, hình ảnh</b> và <b>âm thanh</b>. Trên trang web, thông tin còn có thể kết hợp nhiều dạng như <b>video</b> (vừa có hình vừa có tiếng).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SIÊU LIÊN KẾT -->
+  <section class="step" data-title="Siêu liên kết">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Đi tìm siêu liên kết</h2>
+      <span class="step-sub">Chạm vào các chỗ trên trang để "di chuột" tới đó.</span></div>
+    <div class="cols">
+      <div class="col">
+        <div class="browser web2">
+          <div class="br-bar"><span class="ico" data-icon="back"></span><span class="ico" data-icon="forward"></span><span class="br-addr">https://thieunhi.vn/den-ong-sao</span></div>
+          <div class="br-page" id="web2">
+            <div class="menu"><span class="br-link" data-pt="link" data-id="home" data-name="Trang chủ">Trang chủ</span><span data-pt="text">Đồ chơi Trung thu</span></div>
+            <div class="br-h" data-pt="text">Đèn ông sao</div>
+            <div data-pt="text">Đèn ông sao có năm cánh, được làm từ tre và giấy bóng kính nhiều màu. Em có thể xem <span class="br-link" data-pt="link" data-id="how" data-name="Cách làm đèn ông sao">cách làm đèn ông sao</span> tại nhà.</div>
+            <div class="row">
+              <div class="pic" data-pt="img" id="lantern-pic"></div>
+              <div>
+                <div class="vid" data-pt="link" data-id="video" data-name="Video: rước đèn"><span class="ico" data-icon="play"></span></div>
+              </div>
+              <div data-pt="text" class="small">Bé thích rước đèn cùng các bạn trong xóm. Ảnh bên trái là ảnh chụp, video bên phải bấm vào để xem.</div>
+            </div>
+          </div>
+        </div>
+        <div class="feedback feedback-info" id="pt-fb"><span>Chạm vào chữ, hình hay video trên trang xem con trỏ chuột có hình gì.</span></div>
+      </div>
+      <div class="col">
+        <div class="card tight">
+          <p>Có những chỗ trên trang web, khi đưa con trỏ chuột tới thì con trỏ đổi thành <b>hình bàn tay</b> <span class="ico" data-icon="cursorHand"></span>. Đó là chỗ có <b>siêu liên kết</b>. Nháy chuột vào đó sẽ mở <b>trang web khác</b> hoặc chuyển tới chỗ khác.</p>
+          <p>Văn bản có chứa chữ, hình ảnh, âm thanh, video và siêu liên kết gọi là <b>siêu văn bản</b>. Trang web là siêu văn bản.</p>
+        </div>
+        <b>Em đã tìm được siêu liên kết:</b> <span id="found-count">0/3</span>
+        <ul class="found-list" id="found-list"></ul>
+        <div class="remember">Trên trang web thường có các loại thông tin: văn bản, hình ảnh, âm thanh, video và siêu liên kết.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CÂU HỎI -->
+  <section class="step" data-title="Câu hỏi">
+    <div class="step-head"><span class="phase phase-explore">Câu hỏi</span><h2>Em đã hiểu bài chưa?</h2></div>
+    <div id="quiz-1" class="q-cursor"></div>
+  </section>
+
+  <!-- 5. TÁC HẠI -->
+  <section class="step" data-title="Trang web không phù hợp">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 3</span><h2>Tác hại khi vào trang web không phù hợp</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">An vô tình vào một <b>trang web trò chuyện</b> không phù hợp. Người lạ ở đó gửi cho An những lời "xấu xí", "đáng ghét". An gặp rắc rối gì?</div>
+        </div>
+        <details class="reveal"><summary>Xem ý kiến của Bíp</summary>
+          <div>An bị người lạ <b>chê bai, bắt nạt</b> trên mạng nên buồn và sợ. An nên tắt trang đó và kể ngay cho bố mẹ, thầy cô.</div></details>
+        <p class="mt0">Trên mạng có thông tin em <b>chưa hiểu hết</b>, có thông tin <b>độc hại</b> (trò chơi bạo lực, phim ảnh xấu). Cố tình xem, em có thể:</p>
+        <div class="remember">Em không nên xem các trang web không phù hợp lứa tuổi vì có nguy cơ suy nghĩ lệch lạc, bị lừa đảo, dụ dỗ, bắt nạt và lãng phí thời gian.</div>
+      </div>
+      <div class="col">
+        <ul class="harms" style="margin-bottom:10px">
+          <li>Có <b>suy nghĩ tiêu cực, lệch lạc</b>.</li>
+          <li>Bị <b>lừa đảo, dụ dỗ, bắt nạt</b> bởi kẻ xấu giả danh, giấu tên.</li>
+          <li><b>Lãng phí thời gian</b> dành cho học tập và việc bổ ích.</li>
+        </ul>
+        <p class="mt0"><b>Câu hỏi:</b> Nếu cố tình vào trang web không phù hợp, em có thể gặp những tác hại nào? <b>Chọn tất cả</b> các ý đúng.</p>
+        <div id="pick-harm"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Luyện tập</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0"><b>Bài 1.</b> Đây là hình con trỏ chuột ở vài chỗ trên trang web An đang xem. Chỗ nào có <b>siêu liên kết</b>?</p>
+        <div id="pick-links"></div>
+      </div>
+      <div class="col">
+        <p class="mt0"><b>Bài 2.</b> Ghép mỗi mẩu cắt từ trang web với loại thông tin của nó.</p>
+        <div id="match-types"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BÀI TẬP (Vở bài tập) -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Thông tin trên trang web</h2></div>
+    <div class="cols">
+      <div class="col"><div id="bt-q1"></div></div>
+      <div class="col">
+        <p class="mt0">Mỗi câu về <b>video</b> sau đúng hay sai?</p>
+        <div id="bt-tf"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Siêu liên kết và an toàn khi lên mạng</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Phát biểu nào đúng về <b>siêu liên kết</b>? Chọn tất cả.</p>
+        <div id="bt-link"></div>
+      </div>
+      <div class="col"><div id="bt-q2"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Vì sao cần người lớn đi cùng khi lên mạng?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Em nghĩ trước câu trả lời, rồi chạm để xem gợi ý của Bíp.</p>
+        <details class="reveal"><summary>Bài 3 (Luyện tập). Kể các tác hại khi cố tình xem trang web không phù hợp lứa tuổi.</summary>
+          <div>Suy nghĩ tiêu cực, lệch lạc; bị lừa đảo, dụ dỗ, bắt nạt; lãng phí thời gian.</div></details>
+        <details class="reveal"><summary>Tại sao em cần sự đồng hành của người lớn khi truy cập Internet?</summary>
+          <div>Người lớn giúp em <b>chọn trang web phù hợp</b>, giải thích những điều em <b>chưa hiểu</b>, nhắc em <b>giữ an toàn</b> (không nói chuyện, không gửi ảnh, địa chỉ cho người lạ) và <b>giúp đỡ kịp thời</b> khi em gặp chuyện đáng sợ trên mạng.</div></details>
+        <details class="reveal"><summary>Nếu lỡ vào một trang web lạ, đáng sợ thì em làm gì?</summary>
+          <div>Tắt trang web đó ngay. Không bấm vào các nút, đường liên kết lạ. Kể cho bố mẹ, thầy cô nghe.</div></details>
+      </div>
+      <div class="col-side">
+        <div class="card" style="text-align:center">
+          <p><b>Em đã học xong Bài 3!</b></p>
+          <p class="stars" data-stars-for="l4-b03" data-stars-total="11"></p>
+          <p style="margin:0"><a class="btn btn-primary" href="../index.html"><span class="ico" data-icon="home"></span>Về trang chính</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l4-b03';
+  /* small pictures drawn for this lesson */
+  var STAR = '<polygon points="40,27 44.4,38.9 57.1,39.4 47.1,47.3 50.6,59.6 40,52.5 29.4,59.6 32.9,47.3 22.9,39.4 35.6,38.9" fill="#ffd43b" stroke="#e8590c" stroke-width="2"/>';
+  var ART = {
+    lantern: '<svg viewBox="0 0 120 80"><rect width="120" height="80" fill="#1c3d6e"/><circle cx="96" cy="20" r="12" fill="#fff3bf"/><path d="M40 27V6" stroke="#c4a484" stroke-width="3"/>' + STAR + '</svg>',
+    moon: '<svg viewBox="0 0 120 80"><rect width="120" height="80" fill="#243b6b"/><circle cx="60" cy="40" r="24" fill="#ffe066"/><circle cx="20" cy="18" r="2" fill="#fff"/><circle cx="100" cy="60" r="2" fill="#fff"/></svg>',
+    cake: '<svg viewBox="0 0 120 80"><rect width="120" height="80" fill="#fff4e6"/><rect x="38" y="18" width="44" height="44" rx="12" fill="#e8a33d" stroke="#a0611a" stroke-width="3"/><circle cx="60" cy="40" r="10" fill="none" stroke="#a0611a" stroke-width="3"/></svg>',
+    lion: '<svg viewBox="0 0 120 80"><rect width="120" height="80" fill="#ffe3e3"/><circle cx="60" cy="42" r="24" fill="#fa5252"/><circle cx="51" cy="38" r="4" fill="#fff"/><circle cx="69" cy="38" r="4" fill="#fff"/><path d="M48 52q12 8 24 0" stroke="#fff" stroke-width="3" fill="none"/></svg>',
+    kids: '<svg viewBox="0 0 120 80"><rect width="120" height="80" fill="#d3f9d8"/><path d="M0 62q60-20 120 0v18H0z" fill="#69db7c"/><circle cx="35" cy="34" r="8" fill="#ffd8a8"/><circle cx="60" cy="28" r="8" fill="#ffd8a8"/><circle cx="85" cy="34" r="8" fill="#ffd8a8"/><path d="M35 42v14M60 36v14M85 42v14M27 46l8-4 8 4M52 40l8-4 8 4M77 46l8-4 8 4" stroke="#1864ab" stroke-width="4" fill="none"/></svg>'
+  };
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  function pic(name, cls) { return '<div class="pic ' + (cls || '') + '">' + ART[name] + '</div>'; }
+  function cd(inner, cursor) { return '<span class="cd">' + inner + Core.icon(cursor) + '</span>'; }
+
+  /* pointer test on the pretend page: show the cursor shape where the child taps */
+  function pointerTest() {
+    var page = document.getElementById('web2');
+    var fb = document.getElementById('pt-fb');
+    var list = document.getElementById('found-list');
+    var count = document.getElementById('found-count');
+    var cur = Core.el('span', 'br-cursor');
+    page.appendChild(cur);
+    var found = {}, n = 0;
+    Core.on(page, function (ev) {
+      var t = ev.target;
+      while (t && t !== page && !t.getAttribute('data-pt')) t = t.parentNode;
+      var kind = t && t !== page ? t.getAttribute('data-pt') : 'text';
+      var r = page.getBoundingClientRect();
+      var x = (ev.clientX || r.left + 20) - r.left, y = (ev.clientY || r.top + 20) - r.top;
+      cur.style.left = x + 'px';
+      cur.style.top = y + 'px';
+      cur.innerHTML = Icons[kind === 'link' ? 'cursorHand' : kind === 'text' ? 'cursorText' : 'cursorArrow'];
+      if (kind === 'link') {
+        var id = t.getAttribute('data-id');
+        if (!found[id]) {
+          found[id] = 1; n++;
+          var li = Core.el('li', '', Core.icon('check') + '<span></span>');
+          li.lastChild.appendChild(document.createTextNode(t.getAttribute('data-name')));
+          list.appendChild(li);
+          count.innerHTML = n + '/3';
+        }
+        if (n === 3) Core.celebrate(fb, L, 'links', 'Em tìm được cả 3 siêu liên kết rồi! Con trỏ hình bàn tay cho biết chỗ đó có siêu liên kết.');
+        else Core.say(fb, 'Con trỏ thành <b>bàn tay</b>: chỗ này có <b>siêu liên kết</b>! Nháy vào sẽ mở trang "' + t.getAttribute('data-name') + '".', 'good');
+      } else if (kind === 'img') {
+        Core.say(fb, 'Đây là <b>hình ảnh</b>. Con trỏ vẫn là mũi tên, nên ảnh này không có siêu liên kết.', 'info');
+      } else {
+        Core.say(fb, 'Đây là <b>văn bản</b> bình thường. Con trỏ có hình chữ I, không có siêu liên kết.', 'info');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    document.getElementById('grid4').innerHTML = pic('moon') + pic('lantern') + pic('cake') + pic('lion');
+    document.getElementById('lantern-pic').innerHTML = ART.lantern;
+
+    Core.sort(document.getElementById('sort-start'), {
+      lesson: L, id: 'start',
+      bins: [{ id: 'text', label: 'Văn bản' }, { id: 'img', label: 'Hình ảnh' }, { id: 'aud', label: 'Âm thanh' }, { id: 'vid', label: 'Video' }],
+      items: [
+        { label: 'Truyện cổ tích để đọc', icon: 'book', bin: 'text' },
+        { label: 'Ảnh chú mèo con', icon: 'image', bin: 'img' },
+        { label: 'Bài hát thiếu nhi', icon: 'audio', bin: 'aud' },
+        { label: 'Phim hoạt hình', icon: 'video', bin: 'vid', explain: 'Phim có cả hình chuyển động và tiếng.' },
+        { label: 'Tin dự báo thời tiết bằng chữ', icon: 'text', bin: 'text' },
+        { label: 'Bức tranh bạn vẽ', icon: 'brush', bin: 'img' }
+      ],
+      doneText: 'Giỏi quá! Thông tin trên mạng có nhiều dạng: văn bản, hình ảnh, âm thanh, video.'
+    });
+
+    Core.match(document.getElementById('match-spots'), {
+      lesson: L, id: 'spots', leftTitle: 'Vị trí', rightTitle: 'Dạng thông tin',
+      pairs: [['Vị trí 01', 'Video'], ['Vị trí 02', 'Hình ảnh'], ['Vị trí 03', 'Văn bản']]
+    });
+
+    pointerTest();
+    /* used by tools/fit.html to play the custom activity */
+    window.__solve = function () {
+      var ls = document.querySelectorAll('#web2 [data-pt="link"]');
+      for (var i = 0; i < ls.length; i++) ls[i].click();
+    };
+
+    Core.quiz(document.getElementById('quiz-1'), {
+      lesson: L, id: 'q',
+      questions: [
+        { q: 'Trên trang web có các loại thông tin nào?',
+          options: ['Chỉ có văn bản và hình ảnh.', 'Chỉ có hình ảnh và âm thanh.', 'Chỉ có video.', 'Có văn bản, hình ảnh, âm thanh, video và siêu liên kết.'],
+          answer: 3 },
+        { q: 'Đây là hình con trỏ chuột khi đưa tới vài chỗ trên trang web. Chỗ nào có <b>siêu liên kết</b>?',
+          options: [cd('<span class="u">Trăng ơi!</span>', 'cursorHand'), cd('<span>Trăng ơi!</span>', 'cursorArrow'), cd('<span>Trăng ơi!</span>', 'cursorText')],
+          answer: 0, explain: 'Con trỏ hình bàn tay, chữ lại có gạch chân: đó là siêu liên kết.',
+          hint: 'Siêu liên kết làm con trỏ đổi thành hình gì nhỉ?' }
+      ]
+    });
+
+    Core.pick(document.getElementById('pick-harm'), {
+      lesson: L, id: 'harm',
+      items: [
+        { label: 'Bị dụ dỗ, chỉ cách làm những việc không đúng', icon: 'warning', ok: true },
+        { label: 'Máy tính của em có thể bị hỏng', icon: 'monitor', ok: false },
+        { label: 'Bị bắt nạt, đe doạ trên mạng', icon: 'chat', ok: true },
+        { label: 'Bị lãng phí thời gian', icon: 'clock', ok: true }
+      ],
+      doneText: 'Đúng rồi! Máy hỏng không phải tác hại chính, còn ba ý kia thì em có thể gặp.'
+    });
+
+    Core.pick(document.getElementById('pick-links'), {
+      lesson: L, id: 'ltlinks',
+      items: [
+        { label: 'A. ' + cd('<span class="u">Tết Trung thu</span>', 'cursorHand'), ok: true },
+        { label: 'B. ' + cd('<span>Tết Thiếu nhi</span>', 'cursorArrow'), ok: false },
+        { label: 'C. ' + cd(pic('moon'), 'zoom'), ok: false },
+        { label: 'D. ' + cd(pic('kids'), 'cursorHand'), ok: true }
+      ],
+      doneText: 'Chính xác! Chỗ A và D con trỏ thành bàn tay, đó là siêu liên kết.'
+    });
+
+    Core.match(document.getElementById('match-types'), {
+      lesson: L, id: 'types', leftTitle: 'Mẩu cắt từ trang web', rightTitle: 'Loại thông tin',
+      pairs: [
+        ['<span class="lt-item"><span class="vid"><span class="ico">' + Icons.play + '</span></span>1) Đoạn phim về ngôi trường</span>', 'Video'],
+        ['<span class="lt-item"><span class="aud">' + Core.icon('play') + '<span class="bar"></span>' + Core.icon('download') + '</span>2) Tải bài hát</span>', 'Âm thanh'],
+        ['<span class="lt-item">' + pic('kids') + '3) Ảnh các bạn nhỏ</span>', 'Hình ảnh'],
+        ['<span class="lt-item"><span class="quote">"Yêu Tổ quốc, yêu đồng bào. Học tập tốt, lao động tốt..."</span>4)</span>', 'Văn bản']
+      ]
+    });
+  });
+})();
+</script>
+<script>
+/* Bài tập from the workbook (Vở bài tập Tin học 4) */
+document.addEventListener('DOMContentLoaded', function () {
+  var L = 'l4-b03';
+  Core.quiz(document.getElementById('bt-q1'), {
+    lesson: L, id: 'bt-q1',
+    questions: [
+      { q: 'Các loại thông tin chính trên trang web gồm những loại nào? (đầy đủ nhất)', options: ['Văn bản, hình ảnh và âm thanh.', 'Hình ảnh và âm thanh.', 'Văn bản, hình ảnh, âm thanh và video.', 'Văn bản, hình ảnh, âm thanh, video và siêu liên kết.'], answer: 3 },
+      { q: '<b>Siêu văn bản</b> là văn bản chứa những loại thông tin nào? (đúng nhất)', options: ['Văn bản, hình ảnh, âm thanh.', 'Văn bản, hình ảnh, âm thanh và video.', 'Văn bản, hình ảnh, âm thanh và siêu liên kết.', 'Văn bản, hình ảnh, âm thanh, video và siêu liên kết.'], answer: 3 },
+      { q: 'Thứ nào dưới đây là <b>siêu văn bản</b>?', options: ['Tờ báo giấy', 'Quyển sách', 'Trang web', 'Tờ báo tường'], answer: 2, explain: 'Chỉ trang web mới có siêu liên kết để mở sang trang khác.' }
+    ]
+  });
+  Core.truefalse(document.getElementById('bt-tf'), {
+    lesson: L, id: 'bt-tf',
+    items: [
+      { t: 'Video là một loại thông tin trên trang web.', ok: true },
+      { t: 'Video có thể kết hợp thông tin dạng chữ, hình ảnh và âm thanh.', ok: true },
+      { t: 'Video chỉ kết hợp hình ảnh và âm thanh, không bao giờ có chữ.', ok: false },
+      { t: 'Video chỉ kết hợp hình ảnh và chữ, không có âm thanh.', ok: false }
+    ]
+  });
+  Core.pick(document.getElementById('bt-link'), {
+    lesson: L, id: 'bt-link',
+    items: [
+      { label: 'Đưa chuột vào siêu liên kết, con trỏ thường đổi thành hình bàn tay.', ok: true },
+      { label: 'Nháy chuột vào siêu liên kết sẽ mở ra một trang web hoặc nội dung khác.', ok: true },
+      { label: 'Nháy chuột vào siêu liên kết thì không có gì thay đổi.', ok: false },
+      { label: 'Nháy chuột vào siêu liên kết sẽ mở nội dung mà nó liên kết tới.', ok: true }
+    ]
+  });
+  Core.quiz(document.getElementById('bt-q2'), {
+    lesson: L, id: 'bt-q2',
+    questions: [
+      { q: 'Vì sao máy tính có thể bị hỏng khi cố tình vào những trang web không phù hợp lứa tuổi?', options: ['Vì trang đó có nội dung xấu.', 'Vì trang đó có thể chứa virus, dễ lây và phá hỏng máy tính.', 'Vì trang đó có video.', 'Vì trang đó có siêu liên kết.'], answer: 1 },
+      { q: 'Vì sao em cần <b>người lớn đồng hành</b> khi truy cập Internet?', options: ['Vì có trang web chứa virus, nội dung xấu, không phù hợp lứa tuổi.', 'Vì trang web nào cũng bổ ích.', 'Vì em không biết gõ bàn phím.'], answer: 0 }
+    ]
+  });
+});
+</script>
+</body>
+</html>

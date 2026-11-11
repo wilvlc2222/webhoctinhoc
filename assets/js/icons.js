@@ -67,4 +67,52 @@
     turnRight: svg('<path d="M18 54V30a10 10 0 0 1 10-10h22"/><path d="M40 8l12 12-12 12" stroke-width="5"/>'),
     loop: svg('<path d="M48 22a18 18 0 1 0 4 14"/><path d="M52 8v14H38" stroke-width="5"/>')
   };
+
+  var I = window.Icons;
+  /* mouse pointers (what the cursor looks like over a page) */
+  I.cursorArrow = svg('<path d="M16 6v44l11-11 8 18 7-3-8-18h16z" fill="#fff" stroke-width="3.5"/>');
+  I.cursorHand = svg('<path d="M24 34V10a4 4 0 0 1 8 0v18M32 26a4 4 0 0 1 8 0v4M40 28a4 4 0 0 1 8 0v4M48 32a4 4 0 0 1 8 0v8c0 10-6 18-16 18h-4c-6 0-9-3-12-7l-9-12a4 4 0 0 1 6-5l5 5" fill="#fff" stroke-width="3.5"/>');
+  I.cursorText = svg('<path d="M24 8h16M24 56h16M32 8v48M26 30h12" stroke-width="4"/>');
+  I.zoom = svg('<circle cx="26" cy="26" r="16"/><path d="M38 38l16 16M26 18v16M18 26h16" stroke-width="4"/>');
+  /* kinds of information */
+  I.text = svg('<rect x="12" y="6" width="40" height="52" rx="4"/><path d="M20 18h24M20 26h24M20 34h24M20 42h14"/>');
+  I.image = svg('<rect x="6" y="10" width="52" height="44" rx="4"/><circle cx="22" cy="24" r="5"/><path d="M6 46l16-14 12 10 8-6 16 12"/>');
+  I.audio = svg('<path d="M24 46V14l28-6v32"/><circle cx="18" cy="46" r="7"/><circle cx="46" cy="40" r="7"/>');
+  I.link = svg('<path d="M28 36a10 10 0 0 0 14 0l8-8a10 10 0 0 0-14-14l-4 4"/><path d="M36 28a10 10 0 0 0-14 0l-8 8a10 10 0 0 0 14 14l4-4"/>');
+  I.globe = svg('<circle cx="32" cy="32" r="24"/><path d="M8 32h48M32 8c-8 8-8 40 0 48M32 8c8 8 8 40 0 48"/>');
+  I.search = svg('<circle cx="27" cy="27" r="16"/><path d="M39 39l15 15" stroke-width="5"/>');
+  I.back = svg('<path d="M40 12L20 32l20 20" stroke-width="5"/>');
+  I.forward = svg('<path d="M24 12l20 20-20 20" stroke-width="5"/>');
+  /* files and folders */
+  I.folder = svg('<path d="M6 16a4 4 0 0 1 4-4h14l6 6h24a4 4 0 0 1 4 4v26a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4z"/>');
+  I.folderOpen = svg('<path d="M6 48V16a4 4 0 0 1 4-4h14l6 6h20a4 4 0 0 1 4 4v6"/><path d="M6 48l8-20h46l-8 20z"/>');
+  I.file = svg('<path d="M16 6h22l12 12v40H16z"/><path d="M38 6v12h12"/>');
+  I.copy = svg('<rect x="20" y="18" width="32" height="38" rx="3"/><path d="M14 44V10a3 3 0 0 1 3-3h25"/>');
+  I.cut = svg('<circle cx="18" cy="46" r="8"/><circle cx="46" cy="46" r="8"/><path d="M23 40L46 8M41 40L18 8"/>');
+  I.paste = svg('<rect x="12" y="10" width="40" height="48" rx="4"/><rect x="22" y="5" width="20" height="10" rx="3"/><path d="M22 30h20M22 40h14"/>');
+  I.rename = svg('<rect x="6" y="20" width="40" height="24" rx="3"/><path d="M52 14v36M46 14h12M46 50h12M14 32h18"/>');
+  I.usb = svg('<rect x="22" y="4" width="20" height="16"/><path d="M27 10h2M35 10h2"/><rect x="16" y="20" width="32" height="38" rx="5"/>');
+  I.lock = svg('<rect x="12" y="28" width="40" height="28" rx="4"/><path d="M20 28V20a12 12 0 0 1 24 0v8"/><circle cx="32" cy="42" r="3" fill="currentColor"/>');
+  I.warning = svg('<path d="M32 6L60 54H4z"/><path d="M32 24v14" stroke-width="5"/><circle cx="32" cy="46" r="2" fill="currentColor"/>');
+  I.people = svg('<circle cx="22" cy="20" r="8"/><circle cx="44" cy="22" r="7"/><path d="M6 54c0-10 7-18 16-18s16 8 16 18M36 54c0-8 4-14 10-14s12 6 12 14"/>');
+  I.chat = svg('<path d="M8 12h48v30H26l-12 10V42H8z"/><path d="M18 24h28M18 32h18"/>');
+  I.bulb = svg('<path d="M22 40a16 16 0 1 1 20 0v8H22z"/><path d="M24 54h16M28 60h8"/>');
+  I.book = svg('<path d="M8 12c8-4 16-4 24 2v40c-8-6-16-6-24-2zM56 12c-8-4-16-4-24 2v40c8-6 16-6 24-2z"/>');
+  I.pencil = svg('<path d="M44 8l12 12-32 32H12V40z"/><path d="M38 14l12 12"/>');
+  I.brush = svg('<path d="M54 8L30 36"/><path d="M28 34c-6 0-12 4-12 12 0 4-4 6-8 8 12 2 26-2 26-14z"/>');
+  I.shapes = svg('<circle cx="20" cy="20" r="12"/><rect x="34" y="34" width="22" height="22"/><path d="M44 8l12 20H32z"/>');
+  I.cloud = svg('<path d="M18 48a12 12 0 0 1 0-24 16 16 0 0 1 30 4 10 10 0 0 1-2 20z"/>');
+  I.download = svg('<path d="M32 8v32M20 28l12 12 12-12" stroke-width="4"/><path d="M10 46v8h44v-8"/>');
+  I.gift = svg('<rect x="8" y="24" width="48" height="32" rx="3"/><path d="M4 24h56M32 24v32M32 24c-6-12-18-12-18-4 0 4 8 4 18 4zM32 24c6-12 18-12 18-4 0 4-8 4-18 4z"/>');
+  I.eye = svg('<path d="M4 32c8-14 18-20 28-20s20 6 28 20c-8 14-18 20-28 20S12 46 4 32z"/><circle cx="32" cy="32" r="8"/>');
+  I.clock = svg('<circle cx="32" cy="32" r="24"/><path d="M32 18v14l10 6"/>');
+  I.heart = svg('<path d="M32 54S8 40 8 22a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 18-24 32-24 32z"/>');
+  /* media player */
+  I.pause = svg('<path d="M22 14v36M42 14v36" stroke-width="8"/>');
+  I.stopSq = svg('<rect x="16" y="16" width="32" height="32" rx="3" fill="currentColor"/>');
+  I.prevBar = svg('<path d="M18 14v36" stroke-width="5"/><path d="M48 14L24 32l24 18z" fill="currentColor"/>');
+  I.nextBar = svg('<path d="M46 14v36" stroke-width="5"/><path d="M16 14l24 18-24 18z" fill="currentColor"/>');
+  I.vol = svg('<path d="M10 26h10l14-12v36L20 38H10z" fill="currentColor"/><path d="M42 24a10 10 0 0 1 0 16M48 18a18 18 0 0 1 0 28"/>');
+  I.volOff = svg('<path d="M10 26h10l14-12v36L20 38H10z" fill="currentColor"/><path d="M42 24l14 16M56 24L42 40"/>');
+  I.fullscr = svg('<path d="M8 22V8h14M42 8h14v14M56 42v14H42M22 56H8V42" stroke-width="5"/>');
 })();

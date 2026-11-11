@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 11. Chỉnh sửa văn bản – Tin học 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/art.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/docsim.js"></script>
+<style>
+  .poem { font-size: 17px; line-height: 1.45; }
+  .poem mark { background: #ffec99; color: inherit; }
+  html.eink .poem mark { background: #fff; text-decoration: underline; font-weight: 800; }
+  .steps-cp { margin: 0; padding-left: 22px; }
+  .steps-cp li { margin-bottom: 3px; }
+  .kc { display: inline-block; border: 2px solid #495057; border-bottom-width: 3px; border-radius: 5px; padding: 0 5px; font-size: 13px; font-weight: 800; background: #fff; color: #000; }
+  .ibtn { display: inline-flex; align-items: center; gap: 4px; }
+  .ibtn .ico { width: 24px; height: 24px; color: #1c5fb8; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 4 · Chủ đề 5. Ứng dụng tin học</div>
+      <h1>Bài 11. Chỉnh sửa văn bản</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l4-b11" data-stars-total="12"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li><b>Chọn</b>, <b>sao chép</b> và <b>di chuyển</b> được phần văn bản.</li>
+            <li><b>Chèn hình ảnh</b> vào văn bản.</li>
+          </ul>
+        </div>
+        <div id="quiz-start"></div>
+      </div>
+      <div class="col">
+        <div class="card poem" id="poem-view"></div>
+        <details class="reveal"><summary>Có cách nào để không phải gõ lại những câu giống nhau?</summary>
+          <div>Có! Em gõ một lần, rồi dùng lệnh <b>sao chép</b> (Copy) và <b>dán</b> (Paste) ở những chỗ cần.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SAO CHÉP -->
+  <section class="step" data-title="Sao chép văn bản">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Sao chép phần văn bản</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <ol class="steps-cp">
+          <li><b>Chọn</b> phần văn bản: kéo thả chuột từ đầu tới cuối (trên tablet: chạm giữ rồi kéo).</li>
+          <li>Bấm <b>Copy</b> <span class="kc">Ctrl+C</span>.</li>
+          <li>Đặt <b>con trỏ soạn thảo</b> ở chỗ cần dán.</li>
+          <li>Bấm <b>Paste</b> <span class="kc">Ctrl+V</span>.</li>
+        </ol>
+        <div id="tasks-copy" style="margin-top:8px"></div>
+      </div>
+      <div class="col"><div id="ds-copy"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. DI CHUYỂN -->
+  <section class="step" data-title="Di chuyển văn bản">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Di chuyển phần văn bản</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <ol class="steps-cp">
+          <li><b>Chọn</b> phần văn bản cần di chuyển.</li>
+          <li>Bấm <b>Cut</b> <span class="kc">Ctrl+X</span>: phần đó biến mất khỏi chỗ cũ.</li>
+          <li>Đặt con trỏ soạn thảo ở <b>chỗ mới</b>.</li>
+          <li>Bấm <b>Paste</b> <span class="kc">Ctrl+V</span>.</li>
+        </ol>
+        <div id="tasks-move" style="margin-top:8px"></div>
+        <div class="remember">Có thể sao chép, di chuyển phần văn bản đã chọn bằng các lệnh Copy, Cut và Paste.</div>
+      </div>
+      <div class="col"><div id="ds-move"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. CÂU HỎI -->
+  <section class="step" data-title="Câu hỏi">
+    <div class="step-head"><span class="phase phase-explore">Câu hỏi</span><h2>Ghép cho đúng</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div id="match-ops"></div>
+      </div>
+      <div class="col">
+        <p class="mt0"><b>Luyện tập 1.</b> Ghép mỗi nút lệnh với ý nghĩa của nó.</p>
+        <div id="match-icons"></div>
+        <details class="reveal" style="margin-top:8px"><summary>Luyện tập 3. Sao chép và di chuyển khác nhau thế nào?</summary>
+          <div><b>Sao chép</b>: phần văn bản vẫn còn ở chỗ cũ và có thêm ở chỗ mới. <b>Di chuyển</b>: phần văn bản chuyển tới chỗ mới, chỗ cũ không còn nữa.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CHÈN HÌNH ẢNH -->
+  <section class="step" data-title="Chèn hình ảnh">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 3</span><h2>Chèn hình ảnh vào văn bản</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <ol class="steps-cp">
+          <li>Đặt con trỏ soạn thảo ở chỗ cần chèn ảnh (ví dụ cuối bài).</li>
+          <li>Chọn dải lệnh <b>Insert</b>, bấm nút <b>Picture</b>.</li>
+          <li>Chọn ảnh rồi bấm <b>Insert</b>.</li>
+        </ol>
+        <div id="tasks-pic" style="margin-top:8px"></div>
+
+      </div>
+      <div class="col"><div id="ds-pic"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Soạn bài thơ "Cây xanh"</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="tasks-bai3"></div></div>
+      <div class="col"><div id="ds-bai3"></div></div>
+    </div>
+  </section>
+
+  <!-- BÀI TẬP (Vở bài tập) -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Sao chép, di chuyển, chèn hình ảnh</h2></div>
+    <div class="cols">
+      <div class="col"><div id="bt-fill"></div></div>
+      <div class="col"><div id="bt-tf"></div></div>
+    </div>
+  </section>
+
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Copy hay Cut?</h2></div>
+    <div class="cols">
+      <div class="col"><div id="bt-q"></div></div>
+      <div class="col">
+        <p class="mt0">Sắp xếp các bước <b>di chuyển</b> một phần văn bản theo đúng thứ tự.</p>
+        <div id="bt-order"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Chèn ảnh cho bài văn ở Bài 10</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-vd"></div>
+        <div class="card done-mini"><b>Học xong Bài 11!</b><span class="stars" data-stars-for="l4-b11" data-stars-total="12"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="ds-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l4-b11';
+  var MY = 'D:/Lop 4A2/Nhom 2/Thu An';
+  var FOLDERS = [MY, 'D:/Lop 4A2/Nhom 2', 'D:/Lop 4A2', 'D:'];
+  var A = 'Cây xanh cho bóng mát', B = 'Cây xanh cho quả ngọt';
+  var POEM = A + '\nChe nắng cả sân trường\n' + A + '\nCho em ngồi đọc sách\n\n' + B + '\nMẹ hái về cả nhà\n' + B + '\nÔng bà khen ngon ghê';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  function norm(s) { return s.replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').replace(/^\s+|\s+$/g, ''); }
+  function count(s, w) { var n = 0, i = 0; while ((i = s.indexOf(w, i)) >= 0) { n++; i += w.length; } return n; }
+  function savedIn(d, name) { var s = d.saved(); return s && s.folder === MY && Core.plain(s.name) === Core.plain(name); }
+  var docs = {};
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    var view = POEM.replace(new RegExp(A, 'g'), '<mark>' + A + '</mark>').replace(new RegExp(B, 'g'), '<mark>' + B + '</mark>').replace(/\n/g, '<br>');
+    document.getElementById('poem-view').innerHTML = '<b>Cây xanh</b><br>' + view + '<br><i class="note">(Bíp viết tặng các bạn)</i>';
+
+    Core.quiz(document.getElementById('quiz-start'), {
+      lesson: L, id: 'start',
+      questions: [{ q: 'Trong bài thơ bên phải, những câu nào được <b>lặp lại</b>?', options: ['"Che nắng cả sân trường" và "Mẹ hái về cả nhà"', '"Cây xanh cho bóng mát" và "Cây xanh cho quả ngọt"', 'Không có câu nào lặp lại'], answer: 1,
+        explain: 'Mỗi câu xuất hiện 2 lần. Gõ một lần rồi sao chép là nhanh nhất!' }]
+    });
+
+    var COPY_START = A + '\nChe nắng cả sân trường\n\nCho em ngồi đọc sách';
+    docs.copy = DocSim(document.getElementById('ds-copy'), {
+      text: COPY_START, ribbon: ['home'], rows: 5, ime: true,
+      hello: 'Dòng thứ ba đang trống. Em chọn câu đầu tiên, bấm <b>Copy</b>, đặt con trỏ vào dòng trống rồi bấm <b>Paste</b>.',
+      tasksHost: document.getElementById('tasks-copy'), lesson: L, id: 'copy',
+      tasks: [
+        { text: 'Bấm <b>Copy</b> để sao chép câu "' + A + '".', ok: function (d) { return d.used('copy'); } },
+        { text: 'Dán vào dòng thứ ba bằng <b>Paste</b>.', ok: function (d) { return d.used('paste') && norm(d.text()) === norm(A + '\nChe nắng cả sân trường\n' + A + '\nCho em ngồi đọc sách'); } }
+      ],
+      doneText: 'Giỏi quá! Câu thơ có ở cả chỗ cũ và chỗ mới.'
+    });
+
+    var MOVE_START = 'Bạn Nam rất thích đọc truyện.\nNam đọc truyện cho em gái nghe.\nĐây là bạn Nam, lớp 4A2.';
+    var MOVE_GOAL = 'Đây là bạn Nam, lớp 4A2.\nBạn Nam rất thích đọc truyện.\nNam đọc truyện cho em gái nghe.';
+    docs.move = DocSim(document.getElementById('ds-move'), {
+      text: MOVE_START, ribbon: ['home'], rows: 4, ime: true,
+      hello: 'Câu giới thiệu "Đây là bạn Nam, lớp 4A2." phải đứng <b>đầu tiên</b>. Em di chuyển nó lên đầu bằng <b>Cut</b> và <b>Paste</b> nha.',
+      tasksHost: document.getElementById('tasks-move'), lesson: L, id: 'move',
+      tasks: [
+        { text: 'Chọn câu cuối và bấm <b>Cut</b>.', ok: function (d) { return d.used('cut'); } },
+        { text: 'Đặt con trỏ ở đầu đoạn rồi bấm <b>Paste</b>.', ok: function (d) { return d.used('paste') && norm(d.text()) === MOVE_GOAL; } }
+      ],
+      doneText: 'Đúng rồi! Câu đã được chuyển lên đầu, chỗ cũ không còn nữa.'
+    });
+
+    Core.match(document.getElementById('match-ops'), {
+      lesson: L, id: 'ops', leftTitle: 'Thao tác', rightTitle: 'Mô tả',
+      pairs: [['Chọn phần văn bản', 'Kéo thả chuột từ đầu tới cuối phần văn bản'], ['Sao chép (Copy rồi Paste)', 'Phần văn bản có ở cả chỗ cũ và chỗ mới'], ['Di chuyển (Cut rồi Paste)', 'Phần văn bản chuyển tới chỗ mới, chỗ cũ không còn']]
+    });
+
+    docs.pic = DocSim(document.getElementById('ds-pic'), {
+      text: POEM, ribbon: ['home', 'insert'], rows: 4,
+      hello: 'Chọn dải lệnh <b>Insert</b> rồi bấm <b>Picture</b>.',
+      tasksHost: document.getElementById('tasks-pic'), lesson: L, id: 'pic',
+      tasks: [{ text: 'Chèn một hình ảnh minh hoạ cho bài thơ.', ok: function (d) { return d.pics().length > 0; } }]
+    });
+    function ib(icon, label) { return '<span class="ibtn">' + Core.icon(icon) + label + '</span>'; }
+    Core.match(document.getElementById('match-icons'), {
+      lesson: L, id: 'icons', leftTitle: 'Nút lệnh', rightTitle: 'Ý nghĩa',
+      pairs: [[ib('copy', 'Copy'), 'Sao chép'], [ib('cut', 'Cut'), 'Cắt (để di chuyển)'], [ib('paste', 'Paste'), 'Dán'], [ib('image', 'Picture'), 'Chèn hình ảnh']]
+    });
+
+    docs.bai3 = DocSim(document.getElementById('ds-bai3'), {
+      ime: true, folders: FOLDERS, fileName: 'Bai3', rows: 5,
+      tasksHost: document.getElementById('tasks-bai3'), lesson: L, id: 'bai3',
+      tasks: [
+        { text: 'a) Những câu nào lặp lại? Gõ một lần, rồi dùng <b>Copy</b>, <b>Paste</b> cho lần sau.', ok: function (d) { return d.used('copy') && d.used('paste'); } },
+        { text: 'b) Gõ cả bài thơ "Cây xanh" ở phần Khởi động.', ok: function (d) { var t = d.text(); return count(t, A) >= 2 && count(t, B) >= 2 && t.indexOf('Ông bà khen ngon ghê') >= 0; } },
+        { text: 'c) Chèn hình ảnh minh hoạ.', ok: function (d) { return d.pics().length > 0; } },
+        { text: 'd) Lưu tệp tên <b>Bai3</b> vào thư mục của em.', ok: function (d) { return savedIn(d, 'Bai3'); } }
+      ]
+    });
+
+    docs.vd = DocSim(document.getElementById('ds-vd'), {
+      ime: true, folders: FOLDERS, rows: 5,
+      sampleFiles: [{ path: MY + '/Con meo', text: 'Nhà em có một chú mèo tam thể tên là Mướp. Mướp có bộ lông mềm như nhung, đôi mắt tròn xanh biếc. Mỗi khi em đi học về, Mướp chạy ra quấn lấy chân em. Em rất yêu chú mèo nhỏ của em.', pics: [] }],
+      hello: 'Bấm <b>File › Open</b> để mở bài văn đã lưu ở Bài 10.',
+      tasksHost: document.getElementById('tasks-vd'), lesson: L, id: 'vd',
+      tasks: [
+        { text: 'Mở lại tệp đã lưu ở phần Vận dụng Bài 10.', ok: function (d) { return !!d.opened(); } },
+        { text: 'Chèn thêm hình ảnh phù hợp.', ok: function (d) { return d.opened() && d.pics().length > 0; } },
+        { text: 'Lưu lại với <b>tên mới</b> (File › Save, đổi tên tệp).', ok: function (d, w) { var s = d.saved(), o = d.opened(); return w === 'save' && s && o && (s.folder + '/' + s.name) !== o; } }
+      ]
+    });
+
+    window.__solve = function () {
+      docs.copy.mark('copy'); docs.copy.mark('paste'); docs.copy.setText(A + '\nChe nắng cả sân trường\n' + A + '\nCho em ngồi đọc sách');
+      docs.move.mark('cut'); docs.move.mark('paste'); docs.move.setText(MOVE_GOAL);
+      docs.pic.addPic('flower');
+      var b = docs.bai3; b.mark('copy'); b.mark('paste'); b.setText(POEM); b.addPic('hills'); b.save('Bai3', MY);
+      var v = docs.vd; v.openFile({ text: 'Mèo', pics: [] }, MY + '/Con meo'); v.addPic('kids'); v.save('Con meo co anh', MY);
+    };
+  });
+})();
+</script>
+<script>
+/* Bài tập from the workbook (Vở bài tập Tin học 4) */
+document.addEventListener('DOMContentLoaded', function () {
+  var L = 'l4-b11';
+  Core.fill(document.getElementById('bt-fill'), {
+    lesson: L, id: 'bt-fill',
+    text: 'Em có thể dùng các thao tác [sao chép], [di chuyển] một phần văn bản để soạn thảo nhanh và hợp lí. Em cũng có thể [chèn] thêm [hình ảnh] để văn bản sinh động và hấp dẫn hơn.'
+  });
+  Core.truefalse(document.getElementById('bt-tf'), {
+    lesson: L, id: 'bt-tf',
+    items: [
+      { t: 'Sao chép và di chuyển một phần văn bản cho kết quả giống nhau.', ok: false },
+      { t: 'Di chuyển là đưa phần văn bản đã chọn từ chỗ cũ sang chỗ mới.', ok: true },
+      { t: 'Sao chép là tạo ra một phần văn bản giống hệt và đặt vào chỗ mới.', ok: true },
+      { t: 'Để chèn hình ảnh, em chọn Insert rồi chọn Picture.', ok: true },
+      { t: 'Để chèn hình ảnh, em chọn File rồi chọn Picture.', ok: false }
+    ]
+  });
+  Core.quiz(document.getElementById('bt-q'), {
+    lesson: L, id: 'bt-q',
+    questions: [
+      { q: 'An đã chọn một câu, muốn <b>chuyển</b> câu đó xuống cuối dòng 2 (chỗ cũ không còn nữa). An làm gì?', options: ['Copy › đặt con trỏ ở cuối dòng 2 › Paste', 'Cut › đặt con trỏ ở cuối dòng 2 › Paste', 'Copy › đặt con trỏ ở cuối dòng 2 › Cut', 'Paste › đặt con trỏ ở cuối dòng 2 › Copy'], answer: 1 },
+      { q: 'Muốn câu đó có ở <b>cả chỗ cũ và chỗ mới</b>, An dùng lệnh nào trước khi Paste?', options: ['Copy', 'Cut', 'Delete'], answer: 0 }
+    ]
+  });
+  Core.order(document.getElementById('bt-order'), {
+    lesson: L, id: 'bt-order',
+    items: ['Chọn phần văn bản cần di chuyển.', 'Chọn lệnh Cut.', 'Đưa con trỏ soạn thảo đến chỗ mới.', 'Chọn lệnh Paste.']
+  });
+});
+</script>
+</body>
+</html>

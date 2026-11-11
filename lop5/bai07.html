@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 7. Thực hành soạn thảo văn bản – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/art.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/docsim.js"></script>
+<script src="../assets/js/richdoc.js"></script>
+<style>
+  .sdoc { border: 2px solid var(--line); border-radius: 10px; background: #fff; color: #1c7ed6; padding: 8px 12px; line-height: 1.3; font-family: Calibri, sans-serif; font-size: 15px; }
+  .sdoc .t { color: #e03131; font-weight: 800; font-size: 19px; }
+  .sdoc .r { color: #f76707; }
+  .sdoc i { color: #1c7ed6; }
+  .sdoc .pic { float: right; width: 150px; margin-left: 10px; }
+  .sdoc .pic svg { display: block; width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 5. Ứng dụng tin học</div>
+      <h1>Bài 7. Thực hành soạn thảo văn bản</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b07" data-stars-total="10"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Cần làm gì để có văn bản này?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Quan sát lời bài hát bên phải. Để có văn bản như vậy, em cần làm những việc nào? Chọn tất cả.</p>
+        <div id="pick-ops"></div>
+      </div>
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Thành thạo <b>chọn, xoá, sao chép, di chuyển</b> một đoạn văn bản.</li>
+            <li>Đưa <b>hình ảnh</b> vào văn bản một cách thành thạo.</li>
+          </ul>
+        </div>
+        <div id="song-pic" class="sdoc"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. NHIỆM VỤ 1a -->
+  <section class="step" data-title="Gõ nội dung">
+    <div class="step-head"><span class="phase phase-practice">Nhiệm vụ 1</span><h2>a) Gõ nội dung bài hát, sao chép phần giống nhau</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-type"></div>
+      </div>
+      <div class="col"><div id="ds-type"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. NHIỆM VỤ 1b-c -->
+  <section class="step" data-title="Định dạng">
+    <div class="step-head"><span class="phase phase-practice">Nhiệm vụ 1</span><h2>b–c) Chèn hình ảnh và định dạng văn bản</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="tasks-fmt"></div></div>
+      <div class="col"><div id="rd-fmt"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. NHIỆM VỤ 2 -->
+  <section class="step" data-title="Nhiệm vụ 2">
+    <div class="step-head"><span class="phase phase-practice">Nhiệm vụ 2</span><h2>Bổ sung lời hát lần 2</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="tasks-l2"></div></div>
+      <div class="col"><div id="ds-l2"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. LUYỆN TẬP c -->
+  <section class="step" data-title="Luyện tập 1">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Di chuyển dòng thông tin tác giả</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="tasks-mv"></div></div>
+      <div class="col"><div id="ds-mv"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. LUYỆN TẬP b, d -->
+  <section class="step" data-title="Luyện tập 2">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Định dạng và chèn hình minh hoạ</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="tasks-lt"></div></div>
+      <div class="col"><div id="rd-lt"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Gõ, xoá và chèn hình ảnh</h2></div>
+    <div class="cols">
+      <div class="col"><div id="fill-1"></div></div>
+      <div class="col">
+        <p class="mt0">Sắp xếp các bước <b>chèn hình ảnh</b> vào văn bản theo đúng thứ tự.</p>
+        <div id="order-pic"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Cách nào sai?</h2></div>
+    <div class="cols">
+      <div class="col"><div id="quiz-bt2"></div></div>
+      <div class="col">
+        <p class="mt0">Nối mỗi tổ hợp phím với việc nó làm.</p>
+        <div id="match-keys"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Chia sẻ và góp ý</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Em chia sẻ tệp văn bản đã làm ở phần Luyện tập với bạn, lắng nghe bạn góp ý (hai điều tích cực, một điều mong muốn thay đổi), rồi chỉnh sửa để văn bản hợp lí hơn.</div>
+        </div>
+        <details class="reveal"><summary>Một số góp ý hay gặp</summary>
+          <div>Tên bài hát nên nổi bật hơn; các câu lặp lại nên cùng một màu; hình minh hoạ nên to hơn hoặc đặt bên phải; nhớ ghi nguồn hình ảnh ở cuối văn bản.</div></details>
+      </div>
+      <div class="col-side">
+        <div class="card done-mini"><b>Học xong Bài 7!</b><span class="stars" data-stars-for="l5-b07" data-stars-total="10"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b07';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  var BLUE = '#1c7ed6', RED = '#e03131', ORANGE = '#f76707', GREEN = '#2f9e44';
+  /* our own short song (the textbook's song is replaced by original words) */
+  var TITLE = 'MÙA XUÂN TRÊN SÂN TRƯỜNG', NHAC = 'Nhạc: Nhóm bạn lớp 5A', LOI = 'Lời: Nhóm bạn lớp 5A';
+  var R1 = 'Mùa xuân trên sân trường,', R2 = 'Hoa nở khắp muôn phương.';
+  var V1 = ['Chim hót vang trong nắng,', 'Bạn bè cùng vui chơi.'], V2 = ['Thầy cô cười hiền hậu,', 'Dạy em điều yêu thương.'];
+  var SRC = '(Nguồn hình ảnh: Thư viện ảnh của lớp 5A)';
+  var SONG = [R1, R2, V1[0], V1[1], R1, R2, V2[0], V2[1], R1, R2];
+  function P(s) { return Core.plain(String(s)).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function lines(d) { var a = d.lines(), o = []; for (var i = 0; i < a.length; i++) if (a[i].replace(/\s+/g, '')) o.push(a[i]); return o; }
+  function countP(arr, s) { var n = 0, k = P(s); for (var i = 0; i < arr.length; i++) if (P(arr[i]) === k) n++; return n; }
+  function idxP(arr, s, from) { var k = P(s); for (var i = from || 0; i < arr.length; i++) if (P(arr[i]) === k) return i; return -1; }
+  var docs = {};
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    var h = '<div class="pic">' + Art.svg('kids') + '</div><div class="t">' + TITLE + '</div><i>' + NHAC + '</i><br><i>' + LOI + '</i>';
+    for (var i = 0; i < SONG.length; i++) h += '<div class="' + (SONG[i] === R1 || SONG[i] === R2 ? 'r' : '') + '">' + SONG[i] + '</div>';
+    document.getElementById('song-pic').innerHTML = h + '<i>' + SRC + '</i>';
+
+    Core.pick(document.getElementById('pick-ops'), {
+      lesson: L, id: 'ops',
+      items: [
+        { label: 'Gõ nội dung bài hát', icon: 'text', ok: true }, { label: 'Sao chép các câu lặp lại', icon: 'copy', ok: true },
+        { label: 'Định dạng kí tự', icon: 'brush', ok: true }, { label: 'Chèn và bố trí hình ảnh', icon: 'image', ok: true },
+        { label: 'Tạo thư mục mới', icon: 'folder', ok: false }, { label: 'Tìm kiếm trên Internet', icon: 'search', ok: false }
+      ],
+      doneText: 'Đúng rồi! Gõ, sao chép, định dạng và chèn hình ảnh.'
+    });
+
+    /* Nhiệm vụ 1a: type + copy */
+    var START = [TITLE, NHAC, LOI, R1, R2, V1[0], V1[1]].join('\n');
+    docs.type = DocSim(document.getElementById('ds-type'), {
+      text: START, ribbon: ['home'], rows: 7, ime: true, fileName: 'MuaXuanSanTruong',
+      hello: 'Bài hát còn thiếu phần cuối. Câu nào lặp lại thì <b>Copy</b> rồi <b>Paste</b>, đỡ phải gõ lại.',
+      tasksHost: document.getElementById('tasks-type'), lesson: L, id: 'type',
+      tasks: [
+        { text: 'Chọn 2 dòng điệp khúc (<b>' + R1 + '</b> / <b>' + R2 + '</b>), bấm <b>Copy</b>, rồi <b>Paste</b> xuống cuối bài.', ok: function (d) { var a = lines(d); return d.used('copy') && d.used('paste') && countP(a, R1) >= 2 && countP(a, R2) >= 2; } },
+        { text: 'Gõ tiếp hai dòng: <b>' + V2[0] + '</b> / <b>' + V2[1] + '</b>', ok: function (d) { var a = lines(d); return idxP(a, V2[0]) > -1 && idxP(a, V2[1]) > -1; } },
+        { text: 'Dán điệp khúc thêm một lần nữa ở cuối bài.', ok: function (d) { var a = lines(d); return countP(a, R1) >= 3 && countP(a, R2) >= 3 && P(a[a.length - 1]) === P(R2); } }
+      ],
+      doneText: 'Em đã gõ xong lời bài hát. Những câu lặp lại chỉ cần sao chép, đỡ phải gõ nhiều!'
+    });
+
+    /* Nhiệm vụ 1b-c: format + picture */
+    var fl = [{ t: TITLE, id: 'title' }, { t: NHAC, id: 'nhac' }, { t: LOI, id: 'loi' }];
+    var REF = [];
+    for (i = 0; i < SONG.length; i++) { var isR = SONG[i] === R1 || SONG[i] === R2; fl.push({ t: SONG[i], id: 's' + i }); if (isR) REF.push('s' + i); }
+    fl.push({ t: SRC, id: 'src' });
+    docs.fmt = RichDoc(document.getElementById('rd-fmt'), {
+      fileName: 'MuaXuanSanTruong', lines: fl, gallery: ['kids', 'school', 'flower', 'sing'], height: 210,
+      tasksHost: document.getElementById('tasks-fmt'), lesson: L, id: 'fmt',
+      tasks: [
+        { text: 'Chọn toàn bộ văn bản: phông <b>Calibri</b>, cỡ <b>13</b>, màu <b>xanh</b> (Blue).', ok: function (d) { return d.every(function (r) { return r.f === 'Calibri' && r.s === 13; }) && d.style('s2').c === BLUE; } },
+        { text: 'Tên bài hát: chữ <b>đậm</b>, cỡ <b>16</b>, màu <b>đỏ</b> (Red).', ok: function (d) { var r = d.style('title'); return r.b && r.s === 16 && r.c === RED; } },
+        { text: 'Dòng 2, 3 (Nhạc, Lời) và dòng nguồn hình ảnh cuối bài: chữ <b>nghiêng</b>.', ok: function (d) { return d.style('nhac').i && d.style('loi').i && d.style('src').i; } },
+        { text: 'Các dòng điệp khúc (<b>Mùa xuân...</b>, <b>Hoa nở...</b>): màu <b>cam</b> (Orange). Mẹo: giữ <b>Ctrl</b> để chọn nhiều dòng.', ok: function (d) { for (var k = 0; k < REF.length; k++) if (d.style(REF[k]).c !== ORANGE) return false; return true; } },
+        { text: 'Chèn một hình minh hoạ (<b>Insert</b> › <b>Pictures</b>), bố trí <b>Square</b>, đặt <b>bên phải</b>.', ok: function (d) { var p = d.pic(); return p && p.layout === 'square' && p.side === 'right'; } }
+      ],
+      doneText: 'Văn bản lời bài hát đã đẹp, rõ ràng, có hình minh hoạ!'
+    });
+
+    /* Nhiệm vụ 2: (Lần 1) / (Lần 2) */
+    var FULL = [TITLE, NHAC, LOI].concat(SONG, [SRC]);
+    docs.l2 = DocSim(document.getElementById('ds-l2'), {
+      text: FULL.join('\n'), ribbon: ['home'], rows: 8, ime: true, fileName: 'MuaXuanSanTruong',
+      hello: 'Bấm vào cuối dòng 3 (<b>' + LOI + '</b>) để đặt con trỏ ở đó.',
+      tasksHost: document.getElementById('tasks-l2'), lesson: L, id: 'l2',
+      tasks: [
+        { text: 'a) Đặt con trỏ ở cuối dòng 3, nhấn <b>Enter</b>, gõ <b>(Lần 1)</b>.', ok: function (d) { var a = lines(d); return P(a[3]) === 'lan1'; } },
+        { text: 'b) Chọn từ dòng <b>(Lần 1)</b> đến hết, <b>Copy</b>, rồi <b>Paste</b> vào cuối văn bản.', ok: function (d) { var a = lines(d); return d.used('paste') && countP(a, '(Lần 1)') >= 2 && countP(a, R1) >= 6; } },
+        { text: 'c) Ở phần mới dán, sửa <b>(Lần 1)</b> thành <b>(Lần 2)</b>.', ok: function (d) { var a = lines(d); return idxP(a, '(Lần 2)') > idxP(a, '(Lần 1)') && idxP(a, '(Lần 1)') > -1; } },
+        { text: 'd) Xoá dòng nguồn hình ảnh nằm ngay trước dòng <b>(Lần 2)</b>.', ok: function (d) { var a = lines(d), k = idxP(a, '(Lần 2)'); return k > 0 && P(a[k - 1]) === P(R2) && countP(a, SRC) === 1 && P(a[a.length - 1]) === P(SRC); } }
+      ],
+      doneText: 'Văn bản đã có lời hát lần 1 và lần 2, nguồn hình ảnh ở cuối bài.'
+    });
+
+    /* Luyện tập: our own song about the rice field */
+    var LT_T = 'Đồng lúa quê em', LT_N = 'Nhạc: Nhóm bạn lớp 5A', LT_L = 'Lời: Nhóm bạn lớp 5A';
+    var LT = ['Đồng lúa quê em,', 'Lúa chín vàng như nắng,', 'Gió đưa hương thơm bay,', 'Đồng lúa quê em,', 'Bác nông dân cười vui,', 'Hạt gạo thơm nuôi em lớn.', 'Hạt gạo thơm nuôi em lớn.'];
+    docs.mv = DocSim(document.getElementById('ds-mv'), {
+      text: [LT_T].concat(LT, [LT_N, LT_L]).join('\n'), ribbon: ['home'], rows: 8, ime: true, fileName: 'DongLuaQueEm',
+      hello: 'Chọn hai dòng cuối (Nhạc, Lời) rồi bấm <b>Cut</b>.',
+      tasksHost: document.getElementById('tasks-mv'), lesson: L, id: 'mv',
+      tasks: [
+        { text: 'Chọn hai dòng cuối (<b>Nhạc</b>, <b>Lời</b>), bấm <b>Cut</b>.', ok: function (d) { return d.used('cut'); } },
+        { text: 'Đặt con trỏ ở đầu dòng 2 (ngay sau tên bài hát), bấm <b>Paste</b>.', ok: function (d) { var a = lines(d); return d.used('paste') && P(a[1]) === P(LT_N) && P(a[2]) === P(LT_L) && countP(a, LT_N) === 1 && a.length === LT.length + 3; } }
+      ],
+      doneText: 'Thông tin tác giả đã nằm ngay sau tên bài hát.'
+    });
+    var ll = [{ t: LT_T, id: 'title' }, { t: LT_N, id: 'n' }, { t: LT_L, id: 'l' }];
+    for (i = 0; i < LT.length; i++) ll.push({ t: LT[i], id: 'x' + i });
+    docs.lt = RichDoc(document.getElementById('rd-lt'), {
+      fileName: 'DongLuaQueEm', lines: ll, gallery: ['hills', 'flower', 'kids', 'sea'], height: 230,
+      tasksHost: document.getElementById('tasks-lt'), lesson: L, id: 'lt',
+      tasks: [
+        { text: 'Toàn bộ văn bản: phông <b>Tahoma</b>, cỡ <b>13</b>.', ok: function (d) { return d.every(function (r) { return r.f === 'Tahoma' && r.s === 13; }); } },
+        { text: 'Tên bài hát: cỡ <b>16</b>, chữ <b>đậm</b>, màu <b>xanh lá</b> (Green).', ok: function (d) { var r = d.style('title'); return r.s === 16 && r.b && r.c === GREEN; } },
+        { text: 'Dòng Nhạc, Lời: chữ <b>nghiêng</b>. Hai câu <b>Hạt gạo thơm...</b>: màu <b>đỏ</b> (Red).', ok: function (d) { return d.style('n').i && d.style('l').i && d.style('x5').c === RED && d.style('x6').c === RED; } },
+        { text: 'Chèn một hình minh hoạ hợp với lời bài hát.', ok: function (d) { return !!d.pic(); } }
+      ],
+      doneText: 'Văn bản lời bài hát đã được định dạng và có hình minh hoạ.'
+    });
+
+    Core.fill(document.getElementById('fill-1'), {
+      lesson: L, id: 'fill1',
+      text: 'a) Khi gõ văn bản, nếu gõ nhầm hoặc sai thì dùng phím [Delete] hoặc phím Backspace để xoá.\nb) Để gõ chữ hoa, em nhấn giữ phím [Shift] và đồng thời gõ phím chữ.',
+      extra: ['Enter', 'Ctrl']
+    });
+    Core.order(document.getElementById('order-pic'), {
+      lesson: L, id: 'order',
+      items: ['Mở dải lệnh Insert, chọn Pictures trong nhóm lệnh Illustrations.', 'Tìm đến thư mục chứa tệp ảnh trong hộp thoại mở ra.', 'Chọn tệp hình ảnh cần chèn.', 'Nháy chuột vào nút Insert trong hộp thoại.']
+    });
+    Core.quiz(document.getElementById('quiz-bt2'), {
+      lesson: L, id: 'bt2',
+      questions: [
+        { q: 'Cách nào <b>sai</b> khi muốn <b>thay đổi kích thước</b> hình ảnh?', options: ['Kéo cả hình (bấm giữa hình rồi kéo).', 'Kéo các nút tròn trên khung hình.', 'Nút phải chuột › Size and Position.', 'Picture Format › nhóm lệnh Size.'], answer: 0,
+          explain: 'Kéo cả hình chỉ làm hình đổi vị trí, không đổi kích thước.' },
+        { q: 'Hình đang bố trí Square. Cách nào <b>sai</b> khi muốn <b>đổi vị trí</b> của hình?', options: ['Kéo thả hình tới chỗ mới.', 'Chọn hình, nhấn phím mũi tên.', 'Nút phải chuột › Size and Position.', 'Chọn hình, nháy nút Layout Options.'], answer: 3,
+          explain: 'Nút Layout Options chỉ để chọn cách bố trí, không di chuyển hình.' },
+        { q: 'Cách nào <b>sai</b> khi muốn <b>lưu</b> văn bản?', options: ['Nháy nút lệnh Save (hình đĩa mềm).', 'Nhấn tổ hợp phím Ctrl+S.', 'Chọn File › Save.', 'Nháy nút lệnh Paste.'], answer: 3,
+          explain: 'Paste là dán phần đã sao chép, không phải lưu.' }
+      ]
+    });
+    Core.match(document.getElementById('match-keys'), {
+      lesson: L, id: 'keys', leftTitle: 'Phím', rightTitle: 'Việc làm',
+      pairs: [['Ctrl + C', 'Sao chép (Copy)'], ['Ctrl + X', 'Cắt (Cut)'], ['Ctrl + V', 'Dán (Paste)'], ['Ctrl + S', 'Lưu văn bản (Save)'], ['Ctrl + A', 'Chọn toàn bộ văn bản']]
+    });
+
+    window.__solve = function () {
+      var d = docs.type; d.mark('copy'); d.setText(START + '\n' + [R1, R2, V2[0], V2[1], R1].join('\n')); d.mark('paste'); d.setText(START + '\n' + [R1, R2, V2[0], V2[1], R1, R2].join('\n')); d.mark('paste');
+      d = docs.fmt; d.selectAll(); d.apply('f', 'Calibri'); d.apply('s', 13); d.apply('c', BLUE);
+      d.select(['title']); d.apply('b', true); d.apply('s', 16); d.apply('c', RED);
+      d.select(['nhac', 'loi', 'src']); d.apply('i', true); d.select(REF); d.apply('c', ORANGE); d.insert('kids'); d.layout('square'); d.side('right');
+      d = docs.l2; var a = FULL.slice(); a.splice(3, 0, '(Lần 1)'); d.setText(a.join('\n'));
+      var part = a.slice(3, a.length - 1);
+      var b = a.concat(part.concat([SRC])); d.setText(b.join('\n')); d.mark('paste');
+      var c = b.slice(); c[a.length + 0] = '(Lần 2)'; d.setText(c.join('\n'));
+      c.splice(a.length - 1, 1); d.setText(c.join('\n'));
+      d = docs.mv; d.mark('cut'); d.mark('paste'); d.setText([LT_T, LT_N, LT_L].concat(LT).join('\n')); d.mark('paste');
+      d = docs.lt; d.selectAll(); d.apply('f', 'Tahoma'); d.apply('s', 13); d.select(['title']); d.apply('s', 16); d.apply('b', true); d.apply('c', GREEN);
+      d.select(['n', 'l']); d.apply('i', true); d.select(['x5', 'x6']); d.apply('c', RED); d.insert('hills');
+      document.body.click();
+    };
+  });
+})();
+</script>
+</body>
+</html>

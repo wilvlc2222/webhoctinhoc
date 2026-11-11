@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fit check</title>
+<style>
+  body { font: 14px/1.4 Consolas, monospace; margin: 12px; background: #fff; color: #000; }
+  .bad { color: #c00; font-weight: bold; }
+  iframe { position: fixed; left: 0; top: 0; width: 1300px; height: 700px; border: 0; visibility: hidden; }
+</style>
+</head>
+<body>
+<p>Dev tool. Opens each lesson at 1300x700 and reports every step: <b>+N</b> = overflows by N px, <b>ok-N</b> = N px still free.
+First line = fresh page with all reveals open. Second line (with <code>&amp;solve=1</code>) = after the tool plays every activity,
+so all feedback lines are showing; it also reports the stars earned. It uses a separate learner name and deletes it afterwards.
+Usage: <code>tools/fit.html?pages=lop4/bai02.html,lop4/bai03.html&amp;solve=1</code></p>
+<pre id="out"></pre>
+<script>
+(function () {
+  var out = document.getElementById('out');
+  var m = /pages=([^&]+)/.exec(location.search);
+  var pages = m ? decodeURIComponent(m[1]).split(',') : [];
+  /* short forms: pages=l4 (all Lớp 4), pages=l5, pages=all, pages=l4:1,5,12a */
+  var ALL4 = ['01','02','03','04','05','06','07','08','09','10','11','12a','12b','13','14','15','16'];
+  var ALL5 = ['01','02','03','04','05','06','07','08a','08b','09a','09b','10','11','12','13','14','15','16'];
+  var exp = [];
+  pages.forEach(function (p) {
+    var g = /^(l4|l5|all)(?::(.+))?$/.exec(p);
+    if (!g) { exp.push(p); return; }
+    function add(grade, list) { list.forEach(function (n) { exp.push('lop' + grade + '/bai' + (/^\d[ab]?$/.test(n) ? '0' + n : n) + '.html'); }); }
+    var only = g[2] ? g[2].split(';') : null;
+    if (g[1] !== 'l5') add(4, only || ALL4);
+    if (g[1] !== 'l4') add(5, only || ALL5);
+  });
+  pages = exp;
+  var solve = /solve=1/.test(location.search);
+  var results = [];
+  window.fitResults = results;
+  function log(s, bad) { var d = document.createElement('div'); if (bad) d.className = 'bad'; d.textContent = s; out.appendChild(d); }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function measure(d, hints) {
+    var steps = d.querySelectorAll('.step'), dots = d.querySelectorAll('.step-dot');
+    var main = d.querySelector('main');
+    var line = [], worst = 0, n = Math.max(steps.length, 1);
+    for (var s = 0; s < n; s++) {
+      if (dots[s]) dots[s].click();
+      if (steps[s]) {
+        var det = steps[s].querySelectorAll('details');
+        for (var k = 0; k < det.length; k++) det[k].open = true;
+        if (hints) { var hb = steps[s].querySelectorAll('.howto-btn'); for (var h = 0; h < hb.length; h++) if (!steps[s].querySelector('.howto-tip:not(:empty)')) hb[h].click(); }
+      }
+      var over = main ? main.scrollHeight - main.clientHeight : 0;
+      if (main && steps[s] && over <= 0) over = Math.round(steps[s].getBoundingClientRect().bottom - main.getBoundingClientRect().top - main.clientHeight);
+      var wide = 0, els = (steps[s] || d.body).querySelectorAll('*');
+      for (var e = 0; e < els.length; e++) {
+        var r = els[e].getBoundingClientRect();
+        if (r.width && r.right > 1301) wide = Math.max(wide, Math.round(r.right - 1300));
+      }
+      worst = Math.max(worst, over, wide);
+      line.push((s + 1) + ':' + (over > 0 ? '+' + over : 'ok' + over) + (wide ? ' wide+' + wide : ''));
+    }
+    if (dots[0]) dots[0].click();
+    return { text: line.join('  '), bad: worst > 0 };
+  }
+
+  function clickAll(list) { for (var i = 0; i < list.length; i++) list[i].click(); }
+  async function play(w, d) {
+    var i, j, k;
+    /* quizzes */
+    var qs = d.querySelectorAll('.quiz-q');
+    for (i = 0; i < qs.length; i++) {
+      var opts = qs[i].querySelectorAll('.quiz-opt');
+      for (j = 0; j < opts.length && !qs[i].querySelector('.is-right'); j++) opts[j].click();
+    }
+    /* sort: try bins until the card is placed */
+    var sorts = d.querySelectorAll('.sort');
+    for (i = 0; i < sorts.length; i++) {
+      var bins = sorts[i].querySelectorAll('.sort-bin');
+      var cards = sorts[i].querySelectorAll('.sort-tray .sort-item');
+      for (j = 0; j < cards.length; j++) for (k = 0; k < bins.length && !cards[j]._placed; k++) {
+        if (!/is-selected/.test(cards[j].className)) cards[j].click();
+        bins[k].click();
+      }
+    }
+    /* match */
+    var ms = d.querySelectorAll('.match');
+    for (i = 0; i < ms.length; i++) {
+      var L = ms[i].children[0].querySelectorAll('.match-item'), R = ms[i].children[1].querySelectorAll('.match-item');
+      for (j = 0; j < L.length; j++) { L[j].click(); for (k = 0; k < R.length && !L[j]._done; k++) if (!R[k]._done) R[k].click(); }
+    }
+    /* order */
+    var os = d.querySelectorAll('.order-pool');
+    for (i = 0; i < os.length; i++) for (k = 0; k < 40 && os[i].children.length; k++) clickAll(Array.prototype.slice.call(os[i].children));
+    /* pick */
+    var ps = d.querySelectorAll('.pick');
+    for (i = 0; i < ps.length; i++) {
+      var items = ps[i].querySelectorAll('.pick-item');
+      for (j = 0; j < items.length; j++) if (items[j]._ok) items[j].click();
+      var btn = ps[i].nextSibling && ps[i].nextSibling.querySelector('.btn');
+      if (btn) btn.click();
+    }
+    /* true / false */
+    var tfr = d.querySelectorAll('.tf-row');
+    for (i = 0; i < tfr.length; i++) if (tfr[i]._ans) tfr[i]._ans.click();
+    /* fill in the blanks */
+    var fills = d.querySelectorAll('.fill-text');
+    for (i = 0; i < fills.length; i++) {
+      var bl = fills[i].querySelectorAll('.fill-blank'), bank = fills[i].nextSibling;
+      for (j = 0; j < bl.length; j++) {
+        var chips = bank.querySelectorAll('.fill-word');
+        for (k = 0; k < chips.length; k++) if (chips[k]._w === bl[j]._w) { chips[k].click(); bl[j].click(); break; }
+      }
+    }
+    /* finger game */
+    var fg = d.querySelectorAll('.fg-hands');
+    for (i = 0; i < fg.length; i++) {
+      var bs = fg[i].querySelectorAll('.fg-btn');
+      for (k = 0; k < 200 && !/Xong/.test(fg[i].previousSibling.textContent); k++) bs[k % bs.length].click();
+    }
+    /* typing practice: type each task's text */
+    var tp = d.querySelectorAll('.type-target');
+    for (i = 0; i < tp.length; i++) {
+      var tabs = tp[i].previousSibling.querySelectorAll('.lab-tab');
+      for (j = 0; j < Math.max(1, tabs.length); j++) {
+        if (tabs[j]) d.querySelectorAll('.type-target')[i].previousSibling.querySelectorAll('.lab-tab')[j].click();
+        var tgt = d.querySelectorAll('.type-target')[i];
+        var txt = ''; for (k = 0; k < tgt.children.length; k++) txt += tgt.children[k].textContent.replace('↵\n', '\n');
+        var inp = tgt.nextSibling; inp.value = txt; inp.dispatchEvent(new w.Event('input'));
+      }
+    }
+    /* free typing */
+    var fr = d.querySelectorAll('textarea.type-input');
+    for (i = 0; i < fr.length; i++) if (!fr[i].value) { fr[i].value = new Array(61).join('chữ '); fr[i].dispatchEvent(new w.Event('input')); }
+    /* page-specific solver */
+    if (w.__solve) await w.__solve();
+    await wait(300);
+  }
+
+  async function run() {
+    for (var i = 0; i < pages.length; i++) {
+      var f = document.createElement('iframe');
+      document.body.appendChild(f);
+      var loaded = new Promise(function (r) { f.onload = r; });
+      f.src = '../' + pages[i] + '?fit=' + Date.now();
+      await loaded;
+      var w = f.contentWindow, d = f.contentDocument, errs = [];
+      w.addEventListener('error', function (e) { errs.push(e.message); });
+      var prevCur = w.Core ? w.Core.currentName() : null;
+      if (solve && w.Core) { w.Core.addProfile('__fit'); w.Core.useProfile('__fit'); w.location.reload(); await new Promise(function (r) { f.onload = r; }); w = f.contentWindow; d = f.contentDocument; w.addEventListener('error', function (e) { errs.push(e.message); }); }
+      await wait(400);
+      var a = measure(d);
+      var line = pages[i] + '\n   fresh: ' + a.text;
+      var bad = a.bad;
+      if (solve) {
+        try { await play(w, d); } catch (x) { errs.push('solver: ' + x.message); }
+        var b = measure(d);
+        var sc = d.querySelector('.lesson-top .star-count');
+        line += '\n   solved: ' + b.text + '   stars ' + (sc ? sc.textContent : '-');
+        /* worst case: every Gợi ý (hint) opened as well */
+        if (d.querySelector('.howto-btn')) { var c = measure(d, true); line += '\n   +hint: ' + c.text; bad = bad || c.bad; }
+        bad = bad || b.bad || (sc && sc.textContent.split('/')[0] !== sc.textContent.split('/')[1]);
+        /* problems a child could see: empty icons, programming words leaking into the page */
+        var probs = [], icos = d.querySelectorAll('.ico');
+        var empty = 0; for (var q = 0; q < icos.length; q++) if (!icos[q].innerHTML.replace(/\s/g, '')) empty++;
+        if (empty) probs.push(empty + ' empty icon(s)');
+        var bc = d.body.cloneNode(true), sx = bc.querySelectorAll('script,style');
+        for (q = 0; q < sx.length; q++) sx[q].parentNode.removeChild(sx[q]);
+        var all = bc.textContent, mm = all.match(/undefined|NaN|\[object|\bnull\b|%\d/g);
+        if (mm) probs.push('text: ' + mm.slice(0, 5).join(','));
+        if (probs.length) { line += '\n   PROBLEMS ' + probs.join(' | '); bad = true; }
+        try {
+          var lid = d.querySelector('[data-stars-for]').getAttribute('data-stars-for');
+          var prog = JSON.parse(w.localStorage.getItem('whth-progress') || '{}')['@__fit'] || {};
+          line += '\n   earned: ' + Object.keys(prog[lid] || {}).join(' ');
+        } catch (x) {}
+        if (w.Core) { w.Core.removeProfile('__fit'); w.Core.useProfile(prevCur || null); }
+      }
+      if (errs.length) { line += '\n   ERR ' + errs.join(' | '); bad = true; }
+      results.push(line);
+      log(line, bad);
+      f.parentNode.removeChild(f);
+    }
+    /* short report: only pages with a problem */
+    window.fitShort = results.filter(function (r) { var s = /stars (\d+)\/(\d+)/.exec(r); return /\+\d|ERR|PROBLEMS|wide/.test(r) || (s && s[1] !== s[2]); })
+      .map(function (r) { return r.replace(/\n   earned:.*/, ''); }).join('\n') || ('ALL OK (' + results.length + ' pages)');
+    window.fitDone = true;
+    log('DONE');
+  }
+  /* console helper: column heights of one step, e.g. await cols('lop4/bai04.html', 2) */
+  window.cols = async function (url, step) {
+    var f = document.createElement('iframe');
+    document.body.appendChild(f);
+    var loaded = new Promise(function (r) { f.onload = r; });
+    f.src = '../' + url + '?x=' + Date.now();
+    await loaded; await wait(400);
+    var d = f.contentDocument;
+    d.querySelectorAll('.step-dot')[step - 1].click();
+    var st = d.querySelectorAll('.step')[step - 1];
+    var det = st.querySelectorAll('details');
+    for (var i = 0; i < det.length; i++) det[i].open = true;
+    function H(e) { return Math.round(e.getBoundingClientRect().height); }
+    var out = ['main=' + d.querySelector('main').clientHeight + ' head=' + H(st.querySelector('.step-head'))];
+    var cs = st.querySelectorAll('.cols > *, .cols3 > *');
+    for (var c = 0; c < cs.length; c++) {
+      var parts = [];
+      for (var k = 0; k < cs[c].children.length; k++) { var x = cs[c].children[k]; parts.push((x.id || x.className || x.tagName).slice(0, 14) + '=' + H(x)); }
+      out.push(cs[c].className + ':' + H(cs[c]) + ' [' + parts.join(', ') + ']');
+    }
+    f.parentNode.removeChild(f);
+    return out.join('\n');
+  };
+  /* console helper: column heights after the quizzes, picks and true/false rows are solved,
+     e.g. await scols('lop5/bai05.html', [1, 4]). Uses a throw-away learner name. */
+  window.scols = async function (url, steps) {
+    var f = document.createElement('iframe');
+    document.body.appendChild(f);
+    var loaded = new Promise(function (r) { f.onload = r; });
+    f.src = '../' + url + '?y=' + Date.now();
+    await loaded;
+    var w = f.contentWindow, prev = w.Core.currentName();
+    w.Core.addProfile('__cols'); w.Core.useProfile('__cols');
+    loaded = new Promise(function (r) { f.onload = r; }); w.location.reload(); await loaded; await wait(400);
+    w = f.contentWindow; var d = f.contentDocument, i, j;
+    var qs = d.querySelectorAll('.quiz-q');
+    for (i = 0; i < qs.length; i++) { var o = qs[i].querySelectorAll('.quiz-opt'); for (j = 0; j < o.length && !qs[i].querySelector('.is-right'); j++) o[j].click(); }
+    var tf = d.querySelectorAll('.tf-row'); for (i = 0; i < tf.length; i++) if (tf[i]._ans) tf[i]._ans.click();
+    var ps = d.querySelectorAll('.pick');
+    for (i = 0; i < ps.length; i++) { var it = ps[i].querySelectorAll('.pick-item'); for (j = 0; j < it.length; j++) if (it[j]._ok) it[j].click(); var b = ps[i].nextSibling && ps[i].nextSibling.querySelector('.btn'); if (b) b.click(); }
+    function H(e) { return Math.round(e.getBoundingClientRect().height); }
+    var out = [];
+    for (var s = 0; s < steps.length; s++) {
+      d.querySelectorAll('.step-dot')[steps[s] - 1].click();
+      var cs = d.querySelectorAll('.step')[steps[s] - 1].querySelectorAll('.cols > *, .cols3 > *'), l = [];
+      for (i = 0; i < cs.length; i++) { var p = []; for (j = 0; j < cs[i].children.length; j++) { var x = cs[i].children[j]; p.push((x.id || x.className || x.tagName).slice(0, 14) + '=' + H(x)); } l.push(H(cs[i]) + ' [' + p.join(', ') + ']'); }
+      out.push(steps[s] + ': ' + l.join(' | '));
+    }
+    w.Core.removeProfile('__cols'); w.Core.useProfile(prev || null);
+    f.parentNode.removeChild(f);
+    return out.join('\n');
+  };
+  run();
+})();
+</script>
+</body>
+</html>

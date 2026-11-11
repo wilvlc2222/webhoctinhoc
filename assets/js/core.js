@@ -224,6 +224,17 @@
     show(current);
   };
 
+  /* ---------- small line telling the child HOW to do the activity (tap here, then there).
+     It explains the controls only, never the answer. ---------- */
+  Core.howto = function (text) {
+    var el = Core.el('div', 'howto');
+    var row = Core.el('div', 'howto-row', Core.icon('bulb') + '<span class="howto-text"></span>');
+    row.lastChild.innerHTML = text;
+    el.appendChild(row);
+    el.reset = function () {};
+    return el;
+  };
+
   /* ---------- quiz: multiple choice, retry until right ---------- */
   /* cfg = { lesson, id, questions: [{ q, options: [], answer: index, explain }] } */
   /* One question is shown at a time, with numbered pips to jump between them. */
@@ -239,8 +250,13 @@
     }
     var done = Core.el('div', 'feedback');
     done.setAttribute('aria-live', 'polite');
+    var cur = 0;
+    var how = Core.howto(total > 1 ? 'Chạm vào đáp án em chọn. Chọn sai thì chọn lại; đúng rồi bấm <b>Câu tiếp</b>.' : 'Chạm vào đáp án em chọn. Chọn sai thì chọn lại nha.');
+    host.appendChild(how);
 
     function show(i) {
+      if (i !== cur) how.reset();
+      cur = i;
       for (var k = 0; k < total; k++) {
         cards[k].style.display = k === i ? '' : 'none';
         if (k === i) addClass(pips[k], 'active'); else removeClass(pips[k], 'active');
@@ -263,7 +279,9 @@
         pips.push(pip);
 
         var card = Core.el('div', 'card quiz-q');
-        card.appendChild(Core.el('p', 'quiz-text', '<b>Câu ' + (qi + 1) + '.</b> ' + q.q));
+        /* questions that already carry their own label ("Câu 2.", "Bài 1.", "Luyện tập 1.") keep it */
+        var labelled = /^\s*(<b>\s*)?(Câu|Bài|Luyện tập|Vận dụng)\s+\d/i.test(q.q);
+        card.appendChild(Core.el('p', 'quiz-text', (labelled ? '' : '<b>Câu ' + (qi + 1) + '.</b> ') + q.q));
         var list = Core.el('div', 'quiz-options');
         var fb = Core.el('div', 'feedback');
         fb.setAttribute('aria-live', 'polite');
@@ -289,7 +307,8 @@
                 pip.setAttribute('aria-label', 'Câu ' + (qi + 1) + ', đã đúng');
                 Core.say(fb, 'Đúng rồi! ' + (q.explain || ''), 'good');
                 solved++;
-                if (solved === total) Core.celebrate(done, cfg.lesson, cfg.id, 'Em đã trả lời đúng hết!');
+                /* a one-question quiz shows the star on the same line, to save space */
+                if (solved === total) Core.celebrate(fb, cfg.lesson, cfg.id, 'Đúng rồi! ' + (q.explain || '') + (total > 1 ? ' Em đã trả lời đúng hết các câu!' : ''));
                 else next.style.display = '';
               } else {
                 addClass(b, 'is-wrong');
@@ -320,7 +339,8 @@
     var tray = Core.el('div', 'sort-tray');
     tray.setAttribute('aria-label', 'Các thẻ cần xếp');
     var bins = Core.el('div', 'sort-bins');
-    var fb = Core.el('div', 'feedback feedback-info', '<span>Chạm vào một thẻ, rồi chạm vào ô em muốn xếp vào.</span>');
+    host.appendChild(Core.howto('Chạm vào một thẻ, rồi chạm vào ô hợp với nó. Xếp sai thì thẻ rung lên, em thử ô khác.'));
+    var fb = Core.el('div', 'feedback');
     fb.setAttribute('aria-live', 'polite');
 
     var binEls = {};

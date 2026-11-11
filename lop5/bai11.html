@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="../assets/css/main.css">
 <script src="../assets/js/icons.js"></script>
 <script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/sprites.js"></script>
+<script src="../assets/js/scratch.js"></script>
+<script src="../assets/js/scratchlesson.js"></script>
 <script src="../assets/js/blocklab.js"></script>
 <style>
   .two-col { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -29,7 +33,7 @@
       <h1>Bài 11. Cấu trúc lặp</h1>
     </div>
     <div class="topbar-right">
-      <span class="stars" data-stars-for="l5-b11" data-stars-total="6"></span>
+      <span class="stars" data-stars-for="l5-b11" data-stars-total="10"></span>
       <span class="who">Bạn: <b data-current-name>Khách</b></span>
       <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
     </div>
@@ -97,7 +101,7 @@
         </div>
       </div>
       <div class="col">
-        <p>Đây là chương trình làm Bíp <b>đi dạo</b> trên sân khấu. Em nhìn kĩ xem có nhóm lệnh nào lặp lại hông nha.</p>
+        <p>Đây là chương trình làm Bíp <b>đi dạo</b> trên sân khấu. Em nhìn kĩ xem có nhóm lệnh nào lặp lại không nha.</p>
         <div id="quiz-find"></div>
       </div>
     </div>
@@ -114,7 +118,7 @@
         <div class="script"><div class="c-wrap"><div class="blk blk-control">liên tục</div><div class="c-body"><div class="blk blk-motion">...</div></div></div></div>
         <p style="margin:0">Lặp <b>mãi mãi</b>, đến khi em bấm nút dừng. Ví dụ: đèn giao thông đổi màu cả ngày.</p></div>
       <div class="card kind"><h3>3. Lặp có điều kiện</h3>
-        <div class="script"><div class="c-wrap"><div class="blk blk-control">lặp lại cho đến khi <span class="slot-num">chạm mép?</span></div><div class="c-body"><div class="blk blk-motion">...</div></div></div></div>
+        <div class="script"><div class="c-wrap"><div class="blk blk-control">lặp lại cho đến khi <span class="slot-num">chạm cạnh?</span></div><div class="c-body"><div class="blk blk-motion">...</div></div></div></div>
         <p style="margin:0">Lặp <b>cho đến khi</b> một điều gì đó xảy ra. Ví dụ: chú cá bơi tới khi chạm vào thành bể.</p></div>
     </div>
     <div class="remember"><ul>
@@ -163,6 +167,29 @@
     <div id="quiz"></div>
   </section>
 
+  <!-- BÀI TẬP (Vở bài tập) -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Cấu trúc lặp quanh em</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Hoạt động nào em thực hiện theo <b>cấu trúc lặp</b>? Chọn tất cả.</p>
+        <div id="bt-pick"></div>
+      </div>
+      <div class="col"><div id="bt-fill"></div></div>
+    </div>
+  </section>
+
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Ba kiểu lặp trong Scratch</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Nối mỗi lệnh lặp với tên của nó.</p>
+        <div id="bt-match"></div>
+      </div>
+      <div class="col"><div id="bt-q"></div></div>
+    </div>
+  </section>
+
   <!-- 7. VẬN DỤNG -->
   <section class="step" data-title="Vận dụng">
     <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Chú cá trong bể</h2></div>
@@ -173,17 +200,16 @@
           <div><div class="script">
             <div class="blk blk-event">khi bấm vào lá cờ xanh</div>
             <div class="c-wrap"><div class="blk blk-control">liên tục</div><div class="c-body">
-              <div class="c-wrap"><div class="blk blk-control">lặp lại cho đến khi <span class="slot-num">chạm mép?</span></div>
-                <div class="c-body"><div class="blk blk-motion">di chuyển 5 bước</div></div></div>
-              <div class="blk blk-motion">quay lại (xoay 180 độ)</div></div></div>
-          </div><p style="margin:0">Cá bơi <b>cho đến khi</b> chạm mép (lặp có điều kiện), rồi quay lại. Bọc tất cả trong <b>liên tục</b> để cá bơi mãi.</p></div></details>
+              <div class="blk blk-motion">di chuyển 5 bước</div>
+              <div class="blk blk-motion">nếu chạm cạnh, bật lại</div></div></div>
+          </div><p style="margin:0">Cá bơi từng chút một; chạm thành bể thì bật lại. Đặt cả hai lệnh trong <b>liên tục</b> để cá bơi mãi.</p></div></details>
       </div>
       <div class="col-side">
         <details class="reveal"><summary>Thử ở Scratch thật</summary>
-          <div>Mở Scratch, vẽ <b>hình vuông</b>: <i>lặp lại 4 { di chuyển 100 bước, xoay 90 độ }</i>.<br>Rồi thử <b>tam giác đều</b>: <i>lặp lại 3 { di chuyển 100 bước, xoay 120 độ }</i>. Em đổi số lần và số độ xem ra hình gì nha!</div></details>
+          <div>Mở Scratch, thêm nhóm <b>Bút vẽ</b>, dùng lệnh <i>đặt bút</i> rồi vẽ <b>hình vuông</b>: <i>lặp lại 4 { di chuyển 100 bước, xoay 90 độ }</i>.<br>Rồi thử <b>tam giác đều</b>: <i>lặp lại 3 { di chuyển 100 bước, xoay 120 độ }</i>. Em đổi số lần và số độ xem ra hình gì nha!</div></details>
         <div class="card" style="text-align:center">
           <p><b>Em đã học xong Bài 11!</b></p>
-          <p class="stars" data-stars-for="l5-b11" data-stars-total="6"></p>
+          <p class="stars" data-stars-for="l5-b11" data-stars-total="10"></p>
           <p style="margin:0"><a class="btn btn-primary" href="../index.html"><span class="ico" data-icon="home"></span>Về trang chính</a></p>
         </div>
       </div>
@@ -279,22 +305,18 @@
     var pond = [];
     for (var py = 1; py <= 2; py++) for (var px = 1; px <= 5; px++) pond.push([px, py]);
 
-    BlockLab(document.getElementById('lab'), {
+    window.__lab = BlockLab(document.getElementById('lab'), {
       lesson: L,
       tabsHost: document.getElementById('lab-head'),
       levels: [
         { id: 'lv1', title: 'Đường thẳng', cols: 7, rows: 1, start: [0, 0, 1], goal: [6, 0], max: 2,
-          text: 'Đưa Bíp tới lá cờ (Bíp quay mặt theo hướng anten). Chỉ được dùng <b>2 khối</b>!',
-          hint: 'Dùng 1 khối "lặp lại", bên trong đặt 1 khối "đi tới 1 ô". Bấm dấu + để đổi số lần thành 6.' },
+          text: 'Đưa Bíp tới lá cờ (Bíp quay mặt theo hướng anten). Chỉ được dùng <b>2 khối</b>!' },
         { id: 'lv2', title: 'Leo bậc thang', cols: 5, rows: 5, start: [0, 4, 1], goal: [4, 0], walls: allExcept(5, 5, stairs), max: 5,
-          text: 'Bíp leo cầu thang lên lá cờ. Mỗi bậc: đi tới, quay trái, đi tới, quay phải. Dùng tối đa <b>5 khối</b>.',
-          hint: 'Một bậc gồm 4 khối: đi tới, quay trái, đi tới, quay phải. Bỏ cả 4 khối vào "lặp lại 4 lần".' },
+          text: 'Bíp leo cầu thang lên lá cờ. Mỗi bậc: đi tới, quay trái, đi tới, quay phải. Dùng tối đa <b>5 khối</b>.' },
         { id: 'lv3', title: 'Vẽ hình vuông', cols: 5, rows: 5, start: [0, 0, 1], stars: perimeter(4, 4, true), max: 5,
-          text: 'Bíp đi một vòng hình vuông để nhặt hết các ngôi sao. Dùng tối đa <b>5 khối</b>.',
-          hint: 'Mỗi cạnh: đi tới 3 lần rồi quay phải. Hình vuông có 4 cạnh, vậy lặp lại mấy lần?' },
+          text: 'Bíp đi một vòng hình vuông để nhặt hết các ngôi sao. Dùng tối đa <b>5 khối</b>.' },
         { id: 'lv4', title: 'Vòng quanh hồ', cols: 7, rows: 4, start: [0, 0, 1], walls: pond, stars: perimeter(7, 4, true), max: 7,
           text: 'Bíp đi quanh hồ nước hình chữ nhật, nhặt hết sao. Khó nè: chỉ được <b>7 khối</b>!',
-          hint: 'Em có thể đặt "lặp lại" BÊN TRONG "lặp lại". Cạnh dài: lặp lại 6 lần đi tới. Cạnh ngắn: lặp lại 3 lần đi tới. Đi 1 cạnh dài + 1 cạnh ngắn, rồi lặp lại cả nhóm 2 lần.',
           defaultRepeat: 2 },
         { id: 'free', title: 'Sân chơi tự do', cols: 8, rows: 8, start: [0, 0, 1], free: true,
           text: 'Bíp để lại vết màu ở chỗ đã đi qua. Em dùng lặp lại để vẽ hình em thích nha!' }
@@ -340,6 +362,45 @@
     quizzes();
   });
 })();
+</script>
+<script>
+/* Bài tập from the workbook (Vở bài tập Tin học 5) */
+document.addEventListener('DOMContentLoaded', function () {
+  var L = 'l5-b11';
+  var B = function (s) { return ScratchLesson.blockHTML(s); };
+  Core.pick(document.getElementById('bt-pick'), {
+    lesson: L, id: 'bt-pick',
+    items: [
+      { label: 'Đọc bài nhiều lần, đến khi thuộc thì dừng.', ok: true },
+      { label: 'Làm lần lượt các bước để di chuyển một đoạn văn bản.', ok: false },
+      { label: 'Rửa rau nhiều lần, đến khi rau sạch thì dừng.', ok: true },
+      { label: 'Làm lần lượt các bước để chèn hình ảnh vào trang chiếu.', ok: false }
+    ]
+  });
+  Core.fill(document.getElementById('bt-fill'), {
+    lesson: L, id: 'bt-fill',
+    text: 'a) Trong cấu trúc lặp, công việc được thực hiện [lặp lại].\nb) Trong chương trình có [cấu trúc lặp], lệnh hoặc [khối lệnh] được thực hiện lặp lại.'
+  });
+  Core.match(document.getElementById('bt-match'), {
+    lesson: L, id: 'bt-match', leftTitle: 'Lệnh', rightTitle: 'Tên',
+    pairs: [[B(['repeat', 10, []]), 'Lặp với số lần biết trước'], [B(['forever', []]), 'Lặp liên tục'], [B(['until', ['touching', 'edge'], []]), 'Lặp có điều kiện']]
+  });
+  Core.quiz(document.getElementById('bt-q'), {
+    lesson: L, id: 'bt-q',
+    questions: [
+      { q: 'Muốn chim bồ câu <b>vỗ cánh liên tục</b>, em dùng lệnh lặp nào?', options: ['Lặp với số lần biết trước', 'Lặp liên tục', 'Lặp có điều kiện'], answer: 1 },
+      { q: 'Muốn mèo di chuyển liên tục <b>cho đến khi chạm con trỏ chuột</b>, em dùng lệnh lặp nào?', options: ['Lặp với số lần biết trước', 'Lặp liên tục', 'Lặp có điều kiện (lặp lại cho đến khi)'], answer: 2 }
+    ]
+  });
+  /* self-check for tools/fit.html: play every level with a correct program */
+  window.__solve = function () {
+    var lab = window.__lab, R = function (n, b) { return ['repeat', n, b]; }, F = ['fwd'], RT = ['right'], LT = ['left'];
+    return lab.play(0, [R(6, [F])])
+      .then(function () { return lab.play(1, [R(4, [F, LT, F, RT])]); })
+      .then(function () { return lab.play(2, [R(4, [R(3, [F]), RT])]); })
+      .then(function () { return lab.play(3, [R(2, [R(6, [F]), RT, R(3, [F]), RT])]); });
+  };
+});
 </script>
 </body>
 </html>

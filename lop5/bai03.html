@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 3. Tìm kiếm thông tin trong giải quyết vấn đề – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/websim.js"></script>
+<style>
+  .trips { display: flex; gap: 8px; margin-bottom: 8px; }
+  .trips > div { flex: 1 1 0; border: 2px solid var(--line); border-radius: 12px; padding: 6px 10px; background: var(--paper); font-size: 15px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 3. Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin</div>
+      <h1>Bài 3. Tìm kiếm thông tin trong giải quyết vấn đề</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b03" data-stars-total="10"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Kì nghỉ hè của ba bạn</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Giải thích vì sao cần <b>thu thập, tìm kiếm thông tin</b> khi giải quyết vấn đề.</li>
+            <li>Tìm và <b>chọn được thông tin phù hợp</b> với vấn đề cần giải quyết.</li>
+            <li><b>Hợp tác</b> với người khác để giải quyết vấn đề.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">An đi <b>Nha Trang</b>, Khoa đi <b>Đà Lạt</b>, Minh đi thăm họ hàng ở <b>Úc</b>. Như mọi năm, cả ba xếp vào va li: đồ bơi, kính bơi, kem chống nắng, quần áo mùa hè mát mẻ... Em đoán xem kì nghỉ của ba bạn có vui không?</div>
+        </div>
+        <div class="trips">
+          <div><b>Nha Trang</b><br>thành phố biển, quanh năm nắng nóng</div>
+          <div><b>Đà Lạt</b><br>cao nguyên, mát mẻ, tối và đêm khá lạnh</div>
+          <div><b>Úc</b><br>ở Nam bán cầu, lúc này đang là mùa đông</div>
+        </div>
+        <details class="reveal"><summary>Xem điều gì đã xảy ra</summary>
+          <div><b>An</b> có kì nghỉ vui vì đồ mang theo hợp với Nha Trang. <b>Khoa</b> và <b>Minh</b> thiếu áo ấm nên không đi chơi được nhiều: hai bạn đã <b>không tìm hiểu thông tin</b> về nơi mình đến.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. VA LI -->
+  <section class="step" data-title="Xếp va li">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Có thông tin thì chuẩn bị đúng</h2><span class="step-sub">Giúp Khoa và Minh chuẩn bị lại va li cho đúng.</span></div>
+    <div id="sort-bag"></div>
+    <div class="cols" style="margin-top:8px">
+      <div class="col"><p class="mt0">Để giải quyết vấn đề, em cần <b>đưa ra quyết định</b>; để quyết định đúng thì cần có <b>thông tin</b>. Thiếu thông tin sẽ gặp khó khăn, đủ thông tin sẽ giải quyết vấn đề tốt hơn.</p></div>
+      <div class="col"><div class="remember mt0" style="margin-top:0"><ul><li>Thu thập và tìm kiếm thông tin là cần thiết và quan trọng trong giải quyết vấn đề.</li><li>Có đầy đủ thông tin sẽ giúp em giải quyết vấn đề tốt hơn.</li></ul></div></div>
+    </div>
+  </section>
+
+  <!-- 3. CÂU HỎI -->
+  <section class="step" data-title="Câu hỏi">
+    <div class="step-head"><span class="phase phase-explore">Câu hỏi</span><h2>Chuẩn bị đi tham quan cùng lớp</h2></div>
+    <p class="mt0">Để chuẩn bị cho chuyến đi tham quan với lớp, em cần những thông tin gì? Chọn tất cả.</p>
+    <div id="pick-trip"></div>
+  </section>
+
+  <!-- 4. HỢP TÁC -->
+  <section class="step" data-title="Hợp tác">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Hợp tác để giải quyết vấn đề</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div id="quiz-hd2"></div>
+      </div>
+      <div class="col">
+        <p class="mt0"><b>Câu hỏi.</b> Chọn các phát biểu <b>đúng</b>.</p>
+        <div id="pick-team"></div>
+        <div class="remember"><ul><li>Khi làm việc nhóm, cần thảo luận, phân công công việc dựa vào điểm mạnh của mỗi người.</li><li>Khi được phân công, cần có ý thức, tinh thần trách nhiệm; hợp tác và giúp đỡ nhau.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THỰC HÀNH -->
+  <section class="step" data-title="Thực hành: Sa Pa">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Tìm các điểm tham quan ở Sa Pa</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <p class="mt0">Gia đình em định đi <b>Sa Pa</b> dịp Tết Dương lịch. Thông tin có thể lấy từ ti vi, sách báo, người xung quanh... và đặc biệt là <b>Internet</b>.</p>
+        <ul class="checklist" id="tasks-sp"></ul>
+        <div class="feedback" id="fb-sp"></div>
+      </div>
+      <div class="col"><div id="sim-sp"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Luyện tập</h2></div>
+    <div class="cols">
+      <div class="col"><div id="quiz-lt"></div></div>
+      <div class="col">
+        <details class="reveal"><summary>Luyện tập 2. Lập danh sách địa điểm tham quan ở Thủ đô trên website sodulich.hanoi.gov.vn</summary>
+          <div>Truy cập <b>sodulich.hanoi.gov.vn</b>, chọn chủ đề <b>Điểm đến</b>, ghi lại tên các địa điểm. Ví dụ: Chùa Một Cột, Đền Quán Thánh, Lăng Chủ tịch Hồ Chí Minh, Văn Miếu – Quốc Tử Giám, Hồ Gươm...</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Đúng hay sai? Tìm thông tin ở đâu?</h2></div>
+    <div class="cols">
+      <div class="col"><div id="tf-1"></div></div>
+      <div class="col">
+        <p class="mt0">Để tìm thông tin về một <b>cuộc thi giải Toán qua mạng</b>, em sẽ tìm ở đâu? Chọn các cách đúng.</p>
+        <div id="pick-where"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Điền từ và làm việc nhóm</h2></div>
+    <div class="cols">
+      <div class="col"><div id="fill-1"></div></div>
+      <div class="col">
+        <p class="mt0">Nhóm em được giao <b>trang trí lớp</b> cho ngày đại hội chi đội. Các bạn nên làm gì? Chọn tất cả cách đúng.</p>
+        <div id="pick-deco"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Chọn bộ truyện làm quà sinh nhật</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Mẹ định mua tặng em một bộ truyện vào dịp sinh nhật. Cùng người lớn, em: a) tìm thông tin về những bộ truyện hay cho thiếu nhi; b) chọn một bộ em thích, tìm giá tiền, nơi bán; c) ghi thông tin vào một tệp văn bản.</div>
+        </div>
+        <details class="reveal"><summary>Gợi ý từ khoá</summary>
+          <div>"Truyện hay cho thiếu nhi", rồi tên bộ truyện em chọn kèm chữ "giá" hoặc "mua ở đâu", ví dụ "Dế Mèn phiêu lưu kí giá bao nhiêu".</div></details>
+      </div>
+      <div class="col-side">
+        <div class="card done-mini"><b>Học xong Bài 3!</b><span class="stars" data-stars-for="l5-b03" data-stars-total="10"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b03';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  var R = WebSim.R;
+  WebSim.add({ keys: ['cac diem tham quan o sa pa', 'diem tham quan sa pa', 'du lich sa pa'], label: 'Các điểm tham quan ở Sa Pa', results: [
+    R('Bản Cát Cát – bản làng của người Mông', 'dulichlaocai.vn', 'Bản làng bên suối, có thác nước và nghề dệt vải...', 'Bản <b>Cát Cát</b> nằm dưới thung lũng gần thị xã Sa Pa, là nơi sinh sống của người Mông. Du khách được xem thác nước, nhà cổ và nghề dệt vải lanh.', 'hills'),
+    R('Đỉnh Phan-xi-păng – nóc nhà Đông Dương', 'dulichlaocai.vn', 'Ngọn núi cao nhất Việt Nam, đi cáp treo lên đỉnh...', '<b>Phan-xi-păng</b> là ngọn núi cao nhất Việt Nam. Có thể leo núi hoặc đi cáp treo. Mùa đông trên đỉnh <b>rất lạnh</b>, có khi có băng giá, cần mang đủ áo ấm.', 'hills'),
+    R('Nhà thờ Đá Sa Pa', 'sapa.vn', 'Công trình bằng đá ở trung tâm thị xã...', '<b>Nhà thờ Đá</b> nằm ở trung tâm Sa Pa, xây bằng đá, là nơi du khách thường chụp ảnh. Quanh đó có chợ và quảng trường.', 'temple'),
+    R('Đèo Ô Quy Hồ – một trong những con đèo đẹp nhất', 'dulichviet.vn', 'Con đèo dài, ngắm mây và hoàng hôn...', '<b>Đèo Ô Quy Hồ</b> nối Lào Cai với Lai Châu, mây phủ nhiều, ngắm hoàng hôn rất đẹp.', 'hills'),
+    R('Núi Hàm Rồng và vườn hoa', 'sapa.vn', 'Đi bộ lên núi ngắm toàn cảnh Sa Pa...', 'Lên <b>núi Hàm Rồng</b>, du khách đi qua vườn hoa, vườn lan và ngắm toàn cảnh thị xã Sa Pa.', 'flower')
+  ] });
+  var opened = {};
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    Core.sort(document.getElementById('sort-bag'), {
+      lesson: L, id: 'bag',
+      bins: [{ id: 'hot', label: 'Va li của An (Nha Trang nắng nóng)' }, { id: 'cold', label: 'Va li của Khoa, Minh (Đà Lạt, Úc lạnh)' }],
+      items: [
+        { label: 'Đồ bơi, kính bơi', icon: 'swim', bin: 'hot' }, { label: 'Kem chống nắng', icon: 'heart', bin: 'hot' }, { label: 'Áo phông mùa hè', icon: 'gift', bin: 'hot' },
+        { label: 'Áo khoác ấm', icon: 'cloud', bin: 'cold' }, { label: 'Mũ len, găng tay', icon: 'gift', bin: 'cold' }, { label: 'Khăn quàng cổ', icon: 'cloud', bin: 'cold' }
+      ].map(function (x) { if (!Icons[x.icon]) x.icon = 'gift'; return x; }),
+      doneText: 'Có thông tin về thời tiết nên chuẩn bị đúng. Lần này cả ba bạn đều có kì nghỉ vui!'
+    });
+    Core.pick(document.getElementById('pick-trip'), {
+      lesson: L, id: 'trip',
+      items: [
+        { label: 'Vị trí của điểm tham quan', icon: 'globe', ok: true }, { label: 'Dự báo thời tiết ngày đi', icon: 'cloud', ok: true },
+        { label: 'Chương trình của chuyến tham quan', icon: 'clock', ok: true }, { label: 'Nhận xét, kinh nghiệm của người đã đến đó', icon: 'chat', ok: true },
+        { label: 'Bạn ngồi cạnh em thích ăn món gì', icon: 'heart', ok: false }
+      ],
+      doneText: 'Cả bốn loại thông tin đều cần để chuẩn bị chu đáo.'
+    });
+    Core.quiz(document.getElementById('quiz-hd2'), {
+      lesson: L, id: 'hd2',
+      questions: [{ q: 'Để hoàn thành bài trình chiếu chung, An, Minh, Khoa nên làm theo cách nào?',
+        options: ['Ai giỏi và thích thì làm hộ cả nhóm.', 'Mỗi bạn làm một bài riêng rồi chọn bài hay nhất.', 'Chia nhỏ công việc, phân công mỗi bạn một việc tuỳ điểm mạnh.'], answer: 2,
+        explain: 'Cả ba bạn cùng đóng góp, mỗi bạn làm phần mình giỏi nhất.' }]
+    });
+    Core.pick(document.getElementById('pick-team'), {
+      lesson: L, id: 'team',
+      items: [{ label: 'Khi làm việc nhóm, cần có tinh thần trách nhiệm.', ok: true }, { label: 'Hợp tác để giải quyết vấn đề sẽ hiệu quả hơn.', ok: true }, { label: 'Khi làm việc nhóm, bạn nào giỏi thì nên làm hộ cả nhóm.', ok: false }]
+    });
+
+    var fb = document.getElementById('fb-sp'), done = {}, tasks = ['Tìm kiếm với từ khoá <b>Các điểm tham quan ở Sa Pa</b>.', 'Mở và đọc ít nhất <b>2</b> trang kết quả.', 'Tìm xem đi Sa Pa dịp Tết Dương lịch cần mang thêm gì (đọc trang Phan-xi-păng).'];
+    var ul = document.getElementById('tasks-sp');
+    function draw() { ul.innerHTML = ''; for (var i = 0; i < tasks.length; i++) ul.appendChild(Core.el('li', done[i] ? 'done' : '', '<span class="ico">' + (done[i] ? Icons.check : Icons.starEmpty) + '</span><span>' + tasks[i] + '</span>')); }
+    function tick(k) { if (done[k]) return; done[k] = 1; draw(); var n = 0; for (var x in done) n++; if (n === tasks.length) Core.celebrate(fb, L, 'sapa', 'Đã có thông tin: mùa đông Sa Pa rất lạnh, nhớ mang áo ấm! Thông tin hợp nhất thường ở đầu danh sách kết quả.'); }
+    draw();
+    var sim = WebSim.search(document.getElementById('sim-sp'), { start: 'engine', height: 360, onEvent: function (t, d) {
+      if (t === 'search' && d.topic && /sa pa/i.test(Core.plain(d.topic.label))) tick(0);
+      if (t === 'open' && d.topic && /tham quan/i.test(Core.plain(d.topic.label))) { opened[d.result.title] = 1; var n = 0; for (var x in opened) n++; if (n >= 2) tick(1); if (/Phan/.test(d.result.title)) tick(2); }
+    } });
+
+    Core.quiz(document.getElementById('quiz-lt'), {
+      lesson: L, id: 'lt',
+      questions: [{ q: '<b>Luyện tập 1.</b> Chọn phương án <b>sai</b>:', options: ['Để giải quyết vấn đề em cần đưa ra quyết định.', 'Để có được quyết định em cần có thông tin.', 'Thông tin không có vai trò gì trong giải quyết vấn đề.', 'Thu thập, tìm kiếm thông tin rất quan trọng khi giải quyết vấn đề.'], answer: 2 }]
+    });
+    Core.truefalse(document.getElementById('tf-1'), {
+      lesson: L, id: 'tf',
+      items: [
+        { t: 'Thông tin rất quan trọng khi đưa ra quyết định và giải quyết vấn đề.', ok: true },
+        { t: 'Thông tin không quan trọng khi đưa ra quyết định.', ok: false },
+        { t: 'Có đủ thông tin sẽ giúp em giải quyết vấn đề tốt hơn.', ok: true },
+        { t: 'Chỉ cần đoán, không cần tìm thông tin khi chuẩn bị chuyến đi.', ok: false }
+      ]
+    });
+    Core.pick(document.getElementById('pick-where'), {
+      lesson: L, id: 'where',
+      items: [{ label: 'Tìm trên Internet', icon: 'globe', ok: true }, { label: 'Tìm trong sách giáo khoa', icon: 'book', ok: false }, { label: 'Hỏi các bạn đã từng tham gia thi', icon: 'people', ok: true }, { label: 'Đoán theo tên cuộc thi', icon: 'bulb', ok: false }],
+      doneText: 'Đúng rồi! Sách giáo khoa không có thông tin về cuộc thi.'
+    });
+    Core.fill(document.getElementById('fill-1'), {
+      lesson: L, id: 'fill',
+      text: 'Thu thập và tìm kiếm [thông tin] là cần thiết và [quan trọng] trong giải quyết vấn đề. Có [đầy đủ] thông tin sẽ giúp em giải quyết vấn đề tốt hơn.\nKhi làm việc nhóm, cần thảo luận, [phân công] công việc dựa vào [điểm mạnh] của mỗi người; cần có tinh thần [trách nhiệm], hợp tác và [giúp đỡ] nhau.',
+      extra: ['làm hộ']
+    });
+    Core.pick(document.getElementById('pick-deco'), {
+      lesson: L, id: 'deco',
+      items: [
+        { label: 'Họp nhóm, liệt kê các việc cần làm.', ok: true },
+        { label: 'Phân công việc dựa vào điểm mạnh của từng bạn.', ok: true },
+        { label: 'Bạn khéo tay cắm hoa, bạn vẽ đẹp trang trí bảng.', ok: true },
+        { label: 'Ai thích gì làm nấy, việc còn lại để trưởng nhóm làm hết.', ok: false }
+      ]
+    });
+    window.__solve = function () { sim.solve('Các điểm tham quan ở Sa Pa'); var t = WebSim.find('Các điểm tham quan ở Sa Pa'); for (var i = 0; i < 2; i++) { opened[t.results[i].title] = 1; } tick(1); tick(2); };
+  });
+})();
+</script>
+</body>
+</html>

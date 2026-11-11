@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 14. Sử dụng biến trong chương trình – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/sprites.js"></script>
+<script src="../assets/js/scratch.js"></script>
+<script src="../assets/js/scratchlesson.js"></script>
+<style>
+  .q-scripts .quiz-opt { width: calc(33.33% - 6px); flex-direction: column; align-items: flex-start; }
+  .q-scripts .sc-blk, .q-scripts .sc-nest { font-size: 12px; }
+  .q-scripts, .q-scripts .quiz-q { max-width: none; }
+  .varbox { display: inline-flex; gap: 6px; align-items: center; background: #e9ecef; border: 1px solid #adb5bd; border-radius: 6px; padding: 2px 8px; font-size: 14px; }
+  .varbox b { background: #ff8c1a; color: #fff; border-radius: 4px; padding: 0 6px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính</div>
+      <h1>Bài 14. Sử dụng biến trong chương trình</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b14" data-stars-total="11"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Chương trình "Xin chào bạn"</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Biết dùng biến <b>trả lời</b> để lưu thông tin nhập từ bàn phím.</li>
+            <li><b>Tạo biến</b>, đặt và thay đổi giá trị của biến trong chương trình.</li>
+          </ul>
+        </div>
+        <p class="mt0">An viết chương trình dưới đây. Mèo hỏi "Tên của bạn là gì?", em gõ tên rồi nhấn Enter, mèo chào đúng tên em.</p>
+        <div id="hi-prog"></div>
+      </div>
+      <div class="col"><div id="quiz-why"></div></div>
+    </div>
+  </section>
+
+  <!-- 2. BIẾN TRẢ LỜI -->
+  <section class="step" data-title="Biến trả lời">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Biến "trả lời" trong Scratch</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p>Lệnh <b>hỏi ... và đợi</b> hiện câu hỏi và một ô để nhập câu trả lời. Gõ xong, nhấn <b>Enter</b>.</p>
+          <p class="mb0">Câu trả lời được lưu vào biến <b>trả lời</b>: biến có sẵn của Scratch, ở nhóm <b>Cảm biến</b>. Đánh dấu ô vuông trước tên biến để hiện giá trị của nó trên sân khấu.</p>
+        </div>
+        <div class="remember"><b>Biến</b> dùng để lưu thông tin (dữ liệu) trong chương trình. Biến <b>trả lời</b> lưu thông tin em nhập từ bàn phím.</div>
+      </div>
+      <div class="col">
+        <p class="mt0">Trên sân khấu đang hiện: <span class="varbox">trả lời <b>7</b></span></p>
+        <div id="quiz-seven"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. TẠO BIẾN -->
+  <section class="step" data-title="Tạo biến">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Tạo và sử dụng biến</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p class="mb0">Vào nhóm <b>Các biến số</b>, bấm <b>Tạo một biến</b>, đặt tên (ví dụ <b>Tuổi</b>, <b>Điểm</b>). Rồi dùng lệnh <b>đặt ... thành</b> để gán giá trị, <b>thay đổi ... một lượng</b> để tăng (giảm) giá trị.</p>
+        </div>
+        <div id="match-var"></div>
+      </div>
+      <div class="col"><div id="quiz-a"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. THỰC HÀNH -->
+  <section class="step" data-title="Thực hành">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Tạo chương trình "Xin chào bạn"</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-hi"></div></div>
+      <div class="col"><div id="sc-hi"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Chương trình "Hỏi tuổi"</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-age"></div></div>
+      <div class="col"><div id="sc-age"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Câu nào đúng?</h2></div>
+    <div class="cols">
+      <div class="col"><p class="mt0">Chọn <b>tất cả</b> các câu đúng.</p><div id="pick-1"></div></div>
+      <div class="col"><p class="mt0">Chọn <b>tất cả</b> các câu đúng.</p><div id="pick-2"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Giá trị của biến là bao nhiêu?</h2></div>
+    <div id="quiz-bt2"></div>
+  </section>
+
+  <!-- 8. BÀI TẬP 3 -->
+  <section class="step" data-title="Bài tập 3">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Chọn chương trình đúng</h2></div>
+    <div id="quiz-bt3" class="q-scripts"></div>
+  </section>
+
+  <!-- 9. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Bạn là học sinh lớp nào?</h2></div>
+    <div class="cols">
+      <div class="col-tasks">
+        <div id="tasks-vd"></div>
+        <div class="card done-mini"><b>Học xong Bài 14!</b><span class="stars" data-stars-for="l5-b14" data-stars-total="11"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="sc-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b14';
+  var SL = ScratchLesson, apps = {};
+  var MY = 'D:/Lop 5A/Thu An', FOLDERS = [MY, 'D:/Lop 5A', 'D:'];
+  function S(x) { return SL.scriptHTML(x); }
+  function B(x) { return SL.blockHTML(x); }
+  function P(s) { return Core.plain(String(s)).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function saidHas(a, re) { var s = a.said(); for (var i = 0; i < s.length; i++) if (re.test(P(s[i].text))) return true; return false; }
+  var HI = [['flag'], ['ask', 'Tên của bạn là gì?'], ['sayFor', ['join', 'Xin chào ', ['answer']], 3]];
+  var AGE0 = [['flag'], ['ask', 'Bạn bao nhiêu tuổi?'], ['setVar', 'Tuổi', ['answer']], ['sayFor', ['join', 'Tuổi của bạn: ', ['getVar', 'Tuổi']], 2]];
+  var AGE1 = AGE0.concat([['changeVar', 'Tuổi', 2], ['sayFor', ['join', 'Tuổi của bạn sau hai năm: ', ['getVar', 'Tuổi']], 3]]);
+  var CLASS = [['flag'], ['ask', 'Bạn là học sinh lớp nào?'], ['sayFor', ['join', 'Xin chào bạn học sinh lớp ', ['answer']], 3]];
+
+  document.addEventListener('DOMContentLoaded', function () {
+    SL.icons();
+    document.getElementById('hi-prog').innerHTML = S(HI);
+    Core.quiz(document.getElementById('quiz-why'), {
+      lesson: L, id: 'why',
+      questions: [{ q: 'Vì sao mèo chào <b>đúng tên</b> em vừa gõ?', options: ['Vì tên em gõ vào được lưu trong biến <b>trả lời</b>, rồi mèo dùng biến đó để chào.', 'Vì máy tính đoán được tên em.', 'Vì mèo thuộc tên tất cả học sinh.'], answer: 0 }]
+    });
+    Core.quiz(document.getElementById('quiz-seven'), {
+      lesson: L, id: 'seven',
+      questions: [
+        { q: 'Giá trị của biến <b>trả lời</b> bằng bao nhiêu?', options: ['0', '7', 'Chưa có giá trị'], answer: 1 },
+        { q: 'Người dùng đã nhập gì từ bàn phím?', options: ['Số 7', 'Chữ "trả lời"', 'Không nhập gì'], answer: 0 }
+      ]
+    });
+    Core.match(document.getElementById('match-var'), {
+      lesson: L, id: 'mvar', leftTitle: 'Lệnh', rightTitle: 'Ý nghĩa',
+      pairs: [[B(['setVar', 'Điểm', 0]), 'Gán cho biến Điểm giá trị 0'], [B(['changeVar', 'Điểm', 1]), 'Tăng giá trị biến Điểm thêm 1'], [B(['showVar', 'Điểm']), 'Hiện biến Điểm trên sân khấu'], [B(['ask', 'Bạn tên là gì?']), 'Hỏi và đợi nhập câu trả lời']]
+    });
+    Core.quiz(document.getElementById('quiz-a'), {
+      lesson: L, id: 'qa',
+      questions: [
+        { q: 'Sau khi chạy các lệnh dưới đây, biến <b>a</b> bằng bao nhiêu?<br>' + S([['setVar', 'a', 4], ['changeVar', 'a', 2]]), options: ['2', '4', '5', '6'], answer: 3, explain: 'Ban đầu a = 4, tăng thêm 2 thì a = 6.' }
+      ]
+    });
+
+    apps.hi = Scratch(document.getElementById('sc-hi'), {
+      project: { backdrop: 'trang', sprites: [{ art: 'meo', name: 'Mèo' }] }, folders: FOLDERS, fileName: 'XinChaoBan', cats: ['looks', 'events', 'control', 'sensing', 'operators'],
+      tasksHost: document.getElementById('tasks-hi'), lesson: L, id: 'hi',
+      tasks: [
+        { text: 'Tạo chương trình: khi bấm cờ › <b>hỏi</b> "Tên của bạn là gì?" <b>và đợi</b> › <b>nói</b> (<b>kết hợp</b> "Xin chào " với <b>trả lời</b>) trong 3 giây.', ok: function (a) { return a.has(null, 'ask') && a.has(null, 'join', function (b) { return b[2] && b[2][0] === 'answer'; }); } },
+        { text: 'Bấm cờ xanh, gõ tên em vào ô rồi nhấn Enter: mèo chào đúng tên em.', ok: function (a) { var s = a.said(); for (var i = 0; i < s.length; i++) if (/xin chào/i.test(s[i].text) && s[i].text.length > 9) return true; return false; } }
+      ],
+      doneText: 'Mèo đã chào đúng tên em nhờ biến "trả lời"!'
+    });
+    apps.age = Scratch(document.getElementById('sc-age'), {
+      project: { backdrop: 'lop', vars: { 'Tuổi': 0 }, sprites: [{ art: 'meo', name: 'Mèo', scripts: [AGE0] }] }, folders: FOLDERS, fileName: 'HoiTuoi', cats: ['looks', 'events', 'control', 'sensing', 'operators', 'variables'],
+      hello: 'Đây là tệp HoiTuoi: mèo hỏi tuổi, lưu vào biến Tuổi rồi nói ra. Em bổ sung thêm lệnh nha.',
+      tasksHost: document.getElementById('tasks-age'), lesson: L, id: 'age',
+      tasks: [
+        { text: 'a) Thêm lệnh <b>thay đổi Tuổi một lượng 2</b> vào cuối chương trình.', ok: function (a) { return a.has(null, 'changeVar', function (b) { return b[1] === 'Tuổi' && Number(b[2]) === 2; }); } },
+        { text: 'b) Thêm lệnh <b>nói</b> (kết hợp "Tuổi của bạn sau hai năm: " với biến <b>Tuổi</b>) để thông báo tuổi sau khi thay đổi.', ok: function (a) { var l = a.blocks(), seen = false; for (var i = 0; i < l.length; i++) { if (l[i][0] === 'changeVar') seen = true; if (seen && /^say/.test(l[i][0])) return true; } return false; } },
+        { text: 'Chạy thử: nhập <b>10</b>, mèo phải nói tuổi là <b>12</b>.', ok: function (a) { return saidHas(a, /12$/); } }
+      ],
+      doneText: 'Giá trị biến Tuổi đã tăng thêm 2!'
+    });
+
+    Core.pick(document.getElementById('pick-1'), {
+      lesson: L, id: 'p1',
+      items: [
+        { label: 'Dùng lệnh "hỏi ... và đợi" để nhập thông tin từ bàn phím.', ok: true },
+        { label: 'Thông tin nhập từ bàn phím được lưu trong biến "trả lời".', ok: true },
+        { label: 'Đánh dấu ô vuông trước tên biến "trả lời" để hiện giá trị của biến trên sân khấu.', ok: true },
+        { label: 'Biến "trả lời" không có sẵn, em phải tự tạo ra.', ok: false }
+      ]
+    });
+    Core.pick(document.getElementById('pick-2'), {
+      lesson: L, id: 'p2',
+      items: [
+        { label: 'Ngoài biến "trả lời", em không thể tạo biến khác.', ok: false },
+        { label: 'Các lệnh về biến nằm trong nhóm lệnh Các biến số.', ok: true },
+        { label: 'Lệnh "hỏi ... và đợi" dùng để nhập thông tin từ bàn phím.', ok: true },
+        { label: 'Để tạo biến, em bấm "Tạo một biến" rồi đặt tên cho biến.', ok: true }
+      ]
+    });
+    Core.quiz(document.getElementById('quiz-bt2'), {
+      lesson: L, id: 'bt2',
+      questions: [
+        { q: 'Biến <b>a</b> đang bằng <b>5</b>. Sau khi thực hiện lệnh ' + B(['changeVar', 'a', 2]) + ' thì a bằng bao nhiêu?', options: ['3', '5', '7', '2'], answer: 2 },
+        { q: 'Chạy chương trình dưới đây và nhập <b>8</b>. Mèo nói gì?<br>' + S([['flag'], ['ask', 'Nhập a ='], ['setVar', 'a', ['answer']], ['sayFor', ['join', 'Giá trị của a là ', ['getVar', 'a']], 2]]), options: ['Nhập a =', 'Giá trị của a là 8', 'a = 8', 'Giá trị của a là'], answer: 1 },
+        { q: 'Sau khi chạy chương trình dưới đây, biến <b>Điểm</b> bằng bao nhiêu?<br>' + S([['flag'], ['setVar', 'Điểm', 0], ['repeat', 10, [['changeVar', 'Điểm', 1]]]]), options: ['0', '1', '10', '11'], answer: 2, explain: 'Bắt đầu từ 0, mỗi lần lặp tăng 1, lặp 10 lần: 10.' }
+      ]
+    });
+    Core.quiz(document.getElementById('quiz-bt3'), {
+      lesson: L, id: 'bt3',
+      questions: [
+        { q: 'Chương trình nào hỏi "Bạn học trường nào?" rồi chào, ví dụ "Xin chào bạn học sinh Trường Tiểu học Hoà Bình"?',
+          options: [S([['flag'], ['ask', 'Bạn học trường nào?'], ['say', ['join', 'Xin chào bạn học sinh ', ['answer']]]]), S([['flag'], ['ask', 'Bạn học trường nào?'], ['say', 'Xin chào bạn học sinh']]), S([['flag'], ['say', ['join', 'Xin chào bạn học sinh ', ['answer']]], ['ask', 'Bạn học trường nào?']])], answer: 0 },
+        { q: 'Khoa muốn: đặt <b>Điểm</b> bằng 0, rồi lặp liên tục: nhân vật đi tới con trỏ chuột, nếu chuột được nhấn thì tăng Điểm thêm 1. Chương trình nào đúng?',
+          options: [S([['flag'], ['setVar', 'Điểm', 0], ['forever', [['gotoMouse'], ['if', ['mouseDown'], [['changeVar', 'Điểm', 1]]]]]]), S([['flag'], ['forever', [['setVar', 'Điểm', 0], ['gotoMouse'], ['if', ['mouseDown'], [['changeVar', 'Điểm', 1]]]]]]), S([['flag'], ['setVar', 'Điểm', 0], ['gotoMouse'], ['if', ['mouseDown'], [['changeVar', 'Điểm', 1]]]])], answer: 0,
+          explain: 'Đặt Điểm = 0 một lần ở đầu; việc đi theo chuột và cộng điểm phải lặp liên tục.' }
+      ]
+    });
+    apps.vd = Scratch(document.getElementById('sc-vd'), {
+      project: { backdrop: 'lop', sprites: [{ art: 'meo', name: 'Mèo' }] }, folders: FOLDERS, fileName: 'HocSinhLop', cats: ['looks', 'events', 'control', 'sensing', 'operators', 'variables'],
+      tasksHost: document.getElementById('tasks-vd'), lesson: L, id: 'vd',
+      tasks: [
+        { text: 'Chương trình hỏi "<b>Bạn là học sinh lớp nào?</b>".', ok: function (a) { return a.has(null, 'ask', function (b) { return /lop nao/.test(Core.plain(String(b[1])).toLowerCase()); }); } },
+        { text: 'Nhập xong, chương trình chào, ví dụ "<b>Xin chào bạn học sinh lớp 5A</b>" (5A là câu trả lời vừa nhập). Chạy thử.', ok: function (a) { return saidHas(a, /xinchaobanhocsinhlop.+/); } }
+      ],
+      doneText: 'Em đã dùng biến "trả lời" để chào đúng lớp!'
+    });
+
+    window.__solve = function () {
+      var a = apps.hi; a.setScripts('Mèo', [HI]); a.flag(); a.simulate(0.2); a.answer('Lan'); a.simulate(4);
+      a = apps.age; a.setScripts('Mèo', [AGE1]); a.flag(); a.simulate(0.2); a.answer('10'); a.simulate(6);
+      a = apps.vd; a.setScripts('Mèo', [CLASS]); a.flag(); a.simulate(0.2); a.answer('5A'); a.simulate(4);
+    };
+  });
+})();
+</script>
+</body>
+</html>

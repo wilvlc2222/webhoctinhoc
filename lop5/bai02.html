@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 2. Tìm kiếm thông tin trên website – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/explorer.js"></script>
+<style>
+  .site { border: 3px solid var(--ink); border-radius: 10px; overflow: hidden; background: #fff; color: #222; }
+  .site-head { background: #ffd43b; padding: 6px 10px; display: flex; align-items: center; gap: 10px; }
+  .site-logo { font-weight: 800; font-size: 20px; color: #c92a2a; }
+  .site-nav { display: flex; align-items: center; background: #e03131; flex-wrap: wrap; }
+  .site-nav button { border: 0; background: none; color: #fff; font: inherit; font-size: 13px; font-weight: 800; padding: 6px 8px; cursor: pointer; text-transform: uppercase; }
+  .site-nav button.on { background: #a61e1e; }
+  .site-nav .ico { width: 18px; height: 18px; }
+  .site-nav .s-search { margin-left: auto; }
+  .site-body { padding: 10px 12px; height: 250px; overflow-y: auto; font-size: 15px; }
+  .site-body h4 { margin: 0 0 6px; font-size: 17px; }
+  .site-body .art { display: block; width: 100%; text-align: left; border: 0; border-bottom: 1px solid #eee; background: none; font: inherit; padding: 6px 0; cursor: pointer; color: #1a0dab; font-weight: 700; }
+  .site-search { display: flex; gap: 6px; margin-bottom: 8px; }
+  .site-search input { flex: 1; font: inherit; padding: 4px 10px; border: 2px solid #adb5bd; border-radius: 6px; }
+  .logo-pic { display: inline-flex; width: 120px; height: 90px; border: 2px solid #ced4da; border-radius: 8px; align-items: center; justify-content: center; text-align: center; font-weight: 800; color: #c92a2a; background: #fff9db; cursor: context-menu; float: right; margin-left: 10px; font-size: 13px; }
+  .cmenu2 { position: absolute; z-index: 5; background: #fff; border: 1px solid #868e96; box-shadow: 2px 2px 8px rgba(0,0,0,0.3); font-size: 14px; }
+  .cmenu2 button { display: block; width: 100%; text-align: left; border: 0; background: #fff; padding: 6px 12px; font: inherit; cursor: pointer; color: #222; }
+  html.eink .site-head, html.eink .site-nav { background: #fff; border-bottom: 2px solid #000; }
+  html.eink .site-nav button { color: #000; }
+  html.eink .site-nav button.on { background: #000; color: #fff; }
+  .wx { border: 3px solid var(--ink); border-radius: 8px; overflow: hidden; background: #fff; color: #222; }
+  .wx-addr { font-size: 13px; padding: 3px 8px; background: #e9ecef; }
+  .wx-top { background: #1864ab; color: #fff; padding: 8px 12px; display: flex; align-items: center; gap: 8px; font-weight: 800; }
+  .wx-top .ico { width: 20px; height: 20px; margin-left: auto; }
+  .wx-menu { display: flex; flex-wrap: wrap; gap: 2px 12px; padding: 4px 10px; background: #1c7ed6; color: #fff; font-size: 12px; font-weight: 800; }
+  html.eink .wx-top, html.eink .wx-menu { background: #fff; color: #000; border-bottom: 2px solid #000; }
+  .taskbar2 { display: flex; align-items: center; justify-content: flex-end; gap: 6px; background: #dee2e6; border: 2px solid var(--ink); border-top: 0; padding: 4px 8px; position: relative; border-radius: 0 0 10px 10px; }
+  .toast { position: absolute; right: 8px; bottom: 44px; width: 260px; background: #343a40; color: #fff; padding: 8px 10px; border-radius: 6px; font-size: 13px; z-index: 6; }
+  .tray { position: absolute; right: 8px; bottom: 44px; background: #fff; border: 1px solid #868e96; padding: 6px; z-index: 6; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 2. Mạng máy tính và Internet</div>
+      <h1>Bài 2. Tìm kiếm thông tin trên website</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b02" data-stars-total="9"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Tìm được trên một website cho trước những thông tin <b>phù hợp, có ích</b> cho nhiệm vụ.</li>
+            <li><b>Hợp tác, chia sẻ</b> thông tin với các bạn trong nhóm để hoàn thành công việc.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Nhóm An, Minh, Khoa được giao làm bài trình chiếu về <b>Ngày hội Trạng Nguyên nhỏ tuổi</b>. Các bạn cần tìm thông tin trên website của một tờ báo thiếu nhi (ví dụ trang <b>thieunien.vn</b>). Theo em, các bạn sẽ tìm như thế nào?</div>
+        </div>
+        <details class="reveal"><summary>Ý kiến của Bíp</summary>
+          <div>Có hai cách: <b>duyệt theo chủ đề</b> của website (ví dụ chủ đề Học đường), hoặc dùng <b>nút tìm kiếm</b> của website rồi gõ từ khoá. Mình cùng thử nha!</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. TÌM KIẾM TRÊN WEBSITE -->
+  <section class="step" data-title="Website có chủ đề">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Tìm thông tin trên một website</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div id="site1"></div>
+        <div class="feedback" id="fb-site1"></div>
+      </div>
+      <div class="col-side">
+        <div class="card tight">
+          <p>Mở website, <b>trang chủ</b> (homepage) hiện ra đầu tiên. Thông tin thường được xếp theo <b>chủ đề</b>.</p>
+          <p>Nút về trang chủ thường hình <b>ngôi nhà</b>, nút tìm kiếm hình <b>kính lúp</b>, các chủ đề thường ở <b>phần đầu trang</b>.</p>
+          <p class="note"><b>Thử:</b> tìm mục <b>Phim</b> trong chủ đề <b>Giải trí</b>.</p>
+        </div>
+        <div class="remember">Để tìm kiếm thông tin trên một website em có thể: duyệt theo các chủ đề của website; sử dụng công cụ tìm kiếm của website.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CÂU HỎI + CHIA SẺ -->
+  <section class="step" data-title="Hợp tác, chia sẻ">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Hợp tác, chia sẻ thông tin</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div id="quiz-1"></div>
+        <div class="remember">Các em cần hợp tác và chia sẻ thông tin để hoàn thành công việc chung. Có nhiều cách chia sẻ: gửi qua mạng hay dùng thiết bị lưu trữ di động.</div>
+      </div>
+      <div class="col">
+        <p class="mt0"><b>Câu hỏi.</b> Những cách nào giúp chia sẻ thông tin lưu trên máy tính?</p>
+        <div id="pick-share"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. NHIỆM VỤ 1 -->
+  <section class="step" data-title="Nhiệm vụ 1">
+    <div class="step-head"><span class="phase phase-practice">Nhiệm vụ 1</span><h2>Tìm thông tin về "Ngày hội Trạng Nguyên nhỏ tuổi"</h2></div>
+    <div class="cols">
+      <div class="col-side"><ul class="checklist" id="tasks-nv1"></ul><div class="feedback" id="fb-nv1"></div></div>
+      <div class="col" style="position:relative"><div id="site2"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. NHIỆM VỤ 2 -->
+  <section class="step" data-title="Nhiệm vụ 2: USB">
+    <div class="step-head"><span class="phase phase-practice">Nhiệm vụ 2</span><h2>Dùng USB để chia sẻ tệp</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <ul class="checklist" id="tasks-usb"></ul>
+        <p class="note">Cắm USB nhẹ tay, đúng chiều, nhờ người lớn giúp nếu cần. Máy tính sẽ coi USB như một <b>ổ đĩa</b>.</p>
+        <div class="feedback" id="fb-usb"></div>
+      </div>
+      <div class="col">
+        <div id="usb-xp"></div>
+        <div class="taskbar2" id="taskbar2">
+          <button class="btn btn-small" id="plug">Cắm USB vào máy</button>
+          <button class="btn btn-small" id="unplug" style="display:none">Rút USB ra</button>
+          <button class="btn btn-small" id="tray-btn" aria-label="Hiện biểu tượng ẩn">^</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Quan sát một phần giao diện website</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="wx">
+          <div class="wx-addr">nchmf.gov.vn/</div>
+          <div class="wx-top">TRUNG TÂM DỰ BÁO KHÍ TƯỢNG THUỶ VĂN QUỐC GIA <span class="ico" data-icon="search"></span></div>
+          <div class="wx-menu"><span>GIỚI THIỆU</span><span>THỜI TIẾT</span><span>KHÍ HẬU</span><span>THUỶ VĂN</span><span>HẢI VĂN</span><span>KHOA HỌC &amp; CÔNG NGHỆ</span><span>KIẾN THỨC</span></div>
+        </div>
+        <p class="note">Hình vẽ lại một phần giao diện website.</p>
+      </div>
+      <div class="col"><div id="quiz-lt"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Đúng hay sai?</h2></div>
+    <div id="tf-1"></div>
+  </section>
+
+  <!-- 8. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Điền từ và tìm câu sai</h2></div>
+    <div class="cols">
+      <div class="col"><div id="fill-1"></div></div>
+      <div class="col">
+        <p class="mt0">Phát biểu nào dưới đây là <b>sai</b>? Chọn tất cả câu sai.</p>
+        <div id="pick-wrong"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Tìm thông tin trên website thật</h2></div>
+    <div class="cols">
+      <div class="col">
+        <details class="reveal"><summary>Vận dụng. Tìm thông tin thời tiết ở địa phương em trên website nchmf.gov.vn.</summary>
+          <div>Cùng người lớn mở trang <b>nchmf.gov.vn</b>, chọn chủ đề <b>Thời tiết</b> để xem dự báo, hoặc bấm nút kính lúp và gõ tên tỉnh, thành phố của em.</div></details>
+        <details class="reveal"><summary>Thử thêm: tìm bài hát thiếu nhi trên trang thieunhivietnam.vn</summary>
+          <div>Gõ địa chỉ <b>thieunhivietnam.vn</b>, nhấn Enter. Duyệt theo chủ đề <b>Thư viện</b> để tìm các bài hát thiếu nhi, hoặc dùng công cụ tìm kiếm của trang với từ khoá như "Sao nhi đồng".</div></details>
+      </div>
+      <div class="col-side">
+        <div class="card done-mini"><b>Học xong Bài 2!</b><span class="stars" data-stars-for="l5-b02" data-stars-total="9"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b02';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  var TOPICS = {
+    'Chuyển động': ['Bạn nhỏ làm kế hoạch nhỏ', 'Đội viên tiêu biểu'],
+    'Học đường': ['Ngày hội Trạng Nguyên nhỏ tuổi', 'Bí quyết học tốt môn Toán', 'Thư viện xanh của trường em'],
+    'Giải trí': ['Phim', 'Ca nhạc', 'Truyện tranh'],
+    'Cẩm nang': ['Giữ an toàn khi lên mạng', 'Đọc sách mỗi ngày'],
+    'Thể thao': ['Bóng đá', 'Cờ vua', 'Bơi lội']
+  };
+  var DETAIL = 'Ngày hội <b>Trạng Nguyên nhỏ tuổi</b> là sân chơi trí tuệ dành cho học sinh tiểu học. <br><b>Đối tượng:</b> học sinh tiểu học. <b>Nội dung:</b> kiến thức Tiếng Việt, Toán, hiểu biết về văn hoá, xã hội. <b>Hình thức:</b> thi qua nhiều vòng, các bạn giỏi nhất vào vòng chung kết. <b>Giải thưởng:</b> danh hiệu Trạng Nguyên, Bảng Nhãn, Thám Hoa và nhiều phần quà.';
+
+  /* a pretend newspaper website: home, topics, search, article, detail */
+  function Site(host, fb, onEvent) {
+    var nav = Core.el('div', 'site-nav'), body = Core.el('div', 'site-body'), cur = '';
+    var wrap = Core.el('div', 'site');
+    wrap.innerHTML = '<div class="site-head"><span class="site-logo">Báo Nhi Đồng Vui</span><span class="note">nhidongvui.vn · trang tập luyện</span></div>';
+    wrap.appendChild(nav); wrap.appendChild(body); host.appendChild(wrap);
+    function navBtn(label, fn, cls) { var b = Core.el('button', cls || '', label); Core.on(b, fn); nav.appendChild(b); return b; }
+    function render() {
+      nav.innerHTML = '';
+      navBtn(Core.icon('home'), function () { home(); }, cur === '' ? 'on' : '').setAttribute('aria-label', 'Về trang chủ');
+      for (var t in TOPICS) if (TOPICS.hasOwnProperty(t)) (function (t) { navBtn(t, function () { topic(t); }, cur === t ? 'on' : ''); })(t);
+      navBtn(Core.icon('search'), function () { search(''); }, 's-search' + (cur === '?' ? ' on' : '')).setAttribute('aria-label', 'Tìm kiếm');
+    }
+    function home() { cur = ''; render(); body.innerHTML = '<h4>Trang chủ</h4><p>Chào mừng các bạn nhỏ! Chọn một <b>chủ đề</b> ở thanh màu đỏ, hoặc bấm <b>kính lúp</b> để tìm kiếm.</p>'; onEvent('home'); }
+    function topic(t) {
+      cur = t; render(); body.innerHTML = '<h4>Chủ đề: ' + t + '</h4>';
+      for (var i = 0; i < TOPICS[t].length; i++) (function (a) { var b = Core.el('button', 'art', a); Core.on(b, function () { article(a); }); body.appendChild(b); })(TOPICS[t][i]);
+      onEvent('topic', t);
+    }
+    function search(q) {
+      cur = '?'; render(); body.innerHTML = '';
+      var f = Core.el('form', 'site-search', '<input aria-label="Từ khoá" placeholder="Từ khoá..."><button class="btn btn-small btn-primary" type="submit">Tìm kiếm</button>');
+      var inp = f.querySelector('input'); inp.value = q;
+      f.addEventListener('submit', function (e) { e.preventDefault(); results(inp.value); }, false);
+      body.appendChild(f);
+      onEvent('searchbox');
+      return inp;
+    }
+    function results(q) {
+      var inp = search(q), n = Core.plain(q), list = [];
+      for (var t in TOPICS) if (TOPICS.hasOwnProperty(t)) for (var i = 0; i < TOPICS[t].length; i++) { var a = TOPICS[t][i], pa = Core.plain(a); if (n && (pa.indexOf(n) >= 0 || n.indexOf(pa) >= 0 || (n.length > 4 && pa.split(' ').some(function (w) { return w.length > 3 && n.indexOf(w) >= 0; })))) list.push(a); }
+      if (!list.length) body.appendChild(Core.el('p', '', 'Không tìm thấy bài viết phù hợp.'));
+      for (var k = 0; k < list.length; k++) (function (a) { var b = Core.el('button', 'art', a); Core.on(b, function () { article(a); }); body.appendChild(b); })(list[k]);
+      onEvent('search', q);
+    }
+    function article(a) {
+      body.innerHTML = '<h4>' + a + '</h4>';
+      if (a === 'Ngày hội Trạng Nguyên nhỏ tuổi') {
+        var logo = Core.el('div', 'logo-pic', 'Biểu tượng<br>Trạng Nguyên<br>nhỏ tuổi');
+        body.appendChild(logo);
+        body.appendChild(Core.el('p', '', 'Cuộc thi dành cho học sinh tiểu học trên cả nước...'));
+        var more = Core.el('button', 'art', 'Xem chi tiết →');
+        Core.on(more, function () { body.appendChild(Core.el('p', '', DETAIL)); more.style.display = 'none'; onEvent('detail'); });
+        body.appendChild(more);
+        function menu(ev) {
+          if (ev.preventDefault) ev.preventDefault();
+          var m = Core.el('div', 'cmenu2');
+          ['Open image in new tab', 'Save image as...', 'Copy image'].forEach(function (x) {
+            var b = Core.el('button', '', x);
+            Core.on(b, function () { m.parentNode.removeChild(m); if (/Save/.test(x)) saveDlg(); else Core.say(fb, 'Lệnh này chưa lưu ảnh về máy. Chọn <b>Save image as...</b> nha.', 'info'); });
+            m.appendChild(b);
+          });
+          m.style.left = '40%'; m.style.top = '30%';
+          host.appendChild(m);
+        }
+        logo.addEventListener('contextmenu', menu, false);
+        Core.on(logo, menu);
+      } else body.appendChild(Core.el('p', '', 'Bài viết thuộc trang tập luyện. Nội dung chỉ có vài dòng thôi nha.'));
+      onEvent('article', a);
+    }
+    function saveDlg() {
+      var d = Core.el('div', 'cmenu2', '<div style="padding:8px"><b>Save As</b><br>Tên tệp: <input value="" style="width:150px"> <button class="btn btn-small btn-primary">Save</button></div>');
+      d.style.left = '30%'; d.style.top = '35%';
+      host.appendChild(d);
+      var inp = d.querySelector('input');
+      Core.on(d.querySelector('button'), function () { var v = inp.value.replace(/^\s+|\s+$/g, ''); if (!v) return; d.parentNode.removeChild(d); onEvent('saveimg', v); });
+    }
+    home();
+    return { topic: topic, results: results, article: article, detail: function () { var m = body.querySelector('.art:last-child'); if (m) m.click(); }, save: function (n) { onEvent('saveimg', n); } };
+  }
+
+  function checklist(ul, items, fb, id, doneText) {
+    var done = {};
+    function draw() { ul.innerHTML = ''; for (var i = 0; i < items.length; i++) ul.appendChild(Core.el('li', done[i] ? 'done' : '', '<span class="ico">' + (done[i] ? Icons.check : Icons.starEmpty) + '</span><span>' + items[i] + '</span>')); }
+    draw();
+    return function (k) { if (done[k]) return; done[k] = 1; draw(); var n = 0; for (var x in done) n++; if (n === items.length) Core.celebrate(fb, L, id, doneText); };
+  }
+
+  var api = {};
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    var fb1 = document.getElementById('fb-site1');
+    api.s1 = Site(document.getElementById('site1'), fb1, function (e, a) {
+      if (e === 'topic' && a === 'Giải trí') Core.say(fb1, 'Đây là chủ đề Giải trí. Em thấy mục <b>Phim</b> chưa? Chạm vào nó nha.', 'info');
+      if (e === 'article' && a === 'Phim') Core.celebrate(fb1, L, 'browse', 'Đúng rồi: Giải trí → Phim. Duyệt theo chủ đề giúp tìm thông tin nhanh hơn!');
+    });
+    Core.quiz(document.getElementById('quiz-1'), {
+      lesson: L, id: 'q',
+      questions: [{ q: 'Muốn tìm thông tin về <b>bóng đá</b> trên website báo thiếu nhi, em nên tìm ở chủ đề nào?', options: ['Chuyển động', 'Học đường', 'Giải trí', 'Thể thao'], answer: 3 }]
+    });
+    Core.pick(document.getElementById('pick-share'), {
+      lesson: L, id: 'share',
+      items: [{ label: 'Gửi tệp qua thư điện tử', icon: 'chat', ok: true }, { label: 'Gửi tệp qua mạng xã hội', icon: 'people', ok: true }, { label: 'Sao chép tệp vào thiết bị lưu trữ di động', icon: 'usb', ok: true }, { label: 'Gọi điện thoại, nói lại thông tin', icon: 'phone', ok: false }],
+      doneText: 'Đúng rồi! Gọi điện chỉ nói lại được, không chia sẻ được tệp.'
+    });
+
+    var fbn = document.getElementById('fb-nv1');
+    var tick1 = checklist(document.getElementById('tasks-nv1'), [
+      'Bấm nút <b>kính lúp</b>, gõ từ khoá <b>Ngày hội Trạng Nguyên nhỏ tuổi</b>, bấm <b>Tìm kiếm</b>.',
+      'Nháy vào kết quả đầu danh sách để mở trang web.',
+      'Bấm <b>Xem chi tiết →</b> và đọc: đối tượng, nội dung, hình thức, giải thưởng.',
+      'Nháy nút phải chuột (hoặc chạm) vào <b>ảnh biểu tượng</b>, chọn <b>Save image as...</b>, đặt tên <b>Logo</b>.'
+    ], fbn, 'nv1', 'Em đã tìm và lưu được thông tin cuộc thi!');
+    api.s2 = Site(document.getElementById('site2'), fbn, function (e, a) {
+      if (e === 'search' && /trang nguyen/.test(Core.plain(a))) tick1(0);
+      if (e === 'article' && a === 'Ngày hội Trạng Nguyên nhỏ tuổi') tick1(1);
+      if (e === 'detail') tick1(2);
+      if (e === 'saveimg') { if (Core.plain(a) === 'logo') tick1(3); else Core.say(fbn, 'Đặt tên tệp là <b>Logo</b> nha.', 'info'); }
+    });
+
+    /* USB */
+    var fbu = document.getElementById('fb-usb'), plugged = false, ejected = false, fs = null;
+    var tickU = checklist(document.getElementById('tasks-usb'), ['Cắm USB vào máy tính.', 'Sao chép tệp <b>Logo</b> và <b>ThongtinCuocthi</b> vào ổ <b>USB Drive (E:)</b>.', 'Ngắt kết nối đúng cách: bấm <b>^</b>, chọn USB, chọn <b>Eject</b>, rồi mới rút USB ra.'], fbu, 'usb', 'Em đã chia sẻ tệp bằng USB và rút USB an toàn!');
+    function tree(withUsb) {
+      var t = [{ n: 'D:', label: 'Du lieu (D:)', t: 'drive', c: [{ n: 'Thu An', t: 'folder', c: [{ n: 'Logo', t: 'file', k: 'img' }, { n: 'ThongtinCuocthi', t: 'file', k: 'doc' }] }] }];
+      if (withUsb) t.push({ n: 'E:', label: 'USB Drive (E:)', t: 'drive', c: [] });
+      return t;
+    }
+    function mount(withUsb) {
+      var h = document.getElementById('usb-xp'); h.innerHTML = '';
+      fs = Explorer(h, { tree: tree(withUsb), open: 'D:/Thu An', height: 190, onOp: function () { if (fs && fs.has('E:/Logo') && fs.has('E:/ThongtinCuocthi')) tickU(1); } });
+    }
+    mount(false);
+    var tb = document.getElementById('taskbar2'), plug = document.getElementById('plug'), unplug = document.getElementById('unplug');
+    function pop(html, cls) { var old = tb.querySelector('.toast, .tray'); if (old) old.parentNode.removeChild(old); if (!html) return null; var p = Core.el('div', cls, html); tb.appendChild(p); return p; }
+    Core.on(plug, function () { plugged = true; ejected = false; plug.style.display = 'none'; unplug.style.display = ''; mount(true); tickU(0); Core.say(fbu, 'Máy tính đã nhận USB, hiện thành ổ <b>USB Drive (E:)</b>.', 'good'); });
+    Core.on(document.getElementById('tray-btn'), function () {
+      if (!plugged) { pop(''); Core.say(fbu, 'Chưa có USB nào được cắm.', 'info'); return; }
+      var p = pop('<button class="btn btn-small">' + Icons.usb.replace('<svg', '<svg width="18" height="18"') + ' Eject USB Drive (E:)</button>', 'tray');
+      Core.on(p.querySelector('button'), function () { ejected = true; pop('<b>Safe To Remove Hardware</b><br>Có thể rút USB ra khỏi máy tính an toàn.', 'toast'); Core.say(fbu, 'Giờ em có thể rút USB ra rồi.', 'good'); });
+    });
+    Core.on(unplug, function () {
+      if (!ejected) { Core.say(fbu, 'Ối! Rút USB khi chưa <b>Eject</b> có thể làm hỏng USB và tệp. Cắm lại và làm đúng cách nha.', 'bad'); }
+      else if (fs && fs.has('E:/Logo') && fs.has('E:/ThongtinCuocthi')) tickU(2);
+      plugged = false; pop(''); unplug.style.display = 'none'; plug.style.display = ''; mount(false);
+    });
+
+    Core.quiz(document.getElementById('quiz-lt'), {
+      lesson: L, id: 'lt',
+      questions: [
+        { q: 'a) Địa chỉ của website là gì?', options: ['nchmf.gov.vn', 'Trung tâm Dự báo Khí tượng Thuỷ văn Quốc gia', 'Thời tiết'], answer: 0 },
+        { q: 'b) Dòng nào gồm các <b>chủ đề</b> của website?', options: ['Giới thiệu, Thời tiết, Khí hậu, Thuỷ văn...', 'nchmf, gov, vn', 'Kính lúp, ngôi nhà'], answer: 0 },
+        { q: 'c) Công cụ tìm kiếm của website nằm ở đâu?', options: ['Hình kính lúp ở góc trên bên phải', 'Ở cuối trang', 'Website không có'], answer: 0 }
+      ]
+    });
+
+    Core.truefalse(document.getElementById('tf-1'), {
+      lesson: L, id: 'tf',
+      items: [
+        { t: 'Thông tin trên website thường được sắp xếp theo chủ đề.', ok: true },
+        { t: 'Thông tin trên website sắp xếp lộn xộn, vì vậy rất khó tìm.', ok: false, why: 'Thông tin được xếp có tổ chức theo chủ đề, danh mục.' },
+        { t: 'Có thể tìm thông tin bằng công cụ tìm kiếm của website.', ok: true },
+        { t: 'Tìm kiếm trên website làm tương tự như tìm kiếm trên Internet.', ok: true },
+        { t: 'Thông tin trên máy tính không thể chia sẻ bằng thư điện tử.', ok: false, why: 'Có thể đính kèm tệp gửi qua thư điện tử.' },
+        { t: 'Thông tin trên máy tính có thể chia sẻ nhờ mạng máy tính.', ok: true }
+      ]
+    });
+    Core.fill(document.getElementById('fill-1'), {
+      lesson: L, id: 'fill',
+      text: 'Để tìm thông tin trên một website, em có thể duyệt theo các [chủ đề] của website hoặc dùng chức năng [tìm kiếm] của website.\nCác em cần [hợp tác] và chia sẻ thông tin để hoàn thành công việc chung. Có thể chia sẻ bằng cách gửi qua [mạng] hay dùng thiết bị [lưu trữ] di động.',
+      extra: ['máy in']
+    });
+    Core.pick(document.getElementById('pick-wrong'), {
+      lesson: L, id: 'wrong',
+      items: [
+        { label: 'Có thể chia sẻ thông tin bằng cách sao chép tệp vào USB rồi đưa cho người cần.', ok: false },
+        { label: 'Cắm USB vào máy, máy tính sẽ coi USB như một ổ đĩa.', ok: false },
+        { label: 'Sao chép tệp xong, cần ngắt kết nối USB đúng cách.', ok: false },
+        { label: 'Sao chép tệp xong, chỉ cần rút USB ra khỏi máy.', ok: true }
+      ],
+      doneText: 'Đúng: phải Eject trước rồi mới rút USB.'
+    });
+
+    window.__solve = function () {
+      api.s1.topic('Giải trí'); api.s1.article('Phim');
+      api.s2.results('Ngày hội Trạng Nguyên nhỏ tuổi'); api.s2.article('Ngày hội Trạng Nguyên nhỏ tuổi'); api.s2.detail(); api.s2.save('Logo');
+      plug.click(); fs.copy('D:/Thu An/Logo'); fs.paste('E:'); fs.copy('D:/Thu An/ThongtinCuocthi'); fs.paste('E:');
+      document.getElementById('tray-btn').click(); tb.querySelector('.tray button').click(); unplug.click();
+    };
+  });
+})();
+</script>
+</body>
+</html>

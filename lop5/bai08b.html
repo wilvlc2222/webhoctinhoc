@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 8B. Làm sản phẩm thủ công theo video hướng dẫn – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/player.js"></script>
+<script src="../assets/js/vidsite.js"></script>
+<script src="../assets/js/craftvideos.js"></script>
+<script src="../assets/js/checklist.js"></script>
+<style>
+  .ctlrow { display: inline-flex; align-items: center; gap: 6px; }
+  .ctlrow .ico { width: 22px; height: 22px; }
+  .seg-demo { display: inline-flex; gap: 2px; width: 70px; vertical-align: middle; }
+  .seg-demo i { flex: 1; height: 8px; background: #1c7ed6; border-radius: 2px; }
+  .seg-demo i + i + i { background: #adb5bd; }
+  .thumbq { width: 260px; margin: 0 auto 6px; }
+  .thumbq .vs-thumb { border: 2px solid var(--line); }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 5B. Sử dụng công cụ đa phương tiện hỗ trợ tạo sản phẩm đơn giản</div>
+      <h1>Bài 8B. Làm sản phẩm thủ công theo video hướng dẫn</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b08b" data-stars-total="10"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Học gấp giấy theo video</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li><b>Tìm</b> được video hướng dẫn làm sản phẩm thủ công trên Internet.</li>
+            <li>Dùng các nút điều khiển để <b>xem và làm theo</b> video, tạo ra sản phẩm.</li>
+          </ul>
+        </div>
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Trên Internet có rất nhiều video dạy gấp giấy: con hạc, con ếch, máy bay, thuyền... Xem video, em thấy rõ <b>từng bước</b> và có thể <b>xem lại</b> bước khó bao nhiêu lần cũng được!</div>
+        </div>
+      </div>
+      <div class="col"><div id="quiz-start"></div></div>
+    </div>
+  </section>
+
+  <!-- 2. TÌM VIDEO -->
+  <section class="step" data-title="Tìm video">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Tìm kiếm video hướng dẫn trên Internet</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="card tight">
+          <p class="mb0">Trên trang chia sẻ video: gõ <b>từ khoá</b> vào ô tìm kiếm, nhấn <b>Enter</b>. Chọn mục <b>Video</b> để chỉ hiện video đủ dài, hướng dẫn kĩ (mục <b>Shorts</b> là video rất ngắn).</p>
+        </div>
+        <div id="tasks-find"></div>
+        <div id="fb-find" class="feedback"></div>
+      </div>
+      <div class="col"><div id="vs-find"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. XEM VÀ LÀM THEO -->
+  <section class="step" data-title="Xem và làm theo">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Xem video và làm theo từng bước</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-watch"></div>
+        <div id="fb-watch" class="feedback"></div>
+      </div>
+      <div class="col"><div id="pl-crane"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. LUYỆN TẬP 1 -->
+  <section class="step" data-title="Luyện tập 1">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Các nút điều khiển video</h2></div>
+    <div class="cols">
+      <div class="col"><div id="quiz-lt1"></div></div>
+      <div class="col">
+        <p class="mt0">Nối mỗi nút với việc nó làm.</p>
+        <div id="match-ctl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. LUYỆN TẬP 2 -->
+  <section class="step" data-title="Luyện tập 2">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Tìm video gấp hình em thích</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-lt2"></div>
+        <div id="fb-lt2" class="feedback"></div>
+      </div>
+      <div class="col"><div id="vs-lt2"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Chọn video phù hợp</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="thumbq" id="thumbq"></div>
+        <p class="small-note mt0">Minh thích chọn video dài khoảng 10 phút để có hướng dẫn kĩ.</p>
+      </div>
+      <div class="col"><div id="quiz-bt1"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Nghệ thuật gấp giấy origami</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="card tight"><p class="mb0"><b>Origami</b> (ô-ri-ga-mi) là nghệ thuật gấp giấy của Nhật Bản: biến tờ giấy vuông hay chữ nhật thành hình sinh động chỉ bằng cách <b>gấp</b>, không cần cắt dán.</p></div>
+        <div id="tf-ori"></div>
+      </div>
+      <div class="col">
+        <div id="tasks-ori"></div>
+        <div id="fb-ori" class="feedback"></div>
+        <div id="vs-ori"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Tự làm một sản phẩm gấp giấy</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-vd"></div>
+        <div id="fb-vd" class="feedback"></div>
+        <div class="card done-mini"><b>Học xong Bài 8B!</b><span class="stars" data-stars-for="l5-b08b" data-stars-total="10"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="vs-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b08b';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  function $(id) { return document.getElementById(id); }
+  function P(s) { return Core.plain(String(s)).toLowerCase(); }
+  var V = CraftVideos.list, sims = {}, lists = {};
+  function vid(id) { for (var i = 0; i < V.length; i++) if (V[i].id === id) return V[i]; }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    Core.quiz($('quiz-start'), {
+      lesson: L, id: 'start',
+      questions: [{ q: 'Em muốn tự học gấp một con hạc giấy. Cách nào giúp em thấy rõ <b>từng bước</b> và xem lại được bước khó?', options: ['Xem video hướng dẫn rồi làm theo', 'Đọc tên con hạc thật nhiều lần', 'Đoán cách gấp rồi làm thử', 'Chờ đến khi lớn mới học'], answer: 0,
+        explain: 'Video cho em thấy từng bước, lại xem lại được nhiều lần.' }]
+    });
+
+    /* find a crane video */
+    lists.find = Checklist($('tasks-find'), $('fb-find'), { lesson: L, id: 'find', ordered: true,
+      tasks: ['Gõ từ khoá <b>gấp hạc giấy</b> vào ô tìm kiếm, nhấn Enter.', 'Chọn mục <b>Video</b> để bỏ các video quá ngắn.', 'Mở một video hướng dẫn gấp hạc giấy.'],
+      doneText: 'Em đã tìm được video hướng dẫn. Bây giờ xem và làm theo nha!' });
+    sims.find = VidSite($('vs-find'), { videos: V, height: 300, onEvent: function (t, d) {
+      if (t === 'search' && /hac/.test(P(d.q)) && d.hits.length) lists.find.tick(0);
+      if (t === 'filter' && d.f === 'video') lists.find.tick(1);
+      if (t === 'open' && /hac/.test(P(d.video.title)) && !d.video.short) lists.find.tick(2);
+    } });
+
+    /* watch the crane video with the controls */
+    lists.watch = Checklist($('tasks-watch'), $('fb-watch'), { lesson: L, id: 'watch', ordered: false,
+      tasks: ['Bấm <b>Play</b> để phát video.', 'Đến bước khó (gấp hình con diều), bấm <b>Pause</b> để tạm dừng, làm theo.', 'Chạm vào <b>thanh tiến trình</b> để xem lại một bước.'],
+      doneText: 'Em đã biết dùng các nút để xem và làm theo video!' });
+    var pl = Player($('pl-crane'), { title: 'Gap hac giay.mp4', frames: vid('crane').frames,
+      onControl: function (n) { if (n === 'seek') lists.watch.tick(2); else if (/^Play/.test(n)) watchPlay(); } });
+    var playedOnce = false;
+    function watchPlay() { if (!playedOnce) { playedOnce = true; lists.watch.tick(0); } else lists.watch.tick(1); }
+    sims.crane = pl;
+
+    function cb(icon, label) { return '<span class="ctlrow">' + Core.icon(icon) + label + '</span>'; }
+    Core.quiz($('quiz-lt1'), {
+      lesson: L, id: 'lt1',
+      questions: [
+        { q: '<b>Luyện tập 1.</b> Khi video <b>đang phát</b>, nút Phát/Tạm dừng hiện hình gì?', options: [cb('pause', 'Hình tạm dừng (hai vạch đứng)'), cb('play', 'Hình tam giác phát'), cb('stopSq', 'Hình vuông dừng hẳn'), cb('fullscr', 'Hình bốn góc')], answer: 0,
+          explain: 'Đang phát thì nút hiện hình tạm dừng; bấm vào sẽ tạm dừng. Hai hình này thay thế nhau ở cùng một chỗ.' },
+        { q: 'Khi video <b>đang tạm dừng</b>, nút đó hiện hình gì?', options: [cb('pause', 'Hình tạm dừng'), cb('play', 'Hình tam giác phát'), cb('vol', 'Hình cái loa')], answer: 1 },
+        { q: 'Gặp bước khó, em dùng nút nào để <b>xem lại</b> đoạn video của bước đó?', options: ['Nút phát video', 'Thanh (nút) tiến trình', 'Nút toàn màn hình', 'Nút đến video tiếp theo'], answer: 1 }
+      ]
+    });
+    Core.match($('match-ctl'), {
+      lesson: L, id: 'ctl', leftTitle: 'Nút', rightTitle: 'Việc làm',
+      pairs: [[cb('play', 'Play / Pause'), 'Phát hoặc tạm dừng video'], ['<span class="ctlrow"><span class="seg-demo"><i></i><i></i><i></i><i></i></span>Tiến trình</span>', 'Chuyển đến một thời điểm của video'], [cb('fullscr', 'Full screen'), 'Xem toàn màn hình'], [cb('vol', 'Volume'), 'Bật, tắt âm thanh']]
+    });
+
+    lists.lt2 = Checklist($('tasks-lt2'), $('fb-lt2'), { lesson: L, id: 'lt2', ordered: true,
+      tasks: ['Tìm video gấp giấy một hình em thích: <b>con ếch</b>, <b>máy bay</b>, <b>thuyền</b>...', 'Mở video đó (không chọn video Shorts).', 'Xem hết video (bấm Play, hoặc tua đến cuối).'],
+      doneText: 'Giỏi quá! Giờ em lấy giấy ra làm theo nha.' });
+    sims.lt2 = VidSite($('vs-lt2'), { videos: V, height: 300, onEvent: function (t, d) {
+      if (t === 'search' && d.hits.length && !/hac/.test(P(d.q))) lists.lt2.tick(0);
+      if (t === 'open' && !d.video.short && d.video.id !== 'crane') lists.lt2.tick(1);
+      if (t === 'end' && !d.video.short) lists.lt2.tick(2);
+    } });
+
+    var tv = vid('crane');
+    $('thumbq').innerHTML = '<div class="vs-thumb">' + tv.thumb + '<span class="vs-dur">' + tv.dur + '</span></div>';
+    Core.quiz($('quiz-bt1'), {
+      lesson: L, id: 'bt1',
+      questions: [
+        { q: 'Khi con trỏ chuột không ở trên video, Minh xem <b>thời lượng</b> của video ở vị trí nào?', options: ['Góc trên bên trái', 'Góc trên bên phải', 'Góc dưới bên trái', 'Góc dưới bên phải'], answer: 3 },
+        { q: 'Tìm video làm đồ thủ công, em chọn mục nào để chỉ hiện video <b>không quá ngắn</b>, hướng dẫn đủ chi tiết?', options: ['Tất cả', 'Shorts', 'Video', 'Chưa xem'], answer: 2 }
+      ]
+    });
+    Core.truefalse($('tf-ori'), {
+      lesson: L, id: 'ori',
+      items: [
+        { t: 'Origami là nghệ thuật gấp giấy của Nhật Bản.', ok: true },
+        { t: 'Gấp origami phải cắt và dán thật nhiều.', ok: false },
+        { t: 'Có thể gấp origami từ tờ giấy hình vuông.', ok: true }
+      ]
+    });
+    lists.ori = Checklist($('tasks-ori'), $('fb-ori'), { lesson: L, id: 'oriv', ordered: true,
+      tasks: ['Tìm với từ khoá <b>cách gấp rô-bốt origami</b> (hoặc <b>Paper Boat Origami Tutorial</b>).', 'Mở video và xem đến hết.'],
+      doneText: 'Em đã xem xong video. Thử gấp theo nha!' });
+    sims.ori = VidSite($('vs-ori'), { videos: V, height: 220, onEvent: function (t, d) {
+      if (t === 'search' && /ro bot|robot|boat/.test(P(d.q)) && d.hits.length) lists.ori.tick(0);
+      if (t === 'end' && (d.video.id === 'robot' || d.video.id === 'boat')) lists.ori.tick(1);
+    } });
+
+    lists.vd = Checklist($('tasks-vd'), $('fb-vd'), { lesson: L, id: 'vd', ordered: true,
+      tasks: ['Tìm với từ khoá <b>gấp giấy origami</b>.', 'Chọn mục <b>Video</b>, mở một video em thích.', 'Xem hết video rồi làm theo để tạo sản phẩm.'],
+      doneText: 'Tuyệt! Nhớ khoe sản phẩm gấp giấy của em với bạn bè nha.' });
+    sims.vd = VidSite($('vs-vd'), { videos: V, height: 300, onEvent: function (t, d) {
+      if (t === 'search' && /origami/.test(P(d.q)) && d.hits.length) lists.vd.tick(0);
+      if (t === 'open' && !d.video.short) lists.vd.tick(1);
+      if (t === 'end' && !d.video.short) lists.vd.tick(2);
+    } });
+
+    window.__solve = function () {
+      var s = sims.find; s.search('gấp hạc giấy'); s.filter('video'); s.open('crane');
+      lists.watch.tick(0); lists.watch.tick(1); lists.watch.tick(2);
+      s = sims.lt2; s.search('gấp con ếch'); s.open('frog'); s.player().go(99);
+      s = sims.ori; s.search('cách gấp rô-bốt origami'); s.open('robot'); s.player().go(99);
+      s = sims.vd; s.search('gấp giấy origami'); s.filter('video'); s.open('boat'); s.player().go(99);
+    };
+  });
+})();
+</script>
+</body>
+</html>

@@ -30,7 +30,7 @@
     var E = Core.el;
     var levelIdx = 0;
     var level, prog, targetId, nextId = 1, running = false, timer = null;
-    var robot, walls, starsLeft, visited;
+    var robot, walls, starsLeft, visited, fast = false;
 
     /* ---------- skeleton ---------- */
     var tabs = E('div', 'lab-tabs');
@@ -50,11 +50,9 @@
     var runBtn = E('button', 'btn btn-primary', Core.icon('play') + 'Chạy');
     var resetBtn = E('button', 'btn', Core.icon('reset') + 'Về chỗ cũ');
     var clearBtn = E('button', 'btn', Core.icon('trash') + 'Xoá hết');
-    var hintBtn = E('button', 'btn btn-small', 'Gợi ý');
     controls.appendChild(runBtn);
     controls.appendChild(resetBtn);
     controls.appendChild(clearBtn);
-    controls.appendChild(hintBtn);
 
     /* wide screens: board | palette | program, all side by side */
     var palCol = E('div', 'lab-pal-col');
@@ -306,7 +304,7 @@
         if (s.op === 'iter') {
           var it = document.getElementById('iter-' + s.id);
           if (it) it.innerHTML = 'lần ' + s.i + '/' + s.n;
-          timer = setTimeout(next, Core.tick() / 2);
+          timer = setTimeout(next, fast ? 0 : Core.tick() / 2);
           return;
         }
         if (s.op === 'left') robot.d = (robot.d + 3) % 4;
@@ -320,7 +318,7 @@
           delete starsLeft[key(nx, ny)];
         }
         renderBoard();
-        timer = setTimeout(next, Core.tick());
+        timer = setTimeout(next, fast ? 0 : Core.tick());
       }
       function clearRunMark() {
         var els = progHost.querySelectorAll('.is-running');
@@ -341,7 +339,7 @@
       var left = starCount();
       if (!atGoal || left) {
         var why = !atGoal ? 'Bíp chưa tới lá cờ.' : 'Còn ' + left + ' ngôi sao chưa nhặt.';
-        Core.say(fb, why + (capped ? ' Chương trình chạy lâu quá nên Bíp dừng lại.' : '') + ' Thử lại nha, hoặc bấm "Gợi ý".', 'bad');
+        Core.say(fb, why + (capped ? ' Chương trình chạy lâu quá nên Bíp dừng lại.' : '') + ' Em sửa chương trình rồi thử lại nha.', 'bad');
         return;
       }
       var n = count(prog);
@@ -383,8 +381,12 @@
     Core.on(runBtn, run);
     Core.on(resetBtn, function () { resetWorld(); Core.say(fb, 'Bíp về chỗ cũ rồi.', 'info'); });
     Core.on(clearBtn, function () { if (running) return; prog = []; targetId = 'main'; renderProgram(); resetWorld(); });
-    Core.on(hintBtn, function () { Core.say(fb, level.hint || 'Em thử từng bước một nha.', 'info'); });
 
     load(0);
+    /* for the page self-check: build a program from specs like [['repeat', 6, [['fwd']]]] and run it quickly */
+    function fromSpec(list) { var out = []; for (var i = 0; i < list.length; i++) { var s = list[i], b = { id: 'k' + (nextId++), t: s[0] }; if (s[0] === 'repeat') { b.n = s[1]; b.body = fromSpec(s[2]); } out.push(b); } return out; }
+    return {
+      play: function (i, spec) { return new Promise(function (done) { load(i); prog = fromSpec(spec); targetId = 'main'; renderProgram(); fast = true; run(); (function wait() { if (running) setTimeout(wait, 20); else { fast = false; done(); } })(); }); }
+    };
   };
 })();

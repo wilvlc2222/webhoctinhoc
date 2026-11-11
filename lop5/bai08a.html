@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 8A. Làm quen với phần mềm đồ hoạ – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/paint.js"></script>
+<style>
+  .figpic { border: 2px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; line-height: 0; }
+  .figpic svg { display: block; width: 100%; height: auto; max-height: 290px; }
+  .figcap { text-align: center; font-size: 14px; font-style: italic; color: var(--muted); margin: 2px 0 6px; }
+  .tool-ico { display: inline-flex; align-items: center; gap: 6px; }
+  .tool-ico svg { color: #1864ab; }
+  .areas { display: flex; gap: 8px; }
+  .areas > div { flex: 1 1 0; border: 3px solid var(--line); border-radius: 12px; padding: 6px 10px; background: var(--paper); font-size: 15px; }
+  .areas b.n { display: inline-block; width: 26px; height: 26px; border-radius: 50%; background: #1c7ed6; color: #fff; text-align: center; line-height: 26px; margin-right: 4px; }
+  html.eink .areas b.n { background: #000; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 5A. Sử dụng phần mềm đồ hoạ tạo sản phẩm số đơn giản</div>
+      <h1>Bài 8A. Làm quen với phần mềm đồ hoạ</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b08a" data-stars-total="14"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Tạo thiệp chúc mừng bằng phần mềm gì?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Biết <b>phần mềm đồ hoạ</b> và các công cụ chính của nó.</li>
+            <li>Dùng một số công cụ cơ bản để tạo <b>sản phẩm đơn giản</b>.</li>
+          </ul>
+        </div>
+        <div id="quiz-start"></div>
+      </div>
+      <div class="col">
+        <div class="figpic" id="card-pic"></div>
+        <div class="figcap">Thiệp chúc mừng sinh nhật</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. KHÁM PHÁ 1 -->
+  <section class="step" data-title="Phần mềm đồ hoạ">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Phần mềm đồ hoạ giúp em làm gì?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p class="mb0">Phần mềm đồ hoạ có các công cụ, tính năng giúp <b>thiết kế đồ hoạ</b> trên máy tính: vẽ tranh, thiết kế biểu tượng, thiết kế thiệp chúc mừng... Tấm thiệp sinh nhật ở phần Khởi động là một sản phẩm em có thể làm bằng phần mềm đồ hoạ.</p>
+        </div>
+        <div class="remember">Phần mềm đồ hoạ cung cấp các công cụ giúp em vẽ hình, chỉnh sửa hình... để tạo các sản phẩm đồ hoạ.</div>
+        <p>Phần mềm đồ hoạ quen thuộc: <b>Paint</b> (có sẵn trong Windows), <b>Paint 3D</b>, <b>Tux Paint</b>...</p>
+      </div>
+      <div class="col"><div id="quiz-what"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. KHÁM PHÁ 2 -->
+  <section class="step" data-title="Các công cụ">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Các công cụ của phần mềm đồ hoạ</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p>Phần mềm đồ hoạ có rất nhiều công cụ: <b>chọn</b> một phần hình; <b>vẽ hình</b> (ô van, hình chữ nhật, đường thẳng...); <b>viết chữ</b>, <b>tô màu</b>, <b>tẩy</b>, <b>thay đổi kích thước</b>, <b>quay</b>...</p>
+          <p class="mb0">Với tấm thiệp: vẽ một quả bóng bằng công cụ vẽ hình, dùng công cụ chọn để chọn rồi sao chép thành nhiều quả, tô mỗi quả một màu, rồi viết dòng chữ <i>Happy Birthday</i>.</p>
+        </div>
+        <div class="remember">Phần mềm đồ hoạ có các công cụ chọn, vẽ hình, viết chữ, tô màu... giúp em vẽ hình hiệu quả, dễ dàng chỉnh sửa.</div>
+      </div>
+      <div class="col">
+        <p class="mt0">Nối mỗi công cụ của Paint với việc nó làm.</p>
+        <div id="match-tools"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. NHIỆM VỤ 1 -->
+  <section class="step" data-title="Nhiệm vụ 1">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Nhiệm vụ 1: làm quen với giao diện phần mềm Paint</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="areas" style="flex-direction:column">
+          <div><b class="n">1</b><b>Hộp công cụ</b> ở trên, bên trái: chạm vào công cụ để chọn rồi làm việc trên trang vẽ.</div>
+          <div><b class="n">2</b><b>Hộp màu</b> ở trên, bên phải: <b>màu 1</b> (nét vẽ, tô màu), <b>màu 2</b> và các ô màu.</div>
+          <div><b class="n">3</b><b>Trang vẽ</b>: vùng màu trắng, như tờ giấy vẽ.</div>
+        </div>
+        <div id="tasks-nv1"></div>
+      </div>
+      <div class="col"><div id="pt-nv1"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. NHIỆM VỤ 2 -->
+  <section class="step" data-title="Nhiệm vụ 2">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Nhiệm vụ 2: vẽ và tô màu quả bóng bay</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-nv2"></div>
+        <p class="small-note">Lưu ý: hình vẽ và màu tô lấy màu đang ở ô <b>màu 1</b>. Muốn màu khác, chọn màu trước rồi mới vẽ, tô.</p>
+      </div>
+      <div class="col"><div id="pt-nv2"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. NHIỆM VỤ 3 -->
+  <section class="step" data-title="Nhiệm vụ 3">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Nhiệm vụ 3: tạo chùm bóng bay nhiều màu</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="tasks-nv3"></div></div>
+      <div class="col"><div id="pt-nv3"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Luyện tập</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="figpic" id="light-pic" style="max-width:120px;margin:0 auto"></div>
+        <div class="figcap">Cột đèn giao thông</div>
+        <div id="quiz-lt2"></div>
+      </div>
+      <div class="col">
+        <p class="mt0"><b>Luyện tập 1.</b> Để vẽ cột đèn giao thông bên trái, em cần dùng những công cụ nào? Chọn tất cả.</p>
+        <div id="pick-light"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Phần mềm đồ hoạ giúp em làm gì?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Phần mềm đồ hoạ giúp em làm gì? Chọn phương án đúng.</p>
+        <div id="pick-help"></div>
+      </div>
+      <div class="col"><div id="fill-1"></div></div>
+    </div>
+  </section>
+
+  <!-- 9. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Màn hình làm việc của phần mềm đồ hoạ</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Màn hình làm việc của phần mềm đồ hoạ thường <b>có</b> thành phần nào? (Đúng = có, Sai = không có)</p>
+        <div id="tf-1"></div>
+      </div>
+      <div class="col">
+        <p class="mt0">Nối mỗi thành phần với vị trí của nó trong cửa sổ Paint.</p>
+        <div id="match-area"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. BÀI TẬP 3 -->
+  <section class="step" data-title="Bài tập 3">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Vẽ ngôi nhà cần công cụ nào?</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="figpic" id="house-pic"></div>
+        <div class="figcap">Ngôi nhà</div>
+      </div>
+      <div class="col">
+        <p class="mt0">Để vẽ ngôi nhà như hình bên trái, em cần dùng những công cụ nào? Chọn tất cả.</p>
+        <div id="pick-house"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Vẽ cột đèn giao thông</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-vd"></div>
+        <div class="card done-mini"><b>Học xong Bài 8A!</b><span class="stars" data-stars-for="l5-b08a" data-stars-total="14"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="pt-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b08a';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  var ORANGE = '#f76707', PURPLE = '#7048e8', RED = '#e03131', YELLOW = '#fab005', GREEN = '#2f9e44', BLACK = '#000000';
+  function balloon(x, y, w, h, c, tail) { return [{ k: 'oval', x: x, y: y, w: w, h: h, s: c, f: c, sw: 3 }, { k: 'line', x1: x + w / 2, y1: y + h, x2: x + w / 2 + (tail || -8), y2: y + h + 80, s: '#495057', sw: 2 }]; }
+  var docs = {};
+  function T(k) { return '<span class="tool-ico">' + PaintSim.icon(k) + '</span>'; }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    /* birthday card picture */
+    var card = [];
+    for (var s = 0; s < 9; s++) card.push({ k: 'rect', x: 0, y: s * 32, w: 400, h: 16, s: '#9c36b5', f: '#9c36b5', sw: 0 });
+    var bc = ['#4263eb', RED, ORANGE, '#fcc419', '#94d82d', '#5c7cfa', '#66d9e8', RED];
+    for (var b = 0; b < 8; b++) card = card.concat(balloon(70 + b * 32, 20 + (b % 3) * 14, 34, 44, bc[b], (b % 2 ? 6 : -6)));
+    card.push({ k: 'text', x: 92, y: 182, t: 'Happy Birthday', fs: 34, s: '#ffffff' });
+    for (var g = 0; g < 4; g++) { card.push({ k: 'rect', x: 20 + g * 95, y: 230, w: 80, h: 40, s: '#2b8a3e', f: '#69db7c', sw: 2 }); card.push({ k: 'rect', x: 55 + g * 95, y: 230, w: 10, h: 40, s: RED, f: RED, sw: 0 }); }
+    document.getElementById('card-pic').innerHTML = PaintSim.svg(card, 400, 280, '#be4bdb');
+    var light = [{ k: 'rect', x: 92, y: 150, w: 16, h: 100, s: '#495057', f: '#868e96', sw: 2 }, { k: 'rrect', x: 60, y: 10, w: 80, h: 150, s: BLACK, f: '#343a40', sw: 3 },
+      { k: 'oval', x: 76, y: 20, w: 48, h: 40, s: BLACK, f: RED, sw: 2 }, { k: 'oval', x: 76, y: 65, w: 48, h: 40, s: BLACK, f: YELLOW, sw: 2 }, { k: 'oval', x: 76, y: 110, w: 48, h: 40, s: BLACK, f: GREEN, sw: 2 }];
+    document.getElementById('light-pic').innerHTML = PaintSim.svg(light, 200, 260);
+    var house = [{ k: 'tri', x: 40, y: 20, w: 220, h: 90, s: '#a5673f', f: RED, sw: 3 }, { k: 'rect', x: 60, y: 110, w: 180, h: 120, s: '#a5673f', f: '#ffd8a8', sw: 3 },
+      { k: 'rect', x: 130, y: 160, w: 40, h: 70, s: '#a5673f', f: '#a5673f', sw: 2 }, { k: 'rect', x: 80, y: 135, w: 34, h: 30, s: '#1864ab', f: '#a5d8ff', sw: 2 }, { k: 'rect', x: 188, y: 135, w: 34, h: 30, s: '#1864ab', f: '#a5d8ff', sw: 2 }];
+    document.getElementById('house-pic').innerHTML = PaintSim.svg(house, 300, 240);
+
+    Core.quiz(document.getElementById('quiz-start'), {
+      lesson: L, id: 'start',
+      questions: [{ q: 'Tấm thiệp bên phải được làm bằng loại phần mềm nào là <b>phù hợp nhất</b>?', options: ['Phần mềm soạn thảo văn bản', 'Phần mềm trình chiếu', 'Phần mềm đồ hoạ', 'Phần mềm luyện tập chuột'], answer: 2,
+        explain: 'Phần mềm đồ hoạ có công cụ vẽ hình, tô màu, viết chữ để làm thiệp.' }]
+    });
+    Core.quiz(document.getElementById('quiz-what'), {
+      lesson: L, id: 'what',
+      questions: [
+        { q: 'Tấm thiệp sinh nhật gồm những thông tin dạng nào?', options: ['Dạng chữ và dạng hình ảnh.', 'Dạng chữ và dạng âm thanh.', 'Dạng hình ảnh và dạng âm thanh.', 'Dạng chữ, hình ảnh và âm thanh.'], answer: 0 },
+        { q: 'Phần mềm đồ hoạ cho phép em làm gì?', options: ['Xem ảnh và xem video.', 'Soạn thảo văn bản, tạo bài trình chiếu.', 'Vẽ hình, tô màu và chỉnh sửa hình.', 'Chơi trò chơi.'], answer: 2 }
+      ]
+    });
+    Core.match(document.getElementById('match-tools'), {
+      lesson: L, id: 'tools', leftTitle: 'Công cụ', rightTitle: 'Việc làm',
+      pairs: [[T('select') + 'Select', 'Chọn một phần hình'], [T('fill') + 'Fill', 'Tô màu bên trong hình'], [T('text') + 'Text', 'Viết chữ'], [T('eraser') + 'Eraser', 'Tẩy, xoá hình'], [T('oval') + 'Oval', 'Vẽ hình ô van'], [T('resize') + 'Resize', 'Thay đổi kích thước'], [T('rotate') + 'Rotate', 'Quay, lật hình']]
+    });
+
+    docs.nv1 = PaintSim(document.getElementById('pt-nv1'), {
+      tasksHost: document.getElementById('tasks-nv1'), lesson: L, id: 'nv1',
+      hello: 'Đây là phần mềm vẽ giống Paint. Làm lần lượt các nhiệm vụ bên trái nha.',
+      tasks: [
+        { text: 'Chọn <b>Color 1</b> rồi chạm ô màu <b>đỏ</b>.', ok: function (p) { return p.color1() === RED; } },
+        { text: 'Chọn <b>Color 2</b> rồi chạm ô màu <b>vàng</b>.', ok: function (p) { return p.color2() === YELLOW; } },
+        { text: 'Trong nhóm Shapes, chọn công cụ <b>Oval</b> và vẽ thử một hình ô van.', ok: function (p) { return p.count('oval') > 0; } }
+      ],
+      doneText: 'Em đã biết hộp công cụ, hộp màu và trang vẽ!'
+    });
+    docs.nv2 = PaintSim(document.getElementById('pt-nv2'), {
+      tasksHost: document.getElementById('tasks-nv2'), lesson: L, id: 'nv2', fileName: 'Untitled',
+      tasks: [
+        { text: 'Chọn màu 1 là <b>cam</b>, rồi dùng công cụ <b>Oval</b> vẽ quả bóng bay.', ok: function (p) { var s = p.shapes(); for (var i = 0; i < s.length; i++) if (s[i].k === 'oval' && s[i].s === ORANGE) return true; return false; } },
+        { text: 'Dùng công cụ <b>Line</b> vẽ dây bóng bay.', ok: function (p) { return p.count('line') > 0; } },
+        { text: 'Chọn công cụ <b>Fill</b>, chạm vào bên trong quả bóng để tô màu.', ok: function (p) { return p.filled('oval') > 0; } },
+        { text: 'Bấm <b>Save</b>, lưu tệp với tên <b>BongBay</b>.', ok: function (p) { return Core.plain(p.saved() || '').toLowerCase().replace(/\s/g, '') === 'bongbay'; } }
+      ],
+      doneText: 'Quả bóng bay đầu tiên của em đây rồi!'
+    });
+    docs.nv3 = PaintSim(document.getElementById('pt-nv3'), {
+      shapes: balloon(60, 30, 70, 90, ORANGE, -12), tasksHost: document.getElementById('tasks-nv3'), lesson: L, id: 'nv3', fileName: 'BongBay',
+      hello: 'Chọn công cụ <b>Select</b>, kéo một khung bao quanh quả bóng và dây của nó.',
+      tasks: [
+        { text: 'Dùng <b>Select</b> chọn quả bóng (cả dây), bấm <b>Copy</b> rồi <b>Paste</b> để có quả bóng thứ hai.', ok: function (p) { return p.used('copy') && p.used('paste') && p.count('oval') >= 2; } },
+        { text: 'Kéo quả bóng thứ hai sang bên cạnh, bấm <b>Resize</b> cho nó nhỏ hơn.', ok: function (p) { return p.used('resize'); } },
+        { text: 'Bấm <b>Rotate</b> › <b>Flip horizontal</b> để lật quả bóng thứ hai.', ok: function (p) { return p.used('fliph'); } },
+        { text: 'Chọn màu 1 là <b>tím</b>, dùng <b>Fill</b> tô quả bóng thứ hai.', ok: function (p) { var s = p.shapes(); for (var i = 0; i < s.length; i++) if (s[i].k === 'oval' && s[i].f === PURPLE) return true; return false; } },
+        { text: 'Làm tương tự để có chùm <b>ít nhất 4</b> quả bóng, mỗi quả một màu.', ok: function (p) { return p.count('oval') >= 4 && p.fills('oval') >= 4; } }
+      ],
+      doneText: 'Chùm bóng bay nhiều màu thật đẹp!'
+    });
+
+    Core.pick(document.getElementById('pick-light'), {
+      lesson: L, id: 'light',
+      items: [
+        { label: 'Hình chữ nhật (Rectangle)', ok: true }, { label: 'Hình ô van (Oval)', ok: true }, { label: 'Tô màu (Fill)', ok: true },
+        { label: 'Viết chữ (Text)', ok: false }, { label: 'Tam giác (Triangle)', ok: false }
+      ],
+      doneText: 'Đúng rồi! Hình chữ nhật làm thân và cột, ô van làm đèn, rồi tô màu.'
+    });
+    Core.quiz(document.getElementById('quiz-lt2'), {
+      lesson: L, id: 'lt2',
+      questions: [{ q: '<b>Luyện tập 2.</b> Công cụ nào của Paint dùng để <b>chọn một phần</b> của trang vẽ?', options: ['Fill', 'Select', 'Eraser', 'Text'], answer: 1 }]
+    });
+    Core.pick(document.getElementById('pick-help'), {
+      lesson: L, id: 'help',
+      items: [
+        { label: 'Cung cấp công cụ soạn thảo văn bản để tạo ra văn bản.', ok: false },
+        { label: 'Cung cấp công cụ tạo bài trình bày để tạo bài trình chiếu.', ok: false },
+        { label: 'Cung cấp công cụ vẽ hình, chỉnh sửa hình để tạo sản phẩm đồ hoạ.', ok: true },
+        { label: 'Cung cấp công cụ lập trình để tạo ra chương trình máy tính.', ok: false }
+      ]
+    });
+    Core.fill(document.getElementById('fill-1'), {
+      lesson: L, id: 'fill1',
+      text: 'a) Phần mềm đồ hoạ cung cấp các [công cụ] giúp em vẽ hình, [chỉnh sửa] hình... để có thể tạo các sản phẩm đồ hoạ.\nb) Phần mềm đồ hoạ có các công cụ [vẽ hình], [chọn], viết chữ, [tô màu]... giúp em vẽ hình hiệu quả, dễ dàng chỉnh sửa.'
+    });
+    Core.truefalse(document.getElementById('tf-1'), {
+      lesson: L, id: 'tf1',
+      items: [{ t: 'Hộp công cụ', ok: true }, { t: 'Hộp màu', ok: true }, { t: 'Trang vẽ', ok: true }, { t: 'Bàn phím ảo để gõ chữ', ok: false }, { t: 'Hộp thư điện tử', ok: false }]
+    });
+    Core.match(document.getElementById('match-area'), {
+      lesson: L, id: 'area', leftTitle: 'Thành phần', rightTitle: 'Nằm ở đâu?',
+      pairs: [['Hộp công cụ và các lệnh', 'Phía trên, bên trái cửa sổ'], ['Hộp màu', 'Phía trên, bên phải cửa sổ'], ['Trang vẽ', 'Vùng trắng lớn ở giữa cửa sổ']]
+    });
+    Core.pick(document.getElementById('pick-house'), {
+      lesson: L, id: 'house',
+      items: [
+        { label: 'Tam giác (Triangle)', ok: true }, { label: 'Hình chữ nhật (Rectangle)', ok: true }, { label: 'Tô màu (Fill)', ok: true },
+        { label: 'Hình ô van (Oval)', ok: false }, { label: 'Viết chữ (Text)', ok: false }, { label: 'Ngôi sao (Star)', ok: false }
+      ],
+      doneText: 'Mái nhà là tam giác, thân nhà, cửa, cửa sổ là hình chữ nhật, rồi tô màu.'
+    });
+    docs.vd = PaintSim(document.getElementById('pt-vd'), {
+      tasksHost: document.getElementById('tasks-vd'), lesson: L, id: 'vd', fileName: 'CotDen',
+      tasks: [
+        { text: 'Vẽ thân cột đèn bằng <b>Rectangle</b> (hoặc Rounded rectangle), tô màu sẫm.', ok: function (p) { var s = p.shapes(); for (var i = 0; i < s.length; i++) if ((s[i].k === 'rect' || s[i].k === 'rrect') && s[i].f) return true; return false; } },
+        { text: 'Vẽ <b>ba đèn</b> hình ô van, tô màu <b>đỏ</b>, <b>vàng</b>, <b>xanh lá</b>.', ok: function (p) { var s = p.shapes(), c = {}; for (var i = 0; i < s.length; i++) if (s[i].k === 'oval' && s[i].f) c[s[i].f] = 1; return c[RED] && c[YELLOW] && c[GREEN]; } },
+        { text: 'Bấm <b>Save</b>, lưu tệp với tên <b>CotDen</b>.', ok: function (p) { return !!p.saved(); } }
+      ],
+      doneText: 'Cột đèn giao thông của em xong rồi! Nhớ: đèn đỏ dừng lại, đèn xanh mới được đi.'
+    });
+
+    window.__solve = function () {
+      var p = docs.nv1; p.setColor(1, RED); p.setColor(2, YELLOW); p.add({ k: 'oval', x: 20, y: 20, w: 60, h: 40, s: RED, sw: 3 });
+      p = docs.nv2; p.setColor(1, ORANGE); p.add({ k: 'oval', x: 60, y: 30, w: 70, h: 90, s: ORANGE, sw: 3 }); p.add({ k: 'line', x1: 95, y1: 120, x2: 85, y2: 210, s: ORANGE, sw: 3 }); p.fill(0, ORANGE); p.save('BongBay');
+      p = docs.nv3; p.selectAll(); p.copy(); p.paste(); p.resize(0.75); p.flip('h'); p.fill(2, PURPLE);
+      p.select([0, 1]); p.copy(); p.paste(); p.fill(4, GREEN); p.paste(); p.fill(6, RED);
+      p = docs.vd; p.add({ k: 'rrect', x: 200, y: 10, w: 80, h: 160, s: BLACK, f: '#343a40', sw: 3 });
+      p.add({ k: 'oval', x: 215, y: 20, w: 50, h: 44, s: BLACK, f: RED }); p.add({ k: 'oval', x: 215, y: 68, w: 50, h: 44, s: BLACK, f: YELLOW }); p.add({ k: 'oval', x: 215, y: 116, w: 50, h: 44, s: BLACK, f: GREEN }); p.save('CotDen');
+      document.body.click();
+    };
+  });
+})();
+</script>
+</body>
+</html>

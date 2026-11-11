@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 16. Chương trình của em – Tin học 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/sprites.js"></script>
+<script src="../assets/js/scratch.js"></script>
+<script src="../assets/js/scratchlesson.js"></script>
+<style>
+  .two-prog { display: flex; gap: 10px; flex-wrap: wrap; }
+  .two-prog > div { flex: 1 1 0; min-width: 0; }
+  .two-prog b { display: block; margin-bottom: 4px; }
+  .stairs svg { width: 150px; height: 110px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 4 · Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính</div>
+      <h1>Bài 16. Chương trình của em</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l4-b16" data-stars-total="7"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Ý tưởng Đuổi bắt">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Trò chơi "Đuổi bắt"</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Mở lại chương trình đã lưu, <b>thêm nhân vật</b> và lập trình cho nhiều nhân vật.</li>
+            <li>Chỉnh sửa lệnh, chạy thử và lưu chương trình với tên mới.</li>
+          </ul>
+        </div>
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">An muốn nâng cấp "Chú chó đáng yêu" thành trò <b>"Đuổi bắt"</b>: chú bướm bay tới những chỗ bất kì, còn chú chó <b>đuổi theo</b> bướm. Chó bắt được bướm thì sủa "gâu gâu"!</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="two-prog">
+          <div><b>Chương trình của bướm</b><div id="prog-buom"></div></div>
+          <div><b>Chương trình mới của chó</b><div id="prog-cho"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. NHIỆM VỤ -->
+  <section class="step" data-title="Nhiệm vụ: Đuổi bắt">
+    <div class="step-head"><span class="phase phase-practice">Nhiệm vụ</span><h2>Lập trình cho chó và bướm</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-db"></div></div>
+      <div class="col"><div id="sc-db"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. LUYỆN TẬP 1 -->
+  <section class="step" data-title="Luyện tập 1: thêm cá">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập 1</span><h2>Bể cá có nhiều chú cá</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-ca"></div></div>
+      <div class="col"><div id="sc-ca"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. LUYỆN TẬP 2 -->
+  <section class="step" data-title="Luyện tập 2: bọ dừa">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập 2</span><h2>Bọ dừa vẽ hình chữ nhật</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-bd"></div></div>
+      <div class="col"><div id="sc-bd"></div></div>
+    </div>
+  </section>
+
+  <!-- BÀI TẬP (Vở bài tập) -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Chương trình có nhiều nhân vật</h2></div>
+    <div id="bt-q1" class="q-scripts"></div>
+  </section>
+
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Hai bạn chào nhau</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="bt-tf"></div></div>
+      <div class="col"><div id="bt-q2" class="q-scripts"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Bọ dừa vẽ bậc thang</h2></div>
+    <div class="cols">
+      <div class="col-tasks">
+        <div class="stairs"><svg viewBox="0 0 150 110" aria-hidden="true"><path d="M10 100h40v-40h40v-40h40" fill="none" stroke="#1c7ed6" stroke-width="4"/><circle cx="10" cy="100" r="5" fill="#e03131"/></svg></div>
+        <div id="tasks-vd"></div>
+        <div class="card done-mini"><b>Học xong Bài 16!</b><span class="stars" data-stars-for="l4-b16" data-stars-total="7"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="sc-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l4-b16';
+  var MY = 'D:/Lop 4A2/Nhom 2/Thu An';
+  var FOLDERS = [MY, 'D:/Lop 4A2/Nhom 2', 'D:/Lop 4A2', 'D:'];
+  var SL = ScratchLesson, apps = {};
+  function bugPen(a) { var b = a.byArt('bodua'), out = [], p = a.pen(); if (!b) return out; for (var i = 0; i < p.length; i++) if (p[i].sprite === b.name) out.push(p[i]); return out; }
+  var DOG = [['flag'], ['glideRandom', 1], ['bounce'], ['playUntil', 'gau']];
+  var BUOM = [['flag'], ['forever', [['glideRandom', 1], ['nextCostume']]]];
+  var CHO2 = [['flag'], ['rotStyle', 'lr'], ['forever', [['glideTo', 1.5, 'Bướm'], ['if', ['touching', 'Bướm'], [['playUntil', 'gau']]]]]];
+  var FISH = [['flag'], ['forever', [['move', 10], ['bounce']]]];
+  var SQUARE = [['flag'], ['clear'], ['penDown'], ['move', 100], ['turnR', 90], ['wait', 1], ['move', 100], ['turnR', 90], ['wait', 1], ['move', 100], ['turnR', 90], ['wait', 1], ['move', 100], ['turnR', 90]];
+  var RECT = [['flag'], ['clear'], ['penDown'], ['move', 150], ['turnR', 90], ['move', 80], ['turnR', 90], ['move', 150], ['turnR', 90], ['move', 80], ['turnR', 90]];
+  var STAIRS = [['flag'], ['clear'], ['penDown'], ['move', 60], ['turnL', 90], ['move', 60], ['turnR', 90], ['move', 60], ['turnL', 90], ['move', 60], ['turnR', 90], ['move', 60]];
+
+  document.addEventListener('DOMContentLoaded', function () {
+    SL.icons();
+    document.getElementById('prog-buom').innerHTML = SL.scriptHTML(BUOM);
+    document.getElementById('prog-cho').innerHTML = SL.scriptHTML(CHO2);
+
+    apps.db = Scratch(document.getElementById('sc-db'), {
+      folders: FOLDERS, fileName: 'DuoiBat', cats: ['motion', 'looks', 'sound', 'events', 'control', 'sensing'],
+      samples: [{ path: MY + '/ChuCho', project: { backdrop: 'vuon', sprites: [{ art: 'cho', name: 'Chó', scripts: [DOG] }] } }],
+      hello: 'Bấm <b>Tập tin › Mở</b> để mở tệp ChuCho đã lưu ở Bài 15.',
+      tasksHost: document.getElementById('tasks-db'), lesson: L, id: 'db',
+      tasks: [
+        { text: 'Mở tệp <b>ChuCho</b>.', ok: function (a) { return a.opened() && /chucho/i.test(a.opened().replace(/\s/g, '')); } },
+        { text: 'Thêm nhân vật <b>bướm</b> và tạo chương trình cho bướm như hình ở phần Khởi động.', ok: function (a) { var b = a.byArt('buom'); return b && a.has(b, 'flag') && a.has(b, 'forever') && a.has(b, 'glideRandom'); } },
+        { text: 'Chọn chó, sửa chương trình: <b>liên tục</b> lướt tới <b>Bướm</b>, nếu chạm Bướm thì sủa.', ok: function (a) { var c = a.byArt('cho'); return c && a.has(c, 'forever') && a.has(c, 'glideTo', function (x) { return /bướm/i.test(x[2]); }) && a.has(c, 'touching', function (x) { return /bướm/i.test(x[1]); }); } },
+        { text: 'Chạy chương trình nhiều lần, rồi lưu với tên <b>DuoiBat</b>.', ok: function (a) { return a.runs() > 0 && SL.savedIn(a, MY, 'DuoiBat'); } }
+      ]
+    });
+
+    apps.ca = Scratch(document.getElementById('sc-ca'), {
+      folders: FOLDERS, cats: ['motion', 'looks', 'events', 'control'],
+      samples: [{ path: MY + '/ChuCa', project: { backdrop: 'be', sprites: [{ art: 'ca', name: 'Cá', scripts: [FISH] }] } }],
+      hello: 'Mở tệp <b>ChuCa</b> (Bể cá cảnh) đã làm ở Bài 15.',
+      tasksHost: document.getElementById('tasks-ca'), lesson: L, id: 'ca',
+      tasks: [
+        { text: 'Mở tệp <b>ChuCa</b>.', ok: function (a) { return !!a.opened(); } },
+        { text: 'a) Thêm ít nhất <b>2 nhân vật</b> khác (cá vàng, cá...) và tạo chương trình giống chú cá ban đầu.', ok: function (a) { var n = 0, ns = a.sprites(); for (var i = 0; i < ns.length; i++) if (a.has(ns[i], 'forever') && a.has(ns[i], 'bounce')) n++; return n >= 3; } },
+        { text: 'b) Chạy chương trình và quan sát các chú cá bơi.', ok: function (a) { return a.runs() > 0; } }
+      ]
+    });
+
+    apps.bd = Scratch(document.getElementById('sc-bd'), {
+      folders: FOLDERS, cats: ['motion', 'events', 'control', 'pen'],
+      samples: [{ path: MY + '/Robot 2', project: { backdrop: 'trang', sprites: [{ art: 'meo', name: 'Mèo', x: -50, y: -50, scripts: [SQUARE] }] } }],
+      hello: 'Mở tệp <b>Robot 2</b> đã lưu ở Bài 14.',
+      tasksHost: document.getElementById('tasks-bd'), lesson: L, id: 'bd',
+      tasks: [
+        { text: 'Mở tệp <b>Robot 2</b>.', ok: function (a) { return !!a.opened(); } },
+        { text: 'a) Thêm nhân vật <b>bọ dừa</b>, tạo chương trình cho bọ dừa vẽ <b>hình chữ nhật</b>.', ok: function (a) { return !!a.byArt('bodua') && SL.rectangle(bugPen(a)); } },
+        { text: 'b) Xoá nhân vật <b>mèo</b>.', ok: function (a) { return a.opened() && a.arts().indexOf('meo') < 0; } },
+        { text: 'c) Chạy chương trình và quan sát kết quả.', ok: function (a) { return a.runs() > 0 && a.arts().indexOf('meo') < 0 && SL.rectangle(bugPen(a)); } }
+      ]
+    });
+
+    apps.vd = Scratch(document.getElementById('sc-vd'), {
+      project: { backdrop: 'trang', sprites: [{ art: 'bodua', name: 'Bọ dừa', x: -120, y: -80 }] }, cats: ['motion', 'events', 'control', 'pen'],
+      tasksHost: document.getElementById('tasks-vd'), lesson: L, id: 'vd',
+      tasks: [{ text: 'Tạo chương trình để bọ vừa đi vừa vẽ đường <b>bậc thang</b> như hình (mỗi đoạn 60 bước, quay trái rồi quay phải 90 độ).', ok: function (a) {
+        var p = a.pen(), n = 0; for (var i = 0; i < p.length; i++) { var l = Math.sqrt(Math.pow(p[i].x2 - p[i].x1, 2) + Math.pow(p[i].y2 - p[i].y1, 2)); if (Math.abs(l - 60) < 3) n++; }
+        return n >= 5 && a.has(null, 'turnL') && a.has(null, 'turnR'); } }]
+    });
+
+    window.__solve = function () {
+      var a = apps.db; a.open({ backdrop: 'vuon', sprites: [{ art: 'cho', name: 'Chó', scripts: [DOG] }] }, MY + '/ChuCho');
+      a.addSprite('buom', 'Bướm'); a.setScripts('Bướm', [BUOM]); a.setScripts('Chó', [CHO2]); a.flag(); a.simulate(2); a.stop(); a.save('DuoiBat', MY);
+      var b = apps.ca; b.open({ backdrop: 'be', sprites: [{ art: 'ca', name: 'Cá', scripts: [FISH] }] }, MY + '/ChuCa');
+      b.addSprite('ca2', 'Cá vàng'); b.setScripts('Cá vàng', [FISH]); b.addSprite('ca', 'Cá 2'); b.setScripts('Cá 2', [FISH]); b.flag(); b.simulate(1); b.stop();
+      var c = apps.bd; c.open({ backdrop: 'trang', sprites: [{ art: 'meo', name: 'Mèo', scripts: [SQUARE] }] }, MY + '/Robot 2');
+      c.addSprite('bodua', 'Bọ dừa'); c.setScripts('Bọ dừa', [RECT]); c.removeSprite('Mèo'); c.flag(); c.simulate(3);
+      var d = apps.vd; d.setScripts('Bọ dừa', [STAIRS]); d.flag(); d.simulate(2);
+    };
+  });
+})();
+</script>
+<style>
+  .q-scripts .quiz-opt { width: calc(33.33% - 6px); flex-direction: column; align-items: flex-start; }
+  .q-scripts .sc-blk, .q-scripts .sc-nest { font-size: 12px; }
+  .q-scripts, .q-scripts .quiz-q { max-width: none; }
+  #bt-q1 .sc-script { zoom: 0.8; }
+</style>
+<script>
+/* Bài tập from the workbook (Vở bài tập Tin học 4) */
+document.addEventListener('DOMContentLoaded', function () {
+  var L = 'l4-b16';
+  var S = function (s) { return ScratchLesson.scriptHTML(s); };
+  Core.truefalse(document.getElementById('bt-tf'), {
+    lesson: L, id: 'bt-tf',
+    items: [
+      { t: 'Một chương trình có thể có nhiều nhân vật.', ok: true },
+      { t: 'Muốn thêm nhân vật, em nháy nút Chọn nhân vật rồi chọn trong thư viện.', ok: true },
+      { t: 'Mỗi chương trình chỉ có đúng một nhân vật.', ok: false }
+    ]
+  });
+  var W = [['wait', 1], ['nextCostume']];
+  Core.quiz(document.getElementById('bt-q1'), {
+    lesson: L, id: 'bt-q1',
+    questions: [{ q: 'Minh muốn chú chó làm <b>bốn lần</b>: đợi 1 giây rồi đổi hình dạng. Chương trình nào đúng?',
+      options: [S([['flag']].concat(W, W)), S([['flag']].concat(W, W, W, W)), S([['flag'], ['wait', 4], ['nextCostume']])], answer: 1 }]
+  });
+  Core.quiz(document.getElementById('bt-q2'), {
+    lesson: L, id: 'bt-q2',
+    questions: [{ q: 'Bạn nam nói "Xin chào bạn! Bạn khoẻ không?" trong 5 giây. <b>Sau đó</b> bạn nữ mới nói "Cảm ơn bạn! Mình vẫn khoẻ!". Chương trình nào là của <b>bạn nữ</b>?',
+      options: [S([['flag'], ['say', 'Cảm ơn bạn! Mình vẫn khoẻ!']]), S([['flag'], ['wait', 5], ['say', 'Cảm ơn bạn! Mình vẫn khoẻ!']]), S([['flag'], ['say', 'Cảm ơn bạn! Mình vẫn khoẻ!'], ['wait', 5]])], answer: 1,
+      explain: 'Bạn nữ phải đợi 5 giây (lúc bạn nam đang nói) rồi mới nói.' }]
+  });
+});
+</script>
+</body>
+</html>

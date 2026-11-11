@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 16. Từ kịch bản đến chương trình – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/sprites.js"></script>
+<script src="../assets/js/scratch.js"></script>
+<script src="../assets/js/scratchlesson.js"></script>
+<style>
+  .q-scripts .quiz-opt { width: calc(33.33% - 6px); flex-direction: column; align-items: flex-start; }
+  .q-scripts .sc-blk, .q-scripts .sc-nest { font-size: 12px; }
+  .q-scripts, .q-scripts .quiz-q { max-width: none; }
+  .script3 { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  .script3 > div { border: 2px solid var(--line); border-radius: 10px; padding: 6px 10px; background: var(--paper); font-size: 15px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính</div>
+      <h1>Bài 16. Từ kịch bản đến chương trình</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b16" data-stars-total="10"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Ý tưởng trò chơi "Mèo bắt bóng"</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Viết được <b>kịch bản</b> từ ý tưởng của chương trình.</li>
+            <li>Tạo chương trình theo kịch bản, <b>chạy thử</b> và sửa lỗi.</li>
+          </ul>
+        </div>
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Trò chơi có một con <b>mèo</b> và một trái <b>bóng</b>. Bóng di chuyển liên tục trên sân khấu. Mèo đi theo con trỏ chuột. Mỗi lần mèo <b>chạm bóng</b>, điểm của người chơi tăng thêm 1.</div>
+        </div>
+      </div>
+      <div class="col"><div id="quiz-idea"></div></div>
+    </div>
+  </section>
+
+  <!-- 2. VIẾT KỊCH BẢN -->
+  <section class="step" data-title="Viết kịch bản">
+    <div class="step-head"><span class="phase phase-explore">Khám phá</span><h2>Viết kịch bản</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="script3">
+          <div><b>Nhân vật:</b> mèo, trái bóng.</div>
+          <div><b>Sân khấu:</b> nền trắng (mặc định).</div>
+          <div><b>Hành động:</b> bóng di chuyển liên tục, chạm cạnh thì bật lại. Mèo liên tục đi tới con trỏ chuột; nếu chạm bóng thì tăng <b>Điểm</b> thêm 1.</div>
+        </div>
+        <div class="remember"><b>Kịch bản</b> trả lời: chương trình có những nhân vật nào, sân khấu là gì, các nhân vật hành động thế nào. Từ kịch bản, em dễ dàng tạo ra chương trình.</div>
+      </div>
+      <div class="col">
+        <p class="mt0">Nối mỗi hành động với cấu trúc phù hợp.</p>
+        <div id="match-struct"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THỰC HÀNH -->
+  <section class="step" data-title="Mèo bắt bóng">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Tạo chương trình "Mèo bắt bóng"</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-game"></div></div>
+      <div class="col"><div id="sc-game"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Kịch bản và chạy thử</h2></div>
+    <div class="cols">
+      <div class="col"><p class="mt0"><b>Luyện tập 1.</b> Kịch bản chương trình trả lời những câu hỏi nào? Chọn tất cả.</p><div id="pick-q"></div></div>
+      <div class="col"><div id="quiz-run"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Vì sao cần kịch bản?</h2></div>
+    <div class="cols">
+      <div class="col"><p class="mt0">Tại sao em phải viết kịch bản chương trình? Chọn tất cả.</p><div id="pick-why"></div></div>
+      <div class="col"><div id="fill-1"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Kịch bản "Vườn nhà em"</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <p class="mt0"><b>Ý tưởng của An:</b> trong khu vườn có một chú chó chạy lung tung, chạy đến hàng rào thì quay lại, vừa chạy vừa sủa.</p>
+        <div id="fill-2"></div>
+      </div>
+      <div class="col"><div id="quiz-dog" class="q-scripts"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Chương trình "Vườn nhà em"</h2></div>
+    <div class="cols">
+      <div class="col-tasks">
+        <div id="tasks-vd"></div>
+        <div class="card done-mini"><b>Học xong Bài 16!</b><span class="stars" data-stars-for="l5-b16" data-stars-total="10"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="sc-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b16';
+  var SL = ScratchLesson, apps = {};
+  var MY = 'D:/Lop 5A/Thu An', FOLDERS = [MY, 'D:/Lop 5A', 'D:'];
+  function S(x) { return SL.scriptHTML(x); }
+  var BALL = [['flag'], ['point', 45], ['forever', [['move', 8], ['bounce']]]];
+  var CAT = [['flag'], ['setVar', 'Điểm', 0], ['forever', [['gotoMouse'], ['if', ['touching', 'Bóng'], [['changeVar', 'Điểm', 1], ['wait', 0.5]]]]]];
+  var DOG = [['flag'], ['rotStyle', 'lr'], ['forever', [['glideRandom', 1], ['playUntil', 'gau'], ['bounce']]]];
+
+  document.addEventListener('DOMContentLoaded', function () {
+    SL.icons();
+    Core.quiz(document.getElementById('quiz-idea'), {
+      lesson: L, id: 'idea',
+      questions: [
+        { q: 'Chương trình gồm những <b>nhân vật</b> nào?', options: ['Mèo và trái bóng', 'Chỉ có mèo', 'Mèo, chó và trái bóng'], answer: 0 },
+        { q: '<b>Trái bóng</b> hành động thế nào?', options: ['Đứng yên một chỗ', 'Di chuyển liên tục trên sân khấu', 'Đi theo con trỏ chuột'], answer: 1 },
+        { q: '<b>Mèo</b> hành động thế nào?', options: ['Đi theo con trỏ chuột; chạm bóng thì tăng điểm thêm 1', 'Chạy ngẫu nhiên khắp nơi', 'Đứng yên và kêu meo'], answer: 0 },
+        { q: 'Lệnh nào dùng cho việc "nếu mèo chạm bóng thì tăng điểm"?', options: [SL.blockHTML(['if', ['touching', 'Bóng'], []]), SL.blockHTML(['forever', []]), SL.blockHTML(['repeat', 10, []])], answer: 0 }
+      ]
+    });
+    Core.match(document.getElementById('match-struct'), {
+      lesson: L, id: 'struct', leftTitle: 'Hành động', rightTitle: 'Cấu trúc',
+      pairs: [['Bóng di chuyển liên tục', 'Cấu trúc lặp'], ['Nếu mèo chạm bóng thì tăng điểm', 'Cấu trúc rẽ nhánh'], ['Đặt điểm bằng 0, rồi mới bắt đầu chơi', 'Cấu trúc tuần tự']]
+    });
+
+    apps.game = Scratch(document.getElementById('sc-game'), {
+      project: { backdrop: 'trang', vars: { 'Điểm': 0 }, sprites: [{ art: 'meo', name: 'Mèo', x: -120, y: 0 }, { art: 'bong', name: 'Bóng', x: 60, y: 40, scripts: [BALL] }] },
+      folders: FOLDERS, fileName: 'MeoBatBong', cats: ['motion', 'events', 'control', 'sensing', 'variables'],
+      hello: 'Bóng đã có chương trình rồi. Em chọn nhân vật <b>Mèo</b> để tạo chương trình cho mèo nha.',
+      tasksHost: document.getElementById('tasks-game'), lesson: L, id: 'game',
+      tasks: [
+        { text: 'Cho mèo: khi bấm cờ › <b>đặt Điểm thành 0</b>.', ok: function (a) { return a.has('Mèo', 'setVar', function (b) { return b[1] === 'Điểm' && Number(b[2]) === 0; }); } },
+        { text: 'Tiếp theo: <b>liên tục</b> { <b>đi tới con trỏ chuột</b>; <b>nếu</b> &lt;đang chạm <b>Bóng</b>?&gt; <b>thì</b> thay đổi Điểm một lượng 1, đợi 0.5 giây }.', ok: function (a) { return a.has('Mèo', 'forever') && a.has('Mèo', 'gotoMouse') && a.has('Mèo', 'if', function (b) { return b[1] && b[1][0] === 'touching' && b[1][1] === 'Bóng'; }) && a.has('Mèo', 'changeVar'); } },
+        { text: 'Biến <b>Điểm</b> hiện ở góc sân khấu (ô đánh dấu trước tên biến đang bật). Bấm cờ xanh, di chuột (hoặc ngón tay) trên sân khấu để mèo bắt bóng.', ok: function (a) { return Number(a.vars()['Điểm']) >= 1; } },
+        { text: 'Bấm dừng, chạy lại vài lần: mỗi lần chạy, Điểm bắt đầu từ 0. Lưu tệp <b>MeoBatBong</b>.', ok: function (a) { return a.runs() >= 2 && SL.savedIn(a, MY, 'MeoBatBong'); } }
+      ],
+      doneText: 'Trò chơi Mèo bắt bóng chạy đúng kịch bản!'
+    });
+
+    Core.pick(document.getElementById('pick-q'), {
+      lesson: L, id: 'q',
+      items: [{ label: 'Chương trình có những nhân vật nào?', ok: true }, { label: 'Sân khấu là gì?', ok: true }, { label: 'Hành động của các nhân vật là gì?', ok: true }, { label: 'Làm thế nào để chạy chương trình?', ok: false }]
+    });
+    Core.quiz(document.getElementById('quiz-run'), {
+      lesson: L, id: 'run',
+      questions: [{ q: '<b>Luyện tập 2.</b> Vì sao cần phải <b>chạy thử</b> chương trình?', options: ['Để xem kết quả đã đúng kịch bản chưa, tìm lỗi và sửa.', 'Để biết ai là người tạo ra chương trình.', 'Vì chạy thử thì không cần lưu tệp.'], answer: 0 }]
+    });
+    Core.pick(document.getElementById('pick-why'), {
+      lesson: L, id: 'why',
+      items: [
+        { label: 'Kịch bản giúp xác định cụ thể các việc chương trình cần làm.', ok: true },
+        { label: 'Từ kịch bản, em dễ dàng tạo ra chương trình.', ok: true },
+        { label: 'Từ kịch bản, em chia nhỏ công việc cho dễ hiểu, dễ làm.', ok: true },
+        { label: 'Có kịch bản thì không phải viết chương trình nữa.', ok: false }
+      ]
+    });
+    Core.fill(document.getElementById('fill-1'), {
+      lesson: L, id: 'fill1',
+      text: 'a) [Kịch bản] giúp em xác định cụ thể các công việc mà chương trình cần thực hiện.\nb) Từ kịch bản, em có thể dễ dàng tạo ra [chương trình] để thực hiện [ý tưởng].'
+    });
+    Core.fill(document.getElementById('fill-2'), {
+      lesson: L, id: 'fill2',
+      text: 'Nhân vật: [chú chó]. Sân khấu: [khu vườn].\nHành động: [di chuyển liên tục]; nếu chạm cạnh sân khấu thì bật lại; [phát âm thanh] tiếng sủa.'
+    });
+    Core.quiz(document.getElementById('quiz-dog'), {
+      lesson: L, id: 'dog',
+      questions: [{ q: 'Chương trình nào thực hiện kịch bản "Vườn nhà em"?', options: [S([['flag'], ['forever', [['glideRandom', 1], ['playUntil', 'gau'], ['bounce']]]]), S([['flag'], ['glideRandom', 1], ['playUntil', 'gau'], ['bounce']]), S([['flag'], ['forever', [['glideRandom', 1], ['bounce']]]])], answer: 0,
+        explain: 'Cần lặp liên tục, và có đủ: chạy, sủa, chạm cạnh thì bật lại.' }]
+    });
+    apps.vd = Scratch(document.getElementById('sc-vd'), {
+      project: { backdrop: 'trang', sprites: [{ art: 'meo', name: 'Mèo' }] }, folders: FOLDERS, fileName: 'VuonCuaEm1', cats: ['motion', 'sound', 'events', 'control'],
+      tasksHost: document.getElementById('tasks-vd'), lesson: L, id: 'vd',
+      tasks: [
+        { text: 'Đổi nhân vật thành <b>chó</b>, phông nền thành <b>khu vườn</b>.', ok: function (a) { return a.byArt('cho') && a.backdrop() === 'vuon'; } },
+        { text: 'Cho chó: <b>liên tục</b> { lướt tới vị trí ngẫu nhiên, phát âm thanh Gâu gâu, chạm cạnh bật lại }.', ok: function (a) { var s = a.byArt('cho'); return s && a.has(s, 'forever') && a.has(s, 'glideRandom') && a.has(s, 'bounce') && a.has(s, 'playUntil'); } },
+        { text: 'Thêm <b>đặt kiểu xoay trái - phải</b> trước lệnh lặp để chó không lộn ngược. Chạy thử.', ok: function (a) { var s = a.byArt('cho'); return s && a.has(s, 'rotStyle', function (b) { return b[1] === 'lr'; }) && a.runs() > 0; } },
+        { text: 'Lưu tệp tên <b>VuonCuaEm1</b>.', ok: function (a) { return SL.savedIn(a, MY, 'VuonCuaEm1'); } }
+      ],
+      doneText: 'Chương trình đúng kịch bản của An!'
+    });
+
+    window.__solve = function () {
+      var a = apps.game; a.setScripts('Mèo', [CAT]); a.flag(); a.mouse(60, 40, false); a.simulate(0.1);
+      var b = a.sprite('Bóng'); a.mouse(b.x, b.y, false); a.simulate(0.1); a.stop(); a.flag(); a.simulate(0.2); a.stop(); a.save('MeoBatBong', MY);
+      var v = apps.vd; v.removeSprite('Mèo'); v.addSprite('cho', 'Chó'); v.setBackdrop('vuon'); v.setScripts('Chó', [DOG]); v.flag(); v.simulate(2); v.stop(); v.save('VuonCuaEm1', MY);
+    };
+  });
+})();
+</script>
+</body>
+</html>

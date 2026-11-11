@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 15. Sử dụng biểu thức trong chương trình – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/sprites.js"></script>
+<script src="../assets/js/scratch.js"></script>
+<script src="../assets/js/scratchlesson.js"></script>
+<style>
+  .varbox { display: inline-flex; gap: 6px; align-items: center; background: #e9ecef; border: 1px solid #adb5bd; border-radius: 6px; padding: 2px 8px; font-size: 14px; margin-right: 4px; }
+  .varbox b { background: #ff8c1a; color: #fff; border-radius: 4px; padding: 0 6px; }
+  .match .sc-nest { font-size: 12px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính</div>
+      <h1>Bài 15. Sử dụng biểu thức trong chương trình</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b15" data-stars-total="10"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Chu vi hình vuông trong Scratch</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Viết được <b>biểu thức</b> số và biểu thức điều kiện trong Scratch.</li>
+            <li>Dùng biểu thức để <b>tính toán</b> trong chương trình.</li>
+          </ul>
+        </div>
+        <p class="mt0">Biến <span class="varbox">cạnh</span> lưu độ dài cạnh hình vuông. Phép nhân trong Scratch viết là <b>*</b>.</p>
+        <div id="quiz-cv"></div>
+      </div>
+      <div class="col"><div id="quiz-start"></div></div>
+    </div>
+  </section>
+
+  <!-- 2. KHÁM PHÁ -->
+  <section class="step" data-title="Biểu thức">
+    <div class="step-head"><span class="phase phase-explore">Khám phá</span><h2>Biểu thức trong Scratch</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p>Các phép toán nằm trong nhóm <b>Các phép toán</b>. Phép nhân viết là <b>*</b>, phép chia là <b>/</b>.</p>
+          <p class="mb0">Biểu thức có nhiều phép toán được tạo bằng cách <b>lồng</b> khối này vào trong khối kia. Khi chạy, Scratch tính <b>từ trong ra ngoài</b>, giống như tính trong ngoặc trước.</p>
+        </div>
+        <div class="remember">Scratch có các phép toán để tạo <b>biểu thức số</b> (ví dụ (a + b) * 2) và <b>biểu thức điều kiện</b> (ví dụ a &gt; 50). Biểu thức có thể chứa số, biến và phép toán.</div>
+      </div>
+      <div class="col">
+        <p class="mt0">Hai biến <b>a</b>, <b>b</b> lưu hai cạnh của hình chữ nhật. Nối mỗi biểu thức Scratch với biểu thức toán học tương ứng.</p>
+        <div id="match-ab"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Đọc và tính biểu thức</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0"><b>Luyện tập 1.</b> Nối mỗi biểu thức Scratch với biểu thức toán học tương ứng.</p>
+        <div id="match-lt"></div>
+      </div>
+      <div class="col">
+        <p class="mt0"><b>Luyện tập 2.</b> Hai biến đang có giá trị: <span class="varbox">a <b>3</b></span><span class="varbox">b <b>4</b></span></p>
+        <div id="quiz-lt"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Phép toán và thứ tự tính</h2></div>
+    <div class="cols">
+      <div class="col"><p class="mt0">Chọn <b>tất cả</b> câu đúng.</p><div id="pick-1"></div></div>
+      <div class="col"><div id="quiz-bt1"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Chương trình sẽ thông báo gì?</h2></div>
+    <div id="quiz-bt2"></div>
+  </section>
+
+  <!-- 6. BÀI TẬP 3 -->
+  <section class="step" data-title="Bài tập 3">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Trò chơi đố vui cộng hai số</h2></div>
+    <div class="cols">
+      <div class="col-tasks"><div id="tasks-game"></div></div>
+      <div class="col"><div id="sc-game"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Tính diện tích hình vuông</h2></div>
+    <div class="cols">
+      <div class="col-tasks">
+        <div id="tasks-vd"></div>
+        <div class="card done-mini"><b>Học xong Bài 15!</b><span class="stars" data-stars-for="l5-b15" data-stars-total="10"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="sc-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b15';
+  var SL = ScratchLesson, apps = {};
+  var MY = 'D:/Lop 5A/Thu An', FOLDERS = [MY, 'D:/Lop 5A', 'D:'];
+  function S(x) { return SL.scriptHTML(x); }
+  function B(x) { return SL.blockHTML(x, true); }
+  function V(n) { return ['getVar', n]; }
+  function P(s) { return Core.plain(String(s)).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function saidHas(a, re) { var s = a.said(); for (var i = 0; i < s.length; i++) if (re.test(P(s[i].text))) return true; return false; }
+  var a = V('a'), b = V('b');
+  var GAME = [['flag'], ['setVar', 'a', ['random', 1, 50]], ['setVar', 'b', ['random', 1, 50]], ['ask', ['join', ['getVar', 'a'], ['join', ' + ', ['join', ['getVar', 'b'], ' = ?']]]],
+    ['ifElse', ['eq', ['answer'], ['add', a, b]], [['sayFor', 'Bạn đã làm đúng!', 2]], [['sayFor', 'Tiếc quá! Sai rồi!', 2]]]];
+  var SQ = [['flag'], ['ask', 'Cạnh hình vuông dài bao nhiêu?'], ['setVar', 'cạnh', ['answer']], ['sayFor', ['join', 'Diện tích hình vuông là ', ['mul', V('cạnh'), V('cạnh')]], 3]];
+
+  document.addEventListener('DOMContentLoaded', function () {
+    SL.icons();
+    var c = V('cạnh');
+    Core.quiz(document.getElementById('quiz-start'), {
+      lesson: L, id: 'start',
+      questions: [{ q: 'Biểu thức nào tính <b>chu vi hình vuông</b> trong Scratch?', options: [B(['add', c, 4]), B(['mul', c, c]), B(['add', c, c]), B(['mul', c, 4])], answer: 3, explain: 'Chu vi hình vuông = cạnh × 4.' }]
+    });
+    Core.match(document.getElementById('match-ab'), {
+      lesson: L, id: 'mab', leftTitle: 'Scratch', rightTitle: 'Toán học',
+      pairs: [[B(['mul', ['add', a, b], 2]), '(a + b) × 2'], [B(['mul', a, b]), 'a × b'], [B(['add', a, ['mul', b, 2]]), 'a + b × 2'], [B(['sub', a, b]), 'a − b']]
+    });
+    Core.quiz(document.getElementById('quiz-cv'), {
+      lesson: L, id: 'cv',
+      questions: [{ q: 'Biểu thức nào tính <b>chu vi</b> hình chữ nhật có hai cạnh a, b?', options: [B(['mul', ['add', a, b], 2]), B(['mul', a, b]), B(['add', a, ['mul', b, 2]])], answer: 0 }]
+    });
+    var h = V('h'), r = V('r');
+    Core.match(document.getElementById('match-lt'), {
+      lesson: L, id: 'mlt', leftTitle: 'Scratch', rightTitle: 'Toán học',
+      pairs: [[B(['mul', a, b]), 'a × b'], [B(['div', ['mul', a, h], 2]), '(a × h) : 2'], [B(['mul', r, ['mul', r, 3.14]]), 'r × (r × 3,14)'], [B(['div', ['mul', ['add', a, b], h], 2]), '((a + b) × h) : 2']]
+    });
+    Core.quiz(document.getElementById('quiz-lt'), {
+      lesson: L, id: 'lt',
+      questions: [{ q: 'Lệnh ' + B(['say', ['join', 'Diện tích hình chữ nhật là ', ['mul', a, b]]]) + ' đưa ra thông báo nào?', options: ['Diện tích hình chữ nhật là 3.', 'Diện tích hình chữ nhật là 12.', 'Diện tích hình chữ nhật là 4.', 'Diện tích hình chữ nhật là 7.'], answer: 1, explain: '3 × 4 = 12.' }]
+    });
+    Core.pick(document.getElementById('pick-1'), {
+      lesson: L, id: 'p1',
+      items: [
+        { label: 'Scratch có các phép toán để tạo biểu thức số, biểu thức điều kiện.', ok: true },
+        { label: 'Các phép toán nằm trong nhóm lệnh Các phép toán.', ok: true },
+        { label: 'Biểu thức có nhiều phép toán được tính từ trong ra ngoài.', ok: true },
+        { label: 'Lồng khối này vào khối kia giống như dùng dấu ngoặc trong Toán.', ok: true },
+        { label: 'Scratch không có phép chia.', ok: false }
+      ]
+    });
+    Core.quiz(document.getElementById('quiz-bt1'), {
+      lesson: L, id: 'bt1',
+      questions: [
+        { q: 'Biểu thức ' + B(['add', 2, ['mul', 5, ['sub', 8, 4]]]) + ' ứng với biểu thức toán học nào?', options: ['(2 + 5) × (8 − 4)', '2 + 5 × 8 − 4', '2 + 5 × (8 − 4)', '(2 + 5) × 8 − 4'], answer: 2 },
+        { q: 'Biểu thức ' + B(['mul', ['add', 8, 3], ['sub', 14, 4]]) + ' có kết quả bằng bao nhiêu?', options: ['110', '46', '38', '150'], answer: 0, explain: '(8 + 3) × (14 − 4) = 11 × 10 = 110.' }
+      ]
+    });
+    Core.quiz(document.getElementById('quiz-bt2'), {
+      lesson: L, id: 'bt2',
+      questions: [
+        { q: 'Biến <b>a</b> đang bằng <b>5</b>. Lệnh ' + B(['say', ['join', 'Thể tích hình lập phương là ', ['mul', a, ['mul', a, a]]]]) + ' đưa ra thông báo nào?', options: ['Thể tích hình lập phương là a*a*a.', 'Thể tích hình lập phương là 15.', 'Thể tích hình lập phương là 125.', 'Thể tích hình lập phương là aaa.'], answer: 2, explain: '5 × 5 × 5 = 125.' },
+        { q: 'Biến <b>a</b> = 36, <b>b</b> = 53. Biểu thức ' + B(['eq', 90, ['add', a, b]]) + ' đúng hay sai?', options: ['Đúng', 'Sai'], answer: 1, explain: '36 + 53 = 89, không bằng 90.' },
+        { q: 'Biến <b>a</b> = 3, <b>b</b> = 12, người chơi nhập <b>30</b>. Chương trình nói gì?<br>' + S([['ifElse', ['eq', ['answer'], ['add', a, b]], [['say', 'Bạn đã làm đúng!']], [['say', 'Tiếc quá! Sai rồi!']]]]), options: ['Bạn đã làm đúng!', 'Tiếc quá! Sai rồi!'], answer: 1, explain: 'a + b = 15, khác 30 nên điều kiện sai.' }
+      ]
+    });
+
+    apps.game = Scratch(document.getElementById('sc-game'), {
+      project: { backdrop: 'lop', vars: { a: 0, b: 0 }, sprites: [{ art: 'meo', name: 'Mèo' }] }, folders: FOLDERS, fileName: 'DoVui', cats: ['looks', 'events', 'control', 'sensing', 'operators', 'variables'],
+      tasksHost: document.getElementById('tasks-game'), lesson: L, id: 'game',
+      tasks: [
+        { text: 'Đặt <b>a</b> và <b>b</b> thành số <b>lấy ngẫu nhiên từ 1 đến 50</b>.', ok: function (x) { var n = 0, l = x.blocks(); for (var i = 0; i < l.length; i++) if (l[i][0] === 'setVar' && l[i][2] && l[i][2][0] === 'random' && Number(l[i][2][1]) === 1 && Number(l[i][2][2]) === 50) n++; return n >= 2; } },
+        { text: '<b>Hỏi</b> người chơi kết quả của a + b (dùng <b>kết hợp</b> để hiện hai số).', ok: function (x) { return x.has(null, 'ask'); } },
+        { text: '<b>Nếu</b> &lt;trả lời = a + b&gt; <b>thì</b> nói "Bạn đã làm đúng!", <b>nếu không thì</b> nói "Tiếc quá! Sai rồi!".', ok: function (x) { return x.has(null, 'ifElse', function (b2) { return b2[1] && b2[1][0] === 'eq'; }) && x.has(null, 'add'); } },
+        { text: 'Chạy thử: trả lời đúng một lần và sai một lần.', ok: function (x) { return saidHas(x, /lamdung/) && saidHas(x, /sairoi/); } }
+      ],
+      doneText: 'Trò chơi đố vui đã chạy đúng!'
+    });
+    apps.vd = Scratch(document.getElementById('sc-vd'), {
+      project: { backdrop: 'trang', vars: { 'cạnh': 0 }, sprites: [{ art: 'meo', name: 'Mèo' }] }, folders: FOLDERS, fileName: 'DienTichHinhVuong', cats: ['looks', 'events', 'control', 'sensing', 'operators', 'variables'],
+      tasksHost: document.getElementById('tasks-vd'), lesson: L, id: 'vd',
+      tasks: [
+        { text: 'Hỏi độ dài cạnh, đặt biến <b>cạnh</b> thành <b>trả lời</b>.', ok: function (x) { return x.has(null, 'ask') && x.has(null, 'setVar', function (b2) { return b2[1] === 'cạnh' && b2[2] && b2[2][0] === 'answer'; }); } },
+        { text: 'Nói "Diện tích hình vuông là " kết hợp với <b>cạnh * cạnh</b>.', ok: function (x) { return x.has(null, 'mul'); } },
+        { text: 'Chạy thử, nhập <b>5</b>: mèo phải nói diện tích là <b>25</b>.', ok: function (x) { return saidHas(x, /25$/); } }
+      ],
+      doneText: 'Chương trình đã tính đúng diện tích hình vuông!'
+    });
+
+    window.__solve = function () {
+      var g = apps.game; g.setScripts('Mèo', [GAME]);
+      g.flag(); g.simulate(0.2); var v = g.vars(); g.answer(String(Number(v.a) + Number(v.b))); g.simulate(3);
+      g.flag(); g.simulate(0.2); g.answer('0'); g.simulate(3);
+      var q = apps.vd; q.setScripts('Mèo', [SQ]); q.flag(); q.simulate(0.2); q.answer('5'); q.simulate(4);
+    };
+  });
+})();
+</script>
+</body>
+</html>

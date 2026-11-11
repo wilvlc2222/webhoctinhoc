@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="../assets/css/main.css">
 <script src="../assets/js/icons.js"></script>
 <script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
 <style>
   /* --- two phones (Khởi động) --- */
   .phones { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
@@ -74,7 +75,7 @@
       <h1>Bài 1. Phần cứng và phần mềm máy tính</h1>
     </div>
     <div class="topbar-right">
-      <span class="stars" data-stars-for="l4-b01" data-stars-total="5"></span>
+      <span class="stars" data-stars-for="l4-b01" data-stars-total="9"></span>
       <span class="who">Bạn: <b data-current-name>Khách</b></span>
       <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
     </div>
@@ -190,6 +191,29 @@
     <div id="quiz"></div>
   </section>
 
+  <!-- BÀI TẬP (Vở bài tập) -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Phần cứng hay phần mềm?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Màn hình đang chiếu một bộ phim hoạt hình. Mỗi câu sau đúng hay sai?</p>
+        <div id="bt-tf"></div>
+      </div>
+      <div class="col">
+        <p class="mt0">Xếp mỗi thứ vào đúng ô.</p>
+        <div id="bt-sort"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Dùng máy tính, điện thoại an toàn</h2></div>
+    <div class="cols">
+      <div class="col"><div id="bt-q1"></div></div>
+      <div class="col"><div id="bt-q2"></div></div>
+    </div>
+  </section>
+
   <!-- 6. VẬN DỤNG -->
   <section class="step" data-title="Vận dụng">
     <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Học trực tuyến cần gì?</h2></div>
@@ -206,7 +230,7 @@
       <div class="col-side">
         <div class="card" style="text-align:center">
           <p><b>Em đã học xong Bài 1!</b></p>
-          <p class="stars" data-stars-for="l4-b01" data-stars-total="5"></p>
+          <p class="stars" data-stars-for="l4-b01" data-stars-total="9"></p>
           <p style="margin:0"><a class="btn btn-primary" href="../index.html"><span class="ico" data-icon="home"></span>Về trang chính</a></p>
         </div>
       </div>
@@ -250,9 +274,9 @@
           })(list[i]);
         }
         if (who === 'me') {
-          var miss = Core.el('button', 'btn btn-small', 'Hông thấy Từ điển?');
+          var miss = Core.el('button', 'btn btn-small', 'Không thấy Từ điển?');
           miss.style.marginTop = '8px';
-          Core.on(miss, function () { msg.innerHTML = 'Máy của mẹ <b>chưa cài</b> ứng dụng Từ điển nên hông tra được.'; });
+          Core.on(miss, function () { msg.innerHTML = 'Máy của mẹ <b>chưa cài</b> ứng dụng Từ điển nên không tra được.'; });
           host.appendChild(miss);
         }
       })(hosts[h]);
@@ -274,7 +298,7 @@
         { label: 'Thân máy', icon: 'tower', bin: 'hw' },
         { label: 'Ứng dụng xem video', icon: 'video', bin: 'sw' },
         { label: 'Máy in', icon: 'printer', bin: 'hw' },
-        { label: 'Luyện gõ bàn phím', icon: 'typing', bin: 'sw', hint: 'Đây là chương trình giúp em tập gõ, em có cầm được nó hông?' },
+        { label: 'Luyện gõ bàn phím', icon: 'typing', bin: 'sw', hint: 'Đây là chương trình giúp em tập gõ, em có cầm được nó không?' },
         { label: 'Loa', icon: 'speaker', bin: 'hw' },
         { label: 'Ổ đĩa cứng', icon: 'harddisk', bin: 'hw', hint: 'Ổ đĩa nằm trong thân máy, tháo ra cầm được đó.' }
       ],
@@ -329,13 +353,13 @@
         view.innerHTML = photo;
         Core.say(fb, 'Chụp được rồi! Ứng dụng (phần mềm) điều khiển ống kính (phần cứng) để chụp ảnh.', 'good');
       } else if (k === '01') {
-        view.innerHTML = 'Màn hình tối thui.<br>Ống kính hỏng nên máy hông nhận được hình ảnh.';
-        Core.say(fb, 'Có phần mềm mà thiếu phần cứng thì hông chụp được.', 'bad');
+        view.innerHTML = 'Màn hình tối thui.<br>Ống kính hỏng nên máy không nhận được hình ảnh.';
+        Core.say(fb, 'Có phần mềm mà thiếu phần cứng thì không chụp được.', 'bad');
       } else if (k === '10') {
-        view.innerHTML = 'Hông có nút chụp nào để bấm.<br>Chưa có ứng dụng điều khiển ống kính.';
-        Core.say(fb, 'Có phần cứng mà thiếu phần mềm thì cũng hông chụp được.', 'bad');
+        view.innerHTML = 'Không có nút chụp nào để bấm.<br>Chưa có ứng dụng điều khiển ống kính.';
+        Core.say(fb, 'Có phần cứng mà thiếu phần mềm thì cũng không chụp được.', 'bad');
       } else {
-        view.innerHTML = 'Thiếu cả hai thứ.<br>Hông chụp được gì hết.';
+        view.innerHTML = 'Thiếu cả hai thứ.<br>Không chụp được gì hết.';
         Core.say(fb, 'Thiếu cả phần cứng lẫn phần mềm.', 'bad');
       }
       drawList();
@@ -407,7 +431,7 @@
     Core.on(start, function () {
       if (!on) return;
       if (menu.style.display === 'none') {
-        setMenu([{ t: 'Power', icon: 'power', fn: powerMenu }, { t: 'Settings', fn: function () { Core.say(fb, 'Settings là cài đặt, hông phải để tắt máy.', 'bad'); } }]);
+        setMenu([{ t: 'Power', icon: 'power', fn: powerMenu }, { t: 'Settings', fn: function () { Core.say(fb, 'Settings là cài đặt, không phải để tắt máy.', 'bad'); } }]);
         Core.say(fb, 'Menu Start mở ra rồi. Chạm vào Power.', 'info');
       } else setMenu([]);
     });
@@ -436,14 +460,14 @@
       questions: [
         { q: 'Câu nào dưới đây <b>SAI</b>?',
           options: ['Trò chơi trên máy tính là phần mềm.', 'Thân máy tính là phần cứng.', 'Chương trình luyện gõ bàn phím là phần cứng.', 'Ứng dụng xem video là phần mềm.'],
-          answer: 2, explain: 'Chương trình luyện gõ là phần mềm, em hông cầm được nó.' },
+          answer: 2, explain: 'Chương trình luyện gõ là phần mềm, em không cầm được nó.' },
         { q: 'Màn hình máy tính xách tay là gì?', options: ['Phần cứng', 'Phần mềm'], answer: 0 },
         { q: 'Ổ đĩa cứng nằm trong thân máy là gì?', options: ['Phần cứng', 'Phần mềm'], answer: 0, explain: 'Nó nằm khuất bên trong nhưng vẫn có hình dạng.' },
         { q: 'Câu nào dưới đây <b>ĐÚNG</b>?',
-          options: ['Phần cứng tự làm việc được, hông cần phần mềm.', 'Phần mềm tự làm được mọi việc, hông cần phần cứng.', 'Máy tính cần cả phần cứng và phần mềm mới hoạt động được.'],
+          options: ['Phần cứng tự làm việc được, không cần phần mềm.', 'Phần mềm tự làm được mọi việc, không cần phần cứng.', 'Máy tính cần cả phần cứng và phần mềm mới hoạt động được.'],
           answer: 2 },
         { q: 'Điện thoại của mẹ chưa có Từ điển. Muốn có thì làm sao?',
-          options: ['Phải mua điện thoại mới.', 'Cài thêm phần mềm Từ điển (khi được người lớn cho phép).', 'Hông có cách nào.'],
+          options: ['Phải mua điện thoại mới.', 'Cài thêm phần mềm Từ điển (khi được người lớn cho phép).', 'Không có cách nào.'],
           answer: 1, explain: 'Phần mềm có thể cài thêm hoặc xoá bớt.' },
         { q: 'Việc nào là dùng máy tính <b>đúng cách</b>?',
           options: ['Đặt máy tính ở nơi thoáng mát, khô ráo, sạch sẽ.', 'Để cặp sách lên trên bàn phím.', 'Dùng bút bi viết lên màn hình điện thoại.', 'Tuỳ ý vào bất kì trang web nào.'],
@@ -460,8 +484,61 @@
     dos();
     shutdown();
     quiz();
+    /* used by tools/fit.html to play the custom activities */
+    window.__solve = function () {
+      var combos = [['1', '1'], ['0', '1'], ['1', '0'], ['0', '0']];
+      for (var i = 0; i < combos.length; i++) {
+        document.querySelector('[data-seg="lens"] [data-v="' + combos[i][0] + '"]').click();
+        document.querySelector('[data-seg="app"] [data-v="' + combos[i][1] + '"]').click();
+        document.getElementById('shoot').click();
+      }
+      document.getElementById('start-btn').click();
+      document.querySelector('#menu .btn').click();
+      var bs = document.querySelectorAll('#menu .btn');
+      for (var k = 0; k < bs.length; k++) if (/Shut/.test(bs[k].textContent)) bs[k].click();
+      return new Promise(function (r) { setTimeout(r, Core.tick() * 2 + 200); });
+    };
   });
 })();
+</script>
+<script>
+/* Bài tập from the workbook (Vở bài tập Tin học 4) */
+document.addEventListener('DOMContentLoaded', function () {
+  var L = 'l4-b01';
+  Core.truefalse(document.getElementById('bt-tf'), {
+    lesson: L, id: 'bt-tf',
+    items: [
+      { t: 'Màn hình là phần cứng, hình ảnh đang hiển thị là phần mềm.', ok: true },
+      { t: 'Cả màn hình và hình ảnh trên đó đều là phần cứng.', ok: false },
+      { t: 'Phần mềm trong máy tính điều khiển màn hình hiển thị hình ảnh.', ok: true },
+      { t: 'Màn hình điều khiển hình ảnh hiển thị, nên màn hình là phần mềm.', ok: false }
+    ]
+  });
+  Core.sort(document.getElementById('bt-sort'), {
+    lesson: L, id: 'bt-sort',
+    bins: [{ id: 'hw', label: 'Phần cứng' }, { id: 'sw', label: 'Phần mềm' }],
+    items: [
+      { label: 'Bàn phím', bin: 'hw' }, { label: 'Trục quay trong máy in', bin: 'hw' }, { label: 'Thẻ SIM của điện thoại', bin: 'hw' },
+      { label: 'Trò chơi điện tử', bin: 'sw' }, { label: 'Trình điều khiển máy in', bin: 'sw' }, { label: 'Bàn phím ảo trên điện thoại', bin: 'sw' }
+    ],
+    doneText: 'Đúng rồi! Bàn phím ảo hiện trên màn hình là phần mềm, không cầm nắm được.'
+  });
+  Core.quiz(document.getElementById('bt-q1'), {
+    lesson: L, id: 'bt-q1',
+    questions: [
+      { q: 'Em cần có những gì để nghe được âm thanh từ máy tính?', options: ['Loa nối với máy tính và phần mềm điều khiển loa.', 'Chỉ cần loa, không cần phần mềm.', 'Chỉ cần loa và micrô.', 'Chỉ cần phần mềm, không cần loa.'], answer: 0 },
+      { q: 'Minh đang soạn bài trình chiếu thì chạy ra giúp mẹ mang đồ, lát nữa làm tiếp. Trước khi đi, Minh cần làm gì?', options: ['Giữ nút nguồn 3 giây rồi rút dây điện.', 'Giữ nút nguồn 3 giây và tắt màn hình.', 'Đứng dậy luôn, máy sẽ tự tắt.', 'Lưu lại bài trình chiếu, không cần tắt máy.'], answer: 3 }
+    ]
+  });
+  Core.quiz(document.getElementById('bt-q2'), {
+    lesson: L, id: 'bt-q2',
+    questions: [
+      { q: 'Đang chơi trên điện thoại, Minh thấy máy rất nóng. Minh nên làm gì?', options: ['Ngừng dùng, để máy nghỉ cho nguội và báo bố mẹ.', 'Chơi tiếp cho hết màn.', 'Cho điện thoại vào tủ lạnh.'], answer: 0 },
+      { q: 'Đang tra từ điển trên điện thoại của bố, máy hiện tin nhắn đòi gửi địa chỉ thư điện tử. Minh nên làm gì?', options: ['Gửi thông tin theo yêu cầu.', 'Trả lại điện thoại để bố xử lí.', 'Gửi một thông tin khác.', 'Kệ nó, tra từ điển tiếp.'], answer: 1 },
+      { q: 'Đang chơi trò chơi trên điện thoại của mẹ, máy báo sắp hết pin. Minh nên làm gì?', options: ['Chơi tiếp đến khi hết pin.', 'Trả lại điện thoại để mẹ sạc pin.', 'Vừa sạc pin vừa chơi.'], answer: 1 }
+    ]
+  });
+});
 </script>
 </body>
 </html>

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 9. Hiệu ứng chuyển trang – Tin học 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/art.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/slides.js"></script>
+<style>
+  .demo-row { display: flex; gap: 10px; }
+  .demo-row > div { flex: 1 1 0; min-width: 0; }
+  .hide-ui .ss-tabs, .hide-ui .ss-ribbon, .hide-ui .ss-thumbs { display: none; }
+  .steps-tr { margin: 0; padding-left: 22px; }
+  .steps-tr li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 4 · Chủ đề 5. Ứng dụng tin học</div>
+      <h1>Bài 9. Hiệu ứng chuyển trang</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l4-b09" data-stars-total="9"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Biết <b>hiệu ứng chuyển trang</b> là gì.</li>
+            <li>Tạo được hiệu ứng chuyển trang cho các trang chiếu.</li>
+            <li>Trình chiếu bài có hiệu ứng, lưu tệp vào thư mục của em.</li>
+          </ul>
+        </div>
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Khi thầy cô trình chiếu, có lúc các trang xuất hiện rất <b>ấn tượng</b>: mờ dần, trượt vào, tách đôi... Làm sao được như vậy nhỉ? Em bấm <b>Trình chiếu</b> ở hai bài bên phải để so sánh nha.</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="demo-row">
+          <div><p class="mt0"><b>Bài A</b>: không có hiệu ứng.</p><div id="ss-a" class="hide-ui"></div></div>
+          <div><p class="mt0"><b>Bài B</b>: có hiệu ứng chuyển trang.</p><div id="ss-b" class="hide-ui"></div></div>
+        </div>
+        <p class="note">Ở chế độ Màn hình mực (Kindle) hiệu ứng không chuyển động, chỉ hiện tên hiệu ứng.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. KHÁM PHÁ -->
+  <section class="step" data-title="Tạo hiệu ứng">
+    <div class="step-head"><span class="phase phase-explore">Khám phá</span><h2>Hiệu ứng chuyển trang</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div class="card tight">
+          <p><b>Hiệu ứng chuyển trang</b> là cách một trang chiếu xuất hiện khi chuyển từ trang trước sang. Hiệu ứng giúp bài trình chiếu <b>sinh động, hấp dẫn</b> hơn.</p>
+          <ol class="steps-tr">
+            <li>Chọn trang chiếu (ở cột bên trái).</li>
+            <li>Chọn dải lệnh <b>Transitions</b>.</li>
+            <li>Chọn một hiệu ứng trong nhóm <b>Transition to This Slide</b>.</li>
+            <li>Bấm <b>Preview</b> để xem thử. Muốn mọi trang cùng hiệu ứng: <b>Apply To All</b>.</li>
+          </ol>
+        </div>
+        <div id="tasks-try"></div>
+      </div>
+      <div class="col">
+        <div id="ss-try"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CÂU HỎI -->
+  <section class="step" data-title="Câu hỏi">
+    <div class="step-head"><span class="phase phase-explore">Câu hỏi</span><h2>Đúng hay sai?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Xếp mỗi phát biểu vào ô <b>Đúng</b> hoặc <b>Sai</b>.</p>
+        <div id="sort-ds"></div>
+      </div>
+      <div class="col">
+        <div id="quiz-lt"></div>
+        <div class="remember">Mỗi trang chiếu có một hiệu ứng chuyển trang. Một bài trình chiếu có thể có nhiều hiệu ứng khác nhau.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Giới thiệu Hồ Hoàn Kiếm</h2></div>
+    <div class="cols">
+      <div class="col-side"><div id="tasks-hhk"></div></div>
+      <div class="col"><div id="ss-hhk"></div></div>
+    </div>
+  </section>
+
+  <!-- BÀI TẬP (Vở bài tập) -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Hiệu ứng chuyển trang</h2></div>
+    <div class="cols">
+      <div class="col"><div id="bt-q1"></div></div>
+      <div class="col">
+        <p class="mt0">Sắp xếp các bước <b>tạo hiệu ứng chuyển trang</b> theo đúng thứ tự.</p>
+        <div id="bt-order"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Dùng hiệu ứng thế nào cho hợp lí?</h2></div>
+    <div class="cols">
+      <div class="col"><div id="bt-tf"></div></div>
+      <div class="col"><div id="bt-q2"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Thêm hiệu ứng cho tệp "The thao"</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-tt"></div>
+        <details class="reveal"><summary>Vận dụng 2. Nút Effect Options để làm gì?</summary>
+          <div>Nút <b>Effect Options</b> chọn hướng xuất hiện (trượt từ trái, từ dưới...). Ô <b>Duration</b> chỉnh hiệu ứng nhanh hay chậm.</div></details>
+        <div class="card done-mini"><b>Học xong Bài 9!</b><span class="stars" data-stars-for="l4-b09" data-stars-total="9"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="ss-tt"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l4-b09';
+  var MY = 'D:/Lop 4A2/Nhom 2/Thu An';
+  var FOLDERS = [MY, 'D:/Lop 4A2/Nhom 2', 'D:/Lop 4A2', 'D:'];
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  var CDQH = [
+    { layout: 'title', boxes: { title: 'Cảnh đẹp quê hương', sub: 'Nguyễn Thu An\nLớp 4A2' } },
+    { layout: 'content', boxes: { title: 'Một số cảnh đẹp ở Huế', body: 'Sông Hương\nĐồi Vọng Cảnh\nNúi Ngự Bình' } },
+    { layout: 'picture', pic: 'bridge', boxes: { caption: 'Cầu Trường Tiền' } },
+    { layout: 'text', boxes: { text: 'Mời bạn đến thăm Huế nhé!' } }
+  ];
+  var TT = [
+    { layout: 'title', boxes: { title: 'Bóng đá', sub: 'Môn thể thao em yêu thích' } },
+    { layout: 'picture', pic: 'ball', boxes: { caption: 'Trận bóng đá' } },
+    { layout: 'content', boxes: { title: 'Cách chơi', body: 'Hai đội thi đấu\nĐá bóng vào khung thành đội bạn' } },
+    { layout: 'content', boxes: { title: 'Lợi ích', body: 'Khoẻ mạnh\nĐoàn kết với bạn bè' } }
+  ];
+  function withTrans(deck, list) { var d = JSON.parse(JSON.stringify(deck)); for (var i = 0; i < d.length; i++) d[i].trans = list[i % list.length]; return d; }
+  function kinds(a) { var k = {}, n = 0; for (var i = 1; i < a.count(); i++) { var t = a.slide(i).trans; if (t !== 'none' && !k[t]) { k[t] = 1; n++; } } return n; }
+  function allHave(a, from) { for (var i = from || 1; i < a.count(); i++) if (a.slide(i).trans === 'none') return false; return a.count() > 1; }
+  function savedIn(a, name) { var s = a.saved(); return s && s.folder === MY && Core.plain(s.name) === Core.plain(name); }
+  var apps = {};
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+
+    apps.a = Slides(document.getElementById('ss-a'), { deck: CDQH, width: 300, hello: 'Bấm "Trình chiếu", rồi chạm vào trang để chuyển trang.' });
+    apps.b = Slides(document.getElementById('ss-b'), { deck: withTrans(CDQH, ['fade', 'push', 'split', 'zoom']), width: 300, hello: 'Bấm "Trình chiếu", rồi chạm vào trang để chuyển trang.' });
+
+    apps.tr = Slides(document.getElementById('ss-try'), {
+      deck: CDQH, ribbon: ['home', 'transitions'], width: 420,
+      hello: 'Chọn dải lệnh <b>Transitions</b> rồi chọn hiệu ứng.',
+      tasksHost: document.getElementById('tasks-try'), lesson: L, id: 'try',
+      tasks: [
+        { text: 'Chọn một hiệu ứng cho <b>trang 2</b>.', ok: function (a) { return a.slide(1).trans !== 'none'; } },
+        { text: 'Chọn hiệu ứng <b>khác</b> cho trang 3.', ok: function (a) { var t = a.slide(2).trans; return t !== 'none' && t !== a.slide(1).trans; } },
+        { text: 'Bấm <b>Trình chiếu</b> để xem cả bài.', ok: function (a, w) { return w === 'show'; } }
+      ]
+    });
+
+    Core.sort(document.getElementById('sort-ds'), {
+      lesson: L, id: 'ds',
+      bins: [{ id: 'y', label: 'Đúng' }, { id: 'n', label: 'Sai' }],
+      items: [
+        { label: 'a) Mỗi trang chiếu có thể có nhiều kiểu hiệu ứng chuyển trang.', bin: 'n', explain: 'Mỗi trang chỉ có một hiệu ứng chuyển trang. Chọn hiệu ứng mới thì hiệu ứng cũ bị thay.' },
+        { label: 'b) Một bài trình chiếu có thể có nhiều hiệu ứng chuyển trang khác nhau.', bin: 'y', explain: 'Mỗi trang có thể chọn một hiệu ứng khác nhau.' },
+        { label: 'c) Hiệu ứng chuyển trang giúp bài thuyết trình sinh động, hấp dẫn hơn.', bin: 'y' }
+      ],
+      doneText: 'Chính xác: a) sai, b) và c) đúng.'
+    });
+    Core.quiz(document.getElementById('quiz-lt'), {
+      lesson: L, id: 'lt1',
+      questions: [{ q: '<b>Luyện tập 1.</b> Các nút lệnh tạo hiệu ứng chuyển trang nằm trên dải lệnh nào?', options: ['Design', 'Animations', 'Home', 'Transitions'], answer: 3,
+        explain: 'Dải lệnh Transitions (chuyển tiếp).', hint: 'Animations là hiệu ứng cho từng chữ, từng hình trong trang, không phải chuyển trang.' }]
+    });
+
+    apps.hhk = Slides(document.getElementById('ss-hhk'), {
+      ime: true, folders: FOLDERS, fileName: 'Ho Hoan Kiem', ribbon: ['file', 'home', 'insert', 'transitions'],
+      tasksHost: document.getElementById('tasks-hhk'), lesson: L, id: 'hhk',
+      pictures: ['lake', 'temple', 'bridge', 'town', 'flower'],
+      tasks: [
+        { text: 'a) Tạo <b>4 trang</b> giới thiệu Hồ Hoàn Kiếm: tiêu đề · Tháp Rùa (có ảnh) · đền Ngọc Sơn, cầu Thê Húc · lời mời đến thăm.', ok: function (a) { if (a.count() < 4) return false; var pic = false; for (var i = 0; i < 4; i++) { if (a.slide(i).pic) pic = true; if (!a.anyText(i) && !a.slide(i).pic) return false; } return pic; } },
+        { text: 'b) Tạo hiệu ứng cho các trang 2, 3, 4 (dùng ít nhất <b>2 kiểu</b> khác nhau).', ok: function (a) { return a.count() >= 4 && allHave(a, 1) && kinds(a) >= 2; } },
+        { text: 'c) Lưu tệp tên <b>Ho Hoan Kiem</b> vào thư mục của em.', ok: function (a) { return savedIn(a, 'Ho Hoan Kiem'); } }
+      ],
+      doneText: 'Bài trình chiếu về Hồ Hoàn Kiếm thật sinh động!'
+    });
+
+    apps.tt = Slides(document.getElementById('ss-tt'), {
+      ime: true, folders: FOLDERS, ribbon: ['file', 'home', 'transitions'], sampleFile: { path: MY + '/The thao', deck: TT },
+      hello: 'Bấm <b>File › Open</b> để mở tệp "The thao".',
+      tasksHost: document.getElementById('tasks-tt'), lesson: L, id: 'thethao',
+      tasks: [
+        { text: 'Mở tệp <b>The thao</b>.', ok: function (a) { return a.opened() && Core.plain(a.opened()).indexOf('the thao') >= 0; } },
+        { text: 'Chọn hiệu ứng chuyển trang cho các trang theo ý em.', ok: function (a) { return a.opened() && allHave(a, 1); } },
+        { text: 'Lưu lại tệp.', ok: function (a, w) { return w === 'save' && savedIn(a, 'The thao'); } }
+      ]
+    });
+
+    window.__solve = function () {
+      var t = apps.tr; t.trans(1, 'fade'); t.trans(2, 'push'); t.show();
+      var ov = document.querySelector('#ss-try .ss-showbox'); for (var i = 0; i < 6 && document.querySelector('#ss-try .ss-showbox'); i++) document.querySelector('#ss-try .ss-showbox').click();
+      var h = apps.hhk;
+      h.set(0, 'title', { text: 'Hồ Hoàn Kiếm' }); h.add('picture'); h.pic(1, 'lake'); h.set(1, 'caption', { text: 'Tháp Rùa' });
+      h.add('content'); h.set(2, 'body', { text: 'Đền Ngọc Sơn\nCầu Thê Húc' }); h.add('text'); h.set(3, 'text', { text: 'Mời bạn đến thăm!' });
+      h.trans(1, 'fade'); h.trans(2, 'wipe'); h.trans(3, 'zoom'); h.save('Ho Hoan Kiem', MY);
+      var s = apps.tt; s.openFile(MY + '/The thao', Slides.deckFrom(TT)); s.trans(1, 'fade'); s.trans(2, 'push'); s.trans(3, 'split'); s.save('The thao', MY);
+    };
+  });
+})();
+</script>
+<script>
+/* Bài tập from the workbook (Vở bài tập Tin học 4) */
+document.addEventListener('DOMContentLoaded', function () {
+  var L = 'l4-b09';
+  Core.quiz(document.getElementById('bt-q1'), {
+    lesson: L, id: 'bt-q1',
+    questions: [
+      { q: 'Câu nào <b>không</b> mô tả hiệu ứng chuyển trang?', options: ['Trang 1 trôi sang phải, trang 2 dần xuất hiện.', 'Trang 1 mờ dần, trang 2 dần xuất hiện.', 'Trang 1 biến mất ngay, trang 2 hiện ra ngay.', 'Trang 1 trôi dần xuống dưới, trang 2 dần xuất hiện.'], answer: 2 },
+      { q: 'Nháy chuột vào dải lệnh nào để mở bảng các hiệu ứng chuyển trang?', options: ['Design', 'Layout', 'Home', 'Transitions'], answer: 3 },
+      { q: 'Câu nào <b>đúng</b>?', options: ['Thêm hiệu ứng chuyển trang để bài trình chiếu đơn giản hơn.', 'Mỗi bài trình chiếu chỉ được dùng một kiểu hiệu ứng.', 'Một bài trình chiếu có thể có nhiều kiểu hiệu ứng chuyển trang khác nhau.'], answer: 2 }
+    ]
+  });
+  Core.order(document.getElementById('bt-order'), {
+    lesson: L, id: 'bt-order',
+    items: ['Chọn trang chiếu muốn tạo hiệu ứng chuyển trang.', 'Nháy chọn để mở dải lệnh Transitions.', 'Chọn một hiệu ứng trong nhóm lệnh Transition to This Slide.']
+  });
+  Core.truefalse(document.getElementById('bt-tf'), {
+    lesson: L, id: 'bt-tf',
+    items: [
+      { t: 'Hiệu ứng chuyển trang là cách trang chiếu xuất hiện khi chuyển trang.', ok: true },
+      { t: 'Mỗi trang chiếu dùng được một kiểu hiệu ứng chuyển trang.', ok: true },
+      { t: 'Hiệu ứng chuyển trang được đặt cho từng chữ, từng hình trên trang.', ok: false },
+      { t: 'Hiệu ứng chuyển trang giúp bài trình chiếu ấn tượng, hấp dẫn hơn.', ok: true }
+    ]
+  });
+  Core.quiz(document.getElementById('bt-q2'), {
+    lesson: L, id: 'bt-q2',
+    questions: [
+      { q: 'Minh nói: "Hiệu ứng làm bài trình chiếu hấp dẫn, nên thêm <b>càng nhiều kiểu càng tốt</b>." Em thấy sao?', options: ['Đúng, càng nhiều càng đẹp.', 'Chưa đúng: dùng quá nhiều kiểu làm rối mắt, người xem khó theo dõi nội dung. Chỉ nên chọn vài kiểu hợp lí.', 'Không nên dùng hiệu ứng nào.'], answer: 1 }
+    ]
+  });
+});
+</script>
+</body>
+</html>

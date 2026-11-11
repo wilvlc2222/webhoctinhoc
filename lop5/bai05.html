@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 5. Bản quyền nội dung thông tin – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/art.js"></script>
+<style>
+  .walls { display: flex; gap: 10px; }
+  .wall { flex: 1 1 0; border: 3px solid var(--line); border-radius: 12px; background: #fffdf5; color: #222; padding: 8px 12px; }
+  .wall h3 { margin: 0; font-size: 19px; text-align: center; color: #c2255c; }
+  .wall .by { text-align: center; font-size: 14px; font-style: italic; margin-bottom: 6px; }
+  .wall .lines { height: 150px; background: repeating-linear-gradient(#fffdf5 0 14px, #adb5bd 14px 16px, #fffdf5 16px 24px); margin: 0 16%; }
+  .wall .lines.left { margin: 0 30% 0 4%; height: 110px; }
+  .wall p { margin: 0; font-size: 15px; }
+  .wall .cap { text-align: center; font-weight: 800; font-size: 14px; margin-top: 6px; color: var(--muted); }
+  html.eink .wall, html.eink .wall h3 { border-color: #000; color: #000; background: #fff; }
+  .copy-line { border-top: 3px double #495057; border-bottom: 3px double #495057; text-align: center; font-weight: 800; font-size: 15px; padding: 6px; margin: 6px 0; background: #fff; color: #222; }
+  .respect { display: flex; gap: 8px; margin-top: 8px; }
+  .respect > div { flex: 1 1 0; border: 3px solid; border-radius: 12px; padding: 8px; text-align: center; font-weight: 800; font-size: 15px; background: var(--paper); }
+  .respect > div:nth-child(1) { border-color: #2b8a3e; } .respect > div:nth-child(2) { border-color: #1c7ed6; } .respect > div:nth-child(3) { border-color: #e8590c; }
+  .respect-c { text-align: center; font-weight: 800; margin-top: 6px; }
+  html.eink .respect > div { border-color: #000 !important; }
+  .book { border: 2px solid var(--line); border-radius: 10px; padding: 8px; background: #fff; color: #222; }
+  .book .ph { display: flex; gap: 8px; }
+  .book .ph > div { flex: 0 0 170px; }
+  .book .pic svg { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .book .pc { font-size: 13px; font-style: italic; }
+  .book .src { font-size: 13px; color: #555; margin-top: 4px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 4. Đạo đức, pháp luật và văn hoá trong môi trường số</div>
+      <h1>Bài 5. Bản quyền nội dung thông tin</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b05" data-stars-total="11"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Tác giả là ai?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Hiểu <b>bản quyền nội dung thông tin</b>, biết dùng nội dung của người khác đúng cách.</li>
+            <li><b>Tôn trọng</b> tính riêng tư và bản quyền; không đồng tình với việc làm sai trái.</li>
+          </ul>
+        </div>
+        <p>Lớp 5A làm báo tường chào mừng ngày Nhà giáo Việt Nam. Quan sát hai bài trên báo tường:</p>
+        <div class="walls">
+          <div class="wall">
+            <h3>Cô giáo của em</h3>
+            <div class="by">Xuân Quỳnh</div>
+            <div class="lines"></div>
+            <div class="cap">Bài 1. Bài thơ</div>
+          </div>
+          <div class="wall">
+            <h3>Cô giáo lớp em</h3>
+            <div class="by">Ngô Hà Trang – 5A</div>
+            <p>Tùng! Tùng! Tùng! Trống vào lớp vang lên. Cô bước vào với nụ cười hiền. Bài nào khó, cô giảng đi giảng lại cho đến khi cả lớp hiểu. Chúng em thương cô nhiều lắm!</p>
+            <div class="cap">Bài 2. Bài viết</div>
+          </div>
+        </div>
+      </div>
+      <div class="col"><div id="quiz-who"></div></div>
+    </div>
+  </section>
+
+  <!-- 2. KHÁM PHÁ 1 -->
+  <section class="step" data-title="Bản quyền">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 1</span><h2>Bản quyền nội dung thông tin</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p>Bài thơ, bài viết, hình ảnh minh hoạ trên báo tường là những ví dụ về <b>nội dung thông tin</b>.</p>
+          <p>Nội dung thông tin có thể ở dạng <b>văn bản, hình ảnh, âm thanh</b> hay <b>đa phương tiện</b>...</p>
+          <p class="mb0"><b>Tác giả</b> (người hoặc tổ chức sở hữu nội dung thông tin) có quyền <b>cho phép</b> hoặc <b>không cho phép</b> người khác dùng nội dung thông tin của mình.</p>
+        </div>
+        <div class="remember">Bản quyền nội dung thông tin là quyền của tác giả cho phép hoặc không cho phép người khác sử dụng nội dung thông tin. Chỉ được sử dụng nội dung thông tin khi được phép.</div>
+      </div>
+      <div class="col"><div id="quiz-wrong"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. KHÁM PHÁ 2 -->
+  <section class="step" data-title="Ghi nguồn">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Truy cập và bảo mật nội dung thông tin</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p>Dùng nội dung của người khác: cần <b>được tác giả cho phép</b> và <b>ghi rõ nguồn</b>. Không rõ tác giả thì ghi <b>"Sưu tầm"</b>. Kể lại bằng lời của mình thì ghi <b>"Phỏng theo..."</b>.</p>
+          <p>Truy cập nội dung của người khác khi <b>chưa được phép</b>, dù vô tình hay cố ý, đều là <b>sai</b>. Ví dụ: chép bài của bạn trong giờ kiểm tra.</p>
+          <p class="mb0">Tác giả cần giữ bí mật sản phẩm khi đang làm, và ghi tên hoặc đăng kí bản quyền lên sản phẩm đã xong, ví dụ:</p>
+          <div class="copy-line">Bản quyền © (2024) thuộc nhóm tác giả lớp 5A.</div>
+        </div>
+        <div class="remember">Dùng nội dung thông tin cần được cho phép và ghi rõ nguồn. Khi tạo ra nội dung, cần giữ gìn, bảo mật thông tin.</div>
+      </div>
+      <div class="col">
+        <p class="mt0">Ghép mỗi tình huống với một <b>cách ghi nguồn</b> phù hợp.</p>
+        <div id="match-src"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. KHÁM PHÁ 3 -->
+  <section class="step" data-title="Tôn trọng">
+    <div class="step-head"><span class="phase phase-explore">Khám phá 3</span><h2>Tôn trọng tính riêng tư và bản quyền</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p><b>Tình huống 1.</b> An để quên nhật kí trong ngăn bàn. Bình thấy liền đọc lén, rồi kể cho vài bạn nghe.</p>
+          <p class="mb0"><b>Tình huống 2.</b> Minh vẽ một bức tranh phong cảnh rất đẹp trên máy tính. Hoa lấy bức tranh đó dùng mà không hỏi Minh.</p>
+        </div>
+        <p>Nhật kí, họ tên, ngày sinh, địa chỉ... là <b>thông tin cá nhân</b>, mang tính <b>riêng tư</b>. Chỉ người đó mới được quyết định có cho người khác biết hay không.</p>
+        <div class="respect">
+          <div>Chỉ sử dụng khi được phép</div>
+          <div>Ghi rõ nguồn thông tin</div>
+          <div>Diễn đạt lại và ghi "phỏng theo"</div>
+        </div>
+        <div class="respect-c">= Tôn trọng bản quyền nội dung thông tin</div>
+        <div class="remember">Gặp việc sai trái như xem thư riêng, chép tệp của bạn khi chưa được đồng ý, em cần tỏ rõ thái độ <b>không đồng tình</b>, góp ý, nhắc nhở.</div>
+      </div>
+      <div class="col"><div id="quiz-case"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. CÂU HỎI -->
+  <section class="step" data-title="Đồng tình?">
+    <div class="step-head"><span class="phase phase-explore">Câu hỏi</span><h2>Đồng tình hay không đồng tình?</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Xếp mỗi việc làm vào ô thái độ phù hợp của em.</p>
+        <div id="sort-agree"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Luyện tập</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="book">
+          <div class="ph">
+            <div><div id="pic1" class="pic"></div><div class="pc">1. Luỹ tre <sup>(1)</sup></div></div>
+            <div><div id="pic2" class="pic"></div><div class="pc">2. Cánh đồng <sup>(2)</sup></div></div>
+            <div><div id="pic3" class="pic"></div><div class="pc">3. Hoàng hôn trên biển <sup>(3)</sup></div></div>
+          </div>
+          <div class="src">(1) (2) Nguồn: Lê Văn Hải &nbsp;·&nbsp; (3) Nguồn: Phạm Thu Hà</div>
+        </div>
+        <p><b>Luyện tập 1.</b> Đây là một phần trang sách Mĩ thuật. Nguồn của mỗi bức ảnh là gì? Tại sao phải ghi rõ nguồn?</p>
+        <p class="mb0"><b>Luyện tập 2.</b> Với mỗi hành động, em đồng tình hay không đồng tình?</p>
+      </div>
+      <div class="col"><div id="quiz-lt"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. BÀI TẬP 1 -->
+  <section class="step" data-title="Bài tập 1">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Bản quyền và các dạng nội dung thông tin</h2></div>
+    <div class="cols">
+      <div class="col"><div id="fill-1"></div></div>
+      <div class="col">
+        <p class="mt0">Ghép mỗi mục ở cột A với một mục ở cột B cho phù hợp.</p>
+        <div id="match-form"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. BÀI TẬP 2 -->
+  <section class="step" data-title="Bài tập 2">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Bài thơ không rõ tác giả. Thông tin riêng tư</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card tight">
+          <p class="mb0">Nhóm Ánh, Toàn, Bình, Chi làm bài trình chiếu về bảo vệ môi trường. Toàn tìm được một bài thơ phù hợp trên mạng nhưng <b>không có tên tác giả</b>.</p>
+        </div>
+        <div id="quiz-poem"></div>
+      </div>
+      <div class="col">
+        <p class="mt0">Thông tin nào là <b>thông tin riêng tư</b>, chỉ chủ nhân mới được quyết định cho người khác biết? Chọn tất cả.</p>
+        <div id="pick-private"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Bài trình chiếu Ngày hội Trạng Nguyên nhỏ tuổi</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Trong bài trình chiếu về <b>Ngày hội Trạng Nguyên nhỏ tuổi</b>, các bạn dùng một số thông tin, hình ảnh lấy từ một <b>trang báo thiếu niên</b> trên Internet. Các bạn cần làm gì để tôn trọng bản quyền? Chọn tất cả việc nên làm.</div>
+        </div>
+        <div id="pick-apply"></div>
+      </div>
+      <div class="col-side">
+        <div class="card done-mini"><b>Học xong Bài 5!</b><span class="stars" data-stars-for="l5-b05" data-stars-total="11"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b05';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    document.getElementById('pic1').innerHTML = Art.svg('lake');
+    document.getElementById('pic2').innerHTML = Art.svg('hills');
+    document.getElementById('pic3').innerHTML = Art.svg('sea');
+
+    Core.quiz(document.getElementById('quiz-who'), {
+      lesson: L, id: 'who',
+      questions: [
+        { q: 'Bài thơ (Bài 1) là của tác giả nào?', options: ['Nhà thơ Xuân Quỳnh', 'Bạn Ngô Hà Trang', 'Cả lớp 5A'], answer: 0 },
+        { q: 'Bài viết (Bài 2) là của ai?', options: ['Nhà thơ Xuân Quỳnh', 'Bạn Ngô Hà Trang, lớp 5A', 'Cô giáo chủ nhiệm'], answer: 1 },
+        { q: 'Theo em, tại sao phải <b>ghi rõ tên tác giả</b>?', options: ['Để bài báo dài hơn.', 'Để người đọc biết ai đã làm ra bài đó, tôn trọng công sức của tác giả.', 'Vì tên tác giả làm bài đẹp hơn.'], answer: 1 }
+      ]
+    });
+    Core.quiz(document.getElementById('quiz-wrong'), {
+      lesson: L, id: 'wrong',
+      questions: [{ q: 'Hãy chọn phát biểu <b>sai</b>:', options: [
+        'Tác giả có quyền cho phép người khác sử dụng nội dung thông tin của mình.',
+        'Tác giả có quyền không cho phép người khác sử dụng nội dung thông tin của mình.',
+        'Nội dung thông tin có thể ở dạng văn bản, hình ảnh, âm thanh hay đa phương tiện...',
+        'Nội dung thông tin phải gồm đủ các dạng văn bản, hình ảnh, âm thanh.'], answer: 3,
+        explain: 'Một nội dung thông tin chỉ cần ở một dạng, ví dụ một bài thơ chỉ có văn bản.' }]
+    });
+    Core.match(document.getElementById('match-src'), {
+      lesson: L, id: 'src', leftTitle: 'Tình huống', rightTitle: 'Cách ghi nguồn',
+      pairs: [['Dùng một bức ảnh của tác giả Nguyễn A', 'Tác giả: Nguyễn A'], ['Dùng một bài thơ không rõ tên tác giả', 'Sưu tầm'], ['Kể câu chuyện dựa trên truyện cổ tích Cây khế', 'Phỏng theo truyện Cây khế']]
+    });
+    Core.quiz(document.getElementById('quiz-case'), {
+      lesson: L, id: 'case',
+      questions: [
+        { q: 'Ở <b>tình huống 1</b>, việc làm của Bình thế nào?', options: ['Đúng, vì An để quên thì ai cũng được đọc.', 'Sai, Bình đã vi phạm tính riêng tư của An.', 'Đúng, nếu Bình chỉ kể cho bạn thân.'], answer: 1,
+          explain: 'Nhật kí là thông tin riêng tư. Thấy nhật kí bạn để quên, em cất giữ giúp và trả lại bạn.' },
+        { q: 'Ở <b>tình huống 2</b>, Hoa nên làm gì?', options: ['Cứ dùng, vì tranh trên máy tính ai cũng lấy được.', 'Dùng rồi ghi tên mình là tác giả.', 'Hỏi Minh trước; được cho phép thì dùng và ghi rõ Minh là tác giả.'], answer: 2,
+          explain: 'Đó là cách tôn trọng bản quyền nội dung thông tin.' }
+      ]
+    });
+    Core.sort(document.getElementById('sort-agree'), {
+      lesson: L, id: 'agree',
+      bins: [{ id: 'yes', label: 'Đồng tình' }, { id: 'no', label: 'Không đồng tình' }],
+      items: [
+        { label: 'An nêu tên tác giả bài thơ khi đọc thơ trong buổi sinh hoạt ngoại khoá.', bin: 'yes' },
+        { label: 'Bình xem sổ ghi chép của anh trai mà không xin phép.', bin: 'no' },
+        { label: 'Khoa xin phép Minh trước khi sao chép tệp trình chiếu của Minh.', bin: 'yes' },
+        { label: 'Lan chép bài văn trên mạng rồi nộp, ghi tên mình là tác giả.', bin: 'no' },
+        { label: 'Huy mở máy tính của bạn, đọc tin nhắn của bạn khi bạn vắng mặt.', bin: 'no' },
+        { label: 'Mai kể lại truyện Rùa và Thỏ, ghi "Phỏng theo truyện Rùa và Thỏ".', bin: 'yes' }
+      ],
+      doneText: 'Em đã biết đồng tình với việc làm đúng và không đồng tình với việc làm sai.'
+    });
+    var AG = ['Đồng tình', 'Không đồng tình'];
+    Core.quiz(document.getElementById('quiz-lt'), {
+      lesson: L, id: 'lt',
+      questions: [
+        { q: '<b>Luyện tập 1.</b> Bức ảnh <b>Cánh đồng</b> có nguồn là ai?', options: ['Lê Văn Hải', 'Phạm Thu Hà', 'Không có nguồn'], answer: 0 },
+        { q: '<b>Luyện tập 1.</b> Vì sao trang sách phải ghi rõ nguồn của mỗi bức ảnh?', options: ['Để tôn trọng bản quyền của người chụp ảnh.', 'Để trang sách có nhiều chữ hơn.', 'Vì ảnh không có nguồn thì không in được.'], answer: 0 },
+        { q: '<b>Luyện tập 2a.</b> Đọc tin nhắn trên điện thoại của người khác mà không được phép.', options: AG, answer: 1, explain: 'Tin nhắn là thông tin riêng tư.' },
+        { q: '<b>Luyện tập 2b.</b> Xin phép dùng hình ảnh, bài viết của người khác trong bài trình chiếu và ghi rõ nguồn.', options: AG, answer: 0, explain: 'Đó là tôn trọng bản quyền.' },
+        { q: '<b>Luyện tập 2c.</b> Chia sẻ thông tin riêng tư (nhật kí, hình ảnh...) của người khác mà không xin phép.', options: AG, answer: 1, explain: 'Làm vậy là vi phạm tính riêng tư.' }
+      ]
+    });
+    Core.fill(document.getElementById('fill-1'), {
+      lesson: L, id: 'fill1',
+      text: 'a) Bản quyền nội dung thông tin là [quyền] của tác giả cho phép hoặc không cho phép người khác sử dụng nội dung thông tin.\nb) Chúng ta chỉ sử dụng [nội dung thông tin] khi được phép.\nc) Tác giả nội dung thông tin có [quyền] cho phép hoặc không cho phép người khác sử dụng nội dung thông tin của mình.'
+    });
+    Core.match(document.getElementById('match-form'), {
+      lesson: L, id: 'form', leftTitle: 'A', rightTitle: 'B',
+      pairs: [['Nội dung thông tin', 'Văn bản, hình ảnh, âm thanh, đa phương tiện'], ['Video phim hoạt hình', 'Đa phương tiện'], ['Cuốn truyện tranh', 'Văn bản, hình ảnh']]
+    });
+    Core.quiz(document.getElementById('quiz-poem'), {
+      lesson: L, id: 'poem',
+      questions: [{ q: 'Các bạn bàn nhau. Em sẽ làm theo cách của bạn nào?', options: [
+        'Ánh: dùng bài thơ mà không cần ghi nguồn.',
+        'Toàn: dùng bài thơ và ghi "tác giả chưa rõ".',
+        'Bình: dùng bài thơ và ghi địa chỉ trang web có bài thơ đó.',
+        'Chi: không dùng bài thơ, vì dùng là vi phạm pháp luật.'], answer: 2,
+        explain: 'Ghi nguồn là trang web để người xem biết bài thơ lấy từ đâu.' }]
+    });
+    Core.pick(document.getElementById('pick-private'), {
+      lesson: L, id: 'private',
+      items: [
+        { label: 'Nhật kí của bạn', ok: true }, { label: 'Địa chỉ nhà, số điện thoại', ok: true },
+        { label: 'Mật khẩu tài khoản', ok: true }, { label: 'Tin nhắn trên điện thoại', ok: true },
+        { label: 'Tên một con sông ở Việt Nam', ok: false }, { label: 'Bài thơ in trong sách giáo khoa', ok: false }
+      ],
+      doneText: 'Đúng rồi! Em không xem, không chia sẻ khi chưa được phép.'
+    });
+    Core.pick(document.getElementById('pick-apply'), {
+      lesson: L, id: 'apply',
+      items: [
+        { label: 'Ghi rõ nguồn dưới mỗi thông tin, hình ảnh đã dùng.', ok: true },
+        { label: 'Xin phép khi trang web yêu cầu phải được đồng ý mới được dùng.', ok: true },
+        { label: 'Viết lại bằng lời của mình thì ghi "phỏng theo".', ok: true },
+        { label: 'Ghi tên nhóm mình là tác giả của mọi hình ảnh cho đẹp.', ok: false }
+      ],
+      doneText: 'Đúng rồi! Ghi rõ nguồn, xin phép khi cần là tôn trọng bản quyền nội dung thông tin.'
+    });
+  });
+})();
+</script>
+</body>
+</html>

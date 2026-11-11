@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài 9B. Thực hành tạo đồ dùng gia đình theo video hướng dẫn – Tin học 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/core.js"></script>
+<script src="../assets/js/widgets.js"></script>
+<script src="../assets/js/telex.js"></script>
+<script src="../assets/js/player.js"></script>
+<script src="../assets/js/vidsite.js"></script>
+<script src="../assets/js/craftvideos.js"></script>
+<script src="../assets/js/checklist.js"></script>
+<style>
+  .ctlrow { display: inline-flex; align-items: center; gap: 6px; }
+  .ctlrow .ico { width: 22px; height: 22px; }
+</style>
+</head>
+<body>
+<header class="topbar lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Về trang chính"><span class="ico" id="brand-ico"></span></a>
+    <div class="lesson-title">
+      <div class="lesson-kicker">Lớp 5 · Chủ đề 5B. Sử dụng công cụ đa phương tiện hỗ trợ tạo sản phẩm đơn giản</div>
+      <h1>Bài 9B. Thực hành tạo đồ dùng gia đình theo video hướng dẫn</h1>
+    </div>
+    <div class="topbar-right">
+      <span class="stars" data-stars-for="l5-b09b" data-stars-total="9"></span>
+      <span class="who">Bạn: <b data-current-name>Khách</b></span>
+      <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. KHỞI ĐỘNG -->
+  <section class="step" data-title="Khởi động">
+    <div class="step-head"><span class="phase phase-start">Khởi động</span><h2>Đồ dùng hữu ích từ vật liệu đã qua sử dụng</h2></div>
+    <div class="cols">
+      <div class="col">
+        <div class="card goals">
+          <b>Học xong bài này, em sẽ:</b>
+          <ul>
+            <li>Tìm và làm theo video hướng dẫn để tạo <b>đồ dùng gia đình</b> từ vật liệu tái chế.</li>
+            <li>Biết <b>tái chế</b> giúp tiết kiệm và bảo vệ môi trường.</li>
+          </ul>
+        </div>
+        <div class="card tight"><p class="mb0">Vật liệu đã dùng rồi bỏ đi sẽ thành <b>rác thải</b>, gây ô nhiễm không khí, nguồn nước. Tái chế chúng thành đồ dùng vừa <b>tiết kiệm</b>, vừa <b>giảm ô nhiễm</b>.</p></div>
+      </div>
+      <div class="col">
+        <p class="mt0">Vật liệu nào có thể <b>tái chế</b> làm đồ dùng? Chọn tất cả.</p>
+        <div id="pick-mat"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. LÀM HỘP BÚT -->
+  <section class="step" data-title="Làm hộp bút">
+    <div class="step-head"><span class="phase phase-practice">Thực hành</span><h2>Làm hộp đựng bút theo video hướng dẫn</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-box"></div>
+        <div id="fb-box" class="feedback"></div>
+        <p class="small-note">Khi cần cắt, dùng kéo, em <b>nhờ người lớn</b> giúp nha.</p>
+      </div>
+      <div class="col"><div id="vs-box"></div></div>
+    </div>
+  </section>
+
+  <!-- 3. CÁC BƯỚC -->
+  <section class="step" data-title="Các bước">
+    <div class="step-head"><span class="phase phase-practice">Câu hỏi</span><h2>Nhớ lại các bước trong video</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Sắp xếp các bước làm <b>hộp đựng bút từ chai nhựa</b> theo đúng thứ tự.</p>
+        <div id="order-box"></div>
+      </div>
+      <div class="col"><div id="quiz-why"></div></div>
+    </div>
+  </section>
+
+  <!-- 4. LUYỆN TẬP -->
+  <section class="step" data-title="Luyện tập">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Vật liệu tái chế làm được những đồ dùng nào?</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-lt"></div>
+        <div id="fb-lt" class="feedback"></div>
+      </div>
+      <div class="col"><div id="vs-lt"></div></div>
+    </div>
+  </section>
+
+  <!-- 5. LUYỆN TẬP 2 -->
+  <section class="step" data-title="Đồ dùng tái chế">
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Đồ dùng từ vật liệu tái chế</h2></div>
+    <div class="cols">
+      <div class="col">
+        <p class="mt0">Theo các video em vừa xem, vật liệu tái chế có thể làm ra những đồ dùng nào trong gia đình? Chọn tất cả.</p>
+        <div id="pick-items"></div>
+      </div>
+      <div class="col"><div id="tf-rec"></div></div>
+    </div>
+  </section>
+
+  <!-- 6. BÀI TẬP -->
+  <section class="step" data-title="Bài tập">
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Các nút xem video</h2></div>
+    <div class="cols">
+      <div class="col"><div id="quiz-bt"></div></div>
+      <div class="col">
+        <div class="say"><span class="ico" data-icon="robot"></span>
+          <div class="bubble">Mẹo chọn từ khoá: ghi rõ <b>đồ dùng muốn làm</b> và <b>vật liệu</b> em có. Ví dụ: "cách làm hộp đựng bút từ ống hút", "cách làm khay đựng thức ăn cho chó mèo từ chai nhựa".</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. VẬN DỤNG -->
+  <section class="step" data-title="Vận dụng">
+    <div class="step-head"><span class="phase phase-apply">Vận dụng</span><h2>Làm khung ảnh từ vật liệu sẵn có</h2></div>
+    <div class="cols">
+      <div class="col-side">
+        <div id="tasks-vd"></div>
+        <div id="fb-vd" class="feedback"></div>
+        <div class="card done-mini"><b>Học xong Bài 9B!</b><span class="stars" data-stars-for="l5-b09b" data-stars-total="9"></span><a class="btn btn-primary btn-small" href="../index.html"><span class="ico" data-icon="home"></span>Trang chính</a></div>
+      </div>
+      <div class="col"><div id="vs-vd"></div></div>
+    </div>
+  </section>
+</main>
+<nav class="step-nav" id="step-nav" aria-label="Chuyển phần"></nav>
+
+<script>
+(function () {
+  var L = 'l5-b09b';
+  function fillIcons() {
+    var els = document.querySelectorAll('[data-icon]');
+    for (var i = 0; i < els.length; i++) els[i].innerHTML = Icons[els[i].getAttribute('data-icon')] || '';
+    document.getElementById('brand-ico').innerHTML = Icons.robot;
+  }
+  function $(id) { return document.getElementById(id); }
+  function P(s) { return Core.plain(String(s)).toLowerCase(); }
+  var V = CraftVideos.list, sims = {}, lists = {}, seen = {};
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fillIcons();
+    Core.pick($('pick-mat'), {
+      lesson: L, id: 'mat',
+      items: [
+        { label: 'Chai nhựa đã dùng', ok: true }, { label: 'Ống hút không dùng nữa', ok: true }, { label: 'Bìa các-tông cũ', ok: true },
+        { label: 'Vỏ hộp sữa', ok: true }, { label: 'Thức ăn còn thừa', ok: false }, { label: 'Pin cũ đã hết điện', ok: false }
+      ],
+      doneText: 'Đúng rồi! Thức ăn thừa không dùng được; pin cũ có chất độc hại, phải thu gom riêng, không dùng làm đồ thủ công.'
+    });
+    lists.box = Checklist($('tasks-box'), $('fb-box'), { lesson: L, id: 'box', ordered: true,
+      tasks: ['Tìm với từ khoá <b>cách làm hộp đựng bút từ chai nhựa</b>.', 'Chọn mục <b>Video</b>, mở video hướng dẫn làm hộp đựng bút.', 'Xem hết video, dừng lại ở mỗi bước để làm theo.'],
+      doneText: 'Em đã xem xong. Lấy chai nhựa ra làm theo nha!' });
+    sims.box = VidSite($('vs-box'), { videos: V, height: 300, onEvent: function (t, d) {
+      if (t === 'search' && /hop|but/.test(P(d.q)) && d.hits.length) lists.box.tick(0);
+      if (t === 'open' && d.video.id === 'box') lists.box.tick(1);
+      if (t === 'end' && d.video.id === 'box') lists.box.tick(2);
+    } });
+    Core.order($('order-box'), {
+      lesson: L, id: 'order',
+      items: ['Chuẩn bị chai nhựa đã dùng, rửa sạch, lau khô.', 'Nhờ người lớn cắt ngang chai, giữ phần đáy.', 'Dán giấy màu, ruy băng để trang trí.', 'Cắm bút vào hộp, đặt lên bàn học.']
+    });
+    Core.quiz($('quiz-why'), {
+      lesson: L, id: 'why',
+      questions: [{ q: 'Vì sao nên làm đồ dùng từ vật liệu <b>đã qua sử dụng</b> thay vì mua vật liệu mới?', options: ['Để tiết kiệm và giảm bớt rác thải.', 'Vì vật liệu cũ luôn đẹp hơn.', 'Vì không được mua giấy màu.'], answer: 0 }]
+    });
+    lists.lt = Checklist($('tasks-lt'), $('fb-lt'), { lesson: L, id: 'lt', ordered: false,
+      tasks: ['Tìm với từ khoá <b>đồ dùng thủ công từ vật liệu tái chế</b>.', 'Mở và xem hết ít nhất <b>2</b> video khác nhau.'],
+      doneText: 'Em đã biết thêm nhiều đồ dùng làm từ vật liệu tái chế!' });
+    sims.lt = VidSite($('vs-lt'), { videos: V, height: 300, onEvent: function (t, d) {
+      if (t === 'search' && /tai che/.test(P(d.q)) && d.hits.length) lists.lt.tick(0);
+      if (t === 'end' && !d.video.short) { seen[d.video.id] = 1; var n = 0; for (var k in seen) n++; if (n >= 2) lists.lt.tick(1); }
+    } });
+    Core.pick($('pick-items'), {
+      lesson: L, id: 'items',
+      items: [{ label: 'Hộp đựng bút', ok: true }, { label: 'Chậu cây mini', ok: true }, { label: 'Thùng rác mini để bàn', ok: true }, { label: 'Khung ảnh', ok: true }, { label: 'Điện thoại di động', ok: false }]
+    });
+    Core.truefalse($('tf-rec'), {
+      lesson: L, id: 'rec',
+      items: [
+        { t: 'Rác thải có thể làm ô nhiễm không khí và nguồn nước.', ok: true },
+        { t: 'Tái chế giúp giảm dùng nguyên liệu mới.', ok: true },
+        { t: 'Muốn làm đồ tái chế, nên mua thật nhiều chai nhựa mới.', ok: false }
+      ]
+    });
+    function cb(icon, label) { return '<span class="ctlrow">' + Core.icon(icon) + label + '</span>'; }
+    Core.quiz($('quiz-bt'), {
+      lesson: L, id: 'bt',
+      questions: [
+        { q: 'Trên video, thanh cho em <b>kéo hoặc chạm theo chiều ngang</b> để chuyển đến một thời điểm của video gọi là gì?', options: ['Nút dừng video', 'Nút xem lại video', 'Nút (thanh) tiến trình', 'Nút phát video'], answer: 2 },
+        { q: 'Hai nút nào ở <b>cùng một chỗ</b> và hiện thay thế nhau mỗi khi em nháy chuột vào?', options: [cb('play', 'Phát') + ' và ' + cb('pause', 'Tạm dừng'), cb('vol', 'Âm thanh') + ' và ' + cb('fullscr', 'Toàn màn hình'), cb('prevBar', 'Lùi') + ' và ' + cb('nextBar', 'Tới')], answer: 0 }
+      ]
+    });
+    lists.vd = Checklist($('tasks-vd'), $('fb-vd'), { lesson: L, id: 'vd', ordered: true,
+      tasks: ['Tìm video hướng dẫn <b>làm khung ảnh</b> từ vật liệu sẵn có (giấy, bìa, ống hút...).', 'Mở video, xem hết rồi làm theo.'],
+      doneText: 'Khung ảnh tự làm sẽ là món quà ý nghĩa cho gia đình em!' });
+    sims.vd = VidSite($('vs-vd'), { videos: V, height: 300, onEvent: function (t, d) {
+      if (t === 'search' && /khung anh/.test(P(d.q)) && d.hits.length) lists.vd.tick(0);
+      if (t === 'end' && d.video.id === 'frame') lists.vd.tick(1);
+    } });
+
+    window.__solve = function () {
+      var s = sims.box; s.search('cách làm hộp đựng bút từ chai nhựa'); s.filter('video'); s.open('box'); s.player().go(99);
+      s = sims.lt; s.search('đồ dùng thủ công từ vật liệu tái chế'); s.open('pot'); s.player().go(99); s.back(); s.open('bin'); s.player().go(99);
+      s = sims.vd; s.search('khung ảnh từ vật liệu tái chế'); s.open('frame'); s.player().go(99);
+    };
+  });
+})();
+</script>
+</body>
+</html>
