@@ -126,31 +126,86 @@ function list(req) {
   return { ok: true, rows: rows };
 }
 
+/* is this name already in the class? (answers yes or no only: no code, no stars)
+   The home page asks this before it gives a new learner a new code. */
+function nameExists(req) {
+  var name = cleanName(req.name).toLowerCase(), sh = getSheet(), last = sh.getLastRow();
+  if (!name || last < 2) return { ok: true, exists: false };
+  var v = sh.getRange(2, 1, last - 1, 1).getValues();
+  for (var i = 0; i < v.length; i++) if (String(v[i][0]).toLowerCase() === name) return { ok: true, exists: true, name: String(v[i][0]) };   /* the spelling in the sheet, so "bông" finds "Bông" */
+  return { ok: true, exists: false };
+}
+
+/* ---------- learners: the 4-digit code is the key ----------
+   Each learner chooses a code; no two learners may share one. */
+function findCode(sh, code) {
+  var last = sh.getLastRow();
+  if (last < 2) return 0;
+  var v = sh.getRange(2, 2, last - 1, 1).getValues();
+  for (var i = 0; i < v.length; i++) if (String(v[i][0]) === code) return i + 2;
+  return 0;
+}
+/* a code nobody uses yet, to offer when the chosen one is taken */
+function freeCode(sh) {
+  var last = sh.getLastRow(), used = {}, i, c;
+  if (last >= 2) { var v = sh.getRange(2, 2, last - 1, 1).getValues(); for (i = 0; i < v.length; i++) used[String(v[i][0])] = 1; }
+  for (i = 0; i < 200; i++) { c = String(1000 + Math.floor(Math.random() * 9000)); if (!used[c]) return c; }
+  for (i = 1000; i < 10000; i++) if (!used[String(i)]) return String(i);
+  return '';
+}
+/* is this the teacher's password? (the home page asks before a learner is removed from a device) */
+function checkKey(req) {
+  var key = teacherKey();
+  if (!key) return { ok: false, error: 'no key set' };
+  if (String(req.key || '') !== key) { Utilities.sleep(1500); return { ok: false, error: 'bad key' }; }
+  return { ok: true };
+}
+function writeRow(sh, row, name, code, merged) {
+  var c = countStars(merged), now = new Date();
+  /* a lesson the sheet has no column for yet gets one at the end */
+  var head = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0], l;
+  for (l in c.lessons) if (head.indexOf(l) < 0) { head.push(l); sh.getRange(1, head.length).setValue(l).setFontWeight('bold'); }
+  var started = row ? sh.getRange(row, 6).getValue() : now;
+  var line = [name, code, c.total, c.g4, c.g5, started || now, now, JSON.stringify(merged)];
+  for (var i = FIXED.length; i < head.length; i++) line.push(c.lessons[head[i]] || '');
+  if (!row) row = sh.getLastRow() + 1;
+  sh.getRange(row, 1, 1, line.length).setValues([line]);
+}
+
 function handle(req) {
   if (req.action === "stats") return stats();
   if (req.action === "list") return list(req);
+  if (req.action === "exists") return nameExists(req);
+  if (req.action === "checkKey") return checkKey(req);
   var name = cleanName(req.name), code = String(req.code || '');
   if (!name || !/^\d{4}$/.test(code)) return { ok: false, error: 'bad name or code' };
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
-    var sh = getSheet(), row = findRow(sh, name, code);
+    var sh = getSheet(), row = findCode(sh, code);
+    var rowName = row ? String(sh.getRange(row, 1).getValue()) : '';
+    var mine = !!row && rowName.toLowerCase() === name.toLowerCase();   /* this code belongs to this learner */
+    var data = mine ? parse(sh.getRange(row, DATA_COL).getValue()) : {};
+
     if (req.action === 'load') {
-      if (!row) return { ok: true, found: false };
-      return { ok: true, found: true, progress: parse(sh.getRange(row, DATA_COL).getValue()) };
+      return mine ? { ok: true, found: true, name: rowName, progress: data } : { ok: true, found: false };
+    }
+    /* a learner types a name and a code on the home page:
+       found = this learner already exists (comes back with the stars),
+       taken = the code is somebody else's (with a free code to offer),
+       nameExists = same name with another code (the page asks: are you that learner, or a new one?),
+       created = a new learner */
+    if (req.action === 'enter') {
+      if (mine) return { ok: true, found: true, name: rowName, progress: data };
+      if (row) return { ok: true, taken: true, suggest: freeCode(sh) };
+      if (!req.force && nameExists(req).exists) return { ok: true, nameExists: true };
+      writeRow(sh, 0, name, code, {});
+      return { ok: true, created: true };
     }
     if (req.action !== 'save') return { ok: false, error: 'unknown action' };
-
-    var merged = merge(row ? parse(sh.getRange(row, DATA_COL).getValue()) : {}, sanitize(req.progress));
-    var c = countStars(merged), now = new Date();
-    /* a lesson the sheet has no column for yet gets one at the end */
-    var head = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0], l;
-    for (l in c.lessons) if (head.indexOf(l) < 0) { head.push(l); sh.getRange(1, head.length).setValue(l).setFontWeight('bold'); }
-    var started = row ? sh.getRange(row, 6).getValue() : now;
-    var line = [name, code, c.total, c.g4, c.g5, started || now, now, JSON.stringify(merged)];
-    for (var i = FIXED.length; i < head.length; i++) line.push(c.lessons[head[i]] || '');
-    if (!row) row = sh.getLastRow() + 1;
-    sh.getRange(row, 1, 1, line.length).setValues([line]);
+    if (row && !mine) return { ok: false, error: 'code taken', suggest: freeCode(sh) };
+    var merged = merge(data, sanitize(req.progress));
+    writeRow(sh, row, mine ? rowName : name, code, merged);
     return { ok: true, progress: merged };
   } finally {
     lock.releaseLock();

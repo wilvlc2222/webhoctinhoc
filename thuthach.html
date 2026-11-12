@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="assets/css/main.css">
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/core.js"></script>
+<script src="assets/js/bossbank.js"></script>
 </head>
 <body>
 <header class="topbar">
@@ -22,8 +23,10 @@
 </header>
 
 <!-- Boss challenge for one topic: thuthach.html?g=4&t=5 (grade, topic).
-     The questions are not written here: the page opens the topic's lessons in hidden frames
-     and reuses their quiz and true/false questions (Core.quizBank in core.js / widgets.js). -->
+     A match is 20 questions = 20 points: the bug has 20 HP, a right answer is 1 point and 1 HP, three wrong answers lose.
+     The page opens the topic's lessons in hidden frames and reuses their quiz and true/false questions
+     (Core.quizBank in core.js / widgets.js), then adds the extra ones of assets/js/bossbank.js.
+     tools/boss.html counts the questions of every topic. -->
 <main class="wrap boss-cols">
   <div class="boss-side card">
     <div class="boss-bug" id="boss-bug" aria-hidden="true">
@@ -42,7 +45,8 @@
     </div>
     <h1 class="boss-title">Bọ Lỗi</h1>
     <p class="boss-topic" id="boss-topic"></p>
-    <div class="boss-stat"><span>Máu của Bọ Lỗi</span><div class="boss-hp" id="boss-hp"></div></div>
+    <div class="boss-stat"><span>Máu của Bọ Lỗi: <b id="boss-hp-n"></b></span><div class="boss-hp" id="boss-hp"></div></div>
+    <div class="boss-stat"><span>Điểm của em: <b id="boss-score"></b></span></div>
     <div class="boss-stat"><span>Trái tim của em</span><div class="boss-hearts" id="boss-hearts"></div></div>
   </div>
   <div class="boss-main" id="boss-main"></div>
@@ -52,10 +56,13 @@
 (function () {
   var HEART = '<svg viewBox="0 0 24 24" class="heart-ico" aria-hidden="true"><path d="M12 21C5 15 2 11.5 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 3.500-3 7-10 13z" fill="FILL" stroke="#1d2433" stroke-width="2" stroke-linejoin="round"/></svg>';
   /* questions that point at a picture or text of their own lesson make no sense here */
-  var NEEDS_PAGE = /(hình|bảng|ảnh|tranh|trang chiếu|chương trình|đoạn|văn bản|kịch bản|video|khối lệnh|lệnh|thư mục|cây|sơ đồ)[^.?!]{0,25}(trên|bên|dưới|sau|này|sau đây)|ở trên|bên (trái|phải)|dưới đây|sau đây|trên đây|vừa (xem|đọc|làm|tạo)/i;
+  var NEEDS_PAGE = /(hình|bảng|ảnh|tranh|trang chiếu|chương trình|đoạn|văn bản|kịch bản|video|khối lệnh|lệnh|thư mục|cây|sơ đồ|chỉ dẫn)[^.?!]{0,25}(trên(?! (trang|màn hình|đó|dải|mạng|Internet))|bên(?! trong)|dưới|sau|này|sau đây)|ở trên|bên (trái|phải)|dưới đây|sau đây|trên đây|vừa (xem|đọc|làm|tạo)|ý tưởng của/i;
+  /* "Câu nào dưới đây đúng?" points at its own options, so it is fine */
+  var OPTIONS_BELOW = /(câu|thứ|trang web|việc|phần mềm|thiết bị) nào (dưới|sau) đây/gi;
+  var TOTAL = 20;   /* questions and points of one match */
   var m = /[?&]g=(\d)/.exec(location.search), m2 = /[?&]t=(\d)/.exec(location.search);
   var grade = m ? +m[1] : 4, topic = m2 ? +m2[1] : 1;
-  var main, bank = [], queue, hp, hpMax, hearts, t0, started = false;
+  var main, bank = [], queue, hp, hpMax, hearts, asked, t0, started = false;
 
   function E(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
   function plain(html) { var d = document.createElement('div'); d.innerHTML = html; return (d.textContent || '').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''); }
@@ -65,6 +72,8 @@
     var h = '', i;
     for (i = 0; i < (hpMax || 0); i++) h += '<span class="' + (i < hp ? 'on' : '') + '"></span>';
     document.getElementById('boss-hp').innerHTML = h;
+    document.getElementById('boss-hp-n').innerHTML = hpMax ? hp + '/' + hpMax : '';
+    document.getElementById('boss-score').innerHTML = hpMax ? (hpMax - hp) + '/' + hpMax : '';
     h = '';
     for (i = 0; i < 3; i++) h += HEART.replace('FILL', i < hearts ? '#fa5252' : '#fff');
     document.getElementById('boss-hearts').innerHTML = h;
@@ -72,11 +81,12 @@
   function screen(html) { main.innerHTML = '<div class="card boss-card">' + html + '</div>'; }
 
   function intro() {
-    hpMax = 0; hearts = 3; bars();
+    hpMax = hp = TOTAL; hearts = 3; bars();
     screen('<h2>Thử thách chủ đề ' + topic + ' · Lớp ' + grade + '</h2>' +
       '<p class="boss-lead">Bọ Lỗi đang phá các bài học của chủ đề <b>' + Core.TOPIC_NAMES[topic - 1] + '</b>. Em hãy đánh bại nó!</p>' +
-      '<ul class="boss-rules"><li>Mỗi câu trả lời <b>đúng</b> làm Bọ Lỗi mất 1 máu.</li><li>Mỗi câu trả lời <b>sai</b> làm em mất 1 trái tim. Em có 3 trái tim.</li>' +
-      '<li>Hết máu thì Bọ Lỗi thua. Thắng lần đầu, em được <b>3 kim cương</b>.</li></ul>' +
+      '<ul class="boss-rules"><li>Bọ Lỗi có <b>' + TOTAL + ' máu</b>. Mỗi câu trả lời <b>đúng</b>: em được 1 điểm, Bọ Lỗi mất 1 máu.</li>' +
+      '<li>Mỗi câu trả lời <b>sai</b> làm em mất 1 trái tim. Em có 3 trái tim. Câu đó sẽ được hỏi lại sau.</li>' +
+      '<li>Đủ <b>' + TOTAL + ' điểm</b> thì Bọ Lỗi thua. Thắng lần đầu, em được <b>3 kim cương</b>.</li></ul>' +
       '<button class="btn btn-primary" id="boss-go" type="button">Bắt đầu</button><div class="feedback" id="boss-fb"></div>');
     Core.on(document.getElementById('boss-go'), load);
   }
@@ -88,12 +98,16 @@
     bank = [];
     function add(q, options, answer) {
       var key = plain(q);
-      if (!key || seen[key] || NEEDS_PAGE.test(key) || !options || options.length < 2 || answer == null || !options[answer]) return;
+      if (!key || seen[key] || NEEDS_PAGE.test(key.replace(OPTIONS_BELOW, '$1 nào')) || !options || options.length < 2 || answer == null || !options[answer]) return;
       seen[key] = 1;
       bank.push({ q: String(q).replace(/^\s*(<b>)?\s*(Câu|Bài|Luyện tập|Vận dụng)\s+\d+[.:]?\s*(<\/b>)?\s*/i, ''), options: options, answer: answer });
     }
     function next() {
-      if (i >= lessons.length) return ready();
+      if (i >= lessons.length) {
+        var ex = (window.BOSS_EXTRA || {})[grade + '-' + topic] || [];
+        for (var x = 0; x < ex.length; x++) { if (ex[x].t) add(ex[x].t, ['Đúng', 'Sai'], ex[x].ok ? 0 : 1); else add(ex[x].q, ex[x].options, ex[x].answer); }
+        return ready();
+      }
       Core.say(fb, 'Đang chuẩn bị câu hỏi... (' + (i + 1) + '/' + lessons.length + ')', 'info');
       var f = E('iframe', 'boss-frame');
       f.setAttribute('aria-hidden', 'true'); f.setAttribute('tabindex', '-1');
@@ -125,13 +139,13 @@
       return;
     }
     queue = shuffle(bank.slice());
-    hpMax = hp = Math.max(2, Math.min(6, bank.length - 2));
-    hearts = 3; t0 = new Date().getTime();
+    hpMax = hp = Math.min(TOTAL, bank.length);   /* a wrong question goes back to the end of the queue, so it never runs out */
+    hearts = 3; asked = 0; t0 = new Date().getTime();
     bars(); ask();
   }
 
   function ask() {
-    var q = queue.shift(), html = '<p class="boss-count">Bọ Lỗi còn <b>' + hp + '</b> máu</p><div class="boss-q">' + q.q + '</div><div class="quiz-options" id="boss-opts">', i;
+    var q = queue.shift(), html = '<p class="boss-count">Câu ' + (++asked) + ' · Bọ Lỗi còn <b>' + hp + '</b> máu</p><div class="boss-q">' + q.q + '</div><div class="quiz-options" id="boss-opts">', i;
     for (i = 0; i < q.options.length; i++) html += '<button class="btn quiz-opt" type="button" data-i="' + i + '"><span class="opt-letter">' + String.fromCharCode(65 + i) + '</span><span>' + q.options[i] + '</span></button>';
     screen(html + '</div><div class="feedback" id="boss-fb"></div>');
     var btns = main.querySelectorAll('.quiz-opt'), fb = document.getElementById('boss-fb'), bug = document.getElementById('boss-bug');
@@ -141,12 +155,12 @@
       btns[q.answer].className += ' is-right';
       if (ok) {
         hp--;
-        Core.say(fb, 'Trúng rồi! Bọ Lỗi mất 1 máu.', 'good');
+        Core.say(fb, 'Trúng rồi! Em được 1 điểm, Bọ Lỗi mất 1 máu.', 'good');
         bug.className = 'boss-bug is-hit';
         if (Core.sound) Core.sound('good');
         if (Core.react) Core.react('good');
       } else {
-        hearts--;
+        hearts--; queue.push(q);
         this.className += ' is-wrong';
         Core.say(fb, 'Chưa đúng. Em mất 1 trái tim. Đáp án đúng là <b>' + String.fromCharCode(65 + q.answer) + '</b>.', 'bad');
         if (Core.sound) Core.sound('bad');
@@ -170,7 +184,7 @@
     var secs = Math.round((new Date().getTime() - t0) / 1000), first = !Core.gems.bossWon(grade, topic), i;
     if (first) for (i = 1; i <= 3; i++) Core.gems.add('boss_g' + grade + '_t' + topic + '_' + i);
     document.getElementById('boss-bug').className = 'boss-bug is-down';
-    screen('<h2>Em đã thắng Bọ Lỗi!</h2><p class="boss-lead">Em đánh bại Bọ Lỗi của chủ đề ' + topic + ' trong <b>' + secs + '</b> giây, còn <b>' + hearts + '</b> trái tim.</p>' +
+    screen('<h2>Em đã thắng Bọ Lỗi!</h2><p class="boss-lead">Em đánh bại Bọ Lỗi của chủ đề ' + topic + ' với <b>' + hpMax + '/' + hpMax + ' điểm</b> trong <b>' + secs + '</b> giây, còn <b>' + hearts + '</b> trái tim.</p>' +
       (first ? '<p class="boss-reward">' + Core.gemIcon + 'Phần thưởng thắng lần đầu: <b>+3 kim cương</b></p>' : '<p>Em đã nhận phần thưởng của thử thách này từ lần thắng trước.</p>') +
       '<div class="bip-actions"><button class="btn" id="boss-again" type="button">Đấu lại</button><a class="btn btn-primary" href="index.html">&lsaquo; Về trang chủ</a></div>');
     Core.on(document.getElementById('boss-again'), ready);
@@ -179,7 +193,7 @@
     if (Core.checkBadges) setTimeout(function () { Core.checkBadges(); }, 1300);
   }
   function lose() {
-    screen('<h2>Bọ Lỗi thắng lần này</h2><p class="boss-lead">Không sao cả! Em xem lại các bài của chủ đề ' + topic + ' rồi đấu lại nha. Bọ Lỗi còn <b>' + hp + '</b> máu.</p>' +
+    screen('<h2>Bọ Lỗi thắng lần này</h2><p class="boss-lead">Em được <b>' + (hpMax - hp) + '/' + hpMax + ' điểm</b>. Không sao cả! Em xem lại các bài của chủ đề ' + topic + ' rồi đấu lại nha. Bọ Lỗi còn <b>' + hp + '</b> máu.</p>' +
       '<div class="bip-actions"><a class="btn" href="index.html">&lsaquo; Về trang chủ</a><button class="btn btn-primary" id="boss-again" type="button">Đấu lại</button></div>');
     Core.on(document.getElementById('boss-again'), ready);
   }

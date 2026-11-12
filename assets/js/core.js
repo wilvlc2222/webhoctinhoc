@@ -74,13 +74,26 @@
     var c = Core.codeOf(name);
     return !!c && c === String(code || '').replace(/\D/g, '');
   };
-  Core.addProfile = function (name) {
+  /* which learner on this device has this code ('' = nobody): a code is a learner's key, so it is never shared */
+  Core.codeOwner = function (code) {
+    var p = Core.profiles(), n;
+    for (n in p.codes) if (p.codes.hasOwnProperty(n) && p.codes[n] === String(code)) return n;
+    return '';
+  };
+  Core.freeCode = function () { var c; do { c = newCode(); } while (Core.codeOwner(c)); return c; };
+  /* the server found this code taken by someone else: the learner gets another one */
+  Core.setCode = function (name, code) {
+    var p = Core.profiles();
+    if (p.codes[name]) { p.codes[name] = String(code); writeJSON(PROFILE_KEY, p); }
+  };
+  /* code: the 4 digits the learner chose; left out (tools, tests) a random one is made */
+  Core.addProfile = function (name, code) {
     name = Core.cleanName(name);
     if (!name) return false;
     var p = Core.profiles();
     for (var i = 0; i < p.list.length; i++) if (p.list[i] === name) { p.current = name; writeJSON(PROFILE_KEY, p); return true; }
     p.list.push(name);
-    p.codes[name] = newCode();
+    p.codes[name] = /^\d{4}$/.test(String(code || '')) ? String(code) : newCode();
     p.current = name;
     writeJSON(PROFILE_KEY, p);
     return true;

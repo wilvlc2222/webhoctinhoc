@@ -1643,3 +1643,6 @@ html.eink .tc.gold { background: #000; color: #fff; }
 html.eink .tc.silver { background: #bbb; }
 html.eink .tc.bronze { background: #fff; outline: 2px solid #000; outline-offset: -2px; }
 .guide-teacher { margin-top: 8px; }
+#new-code { flex: 0 1 96px; }
+#add-name .who-row { margin-bottom: 8px; }
+#who-fb .btn { margin-top: 4px; }

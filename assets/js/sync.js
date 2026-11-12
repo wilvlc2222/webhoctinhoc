@@ -8,7 +8,7 @@
   if (!Core) return;
 
   /* ↓↓↓ Dán địa chỉ "Web app URL" của Google Apps Script vào giữa hai dấu nháy. Để trống = không gửi gì. ↓↓↓ */
-  var SYNC_URL = 'https://script.google.com/macros/s/AKfycbytlzWMZWuKJsIL-CJPx0Ms64FBnAB5Qj93yBMKGDppSDxlVpF2nEYaIgOdulckEhoxBg/exec';
+  var SYNC_URL = 'https://script.google.com/macros/s/AKfycbz8L2VJK2Xpm4GH3hEHcXjZyheya-p5it8ldsbo-AwSEHMtf02Yek6diZi1ih7byDDCVw/exec';
   /* ↑↑↑ */
 
   var DIRTY_KEY = 'whth-sync-dirty';
@@ -51,6 +51,15 @@
     busy[name] = true; state = 'sending'; paint();
     post({ action: 'save', name: name, code: Core.codeOf(name), progress: Core.exportProgress(name) }, function (err, res) {
       busy[name] = false;
+      /* the code was made while the sheet could not be reached, and somebody else already has it:
+         take the free code the sheet offers, remember to show it to the learner (home page), send again */
+      if (err && res && res.error === 'code taken' && /^\d{4}$/.test(String(res.suggest || '')) && !Core.codeOwner(res.suggest)) {
+        Core.setCode(name, res.suggest);
+        try { var nc = JSON.parse(localStorage.getItem('whth-newcode') || '{}'); nc[name] = 1; localStorage.setItem('whth-newcode', JSON.stringify(nc)); } catch (e) {}
+        if (typeof Core.onGameReady === 'function' && document.getElementById('lessons')) Core.onGameReady();
+        push(name, cb);
+        return;
+      }
       if (err) { state = 'failed'; setDirty(name, true); if (cb) cb(err); return; }
       state = 'saved';
       var before = JSON.stringify(Core.exportProgress(name));

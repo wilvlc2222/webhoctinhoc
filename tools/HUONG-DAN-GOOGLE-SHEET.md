@@ -74,3 +74,13 @@ Cần làm một lần:
 4. Quay lại `giaovien.html`, nhập đúng mật khẩu đó.
 
 Mật khẩu chỉ nằm trong bảng tính của thầy cô. Trang web không lưu mật khẩu: tải lại trang là phải nhập lại. Muốn đổi mật khẩu thì sửa ô B1.
+
+## Mã số do học sinh tự chọn, xoá tên cần thầy cô
+
+Bản script mới nhất có thêm ba việc. Dán lại `tools/sheet-sync.gs` rồi triển khai **Phiên bản mới** (Quản lý các tuỳ chọn triển khai › bút chì) để giữ nguyên URL.
+
+- **Mã số là khoá, không trùng.** Học sinh tự chọn mã 4 chữ số. Mã đã có bạn khác dùng thì script báo trùng và gợi ý một mã còn trống.
+- **Học sinh cũ quay lại**: nhập đúng tên và mã cũ ở bất kì máy nào là vào lại với đủ sao.
+- **Xoá tên khỏi máy** cần mật khẩu giáo viên (ô B1 của trang tính CaiDat). Xoá khỏi máy không xoá dòng trong bảng tính.
+
+Các dòng cũ trong bảng vẫn dùng được. Nếu hai dòng cũ trùng mã, em học sau sẽ được đổi sang mã mới khi máy gửi kết quả.

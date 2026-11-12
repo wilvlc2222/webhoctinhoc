@@ -205,10 +205,10 @@
   function esc(s) { var d = document.createElement('div'); d.appendChild(document.createTextNode(s)); return d.innerHTML; }
 
   /* big card shown once, right after a new name is made */
-  function showCode(name) {
+  function showCode(name, changed) {
     var m = Core.el('div', 'bip-modal', '<div class="bip-card code-card" role="dialog" aria-modal="true">' +
       '<h2>Chào ' + esc(name) + '!</h2>' +
-      '<p>Mã số của em là</p>' +
+      '<p>' + (changed ? 'Mã số em chọn đã có bạn khác dùng, nên em được đổi sang mã số mới:' : 'Mã số của em là') + '</p>' +
       '<div class="code-big" aria-label="Mã số ' + Core.codeOf(name).split('').join(' ') + '">' + Core.codeOf(name) + '</div>' +
       '<p><b>Em hãy ghi nhớ mã số này</b> (chép vào vở cho chắc). Lần sau em cần <b>tên</b> và <b>mã số</b> để học tiếp và giữ sao của mình.</p>' +
       '<button class="btn btn-primary" type="button">Em đã ghi nhớ rồi</button></div>');
@@ -223,21 +223,13 @@
       '<div class="who-row"><input class="input" id="code-in" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="4 chữ số" aria-label="Mã số 4 chữ số">' +
       '<button class="btn btn-primary" type="submit">Vào học</button></div></form></div>' +
       '<button class="btn btn-small" id="code-back" type="button">&lsaquo; Tên khác</button><div class="feedback" id="who-fb"></div>' +
-      '<div class="who-forgot"><b>Quên mã số?</b> Em hỏi thầy cô trước. Nếu không tìm lại được thì xoá tên này, rồi nhập tên lại để nhận mã số mới.' +
-      '<button class="btn btn-small" id="code-del" type="button">Xoá tên này khỏi máy</button></div>';
+      '<div class="who-forgot"><b>Quên mã số?</b> Em hỏi thầy cô: thầy cô tra được mã số của em, và xoá được tên này khỏi máy.' +
+      '<button class="btn btn-small" id="code-del" type="button">Xoá tên này (cần thầy cô)</button></div>';
     var input = document.getElementById('code-in'), fb = document.getElementById('who-fb');
     if (note) Core.say(fb, note, 'info');
     Core.on(document.getElementById('code-back'), renderNames);
     /* a forgotten code: the name can be removed from this device (asked twice, because the stars kept on this device go with it) */
-    Core.on(document.getElementById('code-del'), function () {
-      var online = Core.sync && Core.sync.on;
-      if (!confirm('Xoá tên "' + name + '" khỏi máy này?\n\nSao của bạn ấy lưu trên máy này sẽ mất' +
-        (online ? '. Kết quả đã gửi lên mạng thì vẫn còn, thầy cô tra được mã số.' : ' và không lấy lại được.'))) return;
-      Core.removeProfile(name);
-      refresh();
-      var fb2 = document.getElementById('who-fb');
-      if (fb2) Core.say(fb2, 'Đã xoá tên "' + esc(name) + '" khỏi máy này.', 'info');
-    });
+    Core.on(document.getElementById('code-del'), function () { teacherDelete(name); });
     input.focus();
     document.getElementById('code-form').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -247,7 +239,8 @@
   }
 
   /* a learner who started on another device gets the stars back from the teacher's sheet (sync.js) */
-  function askRestore() {
+  function askRestore(name, note) {
+    if (typeof name !== 'string') name = note = '';   /* called from a button click */
     var box = document.getElementById('who-box');
     box.innerHTML = '<div id="code-ask"><form id="restore-form" autocomplete="off"><label for="re-name">Tên và mã số của em:</label>' +
       '<div class="who-row"><input class="input" id="re-name" maxlength="20" placeholder="Tên em" aria-label="Tên của em">' +
@@ -256,7 +249,9 @@
       '<button class="btn btn-small" id="code-back" type="button">&lsaquo; Quay lại</button><div class="feedback" id="who-fb"></div>';
     var fb = document.getElementById('who-fb'), go = document.getElementById('re-go');
     Core.on(document.getElementById('code-back'), renderNames);
-    document.getElementById('re-name').focus();
+    if (name) document.getElementById('re-name').value = name;
+    if (note) Core.say(fb, note, 'info');
+    document.getElementById(name ? 're-code' : 're-name').focus();
     document.getElementById('restore-form').addEventListener('submit', function (e) {
       e.preventDefault();
       go.disabled = true;
@@ -267,6 +262,45 @@
         Core.say(fb, err === 'bad' ? 'Em nhập đủ tên và mã số 4 chữ số nha.' :
           err === 'notfound' ? 'Không tìm thấy tên và mã số này. Em kiểm tra lại từng chữ, từng số nha.' :
           'Chưa kết nối được mạng. Em thử lại sau, hoặc nhờ thầy cô.', err === 'bad' ? 'info' : 'bad');
+      });
+    });
+  }
+
+  /* removing a learner from this device needs the teacher: the teacher's password is checked by the sheet script
+     (action "checkKey"), never here. Without a sheet there is nobody to ask, so a plain question is all there is. */
+  function teacherDelete(name) {
+    function remove() {
+      Core.removeProfile(name);
+      refresh();
+      var f = document.getElementById('who-fb');
+      if (f) Core.say(f, 'Đã xoá tên "' + esc(name) + '" khỏi máy này.', 'info');
+    }
+    if (!Core.sync || !Core.sync.on) {
+      if (confirm('Xoá tên "' + name + '" khỏi máy này?\n\nSao của bạn ấy lưu trên máy này sẽ mất và không lấy lại được.')) remove();
+      return;
+    }
+    var box = document.getElementById('who-box');
+    box.innerHTML = '<div id="code-ask"><form id="del-form" autocomplete="off"><label for="del-key">Xoá tên <b>' + esc(name) + '</b> khỏi máy này cần <b>mật khẩu của thầy cô</b>:</label>' +
+      '<div class="who-row"><input class="input" id="del-key" type="password" placeholder="Mật khẩu giáo viên" aria-label="Mật khẩu giáo viên">' +
+      '<button class="btn btn-primary" type="submit" id="del-go">Xoá tên</button></div></form></div>' +
+      '<button class="btn btn-small" id="code-back" type="button">&lsaquo; Thôi, không xoá</button><div class="feedback" id="who-fb"></div>' +
+      '<p class="who-forgot">Sao lưu trên máy này của bạn ấy sẽ mất. Kết quả đã gửi lên mạng thì vẫn còn trong bảng của thầy cô.</p>';
+    var fb = document.getElementById('who-fb'), go = document.getElementById('del-go'), key = document.getElementById('del-key');
+    Core.on(document.getElementById('code-back'), renderNames);
+    key.focus();
+    document.getElementById('del-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!key.value) { Core.say(fb, 'Thầy cô nhập mật khẩu trước.', 'info'); return; }
+      go.disabled = true;
+      Core.say(fb, 'Đang kiểm tra mật khẩu...', 'info');
+      Core.sync.call({ action: 'checkKey', key: key.value }, function (err, res) {
+        go.disabled = false;
+        if (!err) { remove(); return; }
+        var why = res && res.error;
+        key.value = '';
+        Core.say(fb, why === 'bad key' ? 'Mật khẩu chưa đúng.' :
+          why === 'no key set' ? 'Thầy cô chưa đặt mật khẩu giáo viên trong bảng tính.' :
+          'Chưa kiểm tra được mật khẩu. Cần có mạng để thầy cô xác nhận.', 'bad');
       });
     });
   }
@@ -288,17 +322,22 @@
       }
       classGoal();
       Core.on(document.getElementById('who-out'), function () { Core.logout(); refresh(); });
-      Core.on(document.getElementById('who-del'), function () {
-        if (confirm('Xoá tên "' + cur + '" và toàn bộ sao của bạn ấy?')) { Core.removeProfile(cur); refresh(); }
-      });
+      Core.on(document.getElementById('who-del'), function () { teacherDelete(cur); });
+      /* the sheet gave this learner another code (the first one was somebody else's): show it once, big */
+      try {
+        var nc = JSON.parse(localStorage.getItem('whth-newcode') || '{}');
+        if (nc[cur]) { delete nc[cur]; localStorage.setItem('whth-newcode', JSON.stringify(nc)); showCode(cur, true); }
+      } catch (e) {}
     } else {
-      box.innerHTML = '<p class="who">Em <b>nhập tên</b> để vào học.' + (p.list.length ? ' Bạn nào học rồi thì chạm vào tên của mình.' : '') + '</p>' +
+      /* a learner gives a name and chooses a 4-digit code. The code is the learner's key:
+         nobody else may have it, on this device or in the teacher's sheet. */
+      box.innerHTML = '<p class="who">Em nhập <b>tên</b> và tự chọn một <b>mã số 4 chữ số</b> của riêng mình.' + (p.list.length ? ' Bạn nào học trên máy này rồi thì chạm vào tên của mình.' : '') + '</p>' +
         '<div class="names" id="names"></div>' +
-        '<form id="add-name" autocomplete="off"><div class="who-row"><input class="input" id="new-name" maxlength="20" placeholder="Tên em, ví dụ: Bông" aria-label="Tên của em">' +
-        '<button class="btn btn-primary" type="submit">Vào học</button></div></form>' +
-        '<button class="btn btn-small" id="who-restore" type="button" data-sync-only' + (Core.sync && Core.sync.on ? '' : ' style="display:none"') + '>Em đã có mã số (học ở máy khác)</button><div class="feedback" id="who-fb"></div>' +
+        '<form id="add-name" autocomplete="off"><div class="who-row"><input class="input" id="new-name" maxlength="20" placeholder="Tên em" aria-label="Tên của em">' +
+        '<input class="input" id="new-code" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="Mã số" aria-label="Mã số 4 chữ số em tự chọn"></div>' +
+        '<button class="btn btn-primary" type="submit" id="new-go">Vào học</button></form><div class="feedback" id="who-fb"></div>' +
         '<a class="help-link" href="huongdan.html#dang-nhap">Xem hướng dẫn đăng nhập &rsaquo;</a>';
-      var names =document.getElementById('names'), fb = document.getElementById('who-fb');
+      var names = document.getElementById('names'), fb = document.getElementById('who-fb');
       for (var i = 0; i < p.list.length; i++) {
         (function (name) {
           var b = Core.el('button', 'btn btn-small', esc(name));
@@ -307,18 +346,46 @@
           names.appendChild(b);
         })(p.list[i]);
       }
-      Core.on(document.getElementById('who-restore'), askRestore);
+      var force = '';   /* the name a learner confirmed as "I am a new learner", after the sheet said the name exists */
+      /* the chosen code is taken: say so and offer a free one */
+      function taken(code, suggest) {
+        Core.say(fb, 'Mã số <b>' + code + '</b> đã có bạn khác dùng rồi. Em chọn mã khác nha' + (suggest ? ', ví dụ: <b>' + suggest + '</b>' : '') + '.' +
+          (suggest ? ' <button class="btn btn-small" type="button" id="use-code">Dùng mã ' + suggest + '</button>' : ''), 'bad');
+        var u = document.getElementById('use-code'), input = document.getElementById('new-code');
+        if (u) Core.on(u, function () { input.value = suggest; fb.className = 'feedback'; fb.innerHTML = ''; });
+        input.value = ''; input.focus();
+      }
       document.getElementById('add-name').addEventListener('submit', function (e) {
         e.preventDefault();
-        var name = Core.cleanName(document.getElementById('new-name').value);
+        var name = Core.cleanName(document.getElementById('new-name').value), code = document.getElementById('new-code').value.replace(/\D/g, '');
         if (!name) { Core.say(fb, 'Em gõ tên của mình vào ô trước nha.', 'info'); return; }
+        if (code.length !== 4) { Core.say(fb, 'Em tự chọn một mã số có đúng <b>4 chữ số</b>, ví dụ: ' + Core.freeCode() + '.', 'info'); return; }
         if (Core.hasProfile(name)) {
-          askCode(name, 'Tên này đã có trên máy. Nếu là em, hãy nhập mã số. Nếu em là bạn khác trùng tên, hãy thêm một chữ vào tên, ví dụ: ' + esc(name) + ' B.');
+          if (Core.checkCode(name, code)) { Core.useProfile(name); refresh(); return; }
+          askCode(name, 'Trên máy này đã có bạn tên ' + esc(name) + ' với mã số khác. Nếu là em, hãy nhập đúng mã số của mình. Nếu em là bạn khác trùng tên, bấm Tên khác rồi thêm một chữ vào tên, ví dụ: ' + esc(name) + ' B.');
           return;
         }
-        Core.addProfile(name);
-        refresh();
-        showCode(name);
+        if (Core.codeOwner(code)) { taken(code, Core.freeCode()); return; }
+        function create() { Core.addProfile(name, code); refresh(); showCode(name); }
+        /* no sheet, or the sheet cannot be reached: the learner still gets in (the sheet settles a clash later) */
+        if (!Core.sync || !Core.sync.on || name.indexOf('__') === 0) { create(); return; }
+        var go = document.getElementById('new-go');
+        go.disabled = true;
+        Core.say(fb, 'Đang kiểm tra mã số...', 'info');
+        Core.sync.call({ action: 'enter', name: name, code: code, force: force === name }, function (err, res) {
+          go.disabled = false;
+          if (err || !res) { create(); return; }
+          if (res.found) { Core.restoreProfile(Core.cleanName(res.name || name), code, res.progress); refresh(); return; }   /* the learner already exists: back in, with the stars */
+          if (res.taken) { taken(code, Core.codeOwner(res.suggest) ? Core.freeCode() : res.suggest); return; }
+          if (res.nameExists) {
+            Core.say(fb, 'Tên <b>' + esc(name) + '</b> đã có trong lớp với mã số khác. Nếu em là bạn đó, hãy nhập đúng mã số cũ. Nếu em là bạn mới trùng tên: ' +
+              '<button class="btn btn-small" type="button" id="new-me">Em là bạn mới</button>', 'info');
+            Core.on(document.getElementById('new-me'), function () { force = name; go.click(); });
+            return;
+          }
+          /* created in the sheet: now on this device */
+          create();
+        });
       });
     }
     /* lessons open only when someone is learning */

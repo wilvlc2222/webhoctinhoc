@@ -90,16 +90,19 @@
   Core.bubbleText = function (kind) {
     if (kind === 'bad') return '';
     if (justGem) return 'Đúng ngay lần đầu!';
-    return combo >= 2 ? 'Đúng liên tiếp x' + combo + '!' : '';
+    return combo >= 2 && !repeat ? 'Đúng liên tiếp x' + combo + '!' : '';
   };
   var say = Core.say;
   Core.say = function (box, text, type) {
     var ans = isAnswer(box);
     if (ans && type === 'bad') { root(box)._wrong = true; combo = 0; }
-    if (ans && type === 'good') { var now = new Date().getTime(); if (now - lastGood > 80) combo++; lastGood = now; }   /* a quiz says "good" and then celebrates in the same instant: that is one right answer */
+    if (ans && type === 'good' && !repeat) { var now = new Date().getTime(); if (now - lastGood > 80) combo++; lastGood = now; }   /* a quiz says "good" and then celebrates in the same instant: that is one right answer */
     say(box, text, type);
-    if (ans && type === 'good' && combo >= 2) chip(box, 'combo-chip', 'Đúng liên tiếp x' + combo);
+    if (ans && type === 'good' && combo >= 2 && !repeat) chip(box, 'combo-chip', 'Đúng liên tiếp x' + combo);
   };
+  /* an exercise with a "Kiểm tra" button can be checked again and again once it is right:
+     only its first right check counts for the combo */
+  var finished = {}, repeat = false;
   /* small labels that float on the top right corner of the feedback line: they take no room, so no step grows */
   function chip(box, cls, html) {
     var c = box.querySelector('.fb-chips');
@@ -111,8 +114,11 @@
     var key = gemKey(lessonId, activityId), gem = false;
     if (isAnswer(box) && !root(box)._wrong && !quiet() && !Core.gems.has(key)) { Core.gems.add(key); gem = true; }
     justGem = gem;
+    repeat = !!finished[key];
+    finished[key] = true;
     celebrate(box, lessonId, activityId, text);
     justGem = false;
+    repeat = false;
     if (gem) chip(box, 'gem-chip', GEM + '+1 kim cương');
     if (!quiet()) { checkBadges(); lessonDone(lessonId); }
   };

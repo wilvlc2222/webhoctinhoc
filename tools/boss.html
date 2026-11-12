@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Boss challenge check</title>
+<style>
+  body { font: 14px/1.4 Consolas, monospace; margin: 12px; background: #fff; color: #000; }
+  .bad { color: #c00; font-weight: bold; }
+  iframe { position: fixed; left: 0; top: 0; width: 1300px; height: 700px; border: 0; visibility: hidden; }
+</style>
+</head>
+<body>
+<p>Dev tool. For each grade and topic it loads the topic's lessons in hidden frames the way <code>thuthach.html</code> does,
+and counts the questions left after that page's <code>NEEDS_PAGE</code> filter (the filter is read from thuthach.html itself).
+A topic needs at least 4 questions for a challenge. Result also in <code>window.bossShort</code> and <code>window.bossData</code>.
+Add <code>?list=1</code> to print the questions the filter dropped.</p>
+<pre id="out"></pre>
+<script>
+(function () {
+  var out = document.getElementById('out'), list = /[?&]list=1/.test(location.search);
+  function log(s, bad) { var e = document.createElement('div'); if (bad) e.className = 'bad'; e.textContent = s; out.appendChild(e); }
+  function plain(d, html) { var x = d.createElement('div'); x.innerHTML = html; return (x.textContent || '').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''); }
+  function frame(src) {
+    return new Promise(function (res) {
+      var f = document.createElement('iframe'), done = false;
+      function fin() { if (!done) { done = true; res(f); } }
+      f.onload = function () { setTimeout(fin, 400); };
+      setTimeout(fin, 12000);
+      f.src = src; document.body.appendChild(f);
+    });
+  }
+  async function run() {
+    var src = await (await fetch('../thuthach.html')).text();
+    var m = /var NEEDS_PAGE = \/(.+)\/i;/.exec(src);
+    if (!m) { log('NEEDS_PAGE not found in thuthach.html', true); window.bossShort = 'ERROR'; return; }
+    var NEEDS_PAGE = new RegExp(m[1], 'i');
+    var f0 = await frame('../lop4/bai01.html'), C = f0.contentWindow.Core, data = {}, low = [], cache = {};
+    for (var g = 4; g <= 5; g++) for (var t = 1; t <= 6; t++) {
+      var lessons = C.topicLessons(g, t), seen = {}, kept = 0, dropped = [], per = [];
+      for (var i = 0; i < lessons.length; i++) {
+        var id = lessons[i];
+        if (!cache[id]) {
+          var f = await frame('../' + C.lessonHref(id)), qs = [];
+          try {
+            var bank = (f.contentWindow.Core && f.contentWindow.Core.quizBank) || [];
+            bank.forEach(function (b) {
+              if (b.type === 'quiz') (b.questions || []).forEach(function (q) { qs.push([q.q, q.options, q.answer]); });
+              if (b.type === 'tf') (b.items || []).forEach(function (q) { qs.push([q.t, ['Đúng', 'Sai'], q.ok ? 0 : 1]); });
+            });
+          } catch (e) {}
+          cache[id] = qs.map(function (q) { return [plain(document, q[0]), q[1], q[2]]; });
+          document.body.removeChild(f);
+        }
+        var n = 0;
+        cache[id].forEach(function (q) {
+          var key = q[0], options = q[1], answer = q[2];
+          if (!key || seen[key] || !options || options.length < 2 || answer == null || !options[answer]) return;
+          if (NEEDS_PAGE.test(key)) { dropped.push(id + ': ' + key); return; }
+          seen[key] = 1; kept++; n++;
+        });
+        per.push(id.replace(/^l\d-/, '') + '=' + n);
+      }
+      data[g + '-' + t] = { kept: kept, dropped: dropped.length, lessons: lessons.length };
+      if (kept < 4) low.push(g + '-' + t);
+      log('Lớp ' + g + ' chủ đề ' + t + ': ' + kept + ' câu dùng được, ' + dropped.length + ' câu bị lọc (' + per.join(', ') + ')', kept < 4);
+      if (list) dropped.forEach(function (d) { log('    - ' + d); });
+    }
+    document.body.removeChild(f0);
+    window.bossData = data;
+    window.bossShort = low.length ? 'LOW: ' + low.join(', ') : 'ALL OK (12 topics)';
+    log(window.bossShort, low.length > 0);
+  }
+  run();
+})();
+</script>
+</body>
+</html>
