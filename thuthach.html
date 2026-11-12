@@ -99,6 +99,8 @@
     function add(q, options, answer) {
       var key = plain(q);
       if (!key || seen[key] || NEEDS_PAGE.test(key.replace(OPTIONS_BELOW, '$1 nào')) || !options || options.length < 2 || answer == null || !options[answer]) return;
+      /* options that differ only by a picture drawn with the lesson's own styles cannot be told apart here */
+      for (var o = 0, texts = {}; o < options.length; o++) { var ot = plain(String(options[o])); if (!ot || texts[ot]) return; texts[ot] = 1; }
       seen[key] = 1;
       bank.push({ q: String(q).replace(/^\s*(<b>)?\s*(Câu|Bài|Luyện tập|Vận dụng)\s+\d+[.:]?\s*(<\/b>)?\s*/i, ''), options: options, answer: answer });
     }
@@ -142,6 +144,7 @@
     hpMax = hp = Math.min(TOTAL, bank.length);   /* a wrong question goes back to the end of the queue, so it never runs out */
     hearts = 3; asked = 0; t0 = new Date().getTime();
     bars(); ask();
+    if (Core.music) Core.music('boss');
   }
 
   function ask() {
@@ -181,6 +184,7 @@
   }
 
   function win() {
+    if (Core.music) Core.music(null);
     var secs = Math.round((new Date().getTime() - t0) / 1000), first = !Core.gems.bossWon(grade, topic), i;
     if (first) for (i = 1; i <= 3; i++) Core.gems.add('boss_g' + grade + '_t' + topic + '_' + i);
     document.getElementById('boss-bug').className = 'boss-bug is-down';
@@ -193,6 +197,7 @@
     if (Core.checkBadges) setTimeout(function () { Core.checkBadges(); }, 1300);
   }
   function lose() {
+    if (Core.music) Core.music(null);
     screen('<h2>Bọ Lỗi thắng lần này</h2><p class="boss-lead">Em được <b>' + (hpMax - hp) + '/' + hpMax + ' điểm</b>. Không sao cả! Em xem lại các bài của chủ đề ' + topic + ' rồi đấu lại nha. Bọ Lỗi còn <b>' + hp + '</b> máu.</p>' +
       '<div class="bip-actions"><a class="btn" href="index.html">&lsaquo; Về trang chủ</a><button class="btn btn-primary" id="boss-again" type="button">Đấu lại</button></div>');
     Core.on(document.getElementById('boss-again'), ready);

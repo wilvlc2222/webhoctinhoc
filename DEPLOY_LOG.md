@@ -95,3 +95,15 @@
    - Form "Ai đang học?" hiển thị rõ ràng trên đầu trang để nhập tên và mã số.
    - Nút nhắc nhập tên hiển thị ngay phía trên danh sách bài học và tự cuộn tới ô nhập tên khi chạm vào.
    - Danh sách bài học hiển thị tối ưu cho màn hình mực đen trắng (E-ink).
+
+---
+
+## 🔧 SỬA LỖI TRANG CHỦ SAU BẢN bf16da9
+
+### [2026-11-12 16:01] Bước 9: Trang chủ thiếu thông tin, không tương tác được (PPW5 và mọi thiết bị)
+- **Trạng thái:** ✅ Đã sửa và commit trong máy, CHƯA push (bản live vẫn còn lỗi cho tới khi push)
+- **Nguyên nhân gốc:** bản `bf16da9` thêm `fitStage()` vào `applyEink()` trong `assets/js/core.js`. `applyEink()` chạy ngay đầu tệp, lúc `Core.isStage` chưa được khai báo → `TypeError: Core.isStage is not a function` → cả `core.js` dừng giữa chừng → trang chủ không vẽ danh sách bài, không gắn được nút. Lỗi xảy ra trên mọi trình duyệt, không riêng PPW5.
+- **Sửa:** `if (Core.isStage) fitStage();` (lần gọi đầu bỏ qua, phần stage tự gọi `fitStage()` ngay sau khi khai báo).
+- **Đã kiểm (giả lập 758×1024, chế độ màn hình mực):** không còn lỗi JS, 17 bài lớp 4 hiện đủ, ô tên và mã số bấm được, đăng nhập được, trang bài học mở được. `tools/fit.html?pages=all&solve=1` → ALL OK (35 pages).
+- **Chưa kiểm:** trên máy PPW5 thật.
+- **Cùng commit:** thử thách Bọ Lỗi 20 máu = 20 điểm (lớp 4 đủ 20+ câu mỗi chủ đề, `tools/boss.html?g=4`), nhạc nền (bài học và trận đấu), nút bật/tắt nhạc.

@@ -388,6 +388,10 @@ html.eink .light span[class^="on-"] { background: #000; color: #fff; }
 .lesson-title .lesson-kicker { font-size: 12px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lesson-title h1 { font-size: 20px; margin: 0; }
 .lesson-top .topbar-right { flex: none; }
+/* on the fixed stage the top bar must stay one line high, or a long title pushes the step out of the 700px */
+@media (min-width: 900px) and (orientation: landscape) {
+  .lesson-title h1 { font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
 @media (max-width: 680px) {
   .lesson-top .wrap { flex-wrap: wrap; }
   .lesson-title { flex-basis: calc(100% - 60px); }
@@ -1623,8 +1627,9 @@ html.eink .map-stars .star-count::before { color: #000; }
 .boss-title { margin: 0; font-size: 26px; }
 .boss-topic { margin: 0 0 8px; color: var(--muted); }
 .boss-stat { margin-top: 10px; font-weight: 700; font-size: 15px; }
-.boss-hp { display: flex; gap: 4px; justify-content: center; margin-top: 4px; min-height: 18px; }
-.boss-hp span { width: 26px; height: 18px; border: 2px solid var(--ink); border-radius: 5px; background: #fff; }
+/* 20 HP in two rows of ten */
+.boss-hp { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 4px; min-height: 18px; }
+.boss-hp span { box-sizing: border-box; flex: 0 0 8%; margin: 2px 1%; height: 16px; border: 2px solid var(--ink); border-radius: 5px; background: #fff; }
 .boss-hp span.on { background: #845ef7; }
 .boss-hearts { margin-top: 4px; }
 .heart-ico { width: 30px; height: 30px; margin: 0 2px; }

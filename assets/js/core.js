@@ -40,7 +40,7 @@
       btn.setAttribute('aria-pressed', on ? 'true' : 'false');
       btn.innerHTML = on ? 'Màn hình mực: BẬT' : 'Màn hình mực: tắt';
     }
-    if (typeof fitStage === 'function') fitStage();
+    if (Core.isStage) fitStage();   /* not on the first call: the stage code below is not set up yet */
   }
   applyEink();
   /* step delay for animations: e-ink screens refresh slowly */

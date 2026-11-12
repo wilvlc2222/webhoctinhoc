@@ -11,15 +11,17 @@
 </head>
 <body>
 <p>Dev tool. For each grade and topic it loads the topic's lessons in hidden frames the way <code>thuthach.html</code> does,
-and counts the questions left after that page's <code>NEEDS_PAGE</code> filter (the filter is read from thuthach.html itself).
-A topic needs at least 4 questions for a challenge. Result also in <code>window.bossShort</code> and <code>window.bossData</code>.
-Add <code>?list=1</code> to print the questions the filter dropped.</p>
+and counts the questions left after that page's filters (<code>NEEDS_PAGE</code> and <code>OPTIONS_BELOW</code> are read from thuthach.html itself).
+The extra questions of <code>assets/js/bossbank.js</code> are counted too. A topic needs 20 questions (20 points).
+Result also in <code>window.bossShort</code> and <code>window.bossData</code>.
+Add <code>?list=1</code> to print the questions the filter dropped, <code>?g=4</code> to check one grade only.</p>
 <pre id="out"></pre>
+<script src="../assets/js/bossbank.js"></script>
 <script>
 (function () {
-  var out = document.getElementById('out'), list = /[?&]list=1/.test(location.search);
+  var out = document.getElementById('out'), list = /[?&]list=1/.test(location.search), only = /[?&]g=(\d)/.exec(location.search), NEED = 20;
   function log(s, bad) { var e = document.createElement('div'); if (bad) e.className = 'bad'; e.textContent = s; out.appendChild(e); }
-  function plain(d, html) { var x = d.createElement('div'); x.innerHTML = html; return (x.textContent || '').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''); }
+  function plain(html) { var x = document.createElement('div'); x.innerHTML = html; return (x.textContent || '').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''); }
   function frame(src) {
     return new Promise(function (res) {
       var f = document.createElement('iframe'), done = false;
@@ -31,12 +33,25 @@ Add <code>?list=1</code> to print the questions the filter dropped.</p>
   }
   async function run() {
     var src = await (await fetch('../thuthach.html')).text();
-    var m = /var NEEDS_PAGE = \/(.+)\/i;/.exec(src);
-    if (!m) { log('NEEDS_PAGE not found in thuthach.html', true); window.bossShort = 'ERROR'; return; }
-    var NEEDS_PAGE = new RegExp(m[1], 'i');
+    var m = /var NEEDS_PAGE = \/(.+)\/i;/.exec(src), m2 = /var OPTIONS_BELOW = \/(.+)\/gi;/.exec(src);
+    if (!m || !m2) { log('NEEDS_PAGE or OPTIONS_BELOW not found in thuthach.html', true); window.bossShort = 'ERROR'; return; }
+    var NEEDS_PAGE = new RegExp(m[1], 'i'), OPTIONS_BELOW = new RegExp(m2[1], 'gi');
     var f0 = await frame('../lop4/bai01.html'), C = f0.contentWindow.Core, data = {}, low = [], cache = {};
-    for (var g = 4; g <= 5; g++) for (var t = 1; t <= 6; t++) {
+    var g0 = only ? +only[1] : 4, g1 = only ? +only[1] : 5;
+    for (var g = g0; g <= g1; g++) for (var t = 1; t <= 6; t++) {
       var lessons = C.topicLessons(g, t), seen = {}, kept = 0, dropped = [], per = [];
+      /* the same test as add() in thuthach.html */
+      var take = function (id, q, options, answer) {
+        var key = plain(q);
+        if (!key || seen[key] || !options || options.length < 2 || answer == null || !options[answer]) return false;
+        if (NEEDS_PAGE.test(key.replace(OPTIONS_BELOW, '$1 nào'))) { dropped.push(id + ': ' + key); return false; }
+        for (var o = 0, texts = {}; o < options.length; o++) {
+          var ot = plain(String(options[o]));
+          if (!ot || texts[ot]) { dropped.push(id + ' (đáp án giống nhau): ' + key); return false; }
+          texts[ot] = 1;
+        }
+        seen[key] = 1; kept++; return true;
+      };
       for (var i = 0; i < lessons.length; i++) {
         var id = lessons[i];
         if (!cache[id]) {
@@ -44,30 +59,28 @@ Add <code>?list=1</code> to print the questions the filter dropped.</p>
           try {
             var bank = (f.contentWindow.Core && f.contentWindow.Core.quizBank) || [];
             bank.forEach(function (b) {
-              if (b.type === 'quiz') (b.questions || []).forEach(function (q) { qs.push([q.q, q.options, q.answer]); });
-              if (b.type === 'tf') (b.items || []).forEach(function (q) { qs.push([q.t, ['Đúng', 'Sai'], q.ok ? 0 : 1]); });
+              if (b.type === 'quiz') (b.questions || []).forEach(function (q) { qs.push([String(q.q), (q.options || []).map(String), q.answer]); });
+              if (b.type === 'tf') (b.items || []).forEach(function (q) { qs.push([String(q.t), ['Đúng', 'Sai'], q.ok ? 0 : 1]); });
             });
           } catch (e) {}
-          cache[id] = qs.map(function (q) { return [plain(document, q[0]), q[1], q[2]]; });
+          cache[id] = qs;
           document.body.removeChild(f);
         }
         var n = 0;
-        cache[id].forEach(function (q) {
-          var key = q[0], options = q[1], answer = q[2];
-          if (!key || seen[key] || !options || options.length < 2 || answer == null || !options[answer]) return;
-          if (NEEDS_PAGE.test(key)) { dropped.push(id + ': ' + key); return; }
-          seen[key] = 1; kept++; n++;
-        });
+        cache[id].forEach(function (q) { if (take(id, q[0], q[1], q[2])) n++; });
         per.push(id.replace(/^l\d-/, '') + '=' + n);
       }
+      var ex = (window.BOSS_EXTRA || {})[g + '-' + t] || [], nx = 0;
+      ex.forEach(function (x) { if (x.t ? take('extra', x.t, ['Đúng', 'Sai'], x.ok ? 0 : 1) : take('extra', x.q, x.options, x.answer)) nx++; });
+      if (ex.length) per.push('thêm=' + nx + '/' + ex.length);
       data[g + '-' + t] = { kept: kept, dropped: dropped.length, lessons: lessons.length };
-      if (kept < 4) low.push(g + '-' + t);
-      log('Lớp ' + g + ' chủ đề ' + t + ': ' + kept + ' câu dùng được, ' + dropped.length + ' câu bị lọc (' + per.join(', ') + ')', kept < 4);
+      if (kept < NEED) low.push(g + '-' + t);
+      log('Lớp ' + g + ' chủ đề ' + t + ': ' + kept + ' câu dùng được, ' + dropped.length + ' câu bị lọc (' + per.join(', ') + ')', kept < NEED);
       if (list) dropped.forEach(function (d) { log('    - ' + d); });
     }
     document.body.removeChild(f0);
     window.bossData = data;
-    window.bossShort = low.length ? 'LOW: ' + low.join(', ') : 'ALL OK (12 topics)';
+    window.bossShort = low.length ? 'LOW: ' + low.join(', ') : 'ALL OK (' + (only ? 6 : 12) + ' topics, ' + NEED + '+ questions each)';
     log(window.bossShort, low.length > 0);
   }
   run();
