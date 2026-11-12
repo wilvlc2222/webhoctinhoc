@@ -3,15 +3,14 @@
 Cập nhật: 2026-11-12. Tạm dừng một tuần theo lời master. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới tới Lớp 5**.
 
 Trạng thái mã nguồn lúc dừng:
-- Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đang ở commit `5ccb732`.
-- Trong máy có thêm commit `b898f60` (gộp danh sách bài về `assets/js/lessons.js`, sửa 2 câu chữ) **chưa push**.
+- Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đang ở commit `b898f60` (đã push: sửa lỗi trang chủ, Bọ Lỗi 20 điểm, nhạc nền, gộp danh sách bài về `assets/js/lessons.js`).
+- Trong máy chỉ còn commit thêm tệp `plan.md` này là chưa push.
 
 ---
 
 ## 1. Cần master làm hoặc xác nhận (em không tự làm được)
 
-- [ ] **Push `b898f60`** lên GitHub bằng token của `wilvlc2222` (`git push origin main`). Không gấp: bản live vẫn chạy khi thiếu commit này.
-- [ ] **Thử trên Kindle PPW5 thật** sau bản sửa `5ccb732`: trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
+- [ ] **Thử trên Kindle PPW5 thật** sau bản sửa lỗi trang chủ (`5ccb732`, đã có trên bản live): trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
 - [ ] **Nghe thử nhạc**: nhạc bài học (nhẹ, chậm) và nhạc trận Bọ Lỗi. Em chỉ đo được là nhạc chạy và tắt đúng lúc, không nghe được giai điệu. Nếu chưa hợp thì sửa nốt nhạc trong `SONGS` của `assets/js/sound.js`.
 - [ ] **Duyệt 38 câu hỏi em viết thêm** cho Bọ Lỗi lớp 4 (chủ đề 2, 4, 6) trong `assets/js/bossbank.js`: đúng nội dung sách chưa, câu chữ có hợp với học sinh không.
 
