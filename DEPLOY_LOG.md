@@ -82,5 +82,16 @@
   4. Commit và push lên GitHub Pages để cập nhật bản live.
 
 ### [2026-11-12 15:31] Bước 8: Commit và Push code lên GitHub Pages
-- **Trạng thái:** 🔄 Đang thực hiện
-- **Mục tiêu:** Push các sửa đổi lên branch `main` của repo `wilvlc2222/webhoctinhoc`
+- **Trạng thái:** ✅ Hoàn thành
+- **Commit:** `bf16da9` - "Fix Kindle Paperwhite 5 and portrait layout touch and scrolling issues"
+- **Kết quả:** Đã push lên GitHub repository `wilvlc2222/webhoctinhoc`, GitHub Pages đang tự động rebuild (mất ~1-2 phút). Đã gỡ token khỏi remote URL an toàn.
+
+---
+
+## 🎯 KẾT QUẢ SỬA LỖI PPW5:
+1. Màn hình máy đọc sách Kindle Paperwhite 5 (E-ink portrait) không còn bị ép vào khung ngang 1300x700 nữa.
+2. Đã bỏ toàn bộ CSS `transform: scale` trên thiết bị E-ink, khôi phục tương tác cảm ứng tự nhiên trên màn hình cảm ứng của Kindle.
+3. Trang chủ hiển thị dạng danh sách dọc (stacked single-column) cuộn tự nhiên:
+   - Form "Ai đang học?" hiển thị rõ ràng trên đầu trang để nhập tên và mã số.
+   - Nút nhắc nhập tên hiển thị ngay phía trên danh sách bài học và tự cuộn tới ô nhập tên khi chạm vào.
+   - Danh sách bài học hiển thị tối ưu cho màn hình mực đen trắng (E-ink).
