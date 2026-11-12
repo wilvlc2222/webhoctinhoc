@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/main.css">
 <script src="assets/js/icons.js"></script>
+<script src="assets/js/lessons.js"></script>
 <script src="assets/js/core.js"></script>
 </head>
 <body>
@@ -50,42 +51,8 @@
 
 <script>
 (function () {
-  /* href set = lesson is ready; stars = number of activities that give a star */
-  var GRADES = {
-    '4': [
-      { topic: 'Chủ đề 1. Máy tính và em', lessons: [
-        { n: 1, t: 'Phần cứng và phần mềm máy tính', id: 'l4-b01', href: 'lop4/bai01.html', stars: 9 },
-        { n: 2, t: 'Gõ bàn phím đúng cách', id: 'l4-b02', href: 'lop4/bai02.html', stars: 11 } ] },
-      { topic: 'Chủ đề 2. Mạng máy tính và Internet', lessons: [ { n: 3, t: 'Thông tin trên trang web', id: 'l4-b03', href: 'lop4/bai03.html', stars: 11 } ] },
-      { topic: 'Chủ đề 3. Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin', lessons: [
-        { n: 4, t: 'Tìm kiếm thông tin trên Internet', id: 'l4-b04', href: 'lop4/bai04.html', stars: 11 }, { n: 5, t: 'Thao tác với tệp và thư mục', id: 'l4-b05', href: 'lop4/bai05.html', stars: 13 } ] },
-      { topic: 'Chủ đề 4. Đạo đức, pháp luật và văn hoá trong môi trường số', lessons: [ { n: 6, t: 'Sử dụng phần mềm khi được phép', id: 'l4-b06', href: 'lop4/bai06.html', stars: 10 } ] },
-      { topic: 'Chủ đề 5. Ứng dụng tin học', lessons: [
-        { n: 7, t: 'Tạo bài trình chiếu', id: 'l4-b07', href: 'lop4/bai07.html', stars: 11 }, { n: 8, t: 'Định dạng văn bản trên trang chiếu', id: 'l4-b08', href: 'lop4/bai08.html', stars: 10 }, { n: 9, t: 'Hiệu ứng chuyển trang', id: 'l4-b09', href: 'lop4/bai09.html', stars: 9 },
-        { n: 10, t: 'Phần mềm soạn thảo văn bản', id: 'l4-b10', href: 'lop4/bai10.html', stars: 10 }, { n: 11, t: 'Chỉnh sửa văn bản', id: 'l4-b11', href: 'lop4/bai11.html', stars: 12 },
-        { n: '12A', t: 'Thực hành sử dụng công cụ đa phương tiện', id: 'l4-b12a', href: 'lop4/bai12a.html', stars: 5 }, { n: '12B', t: 'Phần mềm luyện gõ bàn phím', id: 'l4-b12b', href: 'lop4/bai12b.html', stars: 6 } ] },
-      { topic: 'Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính', lessons: [
-        { n: 13, t: 'Chơi với máy tính', id: 'l4-b13', href: 'lop4/bai13.html', stars: 9 }, { n: 14, t: 'Khám phá môi trường lập trình trực quan', id: 'l4-b14', href: 'lop4/bai14.html', stars: 9 },
-        { n: 15, t: 'Tạo chương trình máy tính để diễn tả ý tưởng', id: 'l4-b15', href: 'lop4/bai15.html', stars: 9 }, { n: 16, t: 'Chương trình của em', id: 'l4-b16', href: 'lop4/bai16.html', stars: 7 } ] }
-    ],
-    '5': [
-      { topic: 'Chủ đề 1. Máy tính và em', lessons: [ { n: 1, t: 'Em có thể làm gì với máy tính?', id: 'l5-b01', href: 'lop5/bai01.html', stars: 6 } ] },
-      { topic: 'Chủ đề 2. Mạng máy tính và Internet', lessons: [ { n: 2, t: 'Tìm kiếm thông tin trên website', id: 'l5-b02', href: 'lop5/bai02.html', stars: 9 } ] },
-      { topic: 'Chủ đề 3. Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin', lessons: [
-        { n: 3, t: 'Tìm kiếm thông tin trong giải quyết vấn đề', id: 'l5-b03', href: 'lop5/bai03.html', stars: 10 }, { n: 4, t: 'Cây thư mục', id: 'l5-b04', href: 'lop5/bai04.html', stars: 15 } ] },
-      { topic: 'Chủ đề 4. Đạo đức, pháp luật và văn hoá trong môi trường số', lessons: [ { n: 5, t: 'Bản quyền nội dung thông tin', id: 'l5-b05', href: 'lop5/bai05.html', stars: 11 } ] },
-      { topic: 'Chủ đề 5. Ứng dụng tin học', lessons: [
-        { n: 6, t: 'Định dạng kí tự và bố trí hình ảnh trong văn bản', id: 'l5-b06', href: 'lop5/bai06.html', stars: 13 }, { n: 7, t: 'Thực hành soạn thảo văn bản', id: 'l5-b07', href: 'lop5/bai07.html', stars: 10 },
-        { n: '8A', t: 'Làm quen với phần mềm đồ hoạ', id: 'l5-b08a', href: 'lop5/bai08a.html', stars: 14 }, { n: '9A', t: 'Sử dụng phần mềm đồ hoạ tạo sản phẩm số', id: 'l5-b09a', href: 'lop5/bai09a.html', stars: 8 },
-        { n: '8B', t: 'Làm sản phẩm thủ công theo video hướng dẫn', id: 'l5-b08b', href: 'lop5/bai08b.html', stars: 10 }, { n: '9B', t: 'Thực hành tạo đồ dùng gia đình theo video hướng dẫn', id: 'l5-b09b', href: 'lop5/bai09b.html', stars: 9 } ] },
-      { topic: 'Chủ đề 6. Giải quyết vấn đề với sự trợ giúp của máy tính', lessons: [
-        { n: 10, t: 'Cấu trúc tuần tự', id: 'l5-b10', href: 'lop5/bai10.html', stars: 10 },
-        { n: 11, t: 'Cấu trúc lặp', id: 'l5-b11', href: 'lop5/bai11.html', stars: 10 },
-        { n: 12, t: 'Thực hành sử dụng lệnh lặp', id: 'l5-b12', href: 'lop5/bai12.html', stars: 9 }, { n: 13, t: 'Cấu trúc rẽ nhánh', id: 'l5-b13', href: 'lop5/bai13.html', stars: 10 },
-        { n: 14, t: 'Sử dụng biến trong chương trình', id: 'l5-b14', href: 'lop5/bai14.html', stars: 11 }, { n: 15, t: 'Sử dụng biểu thức trong chương trình', id: 'l5-b15', href: 'lop5/bai15.html', stars: 10 },
-        { n: 16, t: 'Từ kịch bản đến chương trình', id: 'l5-b16', href: 'lop5/bai16.html', stars: 10 } ] }
-    ]
-  };
+  /* the lesson list lives in assets/js/lessons.js (one source for this page and game.js) */
+  var GRADES = window.LESSON_GRADES;
   var GRADE_KEY = 'whth-grade';
 
   /* the wide stage shows two columns (see main.css); narrow screens show one list */
@@ -287,7 +254,7 @@
       '<div class="who-row"><input class="input" id="del-key" type="password" placeholder="Mật khẩu giáo viên" aria-label="Mật khẩu giáo viên">' +
       '<button class="btn btn-primary" type="submit" id="del-go">Xoá tên</button></div></form></div>' +
       '<button class="btn btn-small" id="code-back" type="button">&lsaquo; Thôi, không xoá</button><div class="feedback" id="who-fb"></div>' +
-      '<p class="who-forgot">Sao lưu trên máy này của bạn ấy sẽ mất. Kết quả đã gửi lên mạng thì vẫn còn trong bảng của thầy cô.</p>';
+      '<p class="who-forgot">Sao của bạn ấy lưu trên máy này sẽ mất. Kết quả đã gửi lên mạng thì vẫn còn trong bảng của thầy cô.</p>';
     var fb = document.getElementById('who-fb'), go = document.getElementById('del-go'), key = document.getElementById('del-key');
     Core.on(document.getElementById('code-back'), renderNames);
     key.focus();

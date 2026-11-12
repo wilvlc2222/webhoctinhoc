@@ -534,13 +534,15 @@
     Core.initSteps();
   });
 
-  /* load Bíp the mascot (mascot.js), the game sounds (sound.js) and the results sync (sync.js) from the same folder as this file, on every page */
+  /* load the lesson list (lessons.js, unless the page already has it), Bíp the mascot (mascot.js), the game sounds (sound.js),
+     the results sync (sync.js) and the game layer (game.js) from the same folder as this file, on every page */
   (function () {
-    var s = document.getElementsByTagName('script'), extra = ['mascot.js', 'sound.js', 'sync.js', 'game.js'];
+    var s = document.getElementsByTagName('script'), extra = ['lessons.js', 'mascot.js', 'sound.js', 'sync.js', 'game.js'];
     for (var i = s.length - 1; i >= 0; i--) {
       var src = s[i].getAttribute('src') || '';
       if (/(^|\/)core\.js(\?|$)/.test(src)) {
         for (var k = 0; k < extra.length; k++) {
+          if (extra[k] === 'lessons.js' && window.LESSON_GRADES) continue;
           var m = document.createElement('script');
           m.src = src.replace(/core\.js/, extra[k]);
           m.async = false;

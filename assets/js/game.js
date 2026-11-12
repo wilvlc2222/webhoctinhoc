@@ -5,24 +5,27 @@
    - lesson summary card, badges, and the data the boss challenge needs
    Everything here is drawn still, so it also works on e-ink.
 
-   LESSONS repeats the lesson list of index.html (id: [grade, topic, stars]).
-   When a lesson's star total changes there, change it here too. */
+   Core.LESSONS (id: [grade, topic, stars]) is built from the one lesson list in lessons.js. */
 (function () {
   var Core = window.Core;
   if (!Core) return;
 
-  var L = Core.LESSONS = {
-    'l4-b01': [4, 1, 9], 'l4-b02': [4, 1, 11], 'l4-b03': [4, 2, 11], 'l4-b04': [4, 3, 11], 'l4-b05': [4, 3, 13], 'l4-b06': [4, 4, 10],
-    'l4-b07': [4, 5, 11], 'l4-b08': [4, 5, 10], 'l4-b09': [4, 5, 9], 'l4-b10': [4, 5, 10], 'l4-b11': [4, 5, 12], 'l4-b12a': [4, 5, 5], 'l4-b12b': [4, 5, 6],
-    'l4-b13': [4, 6, 9], 'l4-b14': [4, 6, 9], 'l4-b15': [4, 6, 9], 'l4-b16': [4, 6, 7],
-    'l5-b01': [5, 1, 6], 'l5-b02': [5, 2, 9], 'l5-b03': [5, 3, 10], 'l5-b04': [5, 3, 15], 'l5-b05': [5, 4, 11],
-    'l5-b06': [5, 5, 13], 'l5-b07': [5, 5, 10], 'l5-b08a': [5, 5, 14], 'l5-b09a': [5, 5, 8], 'l5-b08b': [5, 5, 10], 'l5-b09b': [5, 5, 9],
-    'l5-b10': [5, 6, 10], 'l5-b11': [5, 6, 10], 'l5-b12': [5, 6, 9], 'l5-b13': [5, 6, 10], 'l5-b14': [5, 6, 11], 'l5-b15': [5, 6, 10], 'l5-b16': [5, 6, 10]
-  };
-  var ORDER = [], id;
-  for (id in L) if (L.hasOwnProperty(id)) ORDER.push(id);
-  Core.TOPIC_NAMES = ['Máy tính và em', 'Mạng máy tính và Internet', 'Tổ chức lưu trữ, tìm kiếm và trao đổi thông tin',
-    'Đạo đức, pháp luật và văn hoá trong môi trường số', 'Ứng dụng tin học', 'Giải quyết vấn đề với sự trợ giúp của máy tính'];
+  var L = Core.LESSONS = {}, ORDER = [];
+  Core.TOPIC_NAMES = [];
+  (function () {
+    var G = window.LESSON_GRADES || {}, grades = ['4', '5'], g, t, k;
+    for (g = 0; g < grades.length; g++) {
+      var topics = G[grades[g]] || [];
+      for (t = 0; t < topics.length; t++) {
+        if (!Core.TOPIC_NAMES[t]) Core.TOPIC_NAMES[t] = topics[t].topic.replace(/^Chủ đề \d+\.\s*/, '');
+        for (k = 0; k < topics[t].lessons.length; k++) {
+          var l = topics[t].lessons[k];
+          L[l.id] = [+grades[g], t + 1, l.stars];
+          ORDER.push(l.id);
+        }
+      }
+    }
+  })();
   /* 'l5-b08a' → 'lop5/bai08a.html' */
   Core.lessonHref = function (lessonId) { return lessonId.replace(/^l(\d)-b/, 'lop$1/bai') + '.html'; };
   Core.topicLessons = function (grade, topic) {
