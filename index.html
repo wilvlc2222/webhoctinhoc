@@ -43,8 +43,8 @@
   </div>
 
   <div class="home-main">
+    <button class="gate-note" id="gate-note" type="button">Em nhập tên ở ô <b>Ai đang học?</b> để bắt đầu học nha.</button>
     <div id="lessons"></div>
-    <button class="gate-note" id="gate-note" type="button">Em nhập tên ở bên trái để bắt đầu học nha.</button>
   </div>
 </main>
 
@@ -89,7 +89,10 @@
   var GRADE_KEY = 'whth-grade';
 
   /* the wide stage shows two columns (see main.css); narrow screens show one list */
-  function isWide() { return !!(window.matchMedia && window.matchMedia('(min-width: 900px)').matches); }
+  function isWide() {
+    if (window.Core && Core.isStage) return Core.isStage();
+    return !!(window.matchMedia && window.matchMedia('(min-width: 900px) and (orientation: landscape)').matches);
+  }
   var shownGrade = null;
   window.addEventListener('resize', function () {
     var host = document.getElementById('lessons');
@@ -412,8 +415,12 @@
     function nudge() {
       var input = document.getElementById('new-name'), fb = document.getElementById('who-fb');
       if (!input) return;
-      Core.say(fb, 'Em nhập tên trước rồi mới vào học được nha.', 'info');
+      Core.say(fb, 'Em nhập tên ở ô <b>Ai đang học?</b> trước rồi mới vào học được nha.', 'info');
       input.focus();
+      var whoBox = document.getElementById('who-box') || document.querySelector('.profile-box');
+      if (whoBox && whoBox.scrollIntoView) {
+        try { whoBox.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { whoBox.scrollIntoView(true); }
+      }
     }
     document.getElementById('gate-note').addEventListener('click', nudge, false);
     Core.on(document.getElementById('view-toggle'), function () {

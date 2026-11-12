@@ -40,6 +40,7 @@
       btn.setAttribute('aria-pressed', on ? 'true' : 'false');
       btn.innerHTML = on ? 'Màn hình mực: BẬT' : 'Màn hình mực: tắt';
     }
+    if (typeof fitStage === 'function') fitStage();
   }
   applyEink();
   /* step delay for animations: e-ink screens refresh slowly */
@@ -184,8 +185,12 @@
   Core.STAGE_W = 1300;
   Core.STAGE_H = 700;
   Core.isStage = function () {
-    if (window.matchMedia) return window.matchMedia('(min-width: 900px)').matches;
-    return window.innerWidth >= 900;
+    /* E-ink devices (Kindle PPW5, etc.) and portrait screens should NEVER use the fixed 1300x700 stage */
+    if (Core.isEink && Core.isEink()) return false;
+    var w = window.innerWidth, h = window.innerHeight;
+    if (w < 900 || w <= h) return false;
+    if (window.matchMedia) return window.matchMedia('(min-width: 900px) and (orientation: landscape)').matches;
+    return true;
   };
   /* shrink the stage when the window is smaller than 1300x700; never enlarge it */
   function fitStage() {

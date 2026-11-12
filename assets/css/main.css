@@ -444,7 +444,7 @@ html.eink .quiz-pip.active { background: #000; color: #fff; }
 }
 
 /* ===== Wide screens (tablet landscape, e.g. 1300x700): every step fits one screen ===== */
-@media (min-width: 900px) {
+@media (min-width: 900px) and (orientation: landscape) {
   .wrap { max-width: 1260px; }
   body { font-size: 18px; }
   h2 { font-size: 23px; }
@@ -504,14 +504,13 @@ html.eink .quiz-pip.active { background: #000; color: #fff; }
   .lesson-item .star-ico { width: 18px; height: 18px; }
 }
 
-/* ===== Fixed stage: on wide screens the app is always exactly 1300x700 =====
+/* ===== Fixed stage: on wide landscape screens the app is always exactly 1300x700 =====
    Bigger windows (PC) show it centred at real size; a slightly smaller window
    shrinks it to fit (core.js sets --stage-scale), so nothing gets cut off.
-   Narrow screens (phones, Kindle portrait) keep the normal scrolling layout. */
-@media (min-width: 900px) {
-  html { height: 100%; overflow: hidden; background: #cfc8b8; }
-  html.eink { background: #ffffff; }
-  body {
+   Narrow screens & portrait devices (Kindle Paperwhite, phones) keep the normal scrolling layout. */
+@media (min-width: 900px) and (orientation: landscape) {
+  html:not(.eink) { height: 100%; overflow: hidden; background: #cfc8b8; }
+  html:not(.eink) body {
     position: absolute; left: 50%; top: 50%; margin: 0;
     width: 1300px; height: 700px; overflow: hidden;
     display: flex; flex-direction: column;
@@ -519,10 +518,37 @@ html.eink .quiz-pip.active { background: #000; color: #fff; }
     transform: translate(-50%, -50%) scale(var(--stage-scale, 1));
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
   }
-  html.eink body { box-shadow: none; outline: 3px solid #000; }
-  body > header { flex: none; }
-  body > main { flex: 1 1 auto; min-height: 0; overflow-y: auto; width: 100%; }
-  body > .step-nav { flex: none; position: static; }
+  html:not(.eink) body > header { flex: none; }
+  html:not(.eink) body > main { flex: 1 1 auto; min-height: 0; overflow-y: auto; width: 100%; }
+  html:not(.eink) body > .step-nav { flex: none; position: static; }
+}
+
+/* E-ink (Kindle Paperwhite, etc.): ALWAYS natural document flow, no transforms, no fixed stage */
+html.eink {
+  height: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  background: #ffffff !important;
+}
+html.eink body {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+  display: block !important;
+  -webkit-transform: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+html.eink body > main {
+  overflow: visible !important;
+  height: auto !important;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 /* ===== Match / order / pick (widgets.js) ===== */
@@ -1409,7 +1435,7 @@ html.eink .bip-wr-left { background: #fff; border: 2px solid #000; }
 .topic-legend li { display: flex; align-items: baseline; gap: 6px; margin-bottom: 2px; }
 html.eink .topic-tag[class*="tp-"] { color: #000; }
 html.eink .lesson-num[class*="tp-"] { background: #000; }
-@media (min-width: 900px) {
+@media (min-width: 900px) and (orientation: landscape) {
   #lessons { -webkit-column-count: auto; -moz-column-count: auto; column-count: auto; }
   .lesson-row { display: flex; gap: 16px; margin-bottom: 5px; }
   .lesson-row > * { flex: 1 1 0; min-width: 0; }
@@ -1435,6 +1461,18 @@ html.eink .lesson-num[class*="tp-"] { background: #000; }
 .home-main.is-locked #lessons { opacity: 0.35; pointer-events: none; }
 .gate-note { position: absolute; left: 50%; top: 120px; width: 420px; max-width: 90%; margin-left: -210px; padding: 14px 18px; border: 3px solid var(--primary); border-radius: 16px;
   background: #fff; color: var(--ink); font: inherit; font-size: 20px; font-weight: 800; text-align: center; cursor: pointer; box-shadow: var(--shadow); }
+/* Narrow & portrait screens (PPW5, phones): gate-note becomes inline instead of absolute overlay */
+@media (max-width: 899px), (orientation: portrait) {
+  .gate-note { position: static; width: auto; max-width: none; margin: 14px 0; left: auto; top: auto; }
+}
+html.eink .gate-note {
+  position: static !important;
+  width: auto !important;
+  max-width: 100% !important;
+  margin: 14px 0 !important;
+  left: auto !important;
+  top: auto !important;
+}
 html.eink .who-code, html.eink .code-big { color: #000; background: #fff; border-color: #000; }
 html.eink .gate-note { border-color: #000; }
 html.eink .home-main.is-locked #lessons { opacity: 1; }
@@ -1485,7 +1523,7 @@ html.eink .gp-btn.plain, html.eink .gp-input { background: #fff; color: #000; bo
 html.eink .gp-tap { outline-color: #000; outline-style: dashed; }
 html.eink .gp-code { color: #000; background: #fff; border-color: #000; }
 html.eink .guide-menu .btn[aria-pressed="true"] { background: #000; color: #fff; }
-@media (min-width: 900px) {
+@media (min-width: 900px) and (orientation: landscape) {
   .guide-cols { display: flex; gap: 24px; align-items: flex-start; }
   .guide-side { flex: 0 0 200px; }
   .guide-menu { flex-direction: column; flex-wrap: nowrap; }
@@ -1496,7 +1534,7 @@ html.eink .guide-menu .btn[aria-pressed="true"] { background: #000; color: #fff;
 .guide-foot { padding: 8px 0; border-top: 2px solid var(--line); background: var(--paper); font-size: 15px; color: var(--muted); }
 .guide-foot a { font-weight: 800; }
 html.eink .guide-foot { border-color: #000; color: #000; }
-@media (min-width: 900px) { body > .guide-foot { flex: none; } }
+@media (min-width: 900px) and (orientation: landscape) { body > .guide-foot { flex: none; } }
 .who-forgot { margin-top: 10px; padding-top: 8px; border-top: 2px dashed var(--line); font-size: 14px; line-height: 1.35; color: var(--muted); }
 .who-forgot .btn { display: flex; margin-top: 6px; color: var(--bad); border-color: var(--bad); --edge: #a51d1d; }
 html.eink .who-forgot .btn { color: #000; border-color: #000; }
@@ -1572,7 +1610,7 @@ html.eink .map-dot { border-color: #000; box-shadow: none; }
 html.eink .map-node.is-current .map-dot { border-width: 6px; box-shadow: none; }
 html.eink .map-t { background: #fff; }
 html.eink .map-stars .star-count::before { color: #000; }
-@media (min-width: 900px) {
+@media (min-width: 900px) and (orientation: landscape) {
   #view-toggle { display: inline-flex; }
   .home-side:not(.no-learner) .hero p { display: none; }
 }
@@ -1601,7 +1639,7 @@ html.eink .map-stars .star-count::before { color: #000; }
 .boss-frame { position: fixed; left: -3000px; top: 0; width: 1300px; height: 700px; border: 0; visibility: hidden; }
 html.eink .boss-hp span.on { background: #000; }
 html.eink .boss-reward { color: #000; }
-@media (min-width: 900px) {
+@media (min-width: 900px) and (orientation: landscape) {
   .boss-cols { display: flex; gap: 20px; align-items: flex-start; padding-top: 14px; }
   .boss-side { flex: 0 0 260px; margin: 0; }
   .boss-main { flex: 1 1 0; min-width: 0; }
