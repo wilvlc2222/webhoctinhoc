@@ -1663,15 +1663,20 @@ html.eink .profile-box .sync-state::before { background: #000; }
   .who-foot { margin-top: 8px; padding-top: 8px; }
   .who-foot .btn { min-height: 36px; font-size: 14px; }
 }
-.boss-menu { width: 800px; }
+.boss-menu { width: 860px; }
 .boss-menu p { margin: 0 0 8px; font-size: 16px; }
 .boss-list { list-style: none; margin: 0; padding: 0; }
 .boss-list li { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-top: 2px solid var(--line); font-size: 16px; }
-.boss-name { flex: 1 1 0; min-width: 0; }
+/* four fixed columns (topic, name, stars, button) so every row lines up whatever its text */
+.boss-list li, .boss-list li.boss-head { display: grid; grid-template-columns: 84px minmax(0, 1fr) 150px 190px; gap: 12px; }
+.boss-list li > .topic-tag { justify-self: start; }
+.boss-list li.boss-head { padding: 0 0 3px; border-top: 0; color: var(--muted); font-size: 13px; font-weight: 700; }
+.boss-head span:last-child { text-align: right; }
+.boss-name { min-width: 0; }
 .boss-won { color: var(--good); font-size: 14px; }
 /* stars towards the unlock (Core.bossBar in game.js): fill = stars, notch = 80% */
-.boss-act { flex: 0 0 196px; display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-.boss-prog { flex: 0 0 132px; display: flex; flex-direction: column; gap: 1px; font-size: 13px; color: var(--muted); text-align: right; }
+.boss-act { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.boss-prog { display: flex; flex-direction: column; gap: 1px; font-size: 13px; color: var(--muted); text-align: right; }
 .boss-bar { position: relative; display: block; height: 12px; border: 2px solid var(--ink); border-radius: 99px; background: #fff; }
 .boss-bar-fill { display: block; height: 100%; max-width: 100%; border-radius: 99px; background: linear-gradient(90deg, #ffd43b, #f59f00); }
 .boss-bar-mark { position: absolute; top: -5px; bottom: -5px; width: 3px; margin-left: -1px; background: var(--ink); border-radius: 2px; }
@@ -1682,9 +1687,12 @@ html.eink .boss-bar-fill { background: #000; }
 html.eink .boss-lock { border-color: #000; color: #000; }
 html.eink .boss-list li.is-locked .boss-name, html.eink .boss-list li.is-locked .topic-tag { opacity: 1; }
 @media (max-width: 520px) {
-  .boss-list li { flex-wrap: wrap; }
-  .boss-act { flex: 1 1 auto; }
-  .boss-prog { order: 5; flex: 1 1 100%; flex-direction: row; align-items: center; gap: 8px; }
+  .boss-list li { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "tag act" "name name" "prog prog"; row-gap: 4px; }
+  .boss-list li > .topic-tag { grid-area: tag; }
+  .boss-name { grid-area: name; }
+  .boss-act { grid-area: act; }
+  .boss-list li.boss-head { display: none; }
+  .boss-prog { grid-area: prog; flex-direction: row; align-items: center; gap: 8px; }
   .boss-prog .boss-bar { flex: 1 1 0; }
 }
 #view-toggle { display: none; }
