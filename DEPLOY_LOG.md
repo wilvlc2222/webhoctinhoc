@@ -241,3 +241,11 @@
 - Kiểm tra: `fit.html?pages=all&solve=1` → ALL OK (35 pages); `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi.
 
 - 4 bản trên (nhạc 8 bài, Solo BOSS, nhịp vừa, tên Bọ Lỗi/Big Bug) gộp vào `main` (fast-forward) và push cùng ngày.
+
+## 2026-11-14 – Big Bug đổi dáng theo HP, phản ứng khi trả lời
+
+- `thuthach.html`: hình SVG `#boss-bug` có thêm các phần theo chặng; hàm `setBug()` gắn class `hp-hi` (trên 2/3 HP: tím, cười đắc ý), `hp-mid` (1/3–2/3: cam, lo, đổ mồ hôi), `hp-lo` (dưới 1/3: đỏ, mắt X, miệng chữ O, vết nứt). Thanh HP của BOSS đổi màu theo.
+- Trả lời đúng: bọ nháy trắng và rung, "-1 HP" bay lên. Sai: bọ nhào tới, há miệng cười, "Ha ha!", thanh HP của em rung. Thắng: bọ lật ngửa (như cũ).
+- `main.css`: `.bb-*`, `.boss-pop`, `bb-flash`, `bb-lunge`, `bb-float`. Màn hình mực: thân trắng/xám nhạt/xám đậm, chỉ đổi dáng; mực và giảm chuyển động thì "-1 HP"/"Ha ha!" đứng yên tới câu sau.
+- Mọi trang đổi `?v=1114d` → `?v=1114e`.
+- Kiểm tra: `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi, không tràn 1280×720; đã soát từng chặng bằng `getComputedStyle` (phần nào hiện, màu thân, cả ở màn hình mực).

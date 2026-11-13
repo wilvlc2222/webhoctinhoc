@@ -1,6 +1,6 @@
 # Việc còn lại của web Tin học vui
 
-Cập nhật: 2026-11-14. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới tới Lớp 5**. Lớp 4 chỉ còn 4 việc ở mục 1 (master thử/duyệt); phần em làm được đã xong hết.
+Cập nhật: 2026-11-14. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới tới Lớp 5**. Lớp 4 chỉ còn 5 việc ở mục 1 (master thử/duyệt); phần em làm được đã xong hết.
 
 Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịch sử đưa lên mạng ở `DEPLOY_LOG.md`.
 
@@ -13,6 +13,7 @@ Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịc
 - [ ] **Thử trên Kindle PPW5 thật** sau bản sửa lỗi trang chủ (`5ccb732`, đã có trên bản live): trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Xem luôn cỡ chữ và khoảng cách ở bố cục dọc (PPW5 cuộn tự nhiên, không có khung 1280×720). Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
 - [ ] **Đọc duyệt câu chữ trang hướng dẫn** (`huongdan.html`, 4 mục).
 - [ ] **Nghe thử nhạc mới** (2026-11-14, `assets/js/sound.js`): giờ có 8 bài: bài học `study1–4`, trang chủ `home1–2`, Bọ Lỗi `boss1–2`. Mỗi lần vào trang chọn một bài khác bài vừa nghe. Âm thanh stereo (mỗi nốt hai giọng trái/phải, có tiếng vang qua lại) và nhạc phát liền khi vào trang nếu trình duyệt cho (vào bằng cách chạm từ trang chủ thì Chrome cho; iPad có thể vẫn phải chạm một lần). Nhịp chỉnh theo lời master ("hơi chậm", rồi "nhanh vừa thôi, không quá nhanh làm trẻ em hồi hộp"): `TEMPO` trong `sound.js` = bài học 0.88, trang chủ 0.9 (nhanh hơn bản gốc chút xíu), BOSS 1.1 (êm hơn bản gốc). Số nhỏ hơn là nhanh hơn. Bài nào chưa hay thì sửa nốt nhạc trong `SONGS`.
+- [ ] **Xem thử Big Bug đổi dáng** (`thuthach.html`): tím đắc ý → cam lo → đỏ choáng theo HP; đúng thì "-1 HP", sai thì bọ nhào tới cười "Ha ha!". Dáng hay màu nào chưa ưng thì nói em sửa.
 - [ ] **Duyệt 38 câu hỏi em viết thêm** cho Bọ Lỗi lớp 4 (chủ đề 2, 4, 6) trong `assets/js/bossbank.js`: đúng nội dung sách chưa, câu chữ có hợp với học sinh không.
 
 ## 2. Lớp 4 – việc còn phải làm
@@ -26,7 +27,7 @@ Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịc
 - [x] **Câu hỏi có đáp án là khối lệnh Scratch trên trang đấu** — xong 2026-11-13. Khối lệnh hiện đúng hình và màu (kiểu dáng nằm trong `main.css`), giữ cả 3 câu. Một câu tràn 44px sau khi trả lời; đã sửa bằng cách xếp các đáp án Scratch thành một hàng (`.boss-opts-row`). Luật một hàng chỉ áp cho bố cục ngang; ở bố cục dọc 758×1024 (màn hình mực) các đáp án xếp chồng, đã đo không đè nhau, không tràn ngang.
 - [x] **Điểm Bọ Lỗi không lưu** — master quyết định 2026-11-14: không cần. Thầy cô chỉ biết thắng hay chưa (qua kim cương), "x/20" chỉ hiện cuối trận.
 - [x] **Trả lời sai không còn hiện đáp án** — xong 2026-11-14 theo lời master: `thuthach.html` chỉ tô xanh khi chọn đúng; sai thì báo "Câu này sẽ quay lại sau, em suy nghĩ kĩ nha." `tools/bossplay.js` thử lần lượt các đáp án và báo lỗi nếu đáp án đúng lộ ra. 6 chủ đề lớp 4 đều thắng 2 lần, không lỗi.
-- [ ] **Bọ Lỗi (Big Bug) đổi màu, đổi dáng theo HP và phản ứng khi trả lời** (master hỏi 2026-11-14, làm ở phiên mới). Hình con bọ là SVG trong `thuthach.html` (`#boss-bug`), CSS `.boss-bug` trong `main.css`; `bars()` biết `hp/hpMax`. Ý định: 3 chặng theo HP còn lại (trên 2/3: tím, vui; 1/3–2/3: cam, lo; dưới 1/3: đỏ, choáng, có vết nứt) bằng class `hp-hi/hp-mid/hp-lo` đổi màu thân, mắt, miệng. Trả lời đúng: bọ nháy trắng, rung, số "-1 HP" bay lên. Trả lời sai: bọ nhào tới cười, thanh HP của em rung. Màn hình mực và giảm chuyển động: chỉ đổi dáng, không chuyển động. Kiểm: `bossplay.js?g=4` (chạy từ trang ở gốc, ví dụ `huongdan.html`), `fit.html?pages=all&solve=1`. Ước lượng 15–25 lượt gọi.
+- [x] **Bọ Lỗi (Big Bug) đổi màu, đổi dáng theo HP và phản ứng khi trả lời** — xong 2026-11-14 (chi tiết trong `DEPLOY_LOG.md`), master cần xem thử. Yêu cầu gốc: Hình con bọ là SVG trong `thuthach.html` (`#boss-bug`), CSS `.boss-bug` trong `main.css`; `bars()` biết `hp/hpMax`. Ý định: 3 chặng theo HP còn lại (trên 2/3: tím, vui; 1/3–2/3: cam, lo; dưới 1/3: đỏ, choáng, có vết nứt) bằng class `hp-hi/hp-mid/hp-lo` đổi màu thân, mắt, miệng. Trả lời đúng: bọ nháy trắng, rung, số "-1 HP" bay lên. Trả lời sai: bọ nhào tới cười, thanh HP của em rung. Màn hình mực và giảm chuyển động: chỉ đổi dáng, không chuyển động. Kiểm: `bossplay.js?g=4` (chạy từ trang ở gốc, ví dụ `huongdan.html`), `fit.html?pages=all&solve=1`. Ước lượng 15–25 lượt gọi.
 
 ## 3. Lớp 4 – điểm nhỏ, chưa gấp
 

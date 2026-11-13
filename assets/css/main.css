@@ -1644,9 +1644,36 @@ html.eink .map-stars .star-count::before { color: #000; }
 
 /* ===== Boss challenge (thuthach.html) ===== */
 .boss-side { text-align: center; }
-.boss-bug svg { width: 150px; height: 138px; }
-.boss-bug.is-hit svg { animation: shake 0.5s; }
+.boss-bug { position: relative; }
+.boss-bug svg { width: 150px; height: 138px; transform-origin: 50% 70%; }
 .boss-bug.is-down svg { transform: rotate(180deg); opacity: 0.6; }
+/* three looks by HP left (setBug() in thuthach.html): purple and cocky, orange and worried, red and dizzy with cracks */
+.boss-bug .bb-body { fill: #845ef7; transition: fill 0.4s; }
+.boss-bug .bb-spot { fill: #5f3dc4; }
+.boss-bug.hp-mid .bb-body { fill: #ff922b; }
+.boss-bug.hp-mid .bb-spot { fill: #d9480f; }
+.boss-bug.hp-lo .bb-body { fill: #ff6b6b; }
+.boss-bug.hp-lo .bb-spot { fill: #c92a2a; }
+.boss-bug .bb-mid, .boss-bug .bb-lo, .boss-bug .bb-laugh,
+.boss-bug.hp-mid .bb-hi, .boss-bug.hp-lo .bb-hi, .boss-bug.hp-lo .bb-up, .boss-bug.is-laugh .bb-face { display: none; }
+.boss-bug.hp-mid .bb-mid, .boss-bug.hp-lo .bb-lo, .boss-bug.is-laugh .bb-laugh { display: inline; }
+/* right answer: the bug flashes white and shakes, "-1 HP" floats up; wrong answer: it lunges and laughs */
+.boss-bug.is-hit svg { animation: shake 0.5s, bb-flash 0.5s; }
+.boss-bug.is-laugh svg { animation: bb-lunge 0.7s; }
+@keyframes bb-flash { 0%, 100% { filter: none; } 20%, 50% { filter: brightness(2.2) saturate(0.2); } }
+@keyframes bb-lunge { 0%, 100% { transform: none; } 30% { transform: translateY(12px) scale(1.22); } 50% { transform: translateY(8px) scale(1.18) rotate(-6deg); } 70% { transform: translateY(8px) scale(1.18) rotate(6deg); } }
+.boss-pop { position: absolute; left: 50%; top: 4px; margin-left: 40px; padding: 2px 8px; border-radius: 10px; background: #fff; border: 2px solid var(--ink); color: #c92a2a; font-weight: 800; font-size: 18px; white-space: nowrap; pointer-events: none; animation: bb-float 1.2s ease-out forwards; }
+.boss-pop.is-laugh { color: #5f3dc4; }
+@keyframes bb-float { 0% { opacity: 0; transform: translateY(20px) scale(0.6); } 20% { opacity: 1; transform: translateY(0) scale(1.15); } 70% { opacity: 1; transform: translateY(-14px); } 100% { opacity: 0; transform: translateY(-30px); } }
+.boss-hp-me.is-shake { animation: shake 0.5s; }
+.boss-hp.hp-mid span.on { background: #ff922b; }
+.boss-hp.hp-lo span.on { background: #ff6b6b; }
+/* e-ink: shades of grey, the shape tells the stage */
+html.eink .boss-bug .bb-body { fill: #fff; }
+html.eink .boss-bug.hp-mid .bb-body { fill: #ccc; }
+html.eink .boss-bug.hp-lo .bb-body { fill: #999; }
+html.eink .boss-bug .bb-spot { fill: #000; }
+html.eink .boss-pop { color: #000; border-color: #000; }
 .boss-title { margin: 0; font-size: 26px; }
 .boss-vn { margin: 0; font-size: 17px; font-weight: 700; color: #5f3dc4; }   /* the BOSS's Vietnamese name under "Big Bug" */
 html.eink .boss-vn { color: #000; }
