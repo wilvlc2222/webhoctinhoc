@@ -51,9 +51,9 @@
     bodua: { name: 'Bọ dừa', costumes: [bug], r: 22 },
     robot: { name: 'Rô-bốt', costumes: [robot], r: 24 },
     chim: { name: 'Chim', costumes: [bird(1), bird(0)], r: 22 },
-    bong: { name: 'Quả bóng', costumes: [ball], r: 20 },
+    bong: { name: 'Trái banh', costumes: [ball], r: 20 },
     sao: { name: 'Ngôi sao', costumes: [star], r: 22 },
-    tao: { name: 'Quả táo', costumes: [apple], r: 18 }
+    tao: { name: 'Trái táo', costumes: [apple], r: 18 }
   };
   var BACKDROPS = {
     trang: { name: 'Trắng', svg: B('<rect width="480" height="360" fill="#fff"/>') },

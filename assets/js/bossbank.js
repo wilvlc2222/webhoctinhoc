@@ -20,12 +20,12 @@ window.BOSS_EXTRA = {
   ],
   /* Lớp 4, chủ đề 4 (Bài 6. Sử dụng phần mềm khi được phép) */
   '4-4': [
-    { q: 'Trong kho ứng dụng, phần mềm có ghi giá tiền là phần mềm gì?', options: ['Phần mềm miễn phí', 'Phần mềm không miễn phí', 'Phần mềm bị hỏng'], answer: 1 },
-    { q: 'Phần mềm không miễn phí là phần mềm như thế nào?', options: ['Ai cũng được dùng mà không cần trả tiền.', 'Phải trả tiền mới được dùng.', 'Chỉ người lớn mới dùng được.'], answer: 1 },
+    { q: 'Trong kho ứng dụng, phần mềm có ghi giá tiền là phần mềm gì?', options: ['Phần mềm miễn phí', 'Phần mềm không miễn phí', 'Phần mềm bị hư'], answer: 1 },
+    { q: 'Phần mềm không miễn phí là phần mềm ra sao?', options: ['Ai cũng được dùng mà không cần trả tiền.', 'Phải trả tiền mới được dùng.', 'Chỉ người lớn mới dùng được.'], answer: 1 },
     { q: 'Phần mềm nào là phần mềm miễn phí?', options: ['Word', 'PowerPoint', 'Scratch 3'], answer: 2 },
     { q: 'Unikey (bộ gõ tiếng Việt) là phần mềm miễn phí hay không miễn phí?', options: ['Miễn phí', 'Không miễn phí'], answer: 0 },
     { q: 'Dùng phần mềm không có bản quyền, máy tính có thể gặp chuyện gì?', options: ['Chạy nhanh hơn.', 'Bị nhiễm virus.', 'Bị mất điện.'], answer: 1 },
-    { q: 'Phần mềm bị "bẻ khoá" là phần mềm như thế nào?', options: ['Phần mềm được tác giả tặng miễn phí.', 'Phần mềm mới mua ở cửa hàng.', 'Phần mềm bị làm cho không phải trả tiền, vi phạm bản quyền.'], answer: 2 },
+    { q: 'Phần mềm bị "bẻ khoá" là phần mềm ra sao?', options: ['Phần mềm được tác giả tặng miễn phí.', 'Phần mềm mới mua ở cửa hàng.', 'Phần mềm bị làm cho không phải trả tiền, vi phạm bản quyền.'], answer: 2 },
     { q: 'Muốn có phần mềm học tiếng Anh, cách nào <b>không nên</b> làm?', options: ['Mua phần mềm từ nhà cung cấp rồi cài đặt.', 'Dùng phần mềm đã bị "bẻ khoá".', 'Tìm một phần mềm miễn phí để cài đặt.'], answer: 1 },
     { q: 'Lợi ích nào có được khi dùng phần mềm có bản quyền?', options: ['Được hỗ trợ nếu phần mềm bị trục trặc.', 'Được xem nhiều đoạn video quảng cáo.', 'Máy tính không bao giờ bị mất điện.'], answer: 0 },
     { q: 'Em chỉ nên dùng một phần mềm khi nào?', options: ['Khi bạn bè cũng đang dùng.', 'Khi tìm được bản "bẻ khoá".', 'Khi được phép: đã mua hoặc được tác giả cho dùng miễn phí.'], answer: 2 },

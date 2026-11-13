@@ -12,11 +12,11 @@
   /* ---------- what can be unlocked ---------- */
   var ITEMS = [
     { id: 'bow', slot: 'neck', name: 'Nơ cổ' },
-    { id: 'cap', slot: 'head', name: 'Mũ lưỡi trai' },
-    { id: 'glasses', slot: 'face', name: 'Kính râm' },
+    { id: 'cap', slot: 'head', name: 'Nón kết' },
+    { id: 'glasses', slot: 'face', name: 'Kính mát' },
     { id: 'cape', slot: 'back', name: 'Áo choàng' },
     { id: 'phones', slot: 'head', name: 'Tai nghe' },
-    { id: 'wizard', slot: 'head', name: 'Mũ phù thuỷ' },
+    { id: 'wizard', slot: 'head', name: 'Nón phù thuỷ' },
     { id: 'crown', slot: 'head', name: 'Vương miện' },
     { id: 'gold', slot: 'skin', name: 'Bíp vàng' }
   ];
