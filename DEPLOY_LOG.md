@@ -258,3 +258,11 @@
 - Kiểm tra: `tools/boss.html?g=4` → ALL OK (6 topics, 20+ questions each); `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi, không tràn.
 
 - 2 bản trên (Big Bug đổi dáng, soát câu hỏi và trang hướng dẫn) gộp vào `main` (fast-forward, `141e21e`) và push cùng ngày.
+
+## 2026-11-14 – Thiết kế lại khung "Ai đang học?" ở trang chủ
+
+- `index.html` (`renderNames`): từ trên xuống là vòng tròn chữ cái đầu (màu theo tên) + tên + mã số trong ô viền xanh; 3 ô Sao (mới, `myStars()` cộng sao mọi bài) · Kim cương · Huy hiệu (bấm được); nút Solo BOSS ngang hết khung; "Cả lớp (N bạn) · X / Y sao" trong ô vàng nhạt có thanh tiến độ; dòng lưu mạng có chấm màu; "Bạn khác vào học" và "Xoá tên này" (chữ đỏ) dời xuống cuối, ngăn bằng gạch.
+- `sync.js` `paint()`: gắn `data-s` = `ok`/`busy`/`bad` để tô chấm. `main.css`: `.who-id`, `.who-avatar`, `.who-stats`, `.who-stat`, `.who-foot`, `.goal-head`; màn hình mực trắng đen; khung sân khấu 1280×720 thu gọn (khung cao ~326px, ngang bản cũ).
+- Mọi trang đổi `?v=1114e` → `?v=1114f`.
+- Kiểm tra: điện thoại 375px không tràn ngang, không lỗi console.
+- Gộp vào `main` (fast-forward) và push cùng ngày.
