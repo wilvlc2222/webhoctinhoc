@@ -1473,7 +1473,6 @@ html.eink .lesson-num[class*="tp-"] { background: #000; }
 /* who is learning: name gate and the 4-digit code (index.html) */
 .who-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .who-row .input { flex: 1 1 110px; min-width: 0; }
-.who-now { margin: 4px 0 10px; font-size: 17px; line-height: 1.5; }
 .who-code { font-size: 22px; letter-spacing: 3px; color: var(--primary); }
 #code-ask form { margin: 0 0 10px; padding: 8px 10px; border: 2px dashed var(--primary); border-radius: 12px; }
 #code-ask label { display: block; margin-bottom: 4px; font-weight: 700; }
@@ -1598,14 +1597,72 @@ html.eink .who-forgot .btn { color: #000; border-color: #000; }
 html.eink .badge-cell.is-on { background: #fff; border-color: #000; border-width: 3px; }
 html.eink .game-toast { border-color: #000; box-shadow: none; }
 
-/* home page: gems, badges, challenge, class goal */
-.who-game { margin-top: 8px; }
-.who-gems { display: inline-flex; align-items: center; font-size: 18px; }
-.class-goal { margin: 6px 0 0; font-size: 13px; line-height: 1.35; }
+/* home page learner card (index.html renderNames), top to bottom:
+   who (avatar, name, code) → own numbers (stars, gems, badges) → Solo BOSS → class goal → saved? → switch learner */
+.who-id { display: flex; align-items: center; gap: 12px; margin: 4px 0 12px; }
+.who-avatar { flex: none; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 50%;
+  background: var(--primary); color: #fff; font-size: 24px; font-weight: 800; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18); }
+.who-avatar.av-1 { background: var(--practice); }
+.who-avatar.av-2 { background: var(--apply); }
+.who-avatar.av-3 { background: var(--know); }
+.who-avatar.av-4 { background: var(--start); }
+.who-id-t { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+.who-name { overflow: hidden; font-size: 22px; color: var(--ink); text-overflow: ellipsis; white-space: nowrap; }
+.who-key { margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--muted); }
+.who-key .who-code { display: inline-block; margin-left: 4px; padding: 0 8px; border: 2px dashed #74c0fc; border-radius: 8px; background: #e7f5ff;
+  font-size: 20px; letter-spacing: 4px; font-variant-numeric: tabular-nums; line-height: 1.4; color: var(--primary); }
+.who-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+.who-stat { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 58px; padding: 6px 4px;
+  border: 2px solid var(--line); border-radius: 12px; background: #fffdf8; color: var(--ink); font: inherit; line-height: 1.15; }
+.who-stat-n { display: inline-flex; align-items: center; gap: 4px; font-size: 20px; }
+.who-stat .stat-ico, .who-stat .gem-ico { width: 22px; height: 22px; }
+.who-stat small { margin-top: 2px; font-size: 12px; font-weight: 700; color: var(--muted); }
+button.who-stat { cursor: pointer; box-shadow: 0 3px 0 #d3c8b2; transition: transform 0.12s ease, box-shadow 0.12s ease; -webkit-tap-highlight-color: transparent; }
+button.who-stat small { color: var(--primary); }
+@media (hover: hover) { button.who-stat:hover { transform: translateY(-2px); box-shadow: 0 5px 0 #d3c8b2; } }
+button.who-stat:active { transform: translateY(3px); box-shadow: 0 0 0 #d3c8b2; }
+.btn.who-boss { display: flex; width: 100%; font-size: 18px; }
+.class-goal { margin-top: 12px; padding: 8px 10px; border-radius: 12px; background: #fff8e6; font-size: 14px; line-height: 1.3; }
 .class-goal:empty { display: none; }
-.goal-bar { display: block; height: 10px; margin-top: 3px; overflow: hidden; border: 2px solid var(--line); border-radius: 99px; background: #fff; }
-.goal-bar span { display: block; height: 100%; background: linear-gradient(90deg, #ffd43b, #f59f00); }
+.goal-head { display: flex; justify-content: space-between; gap: 8px; font-weight: 700; }
+.goal-head small { font-size: 13px; color: var(--muted); }
+.goal-bar { display: block; height: 12px; margin-top: 5px; overflow: hidden; border: 2px solid #f0d9a8; border-radius: 99px; background: #fff; }
+.goal-bar span { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #ffd43b, #f59f00); }
+.profile-box .sync-state { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+.profile-box .sync-state::before { content: ""; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--good); }
+.profile-box .sync-state[data-s="busy"]::before { background: var(--star); }
+.profile-box .sync-state[data-s="bad"]::before { background: var(--bad); }
+.profile-box .sync-state:empty { display: none; }
+.who-foot { display: flex; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 2px dashed var(--line); }
+.who-foot .btn { flex: 1 1 0; padding: 4px 8px; font-size: 15px; }
+.who-foot .who-del { flex: 0 1 auto; color: var(--bad); }
+html.eink .who-avatar { background: #fff; color: #000; border: 3px solid #000; box-shadow: none; }
+html.eink .who-key .who-code { border: 2px solid #000; }
+html.eink .who-stat, html.eink .class-goal { background: #fff; border: 2px solid #000; box-shadow: none; transform: none; }
+html.eink button.who-stat small, html.eink .who-foot .who-del { color: #000; }
+html.eink .goal-bar { border-color: #000; }
 html.eink .goal-bar span { background: #000; }
+html.eink .profile-box .sync-state::before { background: #000; }
+/* the 1280×720 stage: the left column is short, so the card is tighter (about as tall as the old card) */
+@media (min-width: 900px) and (orientation: landscape) {
+  .profile-box { padding: 12px 14px; }
+  .profile-box h2 { margin: 0 0 4px; font-size: 18px; }
+  .who-id { gap: 10px; margin: 0 0 8px; }
+  .who-avatar { width: 44px; height: 44px; font-size: 21px; }
+  .who-name { font-size: 20px; }
+  .who-key { margin-top: 2px; }
+  .who-key .who-code { font-size: 18px; }
+  .who-stats { margin-bottom: 8px; }
+  .who-stat { min-height: 48px; padding: 4px; }
+  .who-stat-n { font-size: 18px; }
+  .who-stat .stat-ico, .who-stat .gem-ico { width: 20px; height: 20px; }
+  .btn.who-boss { min-height: 44px; }
+  .class-goal { margin-top: 8px; padding: 6px 10px; font-size: 13px; }
+  .goal-bar { height: 10px; margin-top: 3px; }
+  .profile-box .sync-state { margin-top: 6px; }
+  .who-foot { margin-top: 8px; padding-top: 8px; }
+  .who-foot .btn { min-height: 36px; font-size: 14px; }
+}
 .boss-menu { width: 640px; }
 .boss-menu p { margin: 0 0 8px; font-size: 16px; }
 .boss-list { list-style: none; margin: 0; padding: 0; }

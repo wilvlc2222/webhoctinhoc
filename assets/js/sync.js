@@ -95,12 +95,14 @@
   function paint() {
     var els = document.querySelectorAll('[data-sync-state]'), name = Core.currentName();
     if (!els.length) return;
-    var text = '';
+    var text = '', s = '';
     if (!skip(name)) {
-      text = state === 'sending' ? 'Đang lưu kết quả lên mạng...' :
-        readDirty()[name] ? 'Chưa lưu được lên mạng. Máy sẽ tự thử lại.' : 'Kết quả đã lưu lên mạng.';
+      s = state === 'sending' ? 'busy' : readDirty()[name] ? 'bad' : 'ok';
+      text = s === 'busy' ? 'Đang lưu kết quả lên mạng...' :
+        s === 'bad' ? 'Chưa lưu được lên mạng. Máy sẽ tự thử lại.' : 'Kết quả đã lưu lên mạng.';
     }
-    for (var i = 0; i < els.length; i++) els[i].innerHTML = text;
+    /* data-s colours the dot in front of the words (main.css) */
+    for (var i = 0; i < els.length; i++) { els[i].innerHTML = text; els[i].setAttribute('data-s', s); }
   }
 
   Core.sync = { on: !!url, push: push, restore: restore, paint: paint, soon: function (name) { soon(name, 2500); }, stats: function (cb) { if (!url) return cb('off'); post({ action: 'stats' }, cb); },

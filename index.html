@@ -159,8 +159,9 @@
     function paint(d) {
       if (!d || !(d.learners > 0)) { el.innerHTML = ''; return; }
       var goal = Math.max(100, Math.ceil((d.stars + 1) / 100) * 100);
-      el.innerHTML = 'Cả lớp: <b>' + d.learners + '</b> bạn · <b>' + d.stars + '</b> sao. Mục tiêu chung: <b>' + goal + '</b> sao!' +
-        '<span class="goal-bar"><span style="width:' + Math.round(d.stars / goal * 100) + '%"></span></span>';
+      el.innerHTML = '<span class="goal-head"><span>Cả lớp <small>(' + d.learners + ' bạn)</small></span>' +
+        '<span><b>' + d.stars + '</b> / ' + goal + ' sao</span></span>' +
+        '<span class="goal-bar" role="img" aria-label="Cả lớp có ' + d.stars + ' trên ' + goal + ' sao"><span style="width:' + Math.round(d.stars / goal * 100) + '%"></span></span>';
     }
     var cached = null;
     try { cached = JSON.parse(localStorage.getItem('whth-class') || 'null'); } catch (e) {}
@@ -176,6 +177,18 @@
 
   /* ---------- who is learning: a name is needed to start, and each name has a 4-digit code ---------- */
   function esc(s) { var d = document.createElement('div'); d.appendChild(document.createTextNode(s)); return d.innerHTML; }
+
+  /* the learner card: a colour per name (same name, same colour) and the learner's own star total */
+  var STAR_ICO = '<svg class="stat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z" fill="#ffd43b" stroke="#e67700" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+  var MEDAL_ICO = '<svg class="stat-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h4l2 6H9zM13 2h4l-2 6h-4z" fill="#748ffc" stroke="#364fc7" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="15" r="6.5" fill="#ffd43b" stroke="#e67700" stroke-width="1.6"/><path d="M12 11.6l1 2.1 2.3.3-1.7 1.6.4 2.3-2-1.1-2 1.1.4-2.3-1.7-1.6 2.3-.3z" fill="#e67700"/></svg>';
+  function avatarHue(name) { var h = 0; for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 997; return h % 5; }
+  function myStars() {
+    var n = 0, g, t, l;
+    for (g in GRADES) if (GRADES.hasOwnProperty(g))
+      for (t = 0; t < GRADES[g].length; t++)
+        for (l = 0; l < GRADES[g][t].lessons.length; l++) if (GRADES[g][t].lessons[l].id) n += Core.countStars(GRADES[g][t].lessons[l].id);
+    return n;
+  }
 
   /* big card shown once, right after a new name is made */
   function showCode(name, changed) {
@@ -281,13 +294,23 @@
   function renderNames() {
     var p = Core.profiles(), cur = p.current, box = document.getElementById('who-box');
     if (cur) {
-      box.innerHTML = '<p class="who who-now">Đang học: <b>' + esc(cur) + '</b><br>Mã số của em: <b class="who-code">' + Core.codeOf(cur) + '</b></p>' +
-        '<div class="who-row"><button class="btn btn-small" id="who-out" type="button">Bạn khác vào học</button>' +
-        '<button class="btn btn-small" id="who-del" type="button">Xoá tên này</button></div>' +
-        (Core.gems ? '<div class="who-row who-game"><span class="who-gems" title="Kim cương: làm đúng ngay lần đầu">' + Core.gemIcon + '<b>' + Core.gems.count() + '</b></span>' +
-          '<button class="btn btn-small" id="who-badges" type="button">Huy hiệu ' + Core.badgeCount() + '</button>' +
-          '<button class="btn btn-small btn-boss" id="who-boss" type="button">' + (Core.swordsIcon || '') + 'Solo BOSS</button></div>' : '') +
-        '<p class="who sync-state" data-sync-state></p><p class="who class-goal" id="class-goal"></p>';
+      /* layout, top to bottom: who (name + code) → what I have (stars, gems, badges) → play (Solo BOSS)
+         → the class together → saved or not → switch learner (least used, so last and quiet) */
+      var code = Core.codeOf(cur);
+      box.innerHTML = '<div class="who-id">' +
+          '<span class="who-avatar av-' + avatarHue(cur) + '" aria-hidden="true">' + esc(cur.charAt(0).toUpperCase()) + '</span>' +
+          '<span class="who-id-t"><b class="who-name">' + esc(cur) + '</b>' +
+          '<span class="who-key">Mã số <b class="who-code" aria-label="' + code.split('').join(' ') + '">' + code + '</b></span></span></div>' +
+        '<div class="who-stats">' +
+          '<span class="who-stat"><span class="who-stat-n">' + STAR_ICO + '<b>' + myStars() + '</b></span><small>Sao</small></span>' +
+          (Core.gems ? '<span class="who-stat" title="Kim cương: làm đúng ngay lần đầu"><span class="who-stat-n">' + Core.gemIcon + '<b>' + Core.gems.count() + '</b></span><small>Kim cương</small></span>' +
+            '<button class="who-stat" id="who-badges" type="button"><span class="who-stat-n">' + MEDAL_ICO + '<b>' + Core.badgeCount() + '</b></span><small>Huy hiệu ›</small></button>' : '') +
+        '</div>' +
+        (Core.gems ? '<button class="btn btn-boss who-boss" id="who-boss" type="button">' + (Core.swordsIcon || '') + 'Solo BOSS</button>' : '') +
+        '<div class="class-goal" id="class-goal"></div>' +
+        '<p class="sync-state" data-sync-state></p>' +
+        '<div class="who-foot"><button class="btn btn-small" id="who-out" type="button">Bạn khác vào học</button>' +
+        '<button class="btn btn-small who-del" id="who-del" type="button">Xoá tên này</button></div>';
       if (Core.sync) Core.sync.paint();
       if (Core.gems) {
         Core.on(document.getElementById('who-badges'), Core.badges);
