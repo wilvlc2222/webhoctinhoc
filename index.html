@@ -39,7 +39,8 @@
 
     <div class="grade-tabs" role="group" aria-label="Chọn lớp">
       <button class="btn" data-grade="4" aria-pressed="true">Lớp 4</button>
-      <button class="btn" data-grade="5" aria-pressed="false">Lớp 5</button>
+      <!-- grade 5 is switched off for now: remove "disabled" and the "(sắp có)" text to bring it back -->
+      <button class="btn" data-grade="5" aria-pressed="false" disabled>Lớp 5 (sắp có)</button>
     </div>
     <ul class="topic-legend" id="topic-legend" aria-label="Các chủ đề"></ul>
     <p class="footer home-note">Bài học bám theo chương trình Tin học lớp 4, lớp 5 (bộ Kết nối tri thức). Nội dung và hình vẽ được soạn lại cho web, không sao chép sách.</p>
@@ -374,11 +375,14 @@
     document.getElementById('brand-ico').innerHTML = Icons.robot;
     var grade = '4';
     try { grade = localStorage.getItem(GRADE_KEY) || '4'; } catch (e) {}
+    /* a grade whose button is switched off cannot be opened, even if it was the last one used */
+    var gb = document.querySelector('[data-grade="' + grade + '"]');
+    if (!gb || gb.disabled) grade = '4';
     renderLessons(grade);
     renderNames();
     var tabs = document.querySelectorAll('[data-grade]');
     for (var k = 0; k < tabs.length; k++) {
-      (function (t) { Core.on(t, function () { renderLessons(t.getAttribute('data-grade')); }); })(tabs[k]);
+      (function (t) { Core.on(t, function () { if (!t.disabled) renderLessons(t.getAttribute('data-grade')); }); })(tabs[k]);
     }
     /* a locked lesson card, or a lesson page opened without a name (#ten), points to the name box */
     function nudge() {

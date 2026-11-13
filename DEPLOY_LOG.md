@@ -164,3 +164,9 @@
 - Đo: 7 trang mẫu ở 1920×1080 (khung phóng 1,5) không hiện khung lỗi, mọi tệp đều có số phiên bản; `fit.html?pages=all&solve=1` → `ALL OK (35 pages)` ở 1280×720; `lop4/bai03.html` bấm ở (334, 479) thì con trỏ giả hiện ở (324, 472), tức hết lệch theo tỉ lệ.
 - Chưa bấm thử: bài vẽ và bài soạn thảo của lớp 5 (`paint.js`, `richdoc.js`) và sân khấu Scratch khi khung phóng to; mã tính theo tỉ lệ khung nên không phụ thuộc độ phóng. Chưa thử bài học trên Kindle thật.
 - Đã commit và push cùng ngày.
+
+### [2026-11-13] Tạm tắt nút Lớp 5 ở trang chủ
+- Theo lời master. `index.html`: nút Lớp 5 có `disabled`, chữ "Lớp 5 (sắp có)"; máy đã lưu lớp 5 từ trước cũng mở ra lớp 4. Bật lại: bỏ `disabled` và chữ "(sắp có)" ở nút đó.
+- Chỉ tắt nút: các trang `lop5/*.html` vẫn mở được nếu ai có đường dẫn trực tiếp.
+- Đo: đặt sẵn lớp 5 trong localStorage rồi mở trang chủ → hiện bài lớp 4, bấm nút Lớp 5 không đổi gì, không có lỗi.
+- Đã commit và push nhánh `claude/disable-class-5-button-e598ae` cùng ngày. CHƯA gộp vào `main` nên trang đang chạy chưa đổi.
