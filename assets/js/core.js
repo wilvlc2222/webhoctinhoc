@@ -182,21 +182,21 @@
     }
   };
 
-  /* ---------- fixed 1300x700 stage (wide screens, see main.css) ---------- */
-  Core.STAGE_W = 1300;
-  Core.STAGE_H = 700;
+  /* ---------- fixed 1280x720 (16:9) stage, scaled to the window (wide screens, see main.css) ---------- */
+  Core.STAGE_W = 1280;
+  Core.STAGE_H = 720;
   Core.isStage = function () {
-    /* E-ink devices (Kindle PPW5, etc.) and portrait screens should NEVER use the fixed 1300x700 stage */
+    /* E-ink devices (Kindle PPW5, etc.) and portrait screens should NEVER use the fixed stage */
     if (Core.isEink && Core.isEink()) return false;
     var w = window.innerWidth, h = window.innerHeight;
     if (w < 900 || w <= h) return false;
     if (window.matchMedia) return window.matchMedia('(min-width: 900px) and (orientation: landscape)').matches;
     return true;
   };
-  /* shrink the stage when the window is smaller than 1300x700; never enlarge it */
+  /* scale the stage to fill the window, smaller or larger, keeping 16:9 (bars appear on the long side) */
   function fitStage() {
     var s = 1;
-    if (Core.isStage()) s = Math.min(1, window.innerWidth / Core.STAGE_W, window.innerHeight / Core.STAGE_H);
+    if (Core.isStage()) s = Math.min(window.innerWidth / Core.STAGE_W, window.innerHeight / Core.STAGE_H);
     var st = document.documentElement.style;
     if (st.setProperty) st.setProperty('--stage-scale', String(s));
   }

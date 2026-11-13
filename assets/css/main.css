@@ -388,7 +388,7 @@ html.eink .light span[class^="on-"] { background: #000; color: #fff; }
 .lesson-title .lesson-kicker { font-size: 12px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lesson-title h1 { font-size: 20px; margin: 0; }
 .lesson-top .topbar-right { flex: none; }
-/* on the fixed stage the top bar must stay one line high, or a long title pushes the step out of the 700px */
+/* on the fixed stage the top bar must stay one line high, or a long title pushes the step out of the 720px */
 @media (min-width: 900px) and (orientation: landscape) {
   .lesson-title h1 { font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
@@ -447,7 +447,7 @@ html.eink .quiz-pip.active { background: #000; color: #fff; }
   .lab-pal-col .lab-palette .blk { flex: 1 1 45%; }
 }
 
-/* ===== Wide screens (tablet landscape, e.g. 1300x700): every step fits one screen ===== */
+/* ===== Wide screens (tablet landscape, e.g. 1280x720): every step fits one screen ===== */
 @media (min-width: 900px) and (orientation: landscape) {
   .wrap { max-width: 1260px; }
   body { font-size: 18px; }
@@ -508,15 +508,15 @@ html.eink .quiz-pip.active { background: #000; color: #fff; }
   .lesson-item .star-ico { width: 18px; height: 18px; }
 }
 
-/* ===== Fixed stage: on wide landscape screens the app is always exactly 1300x700 =====
-   Bigger windows (PC) show it centred at real size; a slightly smaller window
-   shrinks it to fit (core.js sets --stage-scale), so nothing gets cut off.
+/* ===== Fixed stage: on wide landscape screens the app is always a 1280x720 (16:9) stage =====
+   The stage is centred and scaled to fill the window, up or down
+   (core.js sets --stage-scale), so nothing gets cut off and big screens are used fully.
    Narrow screens & portrait devices (Kindle Paperwhite, phones) keep the normal scrolling layout. */
 @media (min-width: 900px) and (orientation: landscape) {
   html:not(.eink) { height: 100%; overflow: hidden; background: #cfc8b8; }
   html:not(.eink) body {
     position: absolute; left: 50%; top: 50%; margin: 0;
-    width: 1300px; height: 700px; overflow: hidden;
+    width: 1280px; height: 720px; overflow: hidden;
     display: flex; flex-direction: column;
     -webkit-transform: translate(-50%, -50%) scale(var(--stage-scale, 1));
     transform: translate(-50%, -50%) scale(var(--stage-scale, 1));
@@ -1642,14 +1642,14 @@ html.eink .map-stars .star-count::before { color: #000; }
 .boss-rules { margin: 6px 0 12px; padding-left: 24px; line-height: 1.5; }
 .boss-count { margin: 0 0 4px; color: var(--muted); font-size: 15px; }
 .boss-q { margin-bottom: 10px; font-size: 20px; font-weight: 700; line-height: 1.35; }
-/* only in the fixed 1300×700 frame; in the portrait layout the answers stack and must keep their own height */
+/* only in the fixed 16:9 frame; in the portrait layout the answers stack and must keep their own height */
 @media (min-width: 900px) and (orientation: landscape) {
   .quiz-options.boss-opts-row { flex-wrap: nowrap; }
   .quiz-options.boss-opts-row .quiz-opt { flex: 1 1 0; min-width: 0; }
 }
 .boss-reward { font-size: 20px; color: #0b7285; }
 .boss-next { margin-top: 10px; }
-.boss-frame { position: fixed; left: -3000px; top: 0; width: 1300px; height: 700px; border: 0; visibility: hidden; }
+.boss-frame { position: fixed; left: -3000px; top: 0; width: 1280px; height: 720px; border: 0; visibility: hidden; }
 html.eink .boss-hp span.on { background: #000; }
 html.eink .boss-reward { color: #000; }
 @media (min-width: 900px) and (orientation: landscape) {

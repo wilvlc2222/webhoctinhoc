@@ -10,7 +10,7 @@ Lý do: phiên 10–12/11/2026 chạy 2 ngày, 1.049 lượt gọi, ngữ cảnh
 - **Mỗi bài học một phiên.** Xong một bài (hoặc một việc trong `plan.md`): cập nhật `plan.md`, rồi nhắc master
   mở phiên mới hoặc gõ `/compact`. Ngữ cảnh qua ~150k tokens mà việc chưa xong thì cũng nhắc `/compact`.
 - **Kiểm tra giao diện bằng chữ trước.** Dùng `read_page`, `get_page_text`, hoặc `javascript_tool` trả về vài con
-  số (kích thước, có tràn 1300×700 hay không, lỗi console). Chỉ chụp một ảnh cuối làm bằng chứng cho mỗi thay đổi
+  số (kích thước, có tràn 1280×720 hay không, lỗi console). Chỉ chụp một ảnh cuối làm bằng chứng cho mỗi thay đổi
   nhìn thấy được; không chụp sau từng bước.
 - **Kết quả `javascript_tool` phải ngắn.** Trả về đúng giá trị cần xem, không trả cả DOM, cả mảng dài hay cả
   `outerHTML`.

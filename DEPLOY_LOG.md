@@ -148,3 +148,11 @@
 - Đã thử ở máy: trang thường không hiện khung; gây lỗi giả thì khung hiện đúng nội dung lỗi.
 - Bước tiếp: push, master mở lại trên PPW5 và chụp ảnh. Nếu còn lỗi, khung sẽ ghi rõ lỗi gì.
 - Đã commit và push cùng ngày.
+
+### [2026-11-13] Khung bài học đổi sang 16:9 (1280×720), co giãn theo màn hình
+- Theo lời master: tận dụng độ phân giải của thiết bị. Khung cố định đổi từ 1300×700 sang 1280×720; `fitStage()` trong `core.js` giờ phóng to lẫn thu nhỏ cho vừa cửa sổ (trước đây chỉ thu nhỏ), giữ tỉ lệ 16:9, phần thừa là viền hai bên hoặc trên dưới.
+- Sửa: `assets/js/core.js`, `assets/css/main.css` (khung, `.boss-frame`), `tools/fit.html`, `tools/boss.html`, `tools/bossplay.js`; `lop4/bai03.html` chia toạ độ con trỏ cho tỉ lệ khung (trước đây lệch khi khung bị co giãn); `index.html` đổi số phiên bản tệp thành `?v=1113c`.
+- Đo: `fit.html?pages=all&solve=1` → `ALL OK (35 pages)` ở 1280×720; trang chủ lớp 4 và lớp 5, 4 mục hướng dẫn không tràn; 6 trận Bọ Lỗi chơi trọn, không tràn. Tỉ lệ co giãn: 1920×1080 → 1,5 (kín màn hình), 2560×1440 → 2, 1920×950 → 1,32, 1366×650 → 0,90, 1024×600 → 0,80.
+- Không đổi: màn hình mực và màn dọc (Kindle) vẫn dùng bố cục cuộn, không dùng khung.
+- Chưa kiểm: thao tác kéo thả, vẽ (`paint.js`, `scratch.js`, `richdoc.js`) khi khung phóng to hơn 1; mã tính theo tỉ lệ nên em cho là đúng nhưng chưa bấm thử. Chưa thử trên máy tính bảng thật.
+- Đã commit và push cùng ngày.

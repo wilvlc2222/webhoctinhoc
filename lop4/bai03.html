@@ -278,7 +278,8 @@
       while (t && t !== page && !t.getAttribute('data-pt')) t = t.parentNode;
       var kind = t && t !== page ? t.getAttribute('data-pt') : 'text';
       var r = page.getBoundingClientRect();
-      var x = (ev.clientX || r.left + 20) - r.left, y = (ev.clientY || r.top + 20) - r.top;
+      var k = (r.width / page.offsetWidth) || 1;   /* the stage may be scaled: turn screen px into page px */
+      var x = ((ev.clientX || r.left + 20) - r.left) / k, y = ((ev.clientY || r.top + 20) - r.top) / k;
       cur.style.left = x + 'px';
       cur.style.top = y + 'px';
       cur.innerHTML = Icons[kind === 'link' ? 'cursorHand' : kind === 'text' ? 'cursorText' : 'cursorArrow'];

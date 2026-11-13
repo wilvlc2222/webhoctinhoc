@@ -208,7 +208,7 @@
     function cellAt(x, y) { return document.getElementById('cell-' + x + '-' + y); }
     function renderBoard() {
       board.innerHTML = '';
-      /* on wide screens the app is a fixed 1300x700 stage: the board gets 280px of height */
+      /* on wide screens the app is a fixed 1280x720 stage: the board gets 280px of height */
       var cell = 64;
       if (isWide()) cell = Math.min(64, Math.floor(280 / level.rows));
       board.style.maxWidth = Math.min(level.cols * cell, 460) + 'px';

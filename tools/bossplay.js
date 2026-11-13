@@ -1,5 +1,5 @@
 /* Test tool: plays the boss challenge of every topic to the end, by itself.
-   Use: open any page of the site at 1300x700, then in the console
+   Use: open any page of the site at 1280x720, then in the console
      var s = document.createElement('script'); s.src = 'tools/bossplay.js?g=4'; document.body.appendChild(s);
    and read window.__boss when window.__done is true.
    Each topic runs in a frame as the learner "__thu" (names starting with "__" are never sent to the sheet).
@@ -17,7 +17,7 @@ window.__boss = {}; window.__done = false;
     for (var t = 1; t <= 6; t++) {
       var r = R[t] = { games: 0, wins: 0, losses: 0, qs: 0, err: [], maxMain: 0, maxDoc: 0, cls: {}, htmlQs: [], res: [] };
       var f = document.createElement('iframe');
-      f.style.cssText = 'position:fixed;left:0;top:0;width:1300px;height:700px;border:0;z-index:9999;background:#fff';
+      f.style.cssText = 'position:fixed;left:0;top:0;width:1280px;height:720px;border:0;z-index:9999;background:#fff';
       f.src = 'thuthach.html?g=' + grade + '&t=' + t;
       document.body.appendChild(f);
       await new Promise(function (x) { f.onload = x; });
