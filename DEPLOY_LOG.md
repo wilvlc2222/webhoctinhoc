@@ -179,6 +179,13 @@
 - Kiểm tra: `tools/fit.html?pages=all&solve=1` → ALL OK (35 pages); trang hướng dẫn không lỗi console.
 - Gộp vào `main` (fast-forward, nhánh `claude/lop-4-tiep-theo-9cb937`) và push cùng ngày.
 
+## 2026-11-14 – Bọ Lỗi: trả lời sai không còn hiện đáp án
+
+- `thuthach.html`: chỉ tô xanh khi chọn đúng; sai thì báo "Câu này sẽ quay lại sau, em suy nghĩ kĩ nha." (master chọn "Ẩn đáp án").
+- `tools/bossplay.js`: thử lần lượt các đáp án, báo lỗi nếu đáp án đúng lộ ra sau khi chọn sai.
+- Kiểm tra: `bossplay.js?g=4` → 6 chủ đề đều thắng 2 lần, không lỗi, không tràn khung.
+- Gộp vào `main` (fast-forward) và push cùng ngày.
+
 ## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 13–16
 
 - Sửa chữ `lop4/bai13.html` (4 chỗ) và `bai15.html` (1 chỗ) theo `docs/phuong-ngu.md`, bằng `tools/replace.ps1`; bài 14, 16 không có chữ cần đổi. Không đổi tệp nào trong `assets/`, nên không đổi số `?v=`. Xong bước 2 (lớp 4).
