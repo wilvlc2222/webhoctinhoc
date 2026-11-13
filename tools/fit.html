@@ -15,14 +15,20 @@ First line = fresh page with all reveals open. Second line (with <code>&amp;solv
 so all feedback lines are showing; it also reports the stars earned. It uses a separate learner name and deletes it afterwards.
 Usage: <code>tools/fit.html?pages=lop4/bai02.html,lop4/bai03.html&amp;solve=1</code></p>
 <pre id="out"></pre>
+<script src="../assets/js/lessons.js"></script>
 <script>
 (function () {
   var out = document.getElementById('out');
   var m = /pages=([^&]+)/.exec(location.search);
   var pages = m ? decodeURIComponent(m[1]).split(',') : [];
   /* short forms: pages=l4 (all Lớp 4), pages=l5, pages=all, pages=l4:1,5,12a */
-  var ALL4 = ['01','02','03','04','05','06','07','08','09','10','11','12a','12b','13','14','15','16'];
-  var ALL5 = ['01','02','03','04','05','06','07','08a','08b','09a','09b','10','11','12','13','14','15','16'];
+  /* the lesson numbers come from the one lesson list (assets/js/lessons.js): 'l4-b12a' → '12a' */
+  function numbersOf(grade) {
+    var o = [];
+    ((window.LESSON_GRADES || {})[grade] || []).forEach(function (tp) { tp.lessons.forEach(function (l) { o.push(l.id.replace(/^l\d-b/, '')); }); });
+    return o;
+  }
+  var ALL4 = numbersOf('4'), ALL5 = numbersOf('5');
   var exp = [];
   pages.forEach(function (p) {
     var g = /^(l4|l5|all)(?::(.+))?$/.exec(p);

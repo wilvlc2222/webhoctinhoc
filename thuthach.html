@@ -151,6 +151,8 @@
     var q = queue.shift(), html = '<p class="boss-count">Câu ' + (++asked) + ' · Bọ Lỗi còn <b>' + hp + '</b> máu</p><div class="boss-q">' + q.q + '</div><div class="quiz-options" id="boss-opts">', i;
     for (i = 0; i < q.options.length; i++) html += '<button class="btn quiz-opt" type="button" data-i="' + i + '"><span class="opt-letter">' + String.fromCharCode(65 + i) + '</span><span>' + q.options[i] + '</span></button>';
     screen(html + '</div><div class="feedback" id="boss-fb"></div>');
+    /* answers drawn as Scratch scripts are tall: keep them side by side so the card still fits the frame */
+    if (/sc-script/.test(q.options.join(''))) document.getElementById('boss-opts').className += ' boss-opts-row';
     var btns = main.querySelectorAll('.quiz-opt'), fb = document.getElementById('boss-fb'), bug = document.getElementById('boss-bug');
     for (i = 0; i < btns.length; i++) Core.on(btns[i], function () {
       var pick = +this.getAttribute('data-i'), ok = pick === q.answer, k;

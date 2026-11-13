@@ -1639,6 +1639,11 @@ html.eink .map-stars .star-count::before { color: #000; }
 .boss-rules { margin: 6px 0 12px; padding-left: 24px; line-height: 1.5; }
 .boss-count { margin: 0 0 4px; color: var(--muted); font-size: 15px; }
 .boss-q { margin-bottom: 10px; font-size: 20px; font-weight: 700; line-height: 1.35; }
+/* only in the fixed 1300×700 frame; in the portrait layout the answers stack and must keep their own height */
+@media (min-width: 900px) and (orientation: landscape) {
+  .quiz-options.boss-opts-row { flex-wrap: nowrap; }
+  .quiz-options.boss-opts-row .quiz-opt { flex: 1 1 0; min-width: 0; }
+}
 .boss-reward { font-size: 20px; color: #0b7285; }
 .boss-next { margin-top: 10px; }
 .boss-frame { position: fixed; left: -3000px; top: 0; width: 1300px; height: 700px; border: 0; visibility: hidden; }

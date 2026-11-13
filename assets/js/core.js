@@ -172,7 +172,8 @@
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
       var id = el.getAttribute('data-stars-for');
-      var total = parseInt(el.getAttribute('data-stars-total'), 10) || 0;
+      /* the lesson list (lessons.js, through game.js) decides; data-stars-total is only used until that list has loaded */
+      var total = (Core.LESSONS && Core.LESSONS[id]) ? Core.LESSONS[id][2] : (parseInt(el.getAttribute('data-stars-total'), 10) || 0);
       var have = Core.countStars(id);
       var html = '';
       for (var s = 0; s < total; s++) html += Core.icon(s < have ? 'star' : 'starEmpty', 'star-ico');

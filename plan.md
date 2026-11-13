@@ -16,20 +16,20 @@ Trạng thái mã nguồn lúc dừng:
 
 ## 2. Lớp 4 – việc còn phải làm
 
-- [ ] **Trang hướng dẫn (`huongdan.html`)** mới có mục "Đăng nhập". Thêm 3 mục ngắn:
+- [x] **Trang hướng dẫn (`huongdan.html`)** — xong 2026-11-13, chưa commit: đã thêm 3 mục (`#sao`, `#bip`, `#bo-loi`), cả 4 mục vừa khung 1300×700. Cần master đọc duyệt câu chữ. Yêu cầu gốc:
   - Sao, kim cương và huy chương.
   - Bíp và tủ đồ.
   - Thử thách diệt Bọ Lỗi (ghi đúng luật mới: 20 máu = 20 điểm, 3 trái tim, câu sai được hỏi lại).
   - Yêu cầu: mỗi mục vừa khung 1300×700 (`main.scrollHeight` bằng `main.clientHeight`), không dùng class `step`. Cách thêm mục ghi trong chú thích đầu tệp.
-- [ ] **Chơi thử trọn trận Bọ Lỗi ở chủ đề 1, 3, 4, 5, 6.** Mới chơi trọn chủ đề 2 (thắng và thua); các chủ đề kia mới đếm câu.
-- [ ] **Kiểm tra câu hỏi có đáp án là khối lệnh Scratch trên trang đấu** (chủ đề 6: bài 14 và bài 16). Trang `thuthach.html` không nạp kiểu dáng riêng của bài học, nên chưa chắc khối lệnh hiện đúng hình. Nếu hiện xấu thì lọc bỏ các câu này (chủ đề 6 đang có 24 câu, bỏ 3 câu vẫn đủ 20).
+- [x] **Chơi thử trọn trận Bọ Lỗi ở cả 6 chủ đề** — xong 2026-11-13 bằng `tools/bossplay.js` (tự chơi: thua, thắng lần đầu +3 kim cương, thắng lần hai không cộng). Cả 6 chủ đề đạt, không câu nào tràn khung 1300×700.
+- [x] **Câu hỏi có đáp án là khối lệnh Scratch trên trang đấu** — xong 2026-11-13. Khối lệnh hiện đúng hình và màu (kiểu dáng nằm trong `main.css`), giữ cả 3 câu. Một câu tràn 44px sau khi trả lời; đã sửa bằng cách xếp các đáp án Scratch thành một hàng (`.boss-opts-row`). Luật một hàng chỉ áp cho bố cục ngang; ở bố cục dọc 758×1024 (màn hình mực) các đáp án xếp chồng, đã đo không đè nhau, không tràn ngang.
 - [ ] **Điểm Bọ Lỗi chưa được lưu.** Hiện chỉ hiện "x/20" cuối trận; trang giáo viên và bảng tính Google chỉ biết thắng hay chưa (qua kim cương). Nếu master muốn thầy cô xem được điểm cao nhất của từng chủ đề thì phải thêm vào dữ liệu tiến độ, `sync.js`, `tools/sheet-sync.gs` và `giaovien.html`. Cần master quyết định có làm không.
 - [ ] **Câu trả lời sai được hỏi lại ở cuối hàng, nhưng đáp án đúng đã hiện ra lúc sai.** Nếu master muốn khó hơn thì đổi thành không hiện đáp án, hoặc thay bằng câu khác.
 
 ## 3. Lớp 4 – điểm nhỏ, chưa gấp
 
 - [ ] Tiêu đề bài trên thanh trên cùng giờ luôn nằm một dòng (để khỏi tràn khung). Học sinh tên dài thì tiêu đề dài bị cắt bằng dấu "…".
-- [ ] Danh sách bài còn lặp ở hai chỗ chưa gộp: số sao `data-stars-total` ghi trong từng trang bài (hiện đang khớp với `lessons.js`), và danh sách tên tệp `ALL4`, `ALL5` trong `tools/fit.html`.
+- [x] Danh sách bài lặp ở hai chỗ — xong 2026-11-13: `tools/fit.html` lấy số bài từ `lessons.js`; số sao trên trang bài lấy từ `lessons.js` (`Core.renderStars`), `data-stars-total` trong từng trang chỉ còn là số dự phòng lúc danh sách chưa nạp xong.
 - [ ] Kindle không có Web Audio nên sẽ im lặng và không có nút nhạc, nút âm thanh. Đây là chủ ý, chỉ ghi lại để khỏi nhầm là lỗi.
 - [ ] Trên PPW5 trang chạy ở bố cục dọc, cuộn tự nhiên (không còn khung 1300×700). Chưa ai xem cỡ chữ và khoảng cách ở bố cục này trên máy thật.
 
@@ -43,6 +43,7 @@ Trạng thái mã nguồn lúc dừng:
 
 - Chạy máy chủ thử: cấu hình `webhoctinhoc` trong `.claude/launch.json` (cổng 8765).
 - Vừa khung: mở `tools/fit.html?pages=all&solve=1`, đọc `window.fitShort`. Đạt là `ALL OK (35 pages)`. Chỉ lớp 4: `pages=l4`.
+- Chơi trọn Bọ Lỗi: mở một trang bất kì ở 1300×700 rồi nạp `tools/bossplay.js?g=4` (cách dùng ghi ở đầu tệp), chờ `window.__done`, đọc `window.__boss`. Đừng chuyển trang trước khi `__done` là true, nếu không tên thử `__thu` còn lại trong localStorage.
 - Đếm câu Bọ Lỗi: mở `tools/boss.html?g=4`, đọc `window.bossShort`. Đạt là `ALL OK (6 topics, 20+ questions each)`.
 - Tên học sinh để thử phải bắt đầu bằng `__` (không gửi lên bảng tính Google thật). Thử xong xoá tên đó khỏi localStorage.
 - Chữ cho học sinh: tiếng Việt chuẩn ("không", không dùng "hông"); dòng hướng dẫn chỉ nói cách thao tác, không gợi ý đáp án.

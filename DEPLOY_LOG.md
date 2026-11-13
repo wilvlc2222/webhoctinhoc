@@ -107,3 +107,26 @@
 - **Đã kiểm (giả lập 758×1024, chế độ màn hình mực):** không còn lỗi JS, 17 bài lớp 4 hiện đủ, ô tên và mã số bấm được, đăng nhập được, trang bài học mở được. `tools/fit.html?pages=all&solve=1` → ALL OK (35 pages).
 - **Chưa kiểm:** trên máy PPW5 thật.
 - **Cùng commit:** thử thách Bọ Lỗi 20 máu = 20 điểm (lớp 4 đủ 20+ câu mỗi chủ đề, `tools/boss.html?g=4`), nhạc nền (bài học và trận đấu), nút bật/tắt nhạc.
+
+### [2026-11-13] Trang hướng dẫn: thêm 3 mục
+- **Trạng thái:** ✅ Đã sửa trong máy, CHƯA commit, CHƯA push
+- **Sửa:** `huongdan.html` thêm mục "Sao và huy chương" (`#sao`), "Bíp và tủ đồ" (`#bip`), "Diệt Bọ Lỗi" (`#bo-loi`). Số liệu lấy từ mã nguồn: huy chương 40% / 70% / 100% số sao (`game.js`), mốc lên cấp của Bíp 3–120 sao (`mascot.js`), luật Bọ Lỗi 20 máu, 3 trái tim, +3 kim cương (`thuthach.html`).
+- **Đã kiểm (1300×700):** cả 4 mục `main.scrollHeight` = `main.clientHeight` = 601, không lỗi console.
+- **Chưa kiểm:** chế độ màn hình mực, bố cục dọc trên PPW5, master chưa duyệt câu chữ.
+
+### [2026-11-13] Bọ Lỗi lớp 4: chơi trọn 6 chủ đề, sửa câu Scratch tràn khung, gộp danh sách bài
+- **Trạng thái:** ✅ Đã sửa trong máy, CHƯA commit, CHƯA push
+- **Công cụ mới:** `tools/bossplay.js` tự chơi trọn trận của từng chủ đề (thua để học đáp án, rồi thắng hai lần).
+- **Kết quả (1300×700):** cả 6 chủ đề thua và thắng đều chạy đúng, thắng lần đầu +3 kim cương, lần hai không cộng; 21 / 22 / 22 / 23 / 48 / 24 câu đã gặp; không lỗi.
+- **Sửa:** câu có đáp án là khối lệnh Scratch (chủ đề 6) tràn 44px sau khi trả lời → `thuthach.html` thêm lớp `boss-opts-row`, `main.css` xếp các đáp án đó thành một hàng. Chạy lại: tràn 0px ở cả 6 chủ đề.
+- **Gộp danh sách bài:** `tools/fit.html` lấy số bài từ `lessons.js`; `Core.renderStars` lấy số sao từ `lessons.js`. `tools/fit.html?pages=l4&solve=1` → ALL OK (17 pages).
+- **Trang hướng dẫn:** sửa mục "Vào trận" cho đúng tên nút ở trang chủ (Thử thách → Vào đấu).
+- **Chưa kiểm:** lớp 5 (`pages=l5`) sau khi đổi `renderStars`; chế độ màn hình mực; hàng đáp án Scratch ở bố cục dọc của PPW5; chưa chụp ảnh hàng đáp án Scratch sau khi sửa.
+
+### [2026-11-13] Kiểm lớp 5 và bố cục dọc, sửa đáp án Scratch đè nhau ở bố cục dọc
+- `tools/fit.html?pages=all&solve=1` → `ALL OK (35 pages)` sau khi `Core.renderStars` lấy số sao từ `lessons.js`.
+- Giả lập 758×1024, màn hình mực: 4 mục của `huongdan.html` không tràn ngang; mục `#bo-loi` ở 1300×700 vẫn vừa khung sau khi sửa câu "Vào trận".
+- Lỗi do bản sửa trước: `.boss-opts-row .quiz-opt { flex: 1 1 0 }` làm đáp án Scratch co chiều cao còn 52px khi xếp dọc, các khối lệnh đè lên nhau. Sửa: bọc hai luật `.boss-opts-row` trong `@media (min-width: 900px) and (orientation: landscape)` (`assets/css/main.css`).
+- Đo lại: 1300×700 ba đáp án một hàng, `main` không tràn; 758×1024 ba đáp án xếp chồng, khối lệnh nằm trọn trong ô.
+- Chưa kiểm: máy Kindle thật. Sau khi trả lời, chữ trong khối lệnh ở màn hình mực khá nhạt (xám trên trắng), cần xem trên máy thật.
+- CHƯA commit, CHƯA push.
