@@ -284,3 +284,4 @@
 - Kiểm tra: trả lời đúng → 0,3 giây sau có mặt buồn, không còn mặt cũ; 1,5 giây sau về `hp-hi`, mặt buồn tắt. `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi.
 - Master yêu cầu thêm: trả lời đúng / sai trong trận BOSS phải có âm thanh khác hẳn nhau. `sound.js` thêm 2 tiếng riêng cho trận BOSS: `hit` (tiếng "bụp" trúng bọ rồi "ting ting ting" đi lên, cao và vui) và `miss` (còi trầm "è è" hai lần rồi tiếng "oaa" tuột xuống). `thuthach.html` dùng `hit` / `miss` thay cho `good` / `bad`; bài học vẫn giữ tiếng `good` / `bad` cũ. Kindle không có Web Audio nên vẫn im lặng.
 - Kiểm tra âm thanh: sau một cú bấm thật, `Core.sound('hit')` tạo 4 nốt (1 vuông + 3 tam giác), `Core.sound('miss')` tạo 3 nốt răng cưa, không lỗi console. `bossplay.js?g=4` chạy lại sau khi đổi tiếng: 6 chủ đề thắng 2 lần, không lỗi.
+- Gộp vào `main` (fast-forward, commit `2c19467`) và push cùng ngày; trang trên GitHub Pages đã có `?v=1114j`, `sound.js` có tiếng `miss`, `main.css` có `.bb-sad`.
