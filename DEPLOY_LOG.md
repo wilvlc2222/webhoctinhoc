@@ -266,3 +266,11 @@
 - Mọi trang đổi `?v=1114e` → `?v=1114f`.
 - Kiểm tra: điện thoại 375px không tràn ngang, không lỗi console.
 - Gộp vào `main` (fast-forward) và push cùng ngày.
+
+## 2026-11-14 – Solo BOSS: đồng hồ 20 phút, mở BOSS khi đủ 80% sao
+
+- `thuthach.html`: đồng hồ "Thời gian còn lại" 20:00 nằm trên thanh HP của BOSS, hiện khi câu đầu tiên ra, tính theo giờ thật (`LIMIT`, `startClock()`). Dưới 1 phút: đỏ, nhịp nhẹ; màn hình mực: chữ trắng nền đen, không nhấp nháy. Hết giờ mà BOSS còn HP → màn "Hết giờ! BOSS thắng lần này" + "Đấu lại". Luật 20 phút có trong màn giới thiệu và `huongdan.html`.
+- Mở BOSS khi em có đủ 80% số sao của chủ đề (`game.js`: `Core.topicStars`, `Core.bossOpen`, `Core.bossBar`; BOSS đã thắng thì vẫn mở). Bảng Solo BOSS ở trang chủ chia 4 cột (Chủ đề · Nội dung · Sao của em · Solo BOSS), có thanh sao với vạch 80%; chủ đề chưa đủ hiện ổ khoá "Còn thiếu n sao". Vào thẳng `thuthach.html` của chủ đề còn khoá → màn "BOSS chưa mở". `tools/bossplay.js` kiểm tra khoá rồi cho học sinh thử đủ sao.
+- Mọi trang đổi `?v=1114f` → `?v=1114h`.
+- Kiểm tra: `bossplay.js?g=4` → 6 chủ đề khoá lúc đầu, đủ sao thì mở, thắng 2 lần, không lỗi, không tràn 1280×720; hết giờ ra màn thua (thử bằng cách vặn giờ trong trình duyệt); điện thoại 375px không tràn ngang.
+- Gộp vào `main` (fast-forward) và push cùng ngày.
