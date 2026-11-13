@@ -6,10 +6,39 @@
 <title>Tin học vui – Lớp 4, Lớp 5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css">
-<script src="assets/js/icons.js"></script>
-<script src="assets/js/lessons.js"></script>
-<script src="assets/js/core.js"></script>
+<link rel="stylesheet" href="assets/css/main.css?v=1113b">
+<script>
+/* old readers (Kindle) have no console: show script errors on the page, so a photo of the screen tells us what broke */
+(function () {
+  var log = [];
+  function show() {
+    if (!document.body) return;
+    var b = document.getElementById('err-box');
+    if (!b) {
+      b = document.createElement('pre');
+      b.id = 'err-box';
+      b.style.cssText = 'margin:8px;padding:8px;border:2px solid #000;background:#fff;color:#000;font:12px/1.4 monospace;white-space:pre-wrap;word-break:break-all';
+      document.body.insertBefore(b, document.body.firstChild);
+    }
+    b.innerHTML = '';
+    b.appendChild(document.createTextNode('Trang gặp lỗi. Em chụp màn hình này gửi thầy cô nhé.\n' + log.join('\n') + '\n' + window.innerWidth + 'x' + window.innerHeight + ' | ' + navigator.userAgent));
+  }
+  window.__err = function (m) { log.push(m); show(); };
+  window.onerror = function (msg, src, line, col) { window.__err(msg + ' @ ' + String(src || '').replace(/^.*\//, '') + ':' + line + ':' + (col || 0)); };
+  window.__miss = function (el) { window.__err('không tải được ' + el.getAttribute('src')); };
+  document.addEventListener('DOMContentLoaded', function () {
+    if (log.length) show();
+    setTimeout(function () {
+      var w = document.getElementById('who-box');
+      if (w && !w.innerHTML) window.__err('trang chưa khởi động xong (Core: ' + typeof window.Core + ', renderStars: ' + typeof (window.Core || {}).renderStars + ')');
+    }, 3000);
+  });
+})();
+</script>
+<!-- ?v=... makes readers that keep old files (Kindle) fetch the new ones; change it when these files change -->
+<script src="assets/js/icons.js?v=1113b" onerror="__miss(this)"></script>
+<script src="assets/js/lessons.js?v=1113b" onerror="__miss(this)"></script>
+<script src="assets/js/core.js?v=1113b" onerror="__miss(this)"></script>
 </head>
 <body>
 <header class="topbar">

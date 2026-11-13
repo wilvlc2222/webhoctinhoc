@@ -140,3 +140,11 @@
 - `index.html`, `assets/css/main.css`: bảng chú thích 6 chủ đề ở cột trái thành một thẻ trắng, mỗi chủ đề một chấm tròn có số cùng màu với nút trên bản đồ (`.topic-dot`), thay cho nhãn viền "Chủ đề N" chữ xám 12px. Dòng ghi chú nguồn bên dưới nhỏ lại còn 11px.
 - Đo ở 1300×700, lớp 4 và lớp 5: 6 dòng đều một hàng, `main` không tràn. Ở 758×1024 màn hình mực: không tràn ngang, chấm và viền màu đen.
 - Đã commit và push cùng ngày.
+
+### [2026-11-13] Kindle PPW5 thật: trang chủ không chạy JavaScript, thêm báo lỗi trên trang
+- Master chụp ảnh PPW5 (bản live `007024e`): ô "Ai đang học?" trống, không có danh sách chủ đề và bài học, nút "Màn hình mực" chưa có chữ bật/tắt, không có hình Bíp. Tức `core.js` không chạy hoặc dừng giữa chừng.
+- Chưa tìm ra nguyên nhân: các tệp trang chủ không có cú pháp mới; giả lập 540×720 và 758×1024 đều chạy đúng. Hai giả thuyết: Kindle còn giữ `core.js` cũ (bản lỗi trước `5ccb732` có đúng triệu chứng này), hoặc trình duyệt Kindle thiếu một hàm.
+- `index.html`: thêm `?v=1113b` vào `main.css`, `icons.js`, `lessons.js`, `core.js` (các tệp `core.js` tự nạp cũng mang theo số này) để ép tải bản mới; thêm đoạn mã đầu trang hiện lỗi JavaScript, tệp không tải được, bề ngang màn hình và tên trình duyệt vào một khung ở đầu trang. Khung chỉ hiện khi có lỗi.
+- Đã thử ở máy: trang thường không hiện khung; gây lỗi giả thì khung hiện đúng nội dung lỗi.
+- Bước tiếp: push, master mở lại trên PPW5 và chụp ảnh. Nếu còn lỗi, khung sẽ ghi rõ lỗi gì.
+- Đã commit và push cùng ngày.
