@@ -256,3 +256,5 @@
 - `huongdan.html`: chữ đã đúng phương ngữ Sài Gòn, số liệu khớp code (`game.js` huy chương, `mascot.js` `LEVELS`); không sửa.
 - Master duyệt nhạc và đã thử Kindle PW5 thật: ổn.
 - Kiểm tra: `tools/boss.html?g=4` → ALL OK (6 topics, 20+ questions each); `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi, không tràn.
+
+- 2 bản trên (Big Bug đổi dáng, soát câu hỏi và trang hướng dẫn) gộp vào `main` (fast-forward, `141e21e`) và push cùng ngày.
