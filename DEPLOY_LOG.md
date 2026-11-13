@@ -171,6 +171,11 @@
 - Đo: đặt sẵn lớp 5 trong localStorage rồi mở trang chủ → hiện bài lớp 4, bấm nút Lớp 5 không đổi gì, không có lỗi.
 - Đã commit, gộp vào `main` và push cùng ngày (nhánh `claude/disable-class-5-button-e598ae`).
 
+## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 9–12 (chưa commit, chưa đưa lên mạng)
+
+- Sửa chữ `lop4/bai09–11.html`, `bai12a.html` theo `docs/phuong-ngu.md` (17 chỗ, bằng `tools/replace.ps1`); `bai12b.html` không có chữ cần đổi. Bài 9 luyện tập đổi sang Chợ Bến Thành, dùng hình có sẵn nên không đổi tệp nào trong `assets/`, không đổi số `?v=`.
+- Kiểm tra: `tools/fit.html?pages=l4&solve=1` → ALL OK (17 pages), đủ sao sau khi tự giải.
+
 ## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 5–8 (chưa commit, chưa đưa lên mạng)
 
 - Sửa chữ `lop4/bai05–08.html` theo `docs/phuong-ngu.md`; bài 9 chỉ đổi 3 dòng mẫu trình chiếu cho khớp tệp "Cảnh đẹp quê hương" (Huế → Sài Gòn). Không đổi tệp nào trong `assets/`, nên không đổi số `?v=`.

@@ -53,7 +53,7 @@
           </ul>
         </div>
         <div class="say"><span class="ico" data-icon="robot"></span>
-          <div class="bubble">Khi thầy cô trình chiếu, có lúc các trang xuất hiện rất <b>ấn tượng</b>: mờ dần, trượt vào, tách đôi... Làm sao được như vậy nhỉ? Em bấm <b>Trình chiếu</b> ở hai bài bên phải để so sánh nha.</div>
+          <div class="bubble">Khi thầy cô trình chiếu, có lúc các trang xuất hiện rất <b>ấn tượng</b>: mờ dần, trượt vào, tách đôi... Làm sao được như vậy ta? Em bấm <b>Trình chiếu</b> ở hai bài bên phải để so sánh nha.</div>
         </div>
       </div>
       <div class="col">
@@ -105,7 +105,7 @@
 
   <!-- 4. LUYỆN TẬP -->
   <section class="step" data-title="Luyện tập">
-    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Giới thiệu Hồ Hoàn Kiếm</h2></div>
+    <div class="step-head"><span class="phase phase-practice">Luyện tập</span><h2>Giới thiệu Chợ Bến Thành</h2></div>
     <div class="cols">
       <div class="col-side"><div id="tasks-hhk"></div></div>
       <div class="col"><div id="ss-hhk"></div></div>
@@ -125,7 +125,7 @@
   </section>
 
   <section class="step" data-title="Bài tập 2">
-    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Dùng hiệu ứng thế nào cho hợp lí?</h2></div>
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Dùng hiệu ứng ra sao cho hợp lí?</h2></div>
     <div class="cols">
       <div class="col"><div id="bt-tf"></div></div>
       <div class="col"><div id="bt-q2"></div></div>
@@ -167,7 +167,7 @@
   var TT = [
     { layout: 'title', boxes: { title: 'Bóng đá', sub: 'Môn thể thao em yêu thích' } },
     { layout: 'picture', pic: 'ball', boxes: { caption: 'Trận bóng đá' } },
-    { layout: 'content', boxes: { title: 'Cách chơi', body: 'Hai đội thi đấu\nĐá bóng vào khung thành đội bạn' } },
+    { layout: 'content', boxes: { title: 'Cách chơi', body: 'Hai đội thi đấu\nĐá banh vào khung thành đội bạn' } },
     { layout: 'content', boxes: { title: 'Lợi ích', body: 'Khoẻ mạnh\nĐoàn kết với bạn bè' } }
   ];
   function withTrans(deck, list) { var d = JSON.parse(JSON.stringify(deck)); for (var i = 0; i < d.length; i++) d[i].trans = list[i % list.length]; return d; }
@@ -210,15 +210,15 @@
     });
 
     apps.hhk = Slides(document.getElementById('ss-hhk'), {
-      ime: true, folders: FOLDERS, fileName: 'Ho Hoan Kiem', ribbon: ['file', 'home', 'insert', 'transitions'],
+      ime: true, folders: FOLDERS, fileName: 'Cho Ben Thanh', ribbon: ['file', 'home', 'insert', 'transitions'],
       tasksHost: document.getElementById('tasks-hhk'), lesson: L, id: 'hhk',
-      pictures: ['lake', 'temple', 'bridge', 'town', 'flower'],
+      pictures: ['market', 'lake', 'bridge', 'town', 'flower'],
       tasks: [
-        { text: 'a) Tạo <b>4 trang</b> giới thiệu Hồ Hoàn Kiếm: tiêu đề · Tháp Rùa (có ảnh) · đền Ngọc Sơn, cầu Thê Húc · lời mời đến thăm.', ok: function (a) { if (a.count() < 4) return false; var pic = false; for (var i = 0; i < 4; i++) { if (a.slide(i).pic) pic = true; if (!a.anyText(i) && !a.slide(i).pic) return false; } return pic; } },
+        { text: 'a) Tạo <b>4 trang</b> giới thiệu Chợ Bến Thành: tiêu đề · tháp đồng hồ (có ảnh) · các gian hàng · lời mời đến thăm.', ok: function (a) { if (a.count() < 4) return false; var pic = false; for (var i = 0; i < 4; i++) { if (a.slide(i).pic) pic = true; if (!a.anyText(i) && !a.slide(i).pic) return false; } return pic; } },
         { text: 'b) Tạo hiệu ứng cho các trang 2, 3, 4 (dùng ít nhất <b>2 kiểu</b> khác nhau).', ok: function (a) { return a.count() >= 4 && allHave(a, 1) && kinds(a) >= 2; } },
-        { text: 'c) Lưu tệp tên <b>Ho Hoan Kiem</b> vào thư mục của em.', ok: function (a) { return savedIn(a, 'Ho Hoan Kiem'); } }
+        { text: 'c) Lưu tệp tên <b>Cho Ben Thanh</b> vào thư mục của em.', ok: function (a) { return savedIn(a, 'Cho Ben Thanh'); } }
       ],
-      doneText: 'Bài trình chiếu về Hồ Hoàn Kiếm thật sinh động!'
+      doneText: 'Bài trình chiếu về Chợ Bến Thành thật sinh động!'
     });
 
     apps.tt = Slides(document.getElementById('ss-tt'), {
@@ -236,9 +236,9 @@
       var t = apps.tr; t.trans(1, 'fade'); t.trans(2, 'push'); t.show();
       var ov = document.querySelector('#ss-try .ss-showbox'); for (var i = 0; i < 6 && document.querySelector('#ss-try .ss-showbox'); i++) document.querySelector('#ss-try .ss-showbox').click();
       var h = apps.hhk;
-      h.set(0, 'title', { text: 'Hồ Hoàn Kiếm' }); h.add('picture'); h.pic(1, 'lake'); h.set(1, 'caption', { text: 'Tháp Rùa' });
-      h.add('content'); h.set(2, 'body', { text: 'Đền Ngọc Sơn\nCầu Thê Húc' }); h.add('text'); h.set(3, 'text', { text: 'Mời bạn đến thăm!' });
-      h.trans(1, 'fade'); h.trans(2, 'wipe'); h.trans(3, 'zoom'); h.save('Ho Hoan Kiem', MY);
+      h.set(0, 'title', { text: 'Chợ Bến Thành' }); h.add('picture'); h.pic(1, 'market'); h.set(1, 'caption', { text: 'Tháp đồng hồ' });
+      h.add('content'); h.set(2, 'body', { text: 'Trái cây, bánh trái\nĐồ thủ công' }); h.add('text'); h.set(3, 'text', { text: 'Mời bạn đến thăm!' });
+      h.trans(1, 'fade'); h.trans(2, 'wipe'); h.trans(3, 'zoom'); h.save('Cho Ben Thanh', MY);
       var s = apps.tt; s.openFile(MY + '/The thao', Slides.deckFrom(TT)); s.trans(1, 'fade'); s.trans(2, 'push'); s.trans(3, 'split'); s.save('The thao', MY);
     };
   });

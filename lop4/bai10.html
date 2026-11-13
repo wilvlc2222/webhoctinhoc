@@ -91,7 +91,7 @@
 
   <!-- 3. SỬA LỖI -->
   <section class="step" data-title="Sửa lỗi gõ">
-    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Gõ sai thì sửa thế nào?</h2></div>
+    <div class="step-head"><span class="phase phase-explore">Khám phá 2</span><h2>Gõ sai thì sửa ra sao?</h2></div>
     <div class="cols">
       <div class="col-side">
         <div class="keys2">
@@ -178,7 +178,7 @@
   function norm(s) { return s.replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').replace(/\s+$/, ''); }
   function savedIn(d, name) { var s = d.saved(); return s && s.folder === MY && Core.plain(s.name) === Core.plain(name); }
   var POEM = 'Trong đầm gì đẹp bằng sen\nLá xanh bông trắng lại chen nhị vàng\nNhị vàng bông trắng lá xanh\nGần bùn mà chẳng hôi tanh mùi bùn.';
-  var FIX_GOAL = 'Em yêu mùa thu Hà Nội.';
+  var FIX_GOAL = 'Em yêu mùa mưa Sài Gòn.';
   var docs = {};
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -196,7 +196,7 @@
     });
 
     docs.fix = DocSim(document.getElementById('ds-fix'), {
-      text: 'Em yêuu mùaa thu Hà Nộii Nội Nội.', ime: true, ribbon: ['home'], rows: 3,
+      text: 'Em yêuu mùaa mưa Sài Gònn Gòn Gòn.', ime: true, ribbon: ['home'], rows: 3,
       hello: 'Câu này bị gõ thừa chữ. Em dùng Backspace, Delete để sửa thành: <b>' + FIX_GOAL + '</b>',
       tasksHost: document.getElementById('tasks-fix'), lesson: L, id: 'fix',
       tasks: [{ text: 'Sửa câu trong trang giấy thành: <b>' + FIX_GOAL + '</b>', ok: function (d) { return norm(d.text()) === FIX_GOAL; } }],
@@ -263,8 +263,8 @@ document.addEventListener('DOMContentLoaded', function () {
   Core.quiz(document.getElementById('bt-q'), {
     lesson: L, id: 'bt-q',
     questions: [
-      { q: 'Muốn <b>lưu</b> văn bản, em làm thế nào?', options: ['Chọn Insert, chọn Save.', 'Chọn Insert, chọn Save As.', 'Chọn File, chọn Save.', 'Chọn File, chọn New.'], answer: 2 },
-      { q: 'Gõ sai <b>một chữ</b> trong câu, em làm thế nào?', options: ['Xoá cả câu rồi gõ lại.', 'Xoá riêng chữ gõ sai rồi gõ lại chữ đó.', 'Để nguyên, không cần sửa.'], answer: 1 }
+      { q: 'Muốn <b>lưu</b> văn bản, em làm sao?', options: ['Chọn Insert, chọn Save.', 'Chọn Insert, chọn Save As.', 'Chọn File, chọn Save.', 'Chọn File, chọn New.'], answer: 2 },
+      { q: 'Gõ sai <b>một chữ</b> trong câu, em làm sao?', options: ['Xoá cả câu rồi gõ lại.', 'Xoá riêng chữ gõ sai rồi gõ lại chữ đó.', 'Để nguyên, không cần sửa.'], answer: 1 }
     ]
   });
 });

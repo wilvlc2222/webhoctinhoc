@@ -55,7 +55,7 @@ Trạng thái mã nguồn lúc dừng:
 Phạm vi master đã duyệt: **chỉ đổi lời dẫn, ví dụ, tên người và địa danh**. **Giữ nguyên thuật ngữ sách giáo khoa** (thư mục, tệp, phần mềm, phần cứng…) vì bài kiểm tra ở trường dùng đúng các từ đó. Quy tắc cũ "chữ cho học sinh dùng tiếng Việt chuẩn" được thay bằng mục này.
 
 - [x] Bước 1: đã quét, bảng "từ cũ → từ mới" nằm ở `docs/phuong-ngu.md` (2026-11-13). Master duyệt "đổi theo bảng" ngày 2026-11-14.
-- [ ] Bước 2: sửa lớp 4, mỗi phiên 3–4 bài. **Xong bài 1–8 (2026-11-14); tiếp theo bài 9–12.** Thay chữ bằng `powershell -ExecutionPolicy Bypass -File tools/replace.ps1 -Rules <tệp quy tắc>` (máy chặn chạy script nên phải có `-ExecutionPolicy Bypass`) (mỗi dòng: tệp, chữ cũ, chữ mới, số lần phải gặp, cách nhau bằng Tab; sai số lần thì bỏ qua tệp đó). Sau mỗi bài chạy `tools/fit.html?pages=l4&solve=1` vì đổi chữ làm đổi độ dài dòng. Đáp án và câu hỏi phải khớp nhau sau khi đổi.
+- [ ] Bước 2: sửa lớp 4, mỗi phiên 3–4 bài. **Xong bài 1–12 (2026-11-14); tiếp theo bài 13–16.** Thay chữ bằng `powershell -ExecutionPolicy Bypass -File tools/replace.ps1 -Rules <tệp quy tắc>` (máy chặn chạy script nên phải có `-ExecutionPolicy Bypass`) (mỗi dòng: tệp, chữ cũ, chữ mới, số lần phải gặp, cách nhau bằng Tab; sai số lần thì bỏ qua tệp đó). Sau mỗi bài chạy `tools/fit.html?pages=l4&solve=1` vì đổi chữ làm đổi độ dài dòng. Đáp án và câu hỏi phải khớp nhau sau khi đổi.
 - [ ] Bước 3: câu hỏi Bọ Lỗi, trang hướng dẫn, lời của Bíp.
 - [ ] Bước 4: lớp 5, sau khi lớp 4 xong.
 - Ước lượng: lớp 4 khoảng 80 lượt gọi, 60–80% một khung 5 tiếng nếu chia 4–5 phiên ngắn; lớp 5 gấp đôi.
