@@ -129,9 +129,14 @@
 - Lỗi do bản sửa trước: `.boss-opts-row .quiz-opt { flex: 1 1 0 }` làm đáp án Scratch co chiều cao còn 52px khi xếp dọc, các khối lệnh đè lên nhau. Sửa: bọc hai luật `.boss-opts-row` trong `@media (min-width: 900px) and (orientation: landscape)` (`assets/css/main.css`).
 - Đo lại: 1300×700 ba đáp án một hàng, `main` không tràn; 758×1024 ba đáp án xếp chồng, khối lệnh nằm trọn trong ô.
 - Chưa kiểm: máy Kindle thật. Sau khi trả lời, chữ trong khối lệnh ở màn hình mực khá nhạt (xám trên trắng), cần xem trên máy thật.
-- CHƯA commit, CHƯA push.
+- Đã commit và push cùng ngày.
 
 ### [2026-11-13] Đưa lên mạng: xong Lớp 4 (hướng dẫn, Bọ Lỗi, gộp danh sách bài)
 - Ba mục 2026-11-13 ở trên đã commit (`a6ebe29`), gộp vào `main` và push.
 - Kiểm trước khi push: `fit.html?pages=all&solve=1` → `ALL OK (35 pages)`; `boss.html?g=4` → `ALL OK`; 6 trận Bọ Lỗi chơi trọn; trang chủ, trang giáo viên, hướng dẫn mở không lỗi.
 - Chưa kiểm: Kindle PPW5 thật.
+
+### [2026-11-13] Trang chủ: trình bày lại bảng chú thích chủ đề
+- `index.html`, `assets/css/main.css`: bảng chú thích 6 chủ đề ở cột trái thành một thẻ trắng, mỗi chủ đề một chấm tròn có số cùng màu với nút trên bản đồ (`.topic-dot`), thay cho nhãn viền "Chủ đề N" chữ xám 12px. Dòng ghi chú nguồn bên dưới nhỏ lại còn 11px.
+- Đo ở 1300×700, lớp 4 và lớp 5: 6 dòng đều một hàng, `main` không tràn. Ở 758×1024 màn hình mực: không tràn ngang, chấm và viền màu đen.
+- Đã commit và push cùng ngày.

@@ -76,7 +76,7 @@
     var topics = GRADES[grade], cards = [], legend = '';
     for (var i = 0; i < topics.length; i++) {
       var ls = topics[i].lessons, tp = i + 1;
-      legend += '<li><span class="topic-tag tp-' + tp + '">Chủ đề ' + tp + '</span><span>' + topics[i].topic.replace(/^Chủ đề \d+\.\s*/, '') + '</span></li>';
+      legend += '<li><span class="topic-dot tp-' + tp + '" title="Chủ đề ' + tp + '">' + tp + '</span><span>' + topics[i].topic.replace(/^Chủ đề \d+\.\s*/, '') + '</span></li>';
       for (var j = 0; j < ls.length; j++) {
         var l = ls[j], tag = '<span class="topic-tag tp-' + tp + '">Chủ đề ' + tp + '</span>';
         if (l.href) {
