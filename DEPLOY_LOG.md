@@ -191,6 +191,14 @@
 - `sound.js`: thêm bài `home` (vui, vừa nhanh); trang có `#topic-legend` (chỉ trang chủ) tự phát sau lần chạm đầu. Bài học vẫn `study`, Bọ Lỗi vẫn `boss`.
 - Mọi trang đổi `?v=1114a` → `?v=1114b` (268 chỗ, 39 tệp).
 - Kiểm tra: trang chủ chạm một lần → `Core.musicPlaying()` = `home`, không lỗi console.
+
+## 2026-11-14 – Nhạc: nhiều bài hơn, stereo, phát liền khi vào trang
+
+- `sound.js`: 8 bài (`study1–4`, `home1–2`, `boss1–2`); `Core.music(kind)` chọn một bài trong nhóm, khác bài nghe lần trước (`whth-music-last`). `Core.musicPlaying()` bỏ, thay bằng `Core.musicSong()`.
+- Stereo: mỗi nốt hai giọng lệch 6 cent, đặt trái/phải bằng `StereoPanner` (bè trầm lệch trái, giai điệu lệch phải), lọc thông thấp 3200 Hz, tiếng vang trái → phải. Trình duyệt không có `StereoPanner` thì phát giữa.
+- Tạo `AudioContext` ngay khi mở trang và thử `resume()`; trình duyệt cho thì phát liền, không thì chờ lần chạm đầu như cũ. Thêm nghe `pointerdown`.
+- Mọi trang đổi `?v=1114b` → `?v=1114c`.
+- Kiểm tra (Chrome trong app): mở trang chủ → `home1` phát chưa cần chạm, lần sau `home2`; chạm thẻ bài 1 → vào bài phát `study2` liền. Không lỗi console.
 - Gộp vào `main` (fast-forward) và push cùng ngày.
 
 ## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 13–16
