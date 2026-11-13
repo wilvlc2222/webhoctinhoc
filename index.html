@@ -145,7 +145,7 @@
     }
     var m = Core.el('div', 'bip-modal', '<div class="bip-card boss-menu" role="dialog" aria-modal="true"><div class="bip-card-head"><h2>Solo BOSS · Lớp ' + g + '</h2>' +
       '<button class="btn btn-small" type="button" id="boss-close">Đóng ✕</button></div>' +
-      '<p>Mỗi chủ đề có một BOSS. Em trả lời đúng các câu hỏi của chủ đề để đánh bại nó. Thắng lần đầu được 3 kim cương.</p><ul class="boss-list">' + rows + '</ul></div>');
+      '<p>Mỗi chủ đề có một BOSS là Bọ Lỗi (Big Bug). Em trả lời đúng các câu hỏi của chủ đề để đánh bại nó. Thắng lần đầu được 3 kim cương.</p><ul class="boss-list">' + rows + '</ul></div>');
     document.body.appendChild(m);
     function close() { if (m.parentNode) document.body.removeChild(m); }
     Core.on(document.getElementById('boss-close'), close);

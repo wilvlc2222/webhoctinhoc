@@ -234,3 +234,8 @@
 - `sound.js`: nhịp theo từng loại trang, `TEMPO` = bài học 0.88, trang chủ 0.9, BOSS 1.1 (master: "nhạc hơi chậm", rồi "nhanh vừa thôi, không quá nhanh làm trẻ em hồi hộp").
 - Mọi trang đổi `?v=1114c` → `?v=1114d`.
 - Kiểm tra: `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi, không tràn; `fit.html?pages=all&solve=1` → ALL OK (35 pages); trang Solo BOSS không lỗi console.
+
+## 2026-11-14 – Tên riêng của BOSS: Bọ Lỗi / Big Bug
+
+- Master dặn: BOSS là tên gọi chung; tên tiếng Việt **Bọ Lỗi**, tiếng Anh **Big Bug**. Thẻ bên trái trang đấu ghi "Big Bug" và dưới là "Bọ Lỗi" (`.boss-vn`); lời giới thiệu "BOSS Bọ Lỗi (Big Bug) đang phá…"; thắng: "Em đã thắng BOSS Bọ Lỗi!"; trang chủ và hướng dẫn: "Mỗi chủ đề có một BOSS là Bọ Lỗi (Big Bug)". Nhãn HP và câu báo vẫn dùng "BOSS".
+- Kiểm tra: `fit.html?pages=all&solve=1` → ALL OK (35 pages); `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi.

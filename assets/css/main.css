@@ -1648,6 +1648,8 @@ html.eink .map-stars .star-count::before { color: #000; }
 .boss-bug.is-hit svg { animation: shake 0.5s; }
 .boss-bug.is-down svg { transform: rotate(180deg); opacity: 0.6; }
 .boss-title { margin: 0; font-size: 26px; }
+.boss-vn { margin: 0; font-size: 17px; font-weight: 700; color: #5f3dc4; }   /* the BOSS's Vietnamese name under "Big Bug" */
+html.eink .boss-vn { color: #000; }
 .boss-topic { margin: 0 0 8px; color: var(--muted); }
 .boss-stat { margin-top: 10px; font-weight: 700; font-size: 15px; }
 /* 20 HP in two rows of ten */

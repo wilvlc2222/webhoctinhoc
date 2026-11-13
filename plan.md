@@ -4,7 +4,7 @@ Cập nhật: 2026-11-14. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới
 
 Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịch sử đưa lên mạng ở `DEPLOY_LOG.md`.
 
-Đổi tên 2026-11-14 (master dặn): thử thách "Diệt Bọ Lỗi" giờ là **Solo BOSS**, con quái là **BOSS**; "máu" và "trái tim" giờ đều là **HP** (BOSS 20 HP, em 3 HP). Các mục cũ bên dưới còn ghi "Bọ Lỗi" là nói về Solo BOSS.
+Đổi tên 2026-11-14 (master dặn): thử thách "Diệt Bọ Lỗi" giờ là **Solo BOSS**, con quái là **BOSS** (tên gọi chung; tên riêng là **Bọ Lỗi**, tiếng Anh **Big Bug**); "máu" và "trái tim" giờ đều là **HP** (BOSS 20 HP, em 3 HP). Các mục cũ bên dưới còn ghi "Bọ Lỗi" là nói về Solo BOSS.
 
 ---
 

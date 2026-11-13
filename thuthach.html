@@ -44,7 +44,7 @@
         <path d="M50 68q10 -7 20 0" fill="none" stroke="#1d2433" stroke-width="3" stroke-linecap="round"/>
       </svg>
     </div>
-    <h1 class="boss-title">BOSS</h1>
+    <h1 class="boss-title">Big Bug</h1><p class="boss-vn">Bọ Lỗi</p>
     <p class="boss-topic" id="boss-topic"></p>
     <div class="boss-stat"><span>HP của BOSS: <b id="boss-hp-n"></b></span><div class="boss-hp" id="boss-hp"></div></div>
     <div class="boss-stat"><span>Điểm của em: <b id="boss-score"></b></span></div>
@@ -84,7 +84,7 @@
   function intro() {
     hpMax = hp = TOTAL; hearts = 3; bars();
     screen('<h2>Solo BOSS · Chủ đề ' + topic + ' · Lớp ' + grade + '</h2>' +
-      '<p class="boss-lead">BOSS đang phá các bài học của chủ đề <b>' + Core.TOPIC_NAMES[topic - 1] + '</b>. Em hãy đánh bại nó!</p>' +
+      '<p class="boss-lead">BOSS <b>Bọ Lỗi</b> (Big Bug) đang phá các bài học của chủ đề <b>' + Core.TOPIC_NAMES[topic - 1] + '</b>. Em hãy đánh bại nó!</p>' +
       '<ul class="boss-rules"><li>BOSS có <b>' + TOTAL + ' HP</b>. Mỗi câu trả lời <b>đúng</b>: em được 1 điểm, BOSS mất 1 HP.</li>' +
       '<li>Em có <b>3 HP</b>. Mỗi câu trả lời <b>sai</b> làm em mất 1 HP. Câu đó sẽ được hỏi lại sau.</li>' +
       '<li>Đủ <b>' + TOTAL + ' điểm</b> thì BOSS thua. Thắng lần đầu, em được <b>3 kim cương</b>.</li></ul>' +
@@ -192,7 +192,7 @@
     var secs = Math.round((new Date().getTime() - t0) / 1000), first = !Core.gems.bossWon(grade, topic), i;
     if (first) for (i = 1; i <= 3; i++) Core.gems.add('boss_g' + grade + '_t' + topic + '_' + i);
     document.getElementById('boss-bug').className = 'boss-bug is-down';
-    screen('<h2>Em đã thắng BOSS!</h2><p class="boss-lead">Em đánh bại BOSS của chủ đề ' + topic + ' với <b>' + hpMax + '/' + hpMax + ' điểm</b> trong <b>' + secs + '</b> giây, còn <b>' + hearts + '</b> HP.</p>' +
+    screen('<h2>Em đã thắng BOSS Bọ Lỗi!</h2><p class="boss-lead">Em đánh bại Bọ Lỗi của chủ đề ' + topic + ' với <b>' + hpMax + '/' + hpMax + ' điểm</b> trong <b>' + secs + '</b> giây, còn <b>' + hearts + '</b> HP.</p>' +
       (first ? '<p class="boss-reward">' + Core.gemIcon + 'Phần thưởng thắng lần đầu: <b>+3 kim cương</b></p>' : '<p>Em đã nhận phần thưởng của thử thách này từ lần thắng trước.</p>') +
       '<div class="bip-actions"><button class="btn" id="boss-again" type="button">Đấu lại</button><a class="btn btn-primary" href="index.html">&lsaquo; Về trang chủ</a></div>');
     Core.on(document.getElementById('boss-again'), ready);
