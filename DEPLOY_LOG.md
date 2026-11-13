@@ -171,24 +171,24 @@
 - Đo: đặt sẵn lớp 5 trong localStorage rồi mở trang chủ → hiện bài lớp 4, bấm nút Lớp 5 không đổi gì, không có lỗi.
 - Đã commit, gộp vào `main` và push cùng ngày (nhánh `claude/disable-class-5-button-e598ae`).
 
-## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 13–16 (chưa đưa lên mạng)
+## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 13–16
 
 - Sửa chữ `lop4/bai13.html` (4 chỗ) và `bai15.html` (1 chỗ) theo `docs/phuong-ngu.md`, bằng `tools/replace.ps1`; bài 14, 16 không có chữ cần đổi. Không đổi tệp nào trong `assets/`, nên không đổi số `?v=`. Xong bước 2 (lớp 4).
 - Kiểm tra: `tools/fit.html?pages=l4&solve=1` → ALL OK (17 pages).
-- Nhánh này nối tiếp nhánh `claude/bai-9-12-5f3192`; bài 1–16 đều chưa gộp vào `main`.
+- Bài 1–16 gộp vào `main` (fast-forward) và push cùng ngày. Kiểm trước khi push: `fit.html?pages=all&solve=1` → ALL OK (35 pages).
 
-## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 9–12 (chưa commit, chưa đưa lên mạng)
+## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 9–12
 
 - Sửa chữ `lop4/bai09–11.html`, `bai12a.html` theo `docs/phuong-ngu.md` (17 chỗ, bằng `tools/replace.ps1`); `bai12b.html` không có chữ cần đổi. Bài 9 luyện tập đổi sang Chợ Bến Thành, dùng hình có sẵn nên không đổi tệp nào trong `assets/`, không đổi số `?v=`.
 - Kiểm tra: `tools/fit.html?pages=l4&solve=1` → ALL OK (17 pages), đủ sao sau khi tự giải.
 
-## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 5–8 (chưa commit, chưa đưa lên mạng)
+## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 5–8
 
 - Sửa chữ `lop4/bai05–08.html` theo `docs/phuong-ngu.md`; bài 9 chỉ đổi 3 dòng mẫu trình chiếu cho khớp tệp "Cảnh đẹp quê hương" (Huế → Sài Gòn). Không đổi tệp nào trong `assets/`, nên không đổi số `?v=`.
 - `.claude/launch.json`: thêm cấu hình `webhoctinhoc-8766` (cổng 8765 hay bị phiên khác chiếm).
 - Kiểm tra: `tools/fit.html?pages=l4&solve=1` → ALL OK (17 pages); bài 6, bài 8 mở không lỗi console.
 
-## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 1–4 (chưa commit, chưa đưa lên mạng)
+## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 1–4
 
 - Sửa chữ `lop4/bai01–04.html` theo bảng `docs/phuong-ngu.md` (bố → ba, quả táo → trái táo, hỏng → hư, thế nào → sao/ra sao, tớ/cậu → mình/bạn).
 - Bài 4: Hồ Gươm → Chợ Bến Thành, Văn Miếu → Nhà thờ Đức Bà, Chùa Một Cột → Thảo Cầm Viên; `assets/js/websim.js` thêm kết quả và hình (`church`, `zoo`). Mã sao `hoguom`, `vanmieu` giữ nguyên để không mất sao cũ.
