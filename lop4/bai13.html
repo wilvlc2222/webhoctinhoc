@@ -172,7 +172,7 @@
     { art: 'meo', name: 'Mèo', x: 0, y: -130, rot: 'lr', scripts: [
       [['flag'], ['goto', 0, -130], ['sayFor', 'Bấm phím mũi tên trái, phải để hứng táo!', 2]],
       [['keypress', 'left'], ['point', -90], ['move', 30]], [['keypress', 'right'], ['point', 90], ['move', 30]]] },
-    { art: 'tao', name: 'Quả táo', x: 0, y: 170, scripts: [
+    { art: 'tao', name: 'Trái táo', x: 0, y: 170, scripts: [
       [['flag'], ['setVar', 'điểm', 0], ['showVar', 'điểm'], ['forever', [['goto', ['random', -200, 200], 170],
         ['until', ['or', ['touching', 'Mèo'], ['lt', ['ypos'], -165]], [['changeY', -6]]],
         ['if', ['touching', 'Mèo'], [['changeVar', 'điểm', 1], ['play', 'pop']]]]]]] }
@@ -184,7 +184,7 @@
     fillIcons();
     Core.quiz(document.getElementById('quiz-route'), {
       lesson: L, id: 'route',
-      questions: [{ q: 'Làm theo các chỉ dẫn trên, bạn học sinh sẽ đi như thế nào?', options: ['Đi thẳng', 'Đi theo một hình tam giác', 'Đi theo một hình vuông', 'Đi theo một hình tròn'], answer: 2,
+      questions: [{ q: 'Làm theo các chỉ dẫn trên, bạn học sinh sẽ đi ra sao?', options: ['Đi thẳng', 'Đi theo một hình tam giác', 'Đi theo một hình vuông', 'Đi theo một hình tròn'], answer: 2,
         explain: '4 lần "đi 4 bước, quay phải" vẽ ra 4 cạnh bằng nhau với 4 góc vuông.' }]
     });
 
@@ -231,7 +231,7 @@
       tasksHost: document.getElementById('tasks-vd'), lesson: L, id: 'vd',
       tasks: [
         { text: 'Mở tệp <b>Trochoi</b>.', ok: function (a) { return a.opened() && /trochoi/i.test(a.opened()); } },
-        { text: 'Chạy chương trình và chơi: hứng được ít nhất <b>3 quả táo</b>.', ok: function (a) { return a.opened() && (+a.vars()['điểm'] || 0) >= 3; } },
+        { text: 'Chạy chương trình và chơi: hứng được ít nhất <b>3 trái táo</b>.', ok: function (a) { return a.opened() && (+a.vars()['điểm'] || 0) >= 3; } },
         { text: 'Dừng chương trình.', ok: function (a, w) { return a.runs() > 0 && !a.running(); } }
       ]
     });
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
     questions: [
       { q: 'Cua làm theo chỉ dẫn: <b>đi thẳng 2 bước, quay phải, đi thẳng 3 bước</b>. Cua đã đi tất cả bao nhiêu bước?', options: ['3 bước', '5 bước', '6 bước'], answer: 1 },
       { q: 'Khi mới mở Scratch, <b>phông nền sân khấu</b> có sẵn là gì?', options: ['Nền trắng', 'Khu vườn', 'Bầu trời'], answer: 0 },
-      { q: 'Khi mới mở Scratch, nhân vật có sẵn trên sân khấu là gì?', options: ['Chú chó', 'Chú mèo', 'Quả bóng'], answer: 1 }
+      { q: 'Khi mới mở Scratch, nhân vật có sẵn trên sân khấu là gì?', options: ['Chú chó', 'Chú mèo', 'Trái banh'], answer: 1 }
     ]
   });
 });

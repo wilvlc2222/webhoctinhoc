@@ -29,7 +29,8 @@ nhau (Khoa – Minh) thì vẫn "mình – bạn".
   Thảo Cầm Viên; `websim.js` thêm kết quả và hình cho ba nơi này). `fit.html?pages=l4&solve=1`: ALL OK.
 - 2026-11-14: xong bài 5–8. Bài 6: tớ/cậu → mình/bạn, bố mẹ → ba mẹ, hỏng → hư. Bài 7, 8 (và mẫu trình chiếu ở bài 9): "Một số cảnh đẹp ở Sài Gòn" – Bến Nhà Rồng, Chợ Bến Thành, Nhà thờ Đức Bà, Dinh Độc Lập, Thảo Cầm Viên; ảnh cầu ghi "Cầu Sài Gòn"; lời mời "Mời bạn đến thăm Sài Gòn nha!". "thế nào" → "sao", "ra sao", "cách nào". Tiêu đề tệp "Cảnh đẹp quê hương" giữ.
 - 2026-11-14: xong bài 9–12. Bài 9 luyện tập: Hồ Hoàn Kiếm → **Chợ Bến Thành** (tháp đồng hồ, các gian hàng; hình `market` có sẵn trong `art.js`; tệp "Cho Ben Thanh"), "đá bóng" → "đá banh". Bài 10: "Em yêu mùa thu Hà Nội." → "Em yêu mùa mưa Sài Gòn.". Bài 11: "quả ngọt" → "trái ngọt" (bài thơ Bíp viết). Bài 12a: "những quả nào" → "những trái nào"; truyện "Sự tích quả dưa hấu", "mâm ngũ quả", "phương Bắc" giữ. "thế nào" → "ra sao"/"làm sao", "nhỉ" → "ta". Bài 12b không có chữ cần đổi.
-- Còn: bài 13–16, rồi Bọ Lỗi, hướng dẫn, lời Bíp.
+- 2026-11-14: xong bài 13–16. Bài 13: sprite "Quả táo" → "Trái táo", "3 quả táo" → "3 trái táo", đáp án nhiễu "Quả bóng" → "Trái banh", "đi như thế nào" → "đi ra sao". Bài 15: "em làm thế nào" → "em làm sao". Bài 14, 16 không có chữ cần đổi. Giữ "quả địa cầu" (tên nút trong Scratch, đúng SGK) và "Mình cùng…" (giống bài 6, 10, 12a). Thư viện nhân vật `assets/js/sprites.js` còn "Quả táo", "Quả bóng" (dùng chung với lớp 5, đổi thì phải đổi số `?v=`): để bước 3.
+- Còn: Bọ Lỗi, hướng dẫn, lời Bíp, `sprites.js`.
 
 ## B. Giữ nguyên
 
