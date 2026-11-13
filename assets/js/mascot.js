@@ -264,7 +264,7 @@
   function init() {
     var eink = document.getElementById('eink-toggle');
     if (eink && !document.querySelector('.bip-avatar')) {
-      var b = E('button', 'btn btn-small bip-avatar', '<span class="bip-mini"></span>');
+      var b = E('button', 'btn btn-small bip-avatar', '<span class="bip-mini"></span><span class="bip-label">Túi đồ</span>');
       b.setAttribute('data-bip', '1'); b.setAttribute('title', 'Tủ đồ của Bíp'); b.setAttribute('aria-label', 'Tủ đồ của Bíp'); b.type = 'button';
       eink.parentNode.insertBefore(b, eink);
       Core.on(b, Core.wardrobe);

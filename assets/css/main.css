@@ -115,6 +115,9 @@ button { font: inherit; color: inherit; }
 .btn-small { min-height: 40px; padding: 4px 12px; font-size: 16px; }
 html.eink .btn { border-width: 3px; }
 html.eink .btn-primary { background: #000; color: #fff; }
+.btn-guide { font-weight: 800; box-shadow: 0 0 0 3px rgba(31, 111, 209, .25); }
+.guide-arrow { display: inline-block; font-size: 22px; line-height: 1; color: var(--primary); margin-right: -4px; animation: guide-nudge 1s ease-in-out infinite; }
+@keyframes guide-nudge { 0%, 100% { transform: translateX(-6px); } 50% { transform: translateX(0); } }
 :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
 
 /* ===== Icons ===== */
@@ -1418,6 +1421,8 @@ html.eink .step-dot.active { transform: none; }
 .bip-item[aria-pressed="true"], .bip-anim[aria-pressed="true"] { --edge: #134a8e; border-width: 3px; border-color: var(--primary); background: #e7f5ff; }
 .bip-avatar { padding: 0 6px; min-width: 40px; }
 .bip-avatar .bip-mini { width: 28px; height: 32px; }
+.bip-avatar .bip-label { margin-left: 4px; }
+.lesson-top .bip-avatar .bip-label { display: none; }
 .bip-hero { float: right; display: flex; flex-direction: column; align-items: center; margin: -8px 0 0 8px; padding: 0; border: 0; background: none;
   color: var(--primary); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
 .bip-hero .bip-mini { width: 80px; height: 90px; transition: transform 0.2s; }

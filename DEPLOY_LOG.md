@@ -285,3 +285,11 @@
 - Master yêu cầu thêm: trả lời đúng / sai trong trận BOSS phải có âm thanh khác hẳn nhau. `sound.js` thêm 2 tiếng riêng cho trận BOSS: `hit` (tiếng "bụp" trúng bọ rồi "ting ting ting" đi lên, cao và vui) và `miss` (còi trầm "è è" hai lần rồi tiếng "oaa" tuột xuống). `thuthach.html` dùng `hit` / `miss` thay cho `good` / `bad`; bài học vẫn giữ tiếng `good` / `bad` cũ. Kindle không có Web Audio nên vẫn im lặng.
 - Kiểm tra âm thanh: sau một cú bấm thật, `Core.sound('hit')` tạo 4 nốt (1 vuông + 3 tam giác), `Core.sound('miss')` tạo 3 nốt răng cưa, không lỗi console. `bossplay.js?g=4` chạy lại sau khi đổi tiếng: 6 chủ đề thắng 2 lần, không lỗi.
 - Gộp vào `main` (fast-forward, commit `2c19467`) và push cùng ngày; trang trên GitHub Pages đã có `?v=1114j`, `sound.js` có tiếng `miss`, `main.css` có `.bb-sad`.
+
+## 2026-11-14 – Thanh trên trang chủ: Hướng dẫn nổi bật, nút Bíp có chữ "Túi đồ"
+
+- Master yêu cầu: thứ tự Hướng dẫn / Xem danh sách / Túi đồ (icon Bíp) / …; nút Hướng dẫn nổi bật hơn, có mũi tên nhỏ chỉ vào.
+- `index.html`: đưa Hướng dẫn lên đầu, thêm `btn-primary btn-guide` và mũi tên `.guide-arrow` (➜) đung đưa qua lại. Màn hình mực và máy tắt hiệu ứng thì mũi tên đứng yên.
+- `mascot.js`: nút Bíp có thêm chữ "Túi đồ"; trang bài học (`.lesson-top`) giấu chữ, chỉ giữ icon.
+- Mọi trang đổi `core.js` / `main.css` `?v=1114j` → `?v=1114k`.
+- Kiểm tra ở 1024px: đúng thứ tự, không tràn ngang, animation `guide-nudge` chạy.
