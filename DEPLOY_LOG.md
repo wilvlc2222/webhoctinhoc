@@ -130,3 +130,8 @@
 - Đo lại: 1300×700 ba đáp án một hàng, `main` không tràn; 758×1024 ba đáp án xếp chồng, khối lệnh nằm trọn trong ô.
 - Chưa kiểm: máy Kindle thật. Sau khi trả lời, chữ trong khối lệnh ở màn hình mực khá nhạt (xám trên trắng), cần xem trên máy thật.
 - CHƯA commit, CHƯA push.
+
+### [2026-11-13] Đưa lên mạng: xong Lớp 4 (hướng dẫn, Bọ Lỗi, gộp danh sách bài)
+- Ba mục 2026-11-13 ở trên đã commit (`a6ebe29`), gộp vào `main` và push.
+- Kiểm trước khi push: `fit.html?pages=all&solve=1` → `ALL OK (35 pages)`; `boss.html?g=4` → `ALL OK`; 6 trận Bọ Lỗi chơi trọn; trang chủ, trang giáo viên, hướng dẫn mở không lỗi.
+- Chưa kiểm: Kindle PPW5 thật.
