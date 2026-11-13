@@ -169,4 +169,4 @@
 - Theo lời master. `index.html`: nút Lớp 5 có `disabled`, chữ "Lớp 5 (sắp có)"; máy đã lưu lớp 5 từ trước cũng mở ra lớp 4. Bật lại: bỏ `disabled` và chữ "(sắp có)" ở nút đó.
 - Chỉ tắt nút: các trang `lop5/*.html` vẫn mở được nếu ai có đường dẫn trực tiếp.
 - Đo: đặt sẵn lớp 5 trong localStorage rồi mở trang chủ → hiện bài lớp 4, bấm nút Lớp 5 không đổi gì, không có lỗi.
-- Đã commit và push nhánh `claude/disable-class-5-button-e598ae` cùng ngày. CHƯA gộp vào `main` nên trang đang chạy chưa đổi.
+- Đã commit, gộp vào `main` và push cùng ngày (nhánh `claude/disable-class-5-button-e598ae`).
