@@ -6,10 +6,10 @@
 <title>Solo BOSS – Tin học vui</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1114h">
-<script src="assets/js/errbox.js?v=1114h"></script>
-<script src="assets/js/icons.js?v=1114h"></script>
-<script src="assets/js/core.js?v=1114h"></script>
+<link rel="stylesheet" href="assets/css/main.css?v=1114j">
+<script src="assets/js/errbox.js?v=1114j"></script>
+<script src="assets/js/icons.js?v=1114j"></script>
+<script src="assets/js/core.js?v=1114j"></script>
 <script src="assets/js/bossbank.js?v=1115b"></script>
 </head>
 <body>
@@ -33,7 +33,8 @@
   <div class="boss-side card">
     <div class="boss-bug" id="boss-bug" aria-hidden="true">
       <!-- three looks by HP left (class hp-hi / hp-mid / hp-lo on #boss-bug, set by setBug()):
-           .bb-hi shows only above 2/3, .bb-mid from 1/3 to 2/3, .bb-lo below 1/3, .bb-up in hi and mid; .bb-laugh after a wrong answer -->
+           .bb-hi shows only above 2/3, .bb-mid from 1/3 to 2/3, .bb-lo below 1/3, .bb-up in hi and mid; .bb-laugh after a wrong answer;
+           .bb-sad for a moment after a right answer (it hides the face, brows, pupils and X eyes of the stage) -->
       <svg viewBox="0 0 120 110">
         <path d="M38 22 26 6M82 22 94 6" stroke="#1d2433" stroke-width="4" stroke-linecap="round"/>
         <circle cx="25" cy="5" r="4" fill="#e03131"/><circle cx="95" cy="5" r="4" fill="#e03131"/>
@@ -44,7 +45,7 @@
         <path class="bb-lo" d="M86 31l-8 10 8 5-9 11M30 82l9 4-3 9" fill="none" stroke="#1d2433" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="44" cy="50" r="11" fill="#fff" stroke="#1d2433" stroke-width="3"/><circle cx="76" cy="50" r="11" fill="#fff" stroke="#1d2433" stroke-width="3"/>
         <g class="bb-up" fill="#1d2433"><circle cx="46" cy="52" r="4.5"/><circle cx="74" cy="52" r="4.5"/></g>
-        <path class="bb-lo" d="M39 45l10 10M49 45 39 55M71 45l10 10M81 45 71 55" stroke="#1d2433" stroke-width="3" stroke-linecap="round"/>
+        <path class="bb-lo bb-x" d="M39 45l10 10M49 45 39 55M71 45l10 10M81 45 71 55" stroke="#1d2433" stroke-width="3" stroke-linecap="round"/>
         <path class="bb-hi" d="M31 36l22 8M89 36l-22 8" stroke="#1d2433" stroke-width="4" stroke-linecap="round"/>
         <path class="bb-mid" d="M33 40l20-7M87 40l-20-7" stroke="#1d2433" stroke-width="4" stroke-linecap="round"/>
         <path class="bb-mid" d="M101 28q6 9 0 13q-6-4 0-13z" fill="#74c0fc" stroke="#1d2433" stroke-width="2"/>
@@ -54,6 +55,12 @@
           <ellipse class="bb-lo" cx="60" cy="71" rx="6" ry="7" fill="#1d2433"/>
         </g>
         <path class="bb-laugh" d="M45 64h30q-2 16-15 16t-15-16z" fill="#1d2433" stroke="#1d2433" stroke-width="2" stroke-linejoin="round"/>
+        <g class="bb-sad">
+          <g fill="#1d2433"><circle cx="44" cy="55" r="4.5"/><circle cx="76" cy="55" r="4.5"/></g>
+          <path d="M31 42l21-10M89 42l-21-10" stroke="#1d2433" stroke-width="4" stroke-linecap="round"/>
+          <path d="M46 78q14-12 28 0" fill="none" stroke="#1d2433" stroke-width="3" stroke-linecap="round"/>
+          <path d="M37 62q-5 8 0 11q5-3 0-11z" fill="#74c0fc" stroke="#1d2433" stroke-width="2"/>
+        </g>
       </svg>
     </div>
     <h1 class="boss-title">Big Bug</h1><p class="boss-vn">Bọ Lỗi</p>
@@ -97,10 +104,15 @@
   }
   /* the bug's look follows the HP left; extra = 'is-hit' (right answer), 'is-laugh' (wrong answer) or 'is-down' (won).
      E-ink and reduced motion turn the animations off, so only the look changes and "-1 HP" / "Ha ha!" stay still. */
+  /* a right answer makes the bug sad for SAD_MS, then it goes back to the look of its HP stage */
+  var SAD_MS = 1500, sadT = null;
   function setBug(extra) {
     var b = document.getElementById('boss-bug'), r = hpMax ? hp / hpMax : 1, old = b.querySelector('.boss-pop'),
         st = r > 2 / 3 ? 'hp-hi' : r >= 1 / 3 ? 'hp-mid' : 'hp-lo';
+    if (sadT) clearTimeout(sadT);
+    sadT = null;
     b.className = 'boss-bug ' + st + (extra ? ' ' + extra : '');
+    if (extra === 'is-hit') sadT = setTimeout(function () { sadT = null; b.className = 'boss-bug ' + st; }, SAD_MS);
     document.getElementById('boss-hp').className = 'boss-hp ' + st;
     document.getElementById('boss-me').className = 'boss-hp boss-hp-me' + (extra === 'is-laugh' ? ' is-shake' : '');
     if (old) b.removeChild(old);
@@ -207,13 +219,13 @@
         this.className += ' is-right';
         hp--;
         Core.say(fb, 'Trúng rồi! Em được 1 điểm, BOSS mất 1 HP.', 'good');
-        if (Core.sound) Core.sound('good');
+        if (Core.sound) Core.sound('hit');
         if (Core.react) Core.react('good');
       } else {
         hearts--; queue.push(q);
         this.className += ' is-wrong';
         Core.say(fb, 'Chưa đúng. Em mất 1 HP. Câu này sẽ quay lại sau, em suy nghĩ kĩ nha.', 'bad');
-        if (Core.sound) Core.sound('bad');
+        if (Core.sound) Core.sound('miss');
         if (Core.react) Core.react('bad');
       }
       if (hp <= 0 || hearts <= 0) stopClock();   /* the match is decided: the time no longer counts */

@@ -6,7 +6,7 @@
   if (!Core) return;
   var AC = window.AudioContext || window.webkitAudioContext;
   var KEY = 'whth-sound', ctx = null;
-  var RANK = { tap: 1, wear: 2, good: 3, bad: 3, win: 4, level: 5 };
+  var RANK = { tap: 1, wear: 2, good: 3, bad: 3, hit: 3, miss: 3, win: 4, level: 5 };
 
   function isOn() { try { return localStorage.getItem(KEY) !== '0'; } catch (e) { return true; } }
   function setOn(on) { try { localStorage.setItem(KEY, on ? '1' : '0'); } catch (e) {} }
@@ -43,6 +43,16 @@
     wear: function () { note(420, 0, 0.12, 0.1, 'sine', 880); },
     good: function () { note(659, 0, 0.12, 0.14); note(880, 0.09, 0.2, 0.14); },
     bad: function () { note(233, 0, 0.16, 0.12, 'sine'); note(175, 0.13, 0.24, 0.12, 'sine'); },
+    /* BOSS match: right and wrong must sound nothing alike.
+       hit = a thump on the bug, then a bright rising "ting ting ting"; miss = a low buzzer twice, then a sliding "waah" */
+    hit: function () {
+      note(180, 0, 0.12, 0.2, 'square', 60);
+      note(784, 0.08, 0.1, 0.15); note(1047, 0.16, 0.1, 0.15); note(1568, 0.24, 0.3, 0.16);
+    },
+    miss: function () {
+      note(147, 0, 0.16, 0.09, 'sawtooth'); note(147, 0.2, 0.16, 0.09, 'sawtooth');
+      note(220, 0.42, 0.45, 0.09, 'sawtooth', 98);
+    },
     win: function () { note(523, 0, 0.12, 0.13); note(659, 0.09, 0.12, 0.13); note(784, 0.18, 0.12, 0.13); note(1047, 0.27, 0.34, 0.15); },
     level: function () {
       var f = [523, 659, 784, 1047, 1319];

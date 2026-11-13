@@ -274,3 +274,13 @@
 - Mọi trang đổi `?v=1114f` → `?v=1114h`.
 - Kiểm tra: `bossplay.js?g=4` → 6 chủ đề khoá lúc đầu, đủ sao thì mở, thắng 2 lần, không lỗi, không tràn 1280×720; hết giờ ra màn thua (thử bằng cách vặn giờ trong trình duyệt); điện thoại 375px không tràn ngang.
 - Gộp vào `main` (fast-forward) và push cùng ngày.
+
+## 2026-11-14 – Big Bug buồn một chút khi em trả lời đúng
+
+- Master yêu cầu: trả lời đúng thì Bọ Lỗi hiện mặt buồn, rồi mới về lại dáng theo HP.
+- `thuthach.html`: thêm nhóm `.bb-sad` trong hình SVG (mắt nhìn xuống, chân mày xếch lên ở giữa, miệng mếu, một giọt nước mắt). `setBug('is-hit')` hẹn giờ `SAD_MS` = 1,5 giây rồi bỏ `is-hit`, bọ về đúng dáng tím / cam / đỏ của HP còn lại. Câu sau tới sớm thì bỏ hẹn giờ cũ.
+- `main.css`: lúc `is-hit` thì giấu mặt, chân mày, con ngươi, mắt chéo X của chặng HP, chỉ hiện mặt buồn; vết nứt của chặng đỏ vẫn giữ. Màn hình mực: chỉ đổi dáng, không chuyển động.
+- Mọi trang đổi `?v=1114h` → `?v=1114j`.
+- Kiểm tra: trả lời đúng → 0,3 giây sau có mặt buồn, không còn mặt cũ; 1,5 giây sau về `hp-hi`, mặt buồn tắt. `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi.
+- Master yêu cầu thêm: trả lời đúng / sai trong trận BOSS phải có âm thanh khác hẳn nhau. `sound.js` thêm 2 tiếng riêng cho trận BOSS: `hit` (tiếng "bụp" trúng bọ rồi "ting ting ting" đi lên, cao và vui) và `miss` (còi trầm "è è" hai lần rồi tiếng "oaa" tuột xuống). `thuthach.html` dùng `hit` / `miss` thay cho `good` / `bad`; bài học vẫn giữ tiếng `good` / `bad` cũ. Kindle không có Web Audio nên vẫn im lặng.
+- Kiểm tra âm thanh: sau một cú bấm thật, `Core.sound('hit')` tạo 4 nốt (1 vuông + 3 tam giác), `Core.sound('miss')` tạo 3 nốt răng cưa, không lỗi console. `bossplay.js?g=4` chạy lại sau khi đổi tiếng: 6 chủ đề thắng 2 lần, không lỗi.

@@ -1740,6 +1740,9 @@ html.eink .map-stars .star-count::before { color: #000; }
 .boss-bug .bb-mid, .boss-bug .bb-lo, .boss-bug .bb-laugh,
 .boss-bug.hp-mid .bb-hi, .boss-bug.hp-lo .bb-hi, .boss-bug.hp-lo .bb-up, .boss-bug.is-laugh .bb-face { display: none; }
 .boss-bug.hp-mid .bb-mid, .boss-bug.hp-lo .bb-lo, .boss-bug.is-laugh .bb-laugh { display: inline; }
+/* right answer: a sad face for a moment (setBug drops is-hit after SAD_MS); the crack of the low stage stays */
+.boss-bug .bb-sad, .boss-bug.is-hit .bb-face, .boss-bug.is-hit .bb-hi, .boss-bug.is-hit .bb-mid, .boss-bug.is-hit .bb-up, .boss-bug.is-hit .bb-x { display: none; }
+.boss-bug.is-hit .bb-sad { display: inline; }
 /* right answer: the bug flashes white and shakes, "-1 HP" floats up; wrong answer: it lunges and laughs */
 .boss-bug.is-hit svg { animation: shake 0.5s, bb-flash 0.5s; }
 .boss-bug.is-laugh svg { animation: bb-lunge 0.7s; }
