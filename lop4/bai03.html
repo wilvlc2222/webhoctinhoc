@@ -6,11 +6,11 @@
 <title>Bài 3. Thông tin trên trang web – Tin học 4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/main.css?v=1113d">
-<script src="../assets/js/errbox.js?v=1113d"></script>
-<script src="../assets/js/icons.js?v=1113d"></script>
-<script src="../assets/js/core.js?v=1113d"></script>
-<script src="../assets/js/widgets.js?v=1113d"></script>
+<link rel="stylesheet" href="../assets/css/main.css?v=1114a">
+<script src="../assets/js/errbox.js?v=1114a"></script>
+<script src="../assets/js/icons.js?v=1114a"></script>
+<script src="../assets/js/core.js?v=1114a"></script>
+<script src="../assets/js/widgets.js?v=1114a"></script>
 <style>
   .web1 .br-page { display: flex; gap: 12px; height: 300px; }
   .web1 .w-left { flex: 1 1 0; }
@@ -166,7 +166,7 @@
           <div class="bubble">An vô tình vào một <b>trang web trò chuyện</b> không phù hợp. Người lạ ở đó gửi cho An những lời "xấu xí", "đáng ghét". An gặp rắc rối gì?</div>
         </div>
         <details class="reveal"><summary>Xem ý kiến của Bíp</summary>
-          <div>An bị người lạ <b>chê bai, bắt nạt</b> trên mạng nên buồn và sợ. An nên tắt trang đó và kể ngay cho bố mẹ, thầy cô.</div></details>
+          <div>An bị người lạ <b>chê bai, bắt nạt</b> trên mạng nên buồn và sợ. An nên tắt trang đó và kể ngay cho ba mẹ, thầy cô.</div></details>
         <p class="mt0">Trên mạng có thông tin em <b>chưa hiểu hết</b>, có thông tin <b>độc hại</b> (trò chơi bạo lực, phim ảnh xấu). Cố tình xem, em có thể:</p>
         <div class="remember">Em không nên xem các trang web không phù hợp lứa tuổi vì có nguy cơ suy nghĩ lệch lạc, bị lừa đảo, dụ dỗ, bắt nạt và lãng phí thời gian.</div>
       </div>
@@ -231,7 +231,7 @@
         <details class="reveal"><summary>Tại sao em cần sự đồng hành của người lớn khi truy cập Internet?</summary>
           <div>Người lớn giúp em <b>chọn trang web phù hợp</b>, giải thích những điều em <b>chưa hiểu</b>, nhắc em <b>giữ an toàn</b> (không nói chuyện, không gửi ảnh, địa chỉ cho người lạ) và <b>giúp đỡ kịp thời</b> khi em gặp chuyện đáng sợ trên mạng.</div></details>
         <details class="reveal"><summary>Nếu lỡ vào một trang web lạ, đáng sợ thì em làm gì?</summary>
-          <div>Tắt trang web đó ngay. Không bấm vào các nút, đường liên kết lạ. Kể cho bố mẹ, thầy cô nghe.</div></details>
+          <div>Tắt trang web đó ngay. Không bấm vào các nút, đường liên kết lạ. Kể cho ba mẹ, thầy cô nghe.</div></details>
       </div>
       <div class="col-side">
         <div class="card" style="text-align:center">
@@ -343,7 +343,7 @@
         { q: 'Đây là hình con trỏ chuột khi đưa tới vài chỗ trên trang web. Chỗ nào có <b>siêu liên kết</b>?',
           options: [cd('<span class="u">Trăng ơi!</span>', 'cursorHand'), cd('<span>Trăng ơi!</span>', 'cursorArrow'), cd('<span>Trăng ơi!</span>', 'cursorText')],
           answer: 0, explain: 'Con trỏ hình bàn tay, chữ lại có gạch chân: đó là siêu liên kết.',
-          hint: 'Siêu liên kết làm con trỏ đổi thành hình gì nhỉ?' }
+          hint: 'Siêu liên kết làm con trỏ đổi thành hình gì ta?' }
       ]
     });
 
@@ -351,11 +351,11 @@
       lesson: L, id: 'harm',
       items: [
         { label: 'Bị dụ dỗ, chỉ cách làm những việc không đúng', icon: 'warning', ok: true },
-        { label: 'Máy tính của em có thể bị hỏng', icon: 'monitor', ok: false },
+        { label: 'Máy tính của em có thể bị hư', icon: 'monitor', ok: false },
         { label: 'Bị bắt nạt, đe doạ trên mạng', icon: 'chat', ok: true },
         { label: 'Bị lãng phí thời gian', icon: 'clock', ok: true }
       ],
-      doneText: 'Đúng rồi! Máy hỏng không phải tác hại chính, còn ba ý kia thì em có thể gặp.'
+      doneText: 'Đúng rồi! Máy hư không phải tác hại chính, còn ba ý kia thì em có thể gặp.'
     });
 
     Core.pick(document.getElementById('pick-links'), {
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
   Core.quiz(document.getElementById('bt-q2'), {
     lesson: L, id: 'bt-q2',
     questions: [
-      { q: 'Vì sao máy tính có thể bị hỏng khi cố tình vào những trang web không phù hợp lứa tuổi?', options: ['Vì trang đó có nội dung xấu.', 'Vì trang đó có thể chứa virus, dễ lây và phá hỏng máy tính.', 'Vì trang đó có video.', 'Vì trang đó có siêu liên kết.'], answer: 1 },
+      { q: 'Vì sao máy tính có thể bị hư khi cố tình vào những trang web không phù hợp lứa tuổi?', options: ['Vì trang đó có nội dung xấu.', 'Vì trang đó có thể chứa virus, dễ lây và phá hư máy tính.', 'Vì trang đó có video.', 'Vì trang đó có siêu liên kết.'], answer: 1 },
       { q: 'Vì sao em cần <b>người lớn đồng hành</b> khi truy cập Internet?', options: ['Vì có trang web chứa virus, nội dung xấu, không phù hợp lứa tuổi.', 'Vì trang web nào cũng bổ ích.', 'Vì em không biết gõ bàn phím.'], answer: 0 }
     ]
   });

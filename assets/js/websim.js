@@ -28,6 +28,8 @@
     town: '<svg viewBox="0 0 160 90"><rect width="160" height="90" fill="#fff9db"/><rect x="20" y="40" width="36" height="40" fill="#ffd43b" stroke="#a0611a" stroke-width="2"/><rect x="62" y="34" width="36" height="46" fill="#ffa94d" stroke="#a0611a" stroke-width="2"/><rect x="104" y="42" width="36" height="38" fill="#ffd43b" stroke="#a0611a" stroke-width="2"/><circle cx="80" cy="22" r="7" fill="#fa5252"/><circle cx="38" cy="30" r="6" fill="#fa5252"/><circle cx="122" cy="32" r="6" fill="#fa5252"/></svg>',
     hills: '<svg viewBox="0 0 160 90"><rect width="160" height="90" fill="#ebfbee"/><path d="M0 80l40-46 30 30 30-40 60 56z" fill="#40c057"/><path d="M0 84h160v6H0z" fill="#2b8a3e"/><circle cx="128" cy="20" r="9" fill="#ffd43b"/></svg>',
     market: '<svg viewBox="0 0 160 90"><rect width="160" height="90" fill="#f8f9fa"/><rect x="30" y="34" width="100" height="46" fill="#ffe066" stroke="#5c4b00" stroke-width="2"/><rect x="66" y="16" width="28" height="22" fill="#fff" stroke="#5c4b00" stroke-width="2"/><circle cx="80" cy="27" r="6" fill="none" stroke="#5c4b00" stroke-width="2"/><rect x="70" y="56" width="20" height="24" fill="#5c4b00"/></svg>',
+    church: '<svg viewBox="0 0 160 90"><rect width="160" height="90" fill="#e7f5ff"/><rect x="50" y="44" width="60" height="38" fill="#e8590c" stroke="#862e05" stroke-width="2"/><rect x="40" y="24" width="18" height="58" fill="#e8590c" stroke="#862e05" stroke-width="2"/><rect x="102" y="24" width="18" height="58" fill="#e8590c" stroke="#862e05" stroke-width="2"/><path d="M38 26l11-18 11 18zM100 26l11-18 11 18z" fill="#868e96"/><path d="M70 82v-20a10 10 0 0 1 20 0v20z" fill="#862e05"/><circle cx="80" cy="52" r="5" fill="#fff4e6"/><path d="M0 82h160v8H0z" fill="#8ce99a"/></svg>',
+    zoo: '<svg viewBox="0 0 160 90"><rect width="160" height="90" fill="#ebfbee"/><circle cx="28" cy="34" r="18" fill="#40c057"/><rect x="25" y="48" width="6" height="32" fill="#8d6e63"/><circle cx="134" cy="30" r="16" fill="#40c057"/><rect x="131" y="42" width="6" height="38" fill="#8d6e63"/><ellipse cx="80" cy="62" rx="26" ry="16" fill="#adb5bd"/><circle cx="56" cy="54" r="11" fill="#adb5bd"/><path d="M50 60q-4 14 4 20" stroke="#adb5bd" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M66 74v8M76 76v6M88 76v6M98 74v8" stroke="#868e96" stroke-width="6"/><circle cx="54" cy="51" r="2" fill="#212529"/><path d="M0 82h160v8H0z" fill="#2b8a3e"/></svg>',
     lantern: '<svg viewBox="0 0 160 90"><rect width="160" height="90" fill="#1c3d6e"/><circle cx="128" cy="22" r="11" fill="#fff3bf"/><path d="M60 14v14" stroke="#c4a484" stroke-width="3"/><polygon points="60,28 65,41 79,41 68,50 72,64 60,56 48,64 52,50 41,41 55,41" fill="#ffd43b" stroke="#e8590c" stroke-width="2"/></svg>'
   };
   function art(name) { return '<div class="pic">' + (ART[name] || ART.hills) + '</div>'; }
@@ -89,7 +91,23 @@
     ] },
     { keys: ['cho ben thanh', 'ben thanh'], label: 'Chợ Bến Thành', results: [
       R('Chợ Bến Thành – biểu tượng của Thành phố Hồ Chí Minh', 'dulichviet.vn', 'Ngôi chợ có tháp đồng hồ nổi tiếng...',
-        '<b>Chợ Bến Thành</b> ở trung tâm Thành phố Hồ Chí Minh có cổng chính với <b>tháp đồng hồ</b>. Chợ bán rất nhiều món ăn và đồ thủ công.', 'market')
+        '<b>Chợ Bến Thành</b> ở trung tâm Thành phố Hồ Chí Minh có cổng chính với <b>tháp đồng hồ</b>. Chợ bán rất nhiều món ăn và đồ thủ công.', 'market'),
+      R('Chợ Bến Thành đã hơn 100 tuổi', 'sacmausaigon.vn', 'Chợ được xây xong năm 1914, có bốn cổng lớn...',
+        'Ngôi chợ được xây xong năm <b>1914</b>, có <b>bốn cổng</b> lớn ở bốn phía. Tháp đồng hồ ở cổng nam đã thành hình ảnh quen thuộc của <b>Sài Gòn</b>.', 'market'),
+      R('Video: Đi chợ Bến Thành buổi tối', 'kenhdulich.vn', 'Ghé chợ đêm, ngắm tháp đồng hồ lên đèn · 4 phút',
+        'Đoạn phim đưa em dạo quanh <b>Chợ Bến Thành</b> lúc tối: tháp đồng hồ lên đèn, các gian hàng trái cây, bánh trái và đồ thủ công.', 'market', true)
+    ] },
+    { keys: ['nha tho duc ba', 'duc ba', 'nha tho lon'], label: 'Nhà thờ Đức Bà', results: [
+      R('Nhà thờ Đức Bà – công trình gạch đỏ giữa Sài Gòn', 'sacmausaigon.vn', 'Nhà thờ được xây từ năm 1877 đến năm 1880...',
+        '<b>Nhà thờ Đức Bà</b> ở Quận 1, Thành phố Hồ Chí Minh, được xây từ năm <b>1877</b> đến năm <b>1880</b>. Tường xây bằng <b>gạch đỏ</b> và có <b>hai tháp chuông</b> cao.', 'church'),
+      R('Video: Ghé thăm Nhà thờ Đức Bà', 'kenhdulich.vn', 'Ngắm hai tháp chuông và công viên trước nhà thờ · 3 phút',
+        'Đoạn phim giới thiệu hai tháp chuông, mặt tường gạch đỏ và công viên nhỏ trước <b>Nhà thờ Đức Bà</b>.', 'church', true)
+    ] },
+    { keys: ['thao cam vien', 'so thu sai gon', 'thao cam vien sai gon'], label: 'Thảo Cầm Viên', results: [
+      R('Thảo Cầm Viên Sài Gòn', 'dulichviet.vn', 'Một trong những vườn thú lâu đời nhất thế giới...',
+        '<b>Thảo Cầm Viên</b> ở Thành phố Hồ Chí Minh được lập năm <b>1864</b>. Ở đây có nhiều loài thú như voi, hươu cao cổ, hổ và rất nhiều cây cổ thụ.', 'zoo'),
+      R('Video: Một ngày ở Thảo Cầm Viên', 'kenhdulich.vn', 'Gặp voi, hươu cao cổ, đi dạo dưới tán cây · 5 phút',
+        'Đoạn phim đưa em đi thăm chuồng voi, hươu cao cổ và vườn cây xanh mát trong <b>Thảo Cầm Viên</b>.', 'zoo', true)
     ] },
     { keys: ['da lat', 'thanh pho da lat'], label: 'Đà Lạt', results: [
       R('Đà Lạt – thành phố ngàn hoa', 'dulichviet.vn', 'Đà Lạt có khí hậu mát mẻ quanh năm...',
@@ -204,7 +222,7 @@
         emit('search', { q: view.q, topic: t });
         var list = E('div', 'ws-results');
         if (!t) {
-          list.appendChild(E('p', 'ws-none', 'Trang tập luyện này không có kết quả cho từ khoá đó. Trên máy tính thật, máy tìm kiếm biết nhiều hơn rất nhiều! Em thử từ khoá khác, ví dụ: <i>Hồ Gươm, Văn Miếu, Vịnh Hạ Long, Tết Trung thu</i>.'));
+          list.appendChild(E('p', 'ws-none', 'Trang tập luyện này không có kết quả cho từ khoá đó. Trên máy tính thật, máy tìm kiếm biết nhiều hơn rất nhiều! Em thử từ khoá khác, ví dụ: <i>Chợ Bến Thành, Nhà thờ Đức Bà, Vịnh Hạ Long, Tết Trung thu</i>.'));
         } else {
           list.appendChild(E('div', 'ws-count', 'Khoảng ' + (t.results.length * 1234567 + 8910).toLocaleString('vi-VN') + ' kết quả'));
           for (var i = 0; i < t.results.length; i++) {

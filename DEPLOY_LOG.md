@@ -170,3 +170,11 @@
 - Chỉ tắt nút: các trang `lop5/*.html` vẫn mở được nếu ai có đường dẫn trực tiếp.
 - Đo: đặt sẵn lớp 5 trong localStorage rồi mở trang chủ → hiện bài lớp 4, bấm nút Lớp 5 không đổi gì, không có lỗi.
 - Đã commit, gộp vào `main` và push cùng ngày (nhánh `claude/disable-class-5-button-e598ae`).
+
+## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 1–4 (chưa commit, chưa đưa lên mạng)
+
+- Sửa chữ `lop4/bai01–04.html` theo bảng `docs/phuong-ngu.md` (bố → ba, quả táo → trái táo, hỏng → hư, thế nào → sao/ra sao, tớ/cậu → mình/bạn).
+- Bài 4: Hồ Gươm → Chợ Bến Thành, Văn Miếu → Nhà thờ Đức Bà, Chùa Một Cột → Thảo Cầm Viên; `assets/js/websim.js` thêm kết quả và hình (`church`, `zoo`). Mã sao `hoguom`, `vanmieu` giữ nguyên để không mất sao cũ.
+- Trang chủ: Bíp xưng "anh" ("Chào em! Anh là Bíp.").
+- Mọi trang đổi `?v=1113d` → `?v=1114a`.
+- Kiểm tra: `tools/fit.html?pages=l4&solve=1` → ALL OK (17 pages).
