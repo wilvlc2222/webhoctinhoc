@@ -1,16 +1,15 @@
 # Việc còn lại của web Tin học vui
 
-Cập nhật: 2026-11-12. Tạm dừng một tuần theo lời master. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới tới Lớp 5**.
+Cập nhật: 2026-11-14. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới tới Lớp 5**. Lớp 4 chỉ còn 4 việc ở mục 1 (master thử/duyệt); phần em làm được đã xong hết.
 
-Trạng thái mã nguồn lúc dừng:
-- Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đang ở commit `b898f60` (đã push: sửa lỗi trang chủ, Bọ Lỗi 20 điểm, nhạc nền, gộp danh sách bài về `assets/js/lessons.js`).
-- Trong máy chỉ còn commit thêm tệp `plan.md` này là chưa push.
+Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịch sử đưa lên mạng ở `DEPLOY_LOG.md`.
 
 ---
 
 ## 1. Cần master làm hoặc xác nhận (em không tự làm được)
 
-- [ ] **Thử trên Kindle PPW5 thật** sau bản sửa lỗi trang chủ (`5ccb732`, đã có trên bản live): trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
+- [ ] **Thử trên Kindle PPW5 thật** sau bản sửa lỗi trang chủ (`5ccb732`, đã có trên bản live): trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Xem luôn cỡ chữ và khoảng cách ở bố cục dọc (PPW5 cuộn tự nhiên, không có khung 1280×720). Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
+- [ ] **Đọc duyệt câu chữ trang hướng dẫn** (`huongdan.html`, 4 mục).
 - [ ] **Nghe thử nhạc**: nhạc bài học (nhẹ, chậm) và nhạc trận Bọ Lỗi. Em chỉ đo được là nhạc chạy và tắt đúng lúc, không nghe được giai điệu. Nếu chưa hợp thì sửa nốt nhạc trong `SONGS` của `assets/js/sound.js`.
 - [ ] **Duyệt 38 câu hỏi em viết thêm** cho Bọ Lỗi lớp 4 (chủ đề 2, 4, 6) trong `assets/js/bossbank.js`: đúng nội dung sách chưa, câu chữ có hợp với học sinh không.
 
@@ -23,15 +22,15 @@ Trạng thái mã nguồn lúc dừng:
   - Yêu cầu: mỗi mục vừa khung 1280×720 (`main.scrollHeight` bằng `main.clientHeight`), không dùng class `step`. Cách thêm mục ghi trong chú thích đầu tệp.
 - [x] **Chơi thử trọn trận Bọ Lỗi ở cả 6 chủ đề** — xong 2026-11-13 bằng `tools/bossplay.js` (tự chơi: thua, thắng lần đầu +3 kim cương, thắng lần hai không cộng). Cả 6 chủ đề đạt, không câu nào tràn khung 1300×700.
 - [x] **Câu hỏi có đáp án là khối lệnh Scratch trên trang đấu** — xong 2026-11-13. Khối lệnh hiện đúng hình và màu (kiểu dáng nằm trong `main.css`), giữ cả 3 câu. Một câu tràn 44px sau khi trả lời; đã sửa bằng cách xếp các đáp án Scratch thành một hàng (`.boss-opts-row`). Luật một hàng chỉ áp cho bố cục ngang; ở bố cục dọc 758×1024 (màn hình mực) các đáp án xếp chồng, đã đo không đè nhau, không tràn ngang.
-- [ ] **Điểm Bọ Lỗi chưa được lưu.** Hiện chỉ hiện "x/20" cuối trận; trang giáo viên và bảng tính Google chỉ biết thắng hay chưa (qua kim cương). Nếu master muốn thầy cô xem được điểm cao nhất của từng chủ đề thì phải thêm vào dữ liệu tiến độ, `sync.js`, `tools/sheet-sync.gs` và `giaovien.html`. Cần master quyết định có làm không.
-- [ ] **Câu trả lời sai được hỏi lại ở cuối hàng, nhưng đáp án đúng đã hiện ra lúc sai.** Nếu master muốn khó hơn thì đổi thành không hiện đáp án, hoặc thay bằng câu khác.
+- [x] **Điểm Bọ Lỗi không lưu** — master quyết định 2026-11-14: không cần. Thầy cô chỉ biết thắng hay chưa (qua kim cương), "x/20" chỉ hiện cuối trận.
+- [x] **Trả lời sai không còn hiện đáp án** — xong 2026-11-14 theo lời master: `thuthach.html` chỉ tô xanh khi chọn đúng; sai thì báo "Câu này sẽ quay lại sau, em suy nghĩ kĩ nha." `tools/bossplay.js` thử lần lượt các đáp án và báo lỗi nếu đáp án đúng lộ ra. 6 chủ đề lớp 4 đều thắng 2 lần, không lỗi.
 
 ## 3. Lớp 4 – điểm nhỏ, chưa gấp
 
-- [ ] Tiêu đề bài trên thanh trên cùng giờ luôn nằm một dòng (để khỏi tràn khung). Học sinh tên dài thì tiêu đề dài bị cắt bằng dấu "…".
+- [x] Tiêu đề bài trên thanh trên cùng luôn nằm một dòng; tên dài bị cắt bằng "…" — master chấp nhận 2026-11-14.
+- [x] "Bóng đá", "Đá bóng vào khung thành" ở mẫu trình chiếu bài 8, 9 — master chọn giữ 2026-11-14.
 - [x] Danh sách bài lặp ở hai chỗ — xong 2026-11-13: `tools/fit.html` lấy số bài từ `lessons.js`; số sao trên trang bài lấy từ `lessons.js` (`Core.renderStars`), `data-stars-total` trong từng trang chỉ còn là số dự phòng lúc danh sách chưa nạp xong.
-- [ ] Kindle không có Web Audio nên sẽ im lặng và không có nút nhạc, nút âm thanh. Đây là chủ ý, chỉ ghi lại để khỏi nhầm là lỗi.
-- [ ] Trên PPW5 trang chạy ở bố cục dọc, cuộn tự nhiên (không còn khung 1280×720). Chưa ai xem cỡ chữ và khoảng cách ở bố cục này trên máy thật.
+- Ghi chú (không phải lỗi): Kindle không có Web Audio nên im lặng, không có nút nhạc, nút âm thanh.
 
 ## 4. Lớp 5 – đang tạm dừng, chỉ làm sau khi Lớp 4 xong
 

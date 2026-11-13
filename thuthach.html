@@ -158,8 +158,9 @@
     for (i = 0; i < btns.length; i++) Core.on(btns[i], function () {
       var pick = +this.getAttribute('data-i'), ok = pick === q.answer, k;
       for (k = 0; k < btns.length; k++) btns[k].disabled = true;
-      btns[q.answer].className += ' is-right';
+      /* a wrong pick does not reveal the right option: the question comes back later and must be thought through */
       if (ok) {
+        this.className += ' is-right';
         hp--;
         Core.say(fb, 'Trúng rồi! Em được 1 điểm, Bọ Lỗi mất 1 máu.', 'good');
         bug.className = 'boss-bug is-hit';
@@ -168,7 +169,7 @@
       } else {
         hearts--; queue.push(q);
         this.className += ' is-wrong';
-        Core.say(fb, 'Chưa đúng. Em mất 1 trái tim. Đáp án đúng là <b>' + String.fromCharCode(65 + q.answer) + '</b>.', 'bad');
+        Core.say(fb, 'Chưa đúng. Em mất 1 trái tim. Câu này sẽ quay lại sau, em suy nghĩ kĩ nha.', 'bad');
         if (Core.sound) Core.sound('bad');
         if (Core.react) Core.react('bad');
       }

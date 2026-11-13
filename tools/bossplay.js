@@ -3,7 +3,8 @@
      var s = document.createElement('script'); s.src = 'tools/bossplay.js?g=4'; document.body.appendChild(s);
    and read window.__boss when window.__done is true.
    Each topic runs in a frame as the learner "__thu" (names starting with "__" are never sent to the sheet).
-   It loses on purpose to learn the answers, then wins twice (first win gives gems, second must not).
+   It loses on purpose to learn the answers (a wrong pick no longer shows the right one, so it tries the
+   options in turn and fails if the right one is revealed), then wins twice (first win gives gems, second must not).
    localStorage is put back as it was at the end. Not loaded by any page of the site. */
 window.__boss = {}; window.__done = false;
 (async function () {
@@ -34,7 +35,7 @@ window.__boss = {}; window.__done = false;
       r.loadSec = Math.round(w * 0.2);
       if (!d().querySelector('.quiz-opt')) { r.err.push('no q: ' + d().getElementById('boss-main').textContent.slice(0, 80)); f.remove(); continue; }
       r.hp = d().getElementById('boss-hp-n').textContent;
-      var known = {}, seen = {}, guard = 0;
+      var known = {}, bad = {}, seen = {}, guard = 0;
       var meas = function (doc, key) {
         var m = doc.querySelector('main'), a = m.scrollHeight - m.clientHeight, b = doc.documentElement.scrollHeight;
         if (a > r.maxMain) { r.maxMain = a; r.overQ = key.slice(0, 60); }
@@ -56,13 +57,15 @@ window.__boss = {}; window.__done = false;
             }
           }
           var texts = opts.map(function (o) { return o.lastElementChild.textContent.trim(); });
-          var idx = known[key] != null ? texts.indexOf(known[key]) : 0;
+          var tried = bad[key] || (bad[key] = []);
+          var idx = known[key] != null ? texts.indexOf(known[key]) : texts.findIndex(function (s) { return tried.indexOf(s) < 0; });
           if (idx < 0) { r.err.push('known answer missing: ' + key.slice(0, 50)); idx = 0; }
           meas(doc, key);
           opts[idx].click();
-          var right = doc.querySelector('.quiz-opt.is-right');
-          if (!right) { r.err.push('no is-right: ' + key.slice(0, 50)); break; }
-          known[key] = right.lastElementChild.textContent.trim();
+          var right = doc.querySelector('.quiz-opt.is-right'), wrong = doc.querySelector('.quiz-opt.is-wrong');
+          if (!right && !wrong) { r.err.push('no is-right/is-wrong: ' + key.slice(0, 50)); break; }
+          if (right && wrong) r.err.push('answer revealed after wrong pick: ' + key.slice(0, 50));
+          if (right) known[key] = right.lastElementChild.textContent.trim(); else tried.push(texts[idx]);
           if (!doc.getElementById('boss-fb').textContent.trim()) r.err.push('no feedback: ' + key.slice(0, 50));
           meas(doc, key);
           var nx = doc.querySelector('.boss-next');
