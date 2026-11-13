@@ -239,3 +239,5 @@
 
 - Master dặn: BOSS là tên gọi chung; tên tiếng Việt **Bọ Lỗi**, tiếng Anh **Big Bug**. Thẻ bên trái trang đấu ghi "Big Bug" và dưới là "Bọ Lỗi" (`.boss-vn`); lời giới thiệu "BOSS Bọ Lỗi (Big Bug) đang phá…"; thắng: "Em đã thắng BOSS Bọ Lỗi!"; trang chủ và hướng dẫn: "Mỗi chủ đề có một BOSS là Bọ Lỗi (Big Bug)". Nhãn HP và câu báo vẫn dùng "BOSS".
 - Kiểm tra: `fit.html?pages=all&solve=1` → ALL OK (35 pages); `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi.
+
+- 4 bản trên (nhạc 8 bài, Solo BOSS, nhịp vừa, tên Bọ Lỗi/Big Bug) gộp vào `main` (fast-forward) và push cùng ngày.
