@@ -49,3 +49,14 @@ Trạng thái mã nguồn lúc dừng:
 - Tên học sinh để thử phải bắt đầu bằng `__` (không gửi lên bảng tính Google thật). Thử xong xoá tên đó khỏi localStorage.
 - Chữ cho học sinh: tiếng Việt chuẩn ("không", không dùng "hông"); dòng hướng dẫn chỉ nói cách thao tác, không gợi ý đáp án.
 - Mỗi bước làm xong ghi vào `DEPLOY_LOG.md`. Chỉ commit hoặc push khi master bảo.
+
+## 6. Đổi chữ bài học sang phương ngữ Sài Gòn (master đồng ý 2026-11-13)
+
+Phạm vi master đã duyệt: **chỉ đổi lời dẫn, ví dụ, tên người và địa danh**. **Giữ nguyên thuật ngữ sách giáo khoa** (thư mục, tệp, phần mềm, phần cứng…) vì bài kiểm tra ở trường dùng đúng các từ đó. Quy tắc cũ "chữ cho học sinh dùng tiếng Việt chuẩn" được thay bằng mục này.
+
+- [ ] Bước 1 (2–3 lượt gọi): chạy lệnh lọc ra danh sách từ miền Bắc, tên người và địa danh trong `lop4/*.html`, `assets/js/bossbank.js`, `huongdan.html`, `assets/js/mascot.js`; đưa master xem bảng "từ cũ → từ mới" trước khi sửa hàng loạt.
+- [ ] Bước 2: sửa lớp 4, mỗi phiên 3–4 bài. Sau mỗi bài chạy `tools/fit.html?pages=l4&solve=1` vì đổi chữ làm đổi độ dài dòng. Đáp án và câu hỏi phải khớp nhau sau khi đổi.
+- [ ] Bước 3: câu hỏi Bọ Lỗi, trang hướng dẫn, lời của Bíp.
+- [ ] Bước 4: lớp 5, sau khi lớp 4 xong.
+- Ước lượng: lớp 4 khoảng 80 lượt gọi, 60–80% một khung 5 tiếng nếu chia 4–5 phiên ngắn; lớp 5 gấp đôi.
+- Mỗi lần đổi tệp nhớ đổi số `?v=` ở mọi trang (xem `DEPLOY_LOG.md` 2026-11-13).

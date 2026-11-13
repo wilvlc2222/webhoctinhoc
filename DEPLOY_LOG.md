@@ -156,3 +156,11 @@
 - Không đổi: màn hình mực và màn dọc (Kindle) vẫn dùng bố cục cuộn, không dùng khung.
 - Chưa kiểm: thao tác kéo thả, vẽ (`paint.js`, `scratch.js`, `richdoc.js`) khi khung phóng to hơn 1; mã tính theo tỉ lệ nên em cho là đúng nhưng chưa bấm thử. Chưa thử trên máy tính bảng thật.
 - Đã commit và push cùng ngày.
+
+### [2026-11-13] Số phiên bản tệp và khung báo lỗi cho mọi trang; thử con trỏ khi khung phóng to
+- Master xác nhận: sau khi trang chủ có `?v=`, Kindle PPW5 hiện đúng (vừa bề ngang, cuộn dọc). Nguyên nhân nhiều khả năng là Kindle giữ tệp cũ.
+- Cả 39 trang (`*.html`, `lop4/`, `lop5/`) gọi CSS và JS trong `assets/` kèm `?v=1113d`. Khi đổi tệp trong `assets/` phải đổi số này ở mọi trang (một lệnh `sed`).
+- Khung báo lỗi chuyển thành tệp chung `assets/js/errbox.js`, nạp đầu tiên ở mọi trang; bỏ đoạn mã lặp trong `index.html`.
+- Đo: 7 trang mẫu ở 1920×1080 (khung phóng 1,5) không hiện khung lỗi, mọi tệp đều có số phiên bản; `fit.html?pages=all&solve=1` → `ALL OK (35 pages)` ở 1280×720; `lop4/bai03.html` bấm ở (334, 479) thì con trỏ giả hiện ở (324, 472), tức hết lệch theo tỉ lệ.
+- Chưa bấm thử: bài vẽ và bài soạn thảo của lớp 5 (`paint.js`, `richdoc.js`) và sân khấu Scratch khi khung phóng to; mã tính theo tỉ lệ khung nên không phụ thuộc độ phóng. Chưa thử bài học trên Kindle thật.
+- Đã commit và push cùng ngày.
