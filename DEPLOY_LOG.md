@@ -171,6 +171,14 @@
 - Đo: đặt sẵn lớp 5 trong localStorage rồi mở trang chủ → hiện bài lớp 4, bấm nút Lớp 5 không đổi gì, không có lỗi.
 - Đã commit, gộp vào `main` và push cùng ngày (nhánh `claude/disable-class-5-button-e598ae`).
 
+## 2026-11-14 – Phương ngữ Sài Gòn, bước 3 (Bọ Lỗi, tủ đồ Bíp, thư viện nhân vật)
+
+- `bossbank.js`: "bị hỏng" → "bị hư", "như thế nào?" → "ra sao?" (2 câu); `thuthach.html` đổi `bossbank.js?v=1115`.
+- `mascot.js` + `huongdan.html`: Nón kết, Kính mát, Nón phù thuỷ (món đồ lưu theo `id`, tiến độ cũ không mất).
+- `sprites.js`: Trái táo, Trái banh; `sprites.js?v=1115` ở lớp 4 bài 13–16, lớp 5 bài 10–16.
+- Kiểm tra: `tools/fit.html?pages=all&solve=1` → ALL OK (35 pages); trang hướng dẫn không lỗi console.
+- Gộp vào `main` (fast-forward, nhánh `claude/lop-4-tiep-theo-9cb937`) và push cùng ngày.
+
 ## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 13–16
 
 - Sửa chữ `lop4/bai13.html` (4 chỗ) và `bai15.html` (1 chỗ) theo `docs/phuong-ngu.md`, bằng `tools/replace.ps1`; bài 14, 16 không có chữ cần đổi. Không đổi tệp nào trong `assets/`, nên không đổi số `?v=`. Xong bước 2 (lớp 4).
