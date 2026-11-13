@@ -231,6 +231,6 @@
 - Đổi tên: "Diệt Bọ Lỗi" → **Solo BOSS**, con quái → **BOSS**; "máu"/"trái tim" → **HP** (BOSS 20 HP, em 3 HP) ở `thuthach.html`, `index.html`, `huongdan.html`, huy hiệu trong `game.js`, `tools/bossplay.js` (38 chỗ, bằng `tools/replace.ps1`).
 - `thuthach.html`: hàng trái tim → thanh HP xanh lá 3 ô (`#boss-me`, `#boss-me-n`), giống thanh HP tím của BOSS.
 - Nút `.btn-boss` (`main.css`): nền tím → đỏ, hai thanh kiếm (`Core.swordsIcon` trong `game.js`), phát sáng nhấp nháy, rê chuột thì sáng hơn, bấm thì lún; màn hình mực và giảm chuyển động thì tắt hiệu ứng. Dùng cho nút **Solo BOSS** ở trang chủ, nút **Vào đấu** và **Bắt đầu solo**.
-- `sound.js`: `TEMPO = 0.8`, mọi bài nhanh lên một phần tư (master: "nhạc hơi chậm").
+- `sound.js`: nhịp theo từng loại trang, `TEMPO` = bài học 0.88, trang chủ 0.9, BOSS 1.1 (master: "nhạc hơi chậm", rồi "nhanh vừa thôi, không quá nhanh làm trẻ em hồi hộp").
 - Mọi trang đổi `?v=1114c` → `?v=1114d`.
 - Kiểm tra: `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi, không tràn; `fit.html?pages=all&solve=1` → ALL OK (35 pages); trang Solo BOSS không lỗi console.
