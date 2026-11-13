@@ -1,6 +1,6 @@
 # Việc còn lại của web Tin học vui
 
-Cập nhật: 2026-11-14. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới tới Lớp 5**. Lớp 4 chỉ còn 5 việc ở mục 1 (master thử/duyệt); phần em làm được đã xong hết.
+Cập nhật: 2026-11-14. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới tới Lớp 5**. Lớp 4 chỉ còn 1 việc ở mục 1: master xem thử Big Bug đổi dáng; phần em làm được đã xong hết.
 
 Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịch sử đưa lên mạng ở `DEPLOY_LOG.md`.
 
@@ -10,11 +10,11 @@ Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịc
 
 ## 1. Cần master làm hoặc xác nhận (em không tự làm được)
 
-- [ ] **Thử trên Kindle PPW5 thật** sau bản sửa lỗi trang chủ (`5ccb732`, đã có trên bản live): trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Xem luôn cỡ chữ và khoảng cách ở bố cục dọc (PPW5 cuộn tự nhiên, không có khung 1280×720). Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
-- [ ] **Đọc duyệt câu chữ trang hướng dẫn** (`huongdan.html`, 4 mục).
-- [ ] **Nghe thử nhạc mới** (2026-11-14, `assets/js/sound.js`): giờ có 8 bài: bài học `study1–4`, trang chủ `home1–2`, Bọ Lỗi `boss1–2`. Mỗi lần vào trang chọn một bài khác bài vừa nghe. Âm thanh stereo (mỗi nốt hai giọng trái/phải, có tiếng vang qua lại) và nhạc phát liền khi vào trang nếu trình duyệt cho (vào bằng cách chạm từ trang chủ thì Chrome cho; iPad có thể vẫn phải chạm một lần). Nhịp chỉnh theo lời master ("hơi chậm", rồi "nhanh vừa thôi, không quá nhanh làm trẻ em hồi hộp"): `TEMPO` trong `sound.js` = bài học 0.88, trang chủ 0.9 (nhanh hơn bản gốc chút xíu), BOSS 1.1 (êm hơn bản gốc). Số nhỏ hơn là nhanh hơn. Bài nào chưa hay thì sửa nốt nhạc trong `SONGS`.
+- [x] **Thử trên Kindle PPW5 thật** — master thử xong, ổn (2026-11-14). sau bản sửa lỗi trang chủ (`5ccb732`, đã có trên bản live): trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Xem luôn cỡ chữ và khoảng cách ở bố cục dọc (PPW5 cuộn tự nhiên, không có khung 1280×720). Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
+- [x] **Đọc duyệt câu chữ trang hướng dẫn** (`huongdan.html`, 4 mục) — master giao em tự soát 2026-11-14: chữ đã đúng phương ngữ Sài Gòn theo `docs/phuong-ngu.md`, số liệu (huy chương 4/10, 7/10; mốc lên cấp 3…120; Áo choàng 25 sao) khớp code; không cần sửa.
+- [x] **Nghe thử nhạc mới** — master duyệt 2026-11-14. (2026-11-14, `assets/js/sound.js`): giờ có 8 bài: bài học `study1–4`, trang chủ `home1–2`, Bọ Lỗi `boss1–2`. Mỗi lần vào trang chọn một bài khác bài vừa nghe. Âm thanh stereo (mỗi nốt hai giọng trái/phải, có tiếng vang qua lại) và nhạc phát liền khi vào trang nếu trình duyệt cho (vào bằng cách chạm từ trang chủ thì Chrome cho; iPad có thể vẫn phải chạm một lần). Nhịp chỉnh theo lời master ("hơi chậm", rồi "nhanh vừa thôi, không quá nhanh làm trẻ em hồi hộp"): `TEMPO` trong `sound.js` = bài học 0.88, trang chủ 0.9 (nhanh hơn bản gốc chút xíu), BOSS 1.1 (êm hơn bản gốc). Số nhỏ hơn là nhanh hơn. Bài nào chưa hay thì sửa nốt nhạc trong `SONGS`.
 - [ ] **Xem thử Big Bug đổi dáng** (`thuthach.html`): tím đắc ý → cam lo → đỏ choáng theo HP; đúng thì "-1 HP", sai thì bọ nhào tới cười "Ha ha!". Dáng hay màu nào chưa ưng thì nói em sửa.
-- [ ] **Duyệt 38 câu hỏi em viết thêm** cho Bọ Lỗi lớp 4 (chủ đề 2, 4, 6) trong `assets/js/bossbank.js`: đúng nội dung sách chưa, câu chữ có hợp với học sinh không.
+- [x] **Duyệt 38 câu hỏi em viết thêm** — master giao em tự soát 2026-11-14, đối chiếu bài 3, 6, 13–16: nội dung đúng, sửa 4 câu cho rõ và đúng chữ SGK (xem `DEPLOY_LOG.md`). cho Bọ Lỗi lớp 4 (chủ đề 2, 4, 6) trong `assets/js/bossbank.js`: đúng nội dung sách chưa, câu chữ có hợp với học sinh không.
 
 ## 2. Lớp 4 – việc còn phải làm
 

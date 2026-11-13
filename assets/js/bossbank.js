@@ -6,7 +6,7 @@ window.BOSS_EXTRA = {
   /* Lớp 4, chủ đề 2 (Bài 3. Thông tin trên trang web) */
   '4-2': [
     { q: 'Truyện cổ tích để đọc trên trang web là thông tin dạng nào?', options: ['Văn bản', 'Hình ảnh', 'Âm thanh', 'Video'], answer: 0 },
-    { q: 'Bài hát thiếu nhi là thông tin dạng nào?', options: ['Văn bản', 'Hình ảnh', 'Âm thanh', 'Video'], answer: 2 },
+    { q: 'Bài hát thiếu nhi chỉ để nghe (không có hình) là thông tin dạng nào?', options: ['Văn bản', 'Hình ảnh', 'Âm thanh', 'Video'], answer: 2 },
     { q: 'Phim hoạt hình là thông tin dạng nào?', options: ['Văn bản', 'Hình ảnh', 'Âm thanh', 'Video'], answer: 3 },
     { q: 'Ảnh chú mèo con là thông tin dạng nào?', options: ['Văn bản', 'Hình ảnh', 'Âm thanh', 'Video'], answer: 1 },
     { q: 'Tin dự báo thời tiết viết bằng chữ là thông tin dạng nào?', options: ['Văn bản', 'Hình ảnh', 'Âm thanh', 'Video'], answer: 0 },
@@ -34,18 +34,18 @@ window.BOSS_EXTRA = {
     { t: 'Dùng phần mềm có bản quyền giúp giữ an toàn thông tin trong máy tính.', ok: true },
     { t: 'Dùng phần mềm có bản quyền là góp phần bảo vệ người làm ra phần mềm.', ok: true },
     { t: 'Mọi phần mềm cài vào máy tính đều miễn phí.', ok: false },
-    { t: 'Sao chép phần mềm phải trả tiền để dùng mà không trả tiền là việc làm đúng.', ok: false }
+    { t: 'Chép phần mềm phải trả tiền của người khác về dùng mà không trả tiền là việc làm đúng.', ok: false }
   ],
   /* Lớp 4, chủ đề 6 (Bài 13 – 16. Làm quen với Scratch) */
   '4-6': [
-    { q: 'Scratch là gì?', options: ['Phần mềm soạn thảo văn bản', 'Ngôn ngữ lập trình trực quan', 'Trình duyệt web'], answer: 1 },
+    { q: 'Scratch là gì?', options: ['Phần mềm soạn thảo văn bản', 'Môi trường lập trình trực quan', 'Trình duyệt web'], answer: 1 },
     { q: 'Trong Scratch, em bấm vào đâu để chạy chương trình?', options: ['Lá cờ xanh', 'Nút đỏ', 'Thùng rác'], answer: 0 },
     { q: 'Trong Scratch, em bấm vào đâu để dừng chương trình?', options: ['Lá cờ xanh', 'Nút đỏ', 'Quả địa cầu'], answer: 1 },
     { q: 'Trong Scratch, nhóm lệnh Chuyển động có màu gì?', options: ['Màu vàng', 'Màu đỏ', 'Màu xanh dương'], answer: 2 },
     { q: 'Trong Scratch, nhóm lệnh Sự kiện có màu gì?', options: ['Màu vàng', 'Màu xanh dương', 'Màu tím'], answer: 0 },
     { q: 'Lệnh "di chuyển 10 bước" thuộc nhóm lệnh nào?', options: ['Sự kiện', 'Chuyển động', 'Điều khiển', 'Bút vẽ'], answer: 1 },
     { q: 'Lệnh "đợi 1 giây" thuộc nhóm lệnh nào?', options: ['Sự kiện', 'Chuyển động', 'Điều khiển', 'Bút vẽ'], answer: 2 },
-    { q: 'Chương trình máy tính là gì?', options: ['Các câu lệnh được sắp xếp theo thứ tự xác định.', 'Một bức tranh vẽ bằng máy tính.', 'Một bài hát lưu trong máy tính.'], answer: 0 },
+    { q: 'Chương trình máy tính là gì?', options: ['Dãy các lệnh mà máy tính thực hiện theo thứ tự.', 'Một bức tranh vẽ bằng máy tính.', 'Một bài hát lưu trong máy tính.'], answer: 0 },
     { q: 'Muốn xoá một nhân vật trong Scratch, em chọn nhân vật đó rồi bấm biểu tượng nào?', options: ['Lá cờ xanh', 'Quả địa cầu', 'Thùng rác'], answer: 2 },
     { q: 'Muốn Scratch hiển thị các lệnh bằng tiếng Việt, em bấm biểu tượng nào?', options: ['Quả địa cầu', 'Thùng rác', 'Nút đỏ'], answer: 0 },
     { t: 'Trong Scratch, các lệnh của cùng một nhóm lệnh có cùng màu.', ok: true }

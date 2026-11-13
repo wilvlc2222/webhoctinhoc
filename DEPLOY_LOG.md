@@ -249,3 +249,10 @@
 - `main.css`: `.bb-*`, `.boss-pop`, `bb-flash`, `bb-lunge`, `bb-float`. Màn hình mực: thân trắng/xám nhạt/xám đậm, chỉ đổi dáng; mực và giảm chuyển động thì "-1 HP"/"Ha ha!" đứng yên tới câu sau.
 - Mọi trang đổi `?v=1114d` → `?v=1114e`.
 - Kiểm tra: `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi, không tràn 1280×720; đã soát từng chặng bằng `getComputedStyle` (phần nào hiện, màu thân, cả ở màn hình mực).
+
+## 2026-11-14 – Soát 38 câu Bọ Lỗi lớp 4 và trang hướng dẫn
+
+- Master giao em tự soát. `bossbank.js` (khoá `'4-2'`, `'4-4'`, `'4-6'`): đối chiếu bài 3, 6, 13–16, nội dung đúng. Sửa 4 câu: "Bài hát thiếu nhi" → "Bài hát thiếu nhi chỉ để nghe (không có hình)" (khỏi lẫn với video); Scratch là "Môi trường lập trình trực quan" (đúng tên bài 14); chương trình máy tính là "Dãy các lệnh mà máy tính thực hiện theo thứ tự." (đúng câu bài 13); câu Đúng/Sai "Sao chép phần mềm…" viết lại cho dễ hiểu. `thuthach.html`: `bossbank.js?v=1115a` → `?v=1115b`.
+- `huongdan.html`: chữ đã đúng phương ngữ Sài Gòn, số liệu khớp code (`game.js` huy chương, `mascot.js` `LEVELS`); không sửa.
+- Master duyệt nhạc và đã thử Kindle PW5 thật: ổn.
+- Kiểm tra: `tools/boss.html?g=4` → ALL OK (6 topics, 20+ questions each); `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi, không tràn.
