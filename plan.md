@@ -10,7 +10,7 @@ Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịc
 
 - [ ] **Thử trên Kindle PPW5 thật** sau bản sửa lỗi trang chủ (`5ccb732`, đã có trên bản live): trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Xem luôn cỡ chữ và khoảng cách ở bố cục dọc (PPW5 cuộn tự nhiên, không có khung 1280×720). Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
 - [ ] **Đọc duyệt câu chữ trang hướng dẫn** (`huongdan.html`, 4 mục).
-- [ ] **Nghe thử nhạc**: nhạc bài học (nhẹ, chậm) và nhạc trận Bọ Lỗi. Em chỉ đo được là nhạc chạy và tắt đúng lúc, không nghe được giai điệu. Nếu chưa hợp thì sửa nốt nhạc trong `SONGS` của `assets/js/sound.js`.
+- [ ] **Nghe thử nhạc trang chủ** (bài `home` trong `SONGS` của `assets/js/sound.js`, thêm 2026-11-14: vui, vừa nhanh, vòng C – G – Am – F). Nhạc bài học và nhạc trận Bọ Lỗi master đã nghe, có rồi (2026-11-14). Nếu chưa hợp thì sửa nốt nhạc trong `SONGS`.
 - [ ] **Duyệt 38 câu hỏi em viết thêm** cho Bọ Lỗi lớp 4 (chủ đề 2, 4, 6) trong `assets/js/bossbank.js`: đúng nội dung sách chưa, câu chữ có hợp với học sinh không.
 
 ## 2. Lớp 4 – việc còn phải làm

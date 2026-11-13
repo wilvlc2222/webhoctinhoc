@@ -186,6 +186,12 @@
 - Kiểm tra: `bossplay.js?g=4` → 6 chủ đề đều thắng 2 lần, không lỗi, không tràn khung.
 - Gộp vào `main` (fast-forward) và push cùng ngày.
 
+## 2026-11-14 – Nhạc nền cho trang chủ
+
+- `sound.js`: thêm bài `home` (vui, vừa nhanh); trang có `#topic-legend` (chỉ trang chủ) tự phát sau lần chạm đầu. Bài học vẫn `study`, Bọ Lỗi vẫn `boss`.
+- Mọi trang đổi `?v=1114a` → `?v=1114b` (268 chỗ, 39 tệp).
+- Kiểm tra: trang chủ chạm một lần → `Core.musicPlaying()` = `home`, không lỗi console.
+
 ## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 13–16
 
 - Sửa chữ `lop4/bai13.html` (4 chỗ) và `bai15.html` (1 chỗ) theo `docs/phuong-ngu.md`, bằng `tools/replace.ps1`; bài 14, 16 không có chữ cần đổi. Không đổi tệp nào trong `assets/`, nên không đổi số `?v=`. Xong bước 2 (lớp 4).

@@ -77,7 +77,7 @@
   }, true);
 
   /* ---------- background music ----------
-     study: a slow, soft loop for lesson pages. boss: a livelier one, started by thuthach.html.
+     study: a slow, soft loop for lesson pages. home: the home page. boss: a livelier one, started by thuthach.html.
      Notes are MIDI numbers (0 = rest), one per step; a timer schedules them a little ahead.
      Never plays inside a frame (boss page and fit checker load lessons in frames). */
   var MKEY = 'whth-music', track = null, mGain = null, mTimer = null, mNext = 0, mStep = 0;
@@ -85,6 +85,10 @@
     study: { beat: 0.8, vol: 0.05, lowType: 'sine', lowLen: 1.5, leadType: 'sine', leadLen: 2.2,
       low: [60, 64, 67, 64, 57, 60, 64, 60, 53, 57, 60, 57, 55, 59, 62, 59, 60, 64, 67, 64, 57, 60, 64, 60, 53, 57, 60, 57, 55, 59, 62, 59],
       lead: [76, 0, 79, 0, 76, 0, 72, 0, 69, 0, 72, 0, 74, 0, 71, 0, 79, 0, 76, 0, 72, 0, 76, 0, 77, 0, 72, 0, 74, 0, 67, 0] },
+    /* home page: a bright, medium-speed welcome loop (C – G – Am – F) */
+    home: { beat: 0.36, vol: 0.045, lowType: 'sine', lowLen: 1.4, leadType: 'triangle', leadLen: 1.6,
+      low: [60, 64, 67, 64, 60, 64, 67, 64, 55, 59, 62, 59, 55, 59, 62, 59, 57, 60, 64, 60, 57, 60, 64, 60, 53, 57, 60, 57, 53, 57, 60, 57],
+      lead: [72, 0, 76, 0, 79, 0, 76, 74, 74, 0, 71, 0, 67, 0, 71, 74, 76, 0, 72, 0, 69, 0, 72, 76, 77, 76, 74, 0, 72, 0, 0, 0] },
     boss: { beat: 0.24, vol: 0.045, lowType: 'triangle', lowLen: 0.9, leadType: 'triangle', leadLen: 1.6,
       low: [57, 57, 64, 57, 57, 57, 64, 57, 53, 53, 60, 53, 53, 53, 60, 53, 60, 60, 67, 60, 60, 60, 67, 60, 52, 52, 59, 52, 56, 56, 59, 64],
       lead: [69, 0, 72, 0, 76, 0, 72, 0, 69, 0, 72, 0, 77, 0, 72, 0, 67, 0, 72, 0, 76, 0, 79, 0, 76, 0, 71, 0, 68, 0, 71, 0] }
@@ -171,8 +175,9 @@
       paintMusic(mb);
       if (musicOn()) { wake(); mStart(); } else mStop();
     }, false);
-    /* lesson pages get the study music; the boss page asks for its own */
+    /* lesson pages get the study music, the home page (the only one with the topic legend) its own; the boss page asks for its own */
     if (document.querySelector('.step')) Core.music('study');
+    else if (document.getElementById('topic-legend')) Core.music('home');
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
