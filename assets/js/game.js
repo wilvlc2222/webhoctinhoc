@@ -61,6 +61,25 @@
     bossWon: function (grade, topic) { return Core.gems.has('boss_g' + grade + '_t' + topic + '_1'); }
   };
 
+  /* ---------- boss unlock: a topic's BOSS opens once the learner has 80% of the topic's stars ----------
+     (a BOSS already beaten stays open). Used by the boss menu (index.html) and thuthach.html. */
+  Core.BOSS_UNLOCK = 0.8;
+  Core.topicStars = function (grade, topic) {
+    var ls = Core.topicLessons(grade, topic), have = 0, total = 0, i;
+    for (i = 0; i < ls.length; i++) { total += L[ls[i]][2]; have += Math.min(Core.countStars(ls[i]), L[ls[i]][2]); }
+    return { have: have, total: total, need: Math.ceil(total * Core.BOSS_UNLOCK - 1e-9) };
+  };
+  Core.bossOpen = function (grade, topic) {
+    var s = Core.topicStars(grade, topic);
+    return Core.gems.bossWon(grade, topic) || (s.total > 0 && s.have >= s.need);
+  };
+  /* progress bar towards the unlock: the fill is the stars, the notch marks 80% */
+  Core.bossBar = function (s) {
+    var pct = s.total ? Math.round(s.have / s.total * 100) : 0;
+    return '<span class="boss-bar" role="img" aria-label="Có ' + s.have + ' trên ' + s.total + ' sao, cần ' + s.need + ' sao">' +
+      '<span class="boss-bar-fill" style="width:' + pct + '%"></span><span class="boss-bar-mark" style="left:' + Math.round(Core.BOSS_UNLOCK * 100) + '%"></span></span>';
+  };
+
   /* ---------- medals ---------- */
   var MEDAL_NAME = { gold: 'Huy chương vàng', silver: 'Huy chương bạc', bronze: 'Huy chương đồng' };
   var MEDAL_FILL = { gold: '#fcc419', silver: '#ced4da', bronze: '#e8a15b' };

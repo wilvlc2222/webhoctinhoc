@@ -3,6 +3,7 @@
      var s = document.createElement('script'); s.src = 'tools/bossplay.js?g=4'; document.body.appendChild(s);
    and read window.__boss when window.__done is true.
    Each topic runs in a frame as the learner "__thu" (names starting with "__" are never sent to the sheet).
+   Before each topic it checks the BOSS is locked (under 80% of the topic's stars) and then gives "__thu" all the stars.
    It loses on purpose to learn the answers (a wrong pick no longer shows the right one, so it tries the
    options in turn and fails if the right one is revealed), then wins twice (first win gives gems, second must not).
    localStorage is put back as it was at the end. Not loaded by any page of the site. */
@@ -17,6 +18,10 @@ window.__boss = {}; window.__done = false;
   try {
     for (var t = 1; t <= 6; t++) {
       var r = R[t] = { games: 0, wins: 0, losses: 0, qs: 0, err: [], maxMain: 0, maxDoc: 0, cls: {}, htmlQs: [], res: [] };
+      /* the BOSS opens at 80% of the topic's stars: check it is shut for a new learner, then give "__thu" every star */
+      r.lockedBefore = !Core.bossOpen(grade, t);
+      Core.topicLessons(grade, t).forEach(function (id) { for (var s = 0; s < Core.LESSONS[id][2]; s++) Core.award(id, 'bossplay' + s); });
+      r.openAfter = Core.bossOpen(grade, t);
       var f = document.createElement('iframe');
       f.style.cssText = 'position:fixed;left:0;top:0;width:1280px;height:720px;border:0;z-index:9999;background:#fff';
       f.src = 'thuthach.html?g=' + grade + '&t=' + t;

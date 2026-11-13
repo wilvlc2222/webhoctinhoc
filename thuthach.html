@@ -6,10 +6,10 @@
 <title>Solo BOSS – Tin học vui</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1114g">
-<script src="assets/js/errbox.js?v=1114g"></script>
-<script src="assets/js/icons.js?v=1114g"></script>
-<script src="assets/js/core.js?v=1114g"></script>
+<link rel="stylesheet" href="assets/css/main.css?v=1114h">
+<script src="assets/js/errbox.js?v=1114h"></script>
+<script src="assets/js/icons.js?v=1114h"></script>
+<script src="assets/js/core.js?v=1114h"></script>
 <script src="assets/js/bossbank.js?v=1115b"></script>
 </head>
 <body>
@@ -254,6 +254,15 @@
     Core.on(document.getElementById('boss-again'), ready);
   }
 
+  /* the BOSS opens at 80% of the topic's stars (Core.bossOpen in game.js); the boss menu shows the same bar */
+  function locked() {
+    var s = Core.topicStars(grade, topic);
+    screen('<h2>BOSS chưa mở</h2><p class="boss-lead">Em cần có <b>' + s.need + ' sao</b> của chủ đề ' + topic + ' (' + Math.round(Core.BOSS_UNLOCK * 100) + '% số sao) thì mới vào đấu được. ' +
+      'Em đang có <b>' + s.have + '/' + s.total + '</b> sao, còn thiếu <b>' + (s.need - s.have) + '</b> sao.</p>' +
+      '<div class="boss-unlock">' + Core.bossBar(s) + '</div><p>Em học tiếp các bài của chủ đề này để lấy thêm sao nha.</p>' +
+      '<a class="btn btn-primary" href="index.html">&lsaquo; Về trang chủ</a>');
+  }
+
   function start() {
     if (started) return;
     if (!Core.currentName()) { location.replace('index.html#ten'); return; }
@@ -261,6 +270,7 @@
     started = true;
     main = document.getElementById('boss-main');
     document.getElementById('boss-topic').innerHTML = 'Chủ đề ' + topic + ' · Lớp ' + grade;
+    if (!Core.bossOpen(grade, topic)) return locked();
     intro();
   }
   /* game.js (lesson table, gems) is loaded by core.js a moment after this page */
