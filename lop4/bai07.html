@@ -229,15 +229,15 @@
     });
     Core.quiz(document.getElementById('quiz-2'), {
       lesson: L, id: 'q2',
-      questions: [{ q: '<b>Câu 2.</b> Để có từ <b>quê hương</b>, em gõ thế nào theo kiểu Telex?', options: ['quee huong', 'quee huwowng', 'que huwowng'], answer: 1,
+      questions: [{ q: '<b>Câu 2.</b> Để có từ <b>quê hương</b>, em gõ sao theo kiểu Telex?', options: ['quee huong', 'quee huwowng', 'que huwowng'], answer: 1,
         explain: 'ê = ee, ư = uw, ơ = ow.' },
-        { q: '<b>Luyện tập 1.</b> Để có từ <b>khiêm tốn</b>, em gõ thế nào kiểu Telex?', options: ['khieem toons', 'khiem toonr', 'khieem toonr', 'khieem toonf'], answer: 0,
+        { q: '<b>Luyện tập 1.</b> Để có từ <b>khiêm tốn</b>, em gõ sao kiểu Telex?', options: ['khieem toons', 'khiem toonr', 'khieem toonr', 'khieem toonf'], answer: 0,
         explain: 'ê = ee, ô = oo, dấu sắc = s.' }]
     });
 
     /* Vietnamese typing practice */
     var vtMode = Telex.switcher(document.getElementById('vt-ime'), 'telex');
-    var goals = ['Cảnh đẹp quê hương', 'Uống nước nhớ nguồn', 'Em yêu trường em', 'Mời bạn đến thăm Huế nhé!'];
+    var goals = ['Cảnh đẹp quê hương', 'Uống nước nhớ nguồn', 'Em yêu trường em', 'Mời bạn đến thăm Sài Gòn nha!'];
     var vtDone = {}, vtHost = document.getElementById('vt-tasks'), vtFb = document.getElementById('vt-fb');
     for (var g = 0; g < goals.length; g++) {
       (function (goal, k) {
@@ -289,9 +289,9 @@
       for (var i = 0; i < ins.length; i++) { ins[i].value = goals[i]; ins[i].dispatchEvent(new Event('input')); }
       var a = apps.cdqh;
       a.set(0, 'title', { text: 'Cảnh đẹp quê hương' }); a.set(0, 'sub', { text: 'Nguyễn Thu An\nLớp 4A2' });
-      a.add('content'); a.set(1, 'title', { text: 'Một số cảnh đẹp ở Huế' }); a.set(1, 'body', { text: 'Sông Hương\nĐồi Vọng Cảnh\nNúi Ngự Bình\nCầu Trường Tiền' });
-      a.add('picture'); a.pic(2, 'bridge'); a.set(2, 'caption', { text: 'Cầu Trường Tiền' });
-      a.add('text'); a.set(3, 'text', { text: 'Mời bạn đến thăm Huế nhé!' });
+      a.add('content'); a.set(1, 'title', { text: 'Một số cảnh đẹp ở Sài Gòn' }); a.set(1, 'body', { text: 'Bến Nhà Rồng\nChợ Bến Thành\nNhà thờ Đức Bà\nDinh Độc Lập' });
+      a.add('picture'); a.pic(2, 'bridge'); a.set(2, 'caption', { text: 'Cầu Sài Gòn' });
+      a.add('text'); a.set(3, 'text', { text: 'Mời bạn đến thăm Sài Gòn nha!' });
       a.save('Canh dep que huong', MY); a.exit();
       ['truong', 'tt'].forEach(function (k) {
         var b = apps[k]; b.set(0, 'title', { text: 'Trang 1' }); b.set(0, 'sub', { text: 'abc' });
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
     questions: [
       { q: 'Phần mềm nào <b>không phải</b> phần mềm hỗ trợ gõ tiếng Việt?', options: ['VietKey', 'Unikey', 'File Explorer', 'EVKey'], answer: 2 },
       { q: 'Hai kiểu gõ tiếng Việt nào phổ biến?', options: ['VNI và VIQR', 'Telex và VNI', 'Telex và VIQR', 'Vietkey và Unikey'], answer: 1 },
-      { q: 'Gõ từ <b>Trường học</b> theo kiểu Telex thế nào?', options: ['Truwongf hoc', 'Truwowngf hocj', 'Truong hoc', 'Truwowngf hocf'], answer: 1, explain: 'ươ = uwow, dấu huyền = f, dấu nặng = j.' }
+      { q: 'Gõ từ <b>Trường học</b> theo kiểu Telex ra sao?', options: ['Truwongf hoc', 'Truwowngf hocj', 'Truong hoc', 'Truwowngf hocf'], answer: 1, explain: 'ươ = uwow, dấu huyền = f, dấu nặng = j.' }
     ]
   });
   Core.match(document.getElementById('bt-telex'), {

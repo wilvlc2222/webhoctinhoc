@@ -87,7 +87,7 @@
           <tr><td><span class="kbtn">24 ▾</span></td><td style="font-size:24px">Cảnh đẹp quê hương</td></tr>
           <tr><td><span class="kbtn">Phông chữ ▾</span></td><td style="font-family:'Comic Sans MS',cursive;font-size:19px">Cảnh đẹp quê hương</td></tr>
           <tr><td><span class="kbtn" style="color:#e03131;font-weight:800">A</span></td><td style="color:#e03131">Cảnh đẹp quê hương</td></tr>
-          <tr><td><span class="kbtn">&bull;&#8212;</span> Bullets</td><td><ul style="margin:0;padding-left:20px"><li>Sông Hương</li><li>Đồi Vọng Cảnh</li><li>Núi Ngự Bình</li></ul></td></tr>
+          <tr><td><span class="kbtn">&bull;&#8212;</span> Bullets</td><td><ul style="margin:0;padding-left:20px"><li>Bến Nhà Rồng</li><li>Chợ Bến Thành</li><li>Nhà thờ Đức Bà</li></ul></td></tr>
         </table>
       </div>
     </div>
@@ -137,7 +137,7 @@
   </section>
 
   <section class="step" data-title="Bài tập 2">
-    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Định dạng thế nào cho đúng?</h2></div>
+    <div class="step-head"><span class="phase phase-practice">Bài tập</span><h2>Định dạng sao cho đúng?</h2></div>
     <div class="cols">
       <div class="col"><div id="bt-q1"></div></div>
       <div class="col"><div id="bt-q2"></div></div>
@@ -174,9 +174,9 @@
   }
   var SAMPLE_CDQH = [
     { layout: 'title', boxes: { title: 'Cảnh đẹp quê hương', sub: 'Nguyễn Thu An\nLớp 4A2' } },
-    { layout: 'content', boxes: { title: 'Một số cảnh đẹp ở Huế', body: 'Sông Hương\nĐồi Vọng Cảnh\nNúi Ngự Bình\nCầu Trường Tiền\nĐiện Hòn Chén' } },
-    { layout: 'picture', pic: 'bridge', boxes: { caption: 'Cầu Trường Tiền' } },
-    { layout: 'text', boxes: { text: 'Mời bạn đến thăm Huế nhé!' } }
+    { layout: 'content', boxes: { title: 'Một số cảnh đẹp ở Sài Gòn', body: 'Bến Nhà Rồng\nChợ Bến Thành\nNhà thờ Đức Bà\nDinh Độc Lập\nThảo Cầm Viên' } },
+    { layout: 'picture', pic: 'bridge', boxes: { caption: 'Cầu Sài Gòn' } },
+    { layout: 'text', boxes: { text: 'Mời bạn đến thăm Sài Gòn nha!' } }
   ];
   var SAMPLE_TRUONG = [
     { layout: 'title', boxes: { title: 'Trường Tiểu học Kim Đồng', sub: 'Địa chỉ: số 1, đường Hoa Sữa' } },
@@ -304,8 +304,8 @@ document.addEventListener('DOMContentLoaded', function () {
   Core.quiz(document.getElementById('bt-q2'), {
     lesson: L, id: 'bt-q2',
     questions: [
-      { q: 'Muốn cụm từ "Em yêu trường em" có chữ <b>đậm</b> và <b>gạch chân</b>, em làm thế nào?', options: ['Chọn cụm từ, rồi bấm nút ' + k('B') + ' và nút ' + k('<u>U</u>'), 'Bấm nút ' + k('B') + ' rồi gõ lại cả câu', 'Chọn cụm từ, rồi bấm nút ' + k('<i>I</i>')], answer: 0 },
-      { q: 'Muốn <b>bỏ</b> chữ nghiêng của cụm từ đó, em làm thế nào?', options: ['Chọn cụm từ, bấm nút ' + k('<i>I</i>') + ' thêm một lần', 'Chọn cụm từ, bấm nút ' + k('B'), 'Xoá cụm từ đi'], answer: 0 }
+      { q: 'Muốn cụm từ "Em yêu trường em" có chữ <b>đậm</b> và <b>gạch chân</b>, em làm cách nào?', options: ['Chọn cụm từ, rồi bấm nút ' + k('B') + ' và nút ' + k('<u>U</u>'), 'Bấm nút ' + k('B') + ' rồi gõ lại cả câu', 'Chọn cụm từ, rồi bấm nút ' + k('<i>I</i>')], answer: 0 },
+      { q: 'Muốn <b>bỏ</b> chữ nghiêng của cụm từ đó, em làm cách nào?', options: ['Chọn cụm từ, bấm nút ' + k('<i>I</i>') + ' thêm một lần', 'Chọn cụm từ, bấm nút ' + k('B'), 'Xoá cụm từ đi'], answer: 0 }
     ]
   });
 });

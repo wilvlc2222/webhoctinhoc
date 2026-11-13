@@ -27,7 +27,8 @@ nhau (Khoa – Minh) thì vẫn "mình – bạn".
 
 - 2026-11-14: xong bài 1–4 (bài 4 đổi Hồ Gươm → Chợ Bến Thành, Văn Miếu → Nhà thờ Đức Bà, Chùa Một Cột →
   Thảo Cầm Viên; `websim.js` thêm kết quả và hình cho ba nơi này). `fit.html?pages=l4&solve=1`: ALL OK.
-- Còn: bài 5–16 (Huế ở bài 7–9, Hồ Hoàn Kiếm bài 9, mùa thu Hà Nội bài 10), rồi Bọ Lỗi, hướng dẫn, lời Bíp.
+- 2026-11-14: xong bài 5–8. Bài 6: tớ/cậu → mình/bạn, bố mẹ → ba mẹ, hỏng → hư. Bài 7, 8 (và mẫu trình chiếu ở bài 9): "Một số cảnh đẹp ở Sài Gòn" – Bến Nhà Rồng, Chợ Bến Thành, Nhà thờ Đức Bà, Dinh Độc Lập, Thảo Cầm Viên; ảnh cầu ghi "Cầu Sài Gòn"; lời mời "Mời bạn đến thăm Sài Gòn nha!". "thế nào" → "sao", "ra sao", "cách nào". Tiêu đề tệp "Cảnh đẹp quê hương" giữ.
+- Còn: bài 9–16 (Hồ Hoàn Kiếm và tiêu đề "thế nào" bài 9, mùa thu Hà Nội bài 10), rồi Bọ Lỗi, hướng dẫn, lời Bíp.
 
 ## B. Giữ nguyên
 
