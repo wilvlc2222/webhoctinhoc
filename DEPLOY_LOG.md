@@ -225,3 +225,12 @@
 - Trang chủ: Bíp xưng "anh" ("Chào em! Anh là Bíp.").
 - Mọi trang đổi `?v=1113d` → `?v=1114a`.
 - Kiểm tra: `tools/fit.html?pages=l4&solve=1` → ALL OK (17 pages).
+
+## 2026-11-14 – Solo BOSS, HP, nút nổi bật, nhạc nhanh hơn
+
+- Đổi tên: "Diệt Bọ Lỗi" → **Solo BOSS**, con quái → **BOSS**; "máu"/"trái tim" → **HP** (BOSS 20 HP, em 3 HP) ở `thuthach.html`, `index.html`, `huongdan.html`, huy hiệu trong `game.js`, `tools/bossplay.js` (38 chỗ, bằng `tools/replace.ps1`).
+- `thuthach.html`: hàng trái tim → thanh HP xanh lá 3 ô (`#boss-me`, `#boss-me-n`), giống thanh HP tím của BOSS.
+- Nút `.btn-boss` (`main.css`): nền tím → đỏ, hai thanh kiếm (`Core.swordsIcon` trong `game.js`), phát sáng nhấp nháy, rê chuột thì sáng hơn, bấm thì lún; màn hình mực và giảm chuyển động thì tắt hiệu ứng. Dùng cho nút **Solo BOSS** ở trang chủ, nút **Vào đấu** và **Bắt đầu solo**.
+- `sound.js`: `TEMPO = 0.8`, mọi bài nhanh lên một phần tư (master: "nhạc hơi chậm").
+- Mọi trang đổi `?v=1114c` → `?v=1114d`.
+- Kiểm tra: `bossplay.js?g=4` → 6 chủ đề thắng 2 lần, không lỗi, không tràn; `fit.html?pages=all&solve=1` → ALL OK (35 pages); trang Solo BOSS không lỗi console.

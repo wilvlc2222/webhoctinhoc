@@ -119,6 +119,8 @@
       low: [52, 52, 59, 52, 52, 52, 59, 52, 48, 48, 55, 48, 48, 48, 55, 48, 55, 55, 62, 55, 55, 55, 62, 55, 50, 50, 57, 50, 54, 54, 57, 62],
       lead: [71, 0, 76, 0, 79, 0, 76, 0, 72, 0, 76, 0, 79, 0, 76, 0, 74, 0, 79, 0, 83, 0, 79, 0, 74, 0, 78, 0, 81, 0, 78, 74] }
   };
+  /* every song plays its beat × TEMPO seconds per step: 0.8 = a quarter faster than written (master 2026-11-14: "nhạc hơi chậm") */
+  var TEMPO = 0.8;
   var POOLS = { study: ['study1', 'study2', 'study3', 'study4'], home: ['home1', 'home2'], boss: ['boss1', 'boss2'] };
   function pick(kind) {
     var p = POOLS[kind], last = '', s, n = 0;
@@ -154,15 +156,16 @@
     try {
       while (mNext < ctx.currentTime + 0.6) {
         var i = mStep % s.low.length;
-        if (s.low[i]) mNote(s.low[i], mNext, s.beat * s.lowLen, s.vol, s.lowType, -0.25, 0.2);
-        if (s.lead[i]) mNote(s.lead[i], mNext, s.beat * s.leadLen, s.vol * 0.8, s.leadType, 0.2, 0.3);
-        mNext += s.beat; mStep++;
+        var b = s.beat * TEMPO;
+        if (s.low[i]) mNote(s.low[i], mNext, b * s.lowLen, s.vol, s.lowType, -0.25, 0.2);
+        if (s.lead[i]) mNote(s.lead[i], mNext, b * s.leadLen, s.vol * 0.8, s.leadType, 0.2, 0.3);
+        mNext += b; mStep++;
       }
     } catch (e) {}
   }
   /* music bus: soft low-pass, then out; a quiet copy goes through a left-right echo */
   function mBus() {
-    var nodes = [], lp, send, dl, dr, fb, mg, d = Math.min(0.6, SONGS[song].beat * 1.5);
+    var nodes = [], lp, send, dl, dr, fb, mg, d = Math.min(0.6, SONGS[song].beat * TEMPO * 1.5);
     mGain = ctx.createGain(); nodes.push(mGain);
     lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3200; nodes.push(lp);
     mGain.connect(lp); lp.connect(ctx.destination);

@@ -1224,6 +1224,26 @@ html.eink .fill-word.is-selected { background: #000; color: #fff; }
 .btn:disabled { box-shadow: none; }
 html.eink .btn, html.eink .btn:hover, html.eink .btn:active { box-shadow: none; transform: none; }
 
+/* Solo BOSS buttons: purple-to-red, crossed swords, a slow red glow so they stand out.
+   Hover lifts and press sinks like every .btn; e-ink and reduced motion stop the glow (rules at the top). */
+.btn.btn-boss {
+  --edge: #7a1530;
+  background: linear-gradient(135deg, #7048e8 0%, #c2255c 55%, #f03e3e 100%);
+  border-color: #7a1530; color: #fff; font-weight: 800; letter-spacing: 0.03em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+  animation: bossGlow 1.8s ease-in-out infinite;
+}
+.btn-boss .swords-ico { width: 1.15em; height: 1.15em; vertical-align: -0.2em; margin-right: 0.35em; }
+@keyframes bossGlow {
+  0%, 100% { box-shadow: 0 3px 0 var(--edge), 0 0 0 0 rgba(240, 62, 62, 0); }
+  50% { box-shadow: 0 3px 0 var(--edge), 0 0 16px 4px rgba(240, 62, 62, 0.55); }
+}
+@media (hover: hover) {
+  .btn.btn-boss:not(:disabled):hover { filter: brightness(1.12) saturate(1.1); animation-duration: 0.9s; }
+}
+.btn.btn-boss:not(:disabled):active { animation: none; filter: brightness(0.95); }
+html.eink .btn.btn-boss { background: #000; border-color: #000; color: #fff; text-shadow: none; }
+
 @keyframes pop { 0% { transform: scale(1); } 35% { transform: scale(1.08); } 70% { transform: scale(0.98); } 100% { transform: scale(1); } }
 .quiz-opt.is-right, .match-item.is-done, .tf-btn.is-on, .fill-blank.is-done, .sort-item.is-placed, .order-step { animation: pop 0.38s ease-out; }
 .tf-row.is-done { animation: pop 0.38s ease-out; }
@@ -1634,8 +1654,9 @@ html.eink .map-stars .star-count::before { color: #000; }
 .boss-hp { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 4px; min-height: 18px; }
 .boss-hp span { box-sizing: border-box; flex: 0 0 8%; margin: 2px 1%; height: 16px; border: 2px solid var(--ink); border-radius: 5px; background: #fff; }
 .boss-hp span.on { background: #845ef7; }
-.boss-hearts { margin-top: 4px; }
-.heart-ico { width: 30px; height: 30px; margin: 0 2px; }
+.boss-hp-me span { flex-basis: 28%; height: 18px; }
+.boss-hp-me span.on { background: #40c057; }
+html.eink .boss-hp-me span.on { background: #000; }
 .boss-card { margin: 0; }
 .boss-card h2 { margin: 0 0 6px; font-size: 26px; }
 .boss-lead, .boss-rules { font-size: 18px; }

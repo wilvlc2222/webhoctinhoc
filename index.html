@@ -6,12 +6,12 @@
 <title>Tin học vui – Lớp 4, Lớp 5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1114c">
+<link rel="stylesheet" href="assets/css/main.css?v=1114d">
 <!-- ?v=... makes readers that keep old files (Kindle) fetch the new ones; change it when these files change -->
-<script src="assets/js/errbox.js?v=1114c"></script>
-<script src="assets/js/icons.js?v=1114c" onerror="__miss(this)"></script>
-<script src="assets/js/lessons.js?v=1114c" onerror="__miss(this)"></script>
-<script src="assets/js/core.js?v=1114c" onerror="__miss(this)"></script>
+<script src="assets/js/errbox.js?v=1114d"></script>
+<script src="assets/js/icons.js?v=1114d" onerror="__miss(this)"></script>
+<script src="assets/js/lessons.js?v=1114d" onerror="__miss(this)"></script>
+<script src="assets/js/core.js?v=1114d" onerror="__miss(this)"></script>
 </head>
 <body>
 <header class="topbar">
@@ -141,11 +141,11 @@
     for (var t = 1; t <= 6; t++) {
       var won = Core.gems && Core.gems.bossWon(g, t);
       rows += '<li><span class="topic-tag tp-' + t + '">Chủ đề ' + t + '</span><span class="boss-name">' + GRADES[g][t - 1].topic.replace(/^Chủ đề \d+\.\s*/, '') + '</span>' +
-        (won ? '<b class="boss-won">Đã thắng</b>' : '') + '<a class="btn btn-small' + (won ? '' : ' btn-primary') + '" href="thuthach.html?g=' + g + '&amp;t=' + t + '">' + (won ? 'Đấu lại' : 'Vào đấu') + '</a></li>';
+        (won ? '<b class="boss-won">Đã thắng</b>' : '') + '<a class="btn btn-small' + (won ? '' : ' btn-boss') + '" href="thuthach.html?g=' + g + '&amp;t=' + t + '">' + (won ? 'Đấu lại' : 'Vào đấu') + '</a></li>';
     }
-    var m = Core.el('div', 'bip-modal', '<div class="bip-card boss-menu" role="dialog" aria-modal="true"><div class="bip-card-head"><h2>Thử thách diệt Bọ Lỗi · Lớp ' + g + '</h2>' +
+    var m = Core.el('div', 'bip-modal', '<div class="bip-card boss-menu" role="dialog" aria-modal="true"><div class="bip-card-head"><h2>Solo BOSS · Lớp ' + g + '</h2>' +
       '<button class="btn btn-small" type="button" id="boss-close">Đóng ✕</button></div>' +
-      '<p>Mỗi chủ đề có một con Bọ Lỗi. Em trả lời đúng các câu hỏi của chủ đề để đánh bại nó. Thắng lần đầu được 3 kim cương.</p><ul class="boss-list">' + rows + '</ul></div>');
+      '<p>Mỗi chủ đề có một BOSS. Em trả lời đúng các câu hỏi của chủ đề để đánh bại nó. Thắng lần đầu được 3 kim cương.</p><ul class="boss-list">' + rows + '</ul></div>');
     document.body.appendChild(m);
     function close() { if (m.parentNode) document.body.removeChild(m); }
     Core.on(document.getElementById('boss-close'), close);
@@ -286,7 +286,7 @@
         '<button class="btn btn-small" id="who-del" type="button">Xoá tên này</button></div>' +
         (Core.gems ? '<div class="who-row who-game"><span class="who-gems" title="Kim cương: làm đúng ngay lần đầu">' + Core.gemIcon + '<b>' + Core.gems.count() + '</b></span>' +
           '<button class="btn btn-small" id="who-badges" type="button">Huy hiệu ' + Core.badgeCount() + '</button>' +
-          '<button class="btn btn-small" id="who-boss" type="button">Thử thách</button></div>' : '') +
+          '<button class="btn btn-small btn-boss" id="who-boss" type="button">' + (Core.swordsIcon || '') + 'Solo BOSS</button></div>' : '') +
         '<p class="who sync-state" data-sync-state></p><p class="who class-goal" id="class-goal"></p>';
       if (Core.sync) Core.sync.paint();
       if (Core.gems) {

@@ -43,6 +43,8 @@
   /* ---------- gems (kept in the progress data under "gems", so they reach the teacher's sheet too) ---------- */
   var GEM = '<svg class="gem-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 22 9 12 22 2 9z" fill="#3bc9db" stroke="#0b7285" stroke-width="2" stroke-linejoin="round"/><path d="M2 9h20M8 9l4-7 4 7-4 13z" fill="none" stroke="#0b7285" stroke-width="1.4" stroke-linejoin="round"/></svg>';
   Core.gemIcon = GEM;
+  /* two crossed swords for the Solo BOSS buttons (drawn in the button's text colour) */
+  Core.swordsIcon = '<svg class="swords-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4l11 11M12.5 17.5l5-5M16 16l4 4M20 4L9 15M6.5 12.5l5 5M8 16l-4 4"/></svg>';
   function gemKey(lessonId, activityId) { return (lessonId + '__' + activityId).replace(/[^A-Za-z0-9_-]/g, '').slice(0, 40); }
   Core.gems = {
     all: function () { return prog().gems || {}; },
@@ -204,8 +206,8 @@
     for (var t = 1; t <= 6; t++) (function (t) {
       BADGES.push({ id: 't' + t, n: TOPIC_BADGE[t - 1], d: 'Mọi bài của chủ đề ' + t + ' đạt từ huy chương bạc', c: colors[t - 1], ok: function (c) { return !!c.topic[t]; } });
     })(t);
-    BADGES.push({ id: 'boss1', n: 'Dũng sĩ diệt Bọ Lỗi', d: 'Thắng 1 thử thách', c: '#5f3dc4', ok: function (c) { return c.boss >= 1; } });
-    BADGES.push({ id: 'boss6', n: 'Khắc tinh của Bọ Lỗi', d: 'Thắng 6 thử thách', c: '#5f3dc4', ok: function (c) { return c.boss >= 6; } });
+    BADGES.push({ id: 'boss1', n: 'Dũng sĩ Solo BOSS', d: 'Thắng 1 thử thách', c: '#5f3dc4', ok: function (c) { return c.boss >= 1; } });
+    BADGES.push({ id: 'boss6', n: 'Khắc tinh của BOSS', d: 'Thắng 6 thử thách', c: '#5f3dc4', ok: function (c) { return c.boss >= 6; } });
   })();
   function badgeIcon(b, on) {
     var f = on ? b.c : '#dee2e6', ink = on ? '#1d2433' : '#adb5bd';

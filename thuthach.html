@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thử thách diệt Bọ Lỗi – Tin học vui</title>
+<title>Solo BOSS – Tin học vui</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1114c">
-<script src="assets/js/errbox.js?v=1114c"></script>
-<script src="assets/js/icons.js?v=1114c"></script>
-<script src="assets/js/core.js?v=1114c"></script>
+<link rel="stylesheet" href="assets/css/main.css?v=1114d">
+<script src="assets/js/errbox.js?v=1114d"></script>
+<script src="assets/js/icons.js?v=1114d"></script>
+<script src="assets/js/core.js?v=1114d"></script>
 <script src="assets/js/bossbank.js?v=1115a"></script>
 </head>
 <body>
@@ -44,18 +44,17 @@
         <path d="M50 68q10 -7 20 0" fill="none" stroke="#1d2433" stroke-width="3" stroke-linecap="round"/>
       </svg>
     </div>
-    <h1 class="boss-title">Bọ Lỗi</h1>
+    <h1 class="boss-title">BOSS</h1>
     <p class="boss-topic" id="boss-topic"></p>
-    <div class="boss-stat"><span>Máu của Bọ Lỗi: <b id="boss-hp-n"></b></span><div class="boss-hp" id="boss-hp"></div></div>
+    <div class="boss-stat"><span>HP của BOSS: <b id="boss-hp-n"></b></span><div class="boss-hp" id="boss-hp"></div></div>
     <div class="boss-stat"><span>Điểm của em: <b id="boss-score"></b></span></div>
-    <div class="boss-stat"><span>Trái tim của em</span><div class="boss-hearts" id="boss-hearts"></div></div>
+    <div class="boss-stat"><span>HP của em: <b id="boss-me-n"></b></span><div class="boss-hp boss-hp-me" id="boss-me"></div></div>
   </div>
   <div class="boss-main" id="boss-main"></div>
 </main>
 
 <script>
 (function () {
-  var HEART = '<svg viewBox="0 0 24 24" class="heart-ico" aria-hidden="true"><path d="M12 21C5 15 2 11.5 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 3.500-3 7-10 13z" fill="FILL" stroke="#1d2433" stroke-width="2" stroke-linejoin="round"/></svg>';
   /* questions that point at a picture or text of their own lesson make no sense here */
   var NEEDS_PAGE = /(hình|bảng|ảnh|tranh|trang chiếu|chương trình|đoạn|văn bản|kịch bản|video|khối lệnh|lệnh|thư mục|cây|sơ đồ|chỉ dẫn)[^.?!]{0,25}(trên(?! (trang|màn hình|đó|dải|mạng|Internet))|bên(?! trong)|dưới|sau|này|sau đây)|ở trên|bên (trái|phải)|dưới đây|sau đây|trên đây|vừa (xem|đọc|làm|tạo)|ý tưởng của/i;
   /* "Câu nào dưới đây đúng?" points at its own options, so it is fine */
@@ -76,19 +75,20 @@
     document.getElementById('boss-hp-n').innerHTML = hpMax ? hp + '/' + hpMax : '';
     document.getElementById('boss-score').innerHTML = hpMax ? (hpMax - hp) + '/' + hpMax : '';
     h = '';
-    for (i = 0; i < 3; i++) h += HEART.replace('FILL', i < hearts ? '#fa5252' : '#fff');
-    document.getElementById('boss-hearts').innerHTML = h;
+    for (i = 0; i < 3; i++) h += '<span class="' + (i < hearts ? 'on' : '') + '"></span>';   /* the learner's 3 HP */
+    document.getElementById('boss-me').innerHTML = h;
+    document.getElementById('boss-me-n').innerHTML = hpMax ? hearts + '/3' : '';
   }
   function screen(html) { main.innerHTML = '<div class="card boss-card">' + html + '</div>'; }
 
   function intro() {
     hpMax = hp = TOTAL; hearts = 3; bars();
-    screen('<h2>Thử thách chủ đề ' + topic + ' · Lớp ' + grade + '</h2>' +
-      '<p class="boss-lead">Bọ Lỗi đang phá các bài học của chủ đề <b>' + Core.TOPIC_NAMES[topic - 1] + '</b>. Em hãy đánh bại nó!</p>' +
-      '<ul class="boss-rules"><li>Bọ Lỗi có <b>' + TOTAL + ' máu</b>. Mỗi câu trả lời <b>đúng</b>: em được 1 điểm, Bọ Lỗi mất 1 máu.</li>' +
-      '<li>Mỗi câu trả lời <b>sai</b> làm em mất 1 trái tim. Em có 3 trái tim. Câu đó sẽ được hỏi lại sau.</li>' +
-      '<li>Đủ <b>' + TOTAL + ' điểm</b> thì Bọ Lỗi thua. Thắng lần đầu, em được <b>3 kim cương</b>.</li></ul>' +
-      '<button class="btn btn-primary" id="boss-go" type="button">Bắt đầu</button><div class="feedback" id="boss-fb"></div>');
+    screen('<h2>Solo BOSS · Chủ đề ' + topic + ' · Lớp ' + grade + '</h2>' +
+      '<p class="boss-lead">BOSS đang phá các bài học của chủ đề <b>' + Core.TOPIC_NAMES[topic - 1] + '</b>. Em hãy đánh bại nó!</p>' +
+      '<ul class="boss-rules"><li>BOSS có <b>' + TOTAL + ' HP</b>. Mỗi câu trả lời <b>đúng</b>: em được 1 điểm, BOSS mất 1 HP.</li>' +
+      '<li>Em có <b>3 HP</b>. Mỗi câu trả lời <b>sai</b> làm em mất 1 HP. Câu đó sẽ được hỏi lại sau.</li>' +
+      '<li>Đủ <b>' + TOTAL + ' điểm</b> thì BOSS thua. Thắng lần đầu, em được <b>3 kim cương</b>.</li></ul>' +
+      '<button class="btn btn-boss" id="boss-go" type="button">' + (Core.swordsIcon || '') + 'Bắt đầu solo</button><div class="feedback" id="boss-fb"></div>');
     Core.on(document.getElementById('boss-go'), load);
   }
 
@@ -138,7 +138,7 @@
 
   function ready() {
     if (bank.length < 4) {
-      screen('<h2>Chưa có thử thách</h2><p>Chủ đề này chưa có đủ câu hỏi để đấu với Bọ Lỗi. Em chọn chủ đề khác nha.</p><a class="btn btn-primary" href="index.html">&lsaquo; Về trang chủ</a>');
+      screen('<h2>Chưa có thử thách</h2><p>Chủ đề này chưa có đủ câu hỏi để solo với BOSS. Em chọn chủ đề khác nha.</p><a class="btn btn-primary" href="index.html">&lsaquo; Về trang chủ</a>');
       return;
     }
     queue = shuffle(bank.slice());
@@ -149,7 +149,7 @@
   }
 
   function ask() {
-    var q = queue.shift(), html = '<p class="boss-count">Câu ' + (++asked) + ' · Bọ Lỗi còn <b>' + hp + '</b> máu</p><div class="boss-q">' + q.q + '</div><div class="quiz-options" id="boss-opts">', i;
+    var q = queue.shift(), html = '<p class="boss-count">Câu ' + (++asked) + ' · BOSS còn <b>' + hp + '</b> HP</p><div class="boss-q">' + q.q + '</div><div class="quiz-options" id="boss-opts">', i;
     for (i = 0; i < q.options.length; i++) html += '<button class="btn quiz-opt" type="button" data-i="' + i + '"><span class="opt-letter">' + String.fromCharCode(65 + i) + '</span><span>' + q.options[i] + '</span></button>';
     screen(html + '</div><div class="feedback" id="boss-fb"></div>');
     /* answers drawn as Scratch scripts are tall: keep them side by side so the card still fits the frame */
@@ -162,14 +162,14 @@
       if (ok) {
         this.className += ' is-right';
         hp--;
-        Core.say(fb, 'Trúng rồi! Em được 1 điểm, Bọ Lỗi mất 1 máu.', 'good');
+        Core.say(fb, 'Trúng rồi! Em được 1 điểm, BOSS mất 1 HP.', 'good');
         bug.className = 'boss-bug is-hit';
         if (Core.sound) Core.sound('good');
         if (Core.react) Core.react('good');
       } else {
         hearts--; queue.push(q);
         this.className += ' is-wrong';
-        Core.say(fb, 'Chưa đúng. Em mất 1 trái tim. Câu này sẽ quay lại sau, em suy nghĩ kĩ nha.', 'bad');
+        Core.say(fb, 'Chưa đúng. Em mất 1 HP. Câu này sẽ quay lại sau, em suy nghĩ kĩ nha.', 'bad');
         if (Core.sound) Core.sound('bad');
         if (Core.react) Core.react('bad');
       }
@@ -192,7 +192,7 @@
     var secs = Math.round((new Date().getTime() - t0) / 1000), first = !Core.gems.bossWon(grade, topic), i;
     if (first) for (i = 1; i <= 3; i++) Core.gems.add('boss_g' + grade + '_t' + topic + '_' + i);
     document.getElementById('boss-bug').className = 'boss-bug is-down';
-    screen('<h2>Em đã thắng Bọ Lỗi!</h2><p class="boss-lead">Em đánh bại Bọ Lỗi của chủ đề ' + topic + ' với <b>' + hpMax + '/' + hpMax + ' điểm</b> trong <b>' + secs + '</b> giây, còn <b>' + hearts + '</b> trái tim.</p>' +
+    screen('<h2>Em đã thắng BOSS!</h2><p class="boss-lead">Em đánh bại BOSS của chủ đề ' + topic + ' với <b>' + hpMax + '/' + hpMax + ' điểm</b> trong <b>' + secs + '</b> giây, còn <b>' + hearts + '</b> HP.</p>' +
       (first ? '<p class="boss-reward">' + Core.gemIcon + 'Phần thưởng thắng lần đầu: <b>+3 kim cương</b></p>' : '<p>Em đã nhận phần thưởng của thử thách này từ lần thắng trước.</p>') +
       '<div class="bip-actions"><button class="btn" id="boss-again" type="button">Đấu lại</button><a class="btn btn-primary" href="index.html">&lsaquo; Về trang chủ</a></div>');
     Core.on(document.getElementById('boss-again'), ready);
@@ -202,7 +202,7 @@
   }
   function lose() {
     if (Core.music) Core.music(null);
-    screen('<h2>Bọ Lỗi thắng lần này</h2><p class="boss-lead">Em được <b>' + (hpMax - hp) + '/' + hpMax + ' điểm</b>. Không sao cả! Em xem lại các bài của chủ đề ' + topic + ' rồi đấu lại nha. Bọ Lỗi còn <b>' + hp + '</b> máu.</p>' +
+    screen('<h2>BOSS thắng lần này</h2><p class="boss-lead">Em được <b>' + (hpMax - hp) + '/' + hpMax + ' điểm</b>. Không sao cả! Em xem lại các bài của chủ đề ' + topic + ' rồi đấu lại nha. BOSS còn <b>' + hp + '</b> HP.</p>' +
       '<div class="bip-actions"><a class="btn" href="index.html">&lsaquo; Về trang chủ</a><button class="btn btn-primary" id="boss-again" type="button">Đấu lại</button></div>');
     Core.on(document.getElementById('boss-again'), ready);
   }

@@ -4,13 +4,15 @@ Cập nhật: 2026-11-14. Thứ tự ưu tiên: **xong hẳn Lớp 4 rồi mới
 
 Bản live (GitHub Pages, repo `wilvlc2222/webhoctinhoc`) đi theo `main`; lịch sử đưa lên mạng ở `DEPLOY_LOG.md`.
 
+Đổi tên 2026-11-14 (master dặn): thử thách "Diệt Bọ Lỗi" giờ là **Solo BOSS**, con quái là **BOSS**; "máu" và "trái tim" giờ đều là **HP** (BOSS 20 HP, em 3 HP). Các mục cũ bên dưới còn ghi "Bọ Lỗi" là nói về Solo BOSS.
+
 ---
 
 ## 1. Cần master làm hoặc xác nhận (em không tự làm được)
 
 - [ ] **Thử trên Kindle PPW5 thật** sau bản sửa lỗi trang chủ (`5ccb732`, đã có trên bản live): trang chủ có hiện đủ bài không, ô tên và mã số có bấm được không, vào bài học có chạm được không. Xem luôn cỡ chữ và khoảng cách ở bố cục dọc (PPW5 cuộn tự nhiên, không có khung 1280×720). Em mới thử bằng giả lập 758×1024 ở chế độ màn hình mực.
 - [ ] **Đọc duyệt câu chữ trang hướng dẫn** (`huongdan.html`, 4 mục).
-- [ ] **Nghe thử nhạc mới** (2026-11-14, `assets/js/sound.js`): giờ có 8 bài: bài học `study1–4`, trang chủ `home1–2`, Bọ Lỗi `boss1–2`. Mỗi lần vào trang chọn một bài khác bài vừa nghe. Âm thanh stereo (mỗi nốt hai giọng trái/phải, có tiếng vang qua lại) và nhạc phát liền khi vào trang nếu trình duyệt cho (vào bằng cách chạm từ trang chủ thì Chrome cho; iPad có thể vẫn phải chạm một lần). Bài nào chưa hay thì sửa nốt nhạc trong `SONGS`.
+- [ ] **Nghe thử nhạc mới** (2026-11-14, `assets/js/sound.js`): giờ có 8 bài: bài học `study1–4`, trang chủ `home1–2`, Bọ Lỗi `boss1–2`. Mỗi lần vào trang chọn một bài khác bài vừa nghe. Âm thanh stereo (mỗi nốt hai giọng trái/phải, có tiếng vang qua lại) và nhạc phát liền khi vào trang nếu trình duyệt cho (vào bằng cách chạm từ trang chủ thì Chrome cho; iPad có thể vẫn phải chạm một lần). Master thấy "hơi chậm" nên mọi bài đã nhanh lên một phần tư (`TEMPO = 0.8`); vẫn chậm/nhanh thì đổi số này. Bài nào chưa hay thì sửa nốt nhạc trong `SONGS`.
 - [ ] **Duyệt 38 câu hỏi em viết thêm** cho Bọ Lỗi lớp 4 (chủ đề 2, 4, 6) trong `assets/js/bossbank.js`: đúng nội dung sách chưa, câu chữ có hợp với học sinh không.
 
 ## 2. Lớp 4 – việc còn phải làm

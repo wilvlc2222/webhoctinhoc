@@ -77,10 +77,10 @@ window.__boss = {}; window.__done = false;
           r.games++;
           var lead = (doc.querySelector('.boss-lead') || {}).textContent || '';
           var sc = (/(\d+\/\d+) điểm/.exec(lead) || [])[1];
-          if (/thắng Bọ Lỗi/.test(h.textContent)) {
+          if (/thắng BOSS/.test(h.textContent)) {
             r.wins++; r.res.push('W' + sc + (doc.querySelector('.boss-reward') ? '+gem' : ''));
             if (r.wins >= 2) break;
-          } else if (/Bọ Lỗi thắng/.test(h.textContent)) {
+          } else if (/BOSS thắng/.test(h.textContent)) {
             r.losses++; if (r.losses <= 2) r.res.push('L' + sc);
           } else { r.err.push('odd: ' + h.textContent); break; }
           doc.getElementById('boss-again').click();
