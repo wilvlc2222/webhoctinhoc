@@ -191,6 +191,7 @@
 - `sound.js`: thêm bài `home` (vui, vừa nhanh); trang có `#topic-legend` (chỉ trang chủ) tự phát sau lần chạm đầu. Bài học vẫn `study`, Bọ Lỗi vẫn `boss`.
 - Mọi trang đổi `?v=1114a` → `?v=1114b` (268 chỗ, 39 tệp).
 - Kiểm tra: trang chủ chạm một lần → `Core.musicPlaying()` = `home`, không lỗi console.
+- Gộp vào `main` (fast-forward) và push cùng ngày.
 
 ## 2026-11-14 – Phương ngữ Sài Gòn, lớp 4 bài 13–16
 
