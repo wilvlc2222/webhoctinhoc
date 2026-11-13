@@ -1736,6 +1736,17 @@ html.eink .boss-pop { color: #000; border-color: #000; }
 html.eink .boss-vn { color: #000; }
 .boss-topic { margin: 0 0 8px; color: var(--muted); }
 .boss-stat { margin-top: 10px; font-weight: 700; font-size: 15px; }
+/* 20-minute countdown (startClock() in thuthach.html); under 1 minute it turns red and pulses.
+   E-ink and reduced motion turn the pulse off (rules at the top), so there the clock only gets a heavier border:
+   on e-ink it is also drawn white on black. */
+.boss-time { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.boss-time[hidden] { display: none; }
+.boss-clock { display: inline-block; min-width: 76px; padding: 1px 8px; border: 2px solid var(--ink); border-radius: 8px; background: #fff; font-size: 22px; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.boss-time.is-warn { color: #c92a2a; }
+.boss-time.is-warn .boss-clock { border: 3px solid #c92a2a; background: #fff5f5; color: #c92a2a; animation: bb-tick 1s infinite; }
+@keyframes bb-tick { 0%, 100% { transform: none; } 50% { transform: scale(1.12); } }
+html.eink .boss-time.is-warn { color: #000; }
+html.eink .boss-time.is-warn .boss-clock { border: 3px solid #000; background: #000; color: #fff; }
 /* 20 HP in two rows of ten */
 .boss-hp { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 4px; min-height: 18px; }
 .boss-hp span { box-sizing: border-box; flex: 0 0 8%; margin: 2px 1%; height: 16px; border: 2px solid var(--ink); border-radius: 5px; background: #fff; }

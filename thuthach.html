@@ -6,10 +6,10 @@
 <title>Solo BOSS – Tin học vui</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1114f">
-<script src="assets/js/errbox.js?v=1114f"></script>
-<script src="assets/js/icons.js?v=1114f"></script>
-<script src="assets/js/core.js?v=1114f"></script>
+<link rel="stylesheet" href="assets/css/main.css?v=1114g">
+<script src="assets/js/errbox.js?v=1114g"></script>
+<script src="assets/js/icons.js?v=1114g"></script>
+<script src="assets/js/core.js?v=1114g"></script>
 <script src="assets/js/bossbank.js?v=1115b"></script>
 </head>
 <body>
@@ -25,6 +25,7 @@
 
 <!-- Boss challenge for one topic: thuthach.html?g=4&t=5 (grade, topic).
      A match is 20 questions = 20 points: the bug has 20 HP, a right answer is 1 point and 1 HP, three wrong answers lose.
+     A match lasts at most 20 minutes (LIMIT): when the time is up and the bug still has HP, the bug wins.
      The page opens the topic's lessons in hidden frames and reuses their quiz and true/false questions
      (Core.quizBank in core.js / widgets.js), then adds the extra ones of assets/js/bossbank.js.
      tools/boss.html counts the questions of every topic. -->
@@ -57,6 +58,8 @@
     </div>
     <h1 class="boss-title">Big Bug</h1><p class="boss-vn">Bọ Lỗi</p>
     <p class="boss-topic" id="boss-topic"></p>
+    <!-- 20-minute countdown, shown once the first question is on screen; .is-warn under 1 minute -->
+    <div class="boss-stat boss-time" id="boss-time" hidden><span>Thời gian còn lại</span> <b class="boss-clock" id="boss-clock" role="timer">20:00</b></div>
     <div class="boss-stat"><span>HP của BOSS: <b id="boss-hp-n"></b></span><div class="boss-hp" id="boss-hp"></div></div>
     <div class="boss-stat"><span>Điểm của em: <b id="boss-score"></b></span></div>
     <div class="boss-stat"><span>HP của em: <b id="boss-me-n"></b></span><div class="boss-hp boss-hp-me" id="boss-me"></div></div>
@@ -71,9 +74,10 @@
   /* "Câu nào dưới đây đúng?" points at its own options, so it is fine */
   var OPTIONS_BELOW = /(câu|thứ|trang web|việc|phần mềm|thiết bị) nào (dưới|sau) đây/gi;
   var TOTAL = 20;   /* questions and points of one match */
+  var LIMIT = 20 * 60;   /* seconds of one match */
   var m = /[?&]g=(\d)/.exec(location.search), m2 = /[?&]t=(\d)/.exec(location.search);
   var grade = m ? +m[1] : 4, topic = m2 ? +m2[1] : 1;
-  var main, bank = [], queue, hp, hpMax, hearts, asked, t0, started = false;
+  var main, bank = [], queue, hp, hpMax, hearts, asked, t0, started = false, tick = null;
 
   function E(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
   function plain(html) { var d = document.createElement('div'); d.innerHTML = html; return (d.textContent || '').replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''); }
@@ -102,6 +106,22 @@
     if (old) b.removeChild(old);
     if (extra === 'is-hit' || extra === 'is-laugh') b.appendChild(E('span', 'boss-pop' + (extra === 'is-laugh' ? ' is-laugh' : ''), extra === 'is-hit' ? '-1 HP' : 'Ha ha!'));
   }
+  /* the clock counts from t0 by the real time, so a slow or sleeping tablet still ends the match on time */
+  function now() { return new Date().getTime(); }
+  function secsLeft() { return Math.max(0, LIMIT - Math.floor((now() - t0) / 1000)); }
+  function showClock() {
+    var s = secsLeft(), mm = Math.floor(s / 60), ss = s % 60;
+    document.getElementById('boss-clock').innerHTML = (mm < 10 ? '0' : '') + mm + ':' + (ss < 10 ? '0' : '') + ss;
+    document.getElementById('boss-time').className = 'boss-stat boss-time' + (s < 60 ? ' is-warn' : '');
+    return s;
+  }
+  function startClock() {
+    stopClock();
+    document.getElementById('boss-time').hidden = false;
+    showClock();
+    tick = setInterval(function () { if (!showClock()) { stopClock(); setBug(''); lose(true); } }, 250);
+  }
+  function stopClock() { if (tick) clearInterval(tick); tick = null; }
   function screen(html) { main.innerHTML = '<div class="card boss-card">' + html + '</div>'; }
 
   function intro() {
@@ -110,7 +130,8 @@
       '<p class="boss-lead">BOSS <b>Bọ Lỗi</b> (Big Bug) đang phá các bài học của chủ đề <b>' + Core.TOPIC_NAMES[topic - 1] + '</b>. Em hãy đánh bại nó!</p>' +
       '<ul class="boss-rules"><li>BOSS có <b>' + TOTAL + ' HP</b>. Mỗi câu trả lời <b>đúng</b>: em được 1 điểm, BOSS mất 1 HP.</li>' +
       '<li>Em có <b>3 HP</b>. Mỗi câu trả lời <b>sai</b> làm em mất 1 HP. Câu đó sẽ được hỏi lại sau.</li>' +
-      '<li>Đủ <b>' + TOTAL + ' điểm</b> thì BOSS thua. Thắng lần đầu, em được <b>3 kim cương</b>.</li></ul>' +
+      '<li>Đủ <b>' + TOTAL + ' điểm</b> thì BOSS thua. Thắng lần đầu, em được <b>3 kim cương</b>.</li>' +
+      '<li>Mỗi trận có <b>' + LIMIT / 60 + ' phút</b>. Hết giờ mà BOSS còn HP thì BOSS thắng.</li></ul>' +
       '<button class="btn btn-boss" id="boss-go" type="button">' + (Core.swordsIcon || '') + 'Bắt đầu solo</button><div class="feedback" id="boss-fb"></div>');
     Core.on(document.getElementById('boss-go'), load);
   }
@@ -166,8 +187,8 @@
     }
     queue = shuffle(bank.slice());
     hpMax = hp = Math.min(TOTAL, bank.length);   /* a wrong question goes back to the end of the queue, so it never runs out */
-    hearts = 3; asked = 0; t0 = new Date().getTime();
-    bars(); ask();
+    hearts = 3; asked = 0; t0 = now();
+    bars(); ask(); startClock();
     if (Core.music) Core.music('boss');
   }
 
@@ -195,6 +216,7 @@
         if (Core.sound) Core.sound('bad');
         if (Core.react) Core.react('bad');
       }
+      if (hp <= 0 || hearts <= 0) stopClock();   /* the match is decided: the time no longer counts */
       bars(); setBug(ok ? 'is-hit' : 'is-laugh');
       var go = E('button', 'btn btn-primary boss-next', hp <= 0 || hearts <= 0 ? 'Xem kết quả' : 'Câu tiếp &rsaquo;');
       go.type = 'button';
@@ -210,8 +232,9 @@
   }
 
   function win() {
+    stopClock();
     if (Core.music) Core.music(null);
-    var secs = Math.round((new Date().getTime() - t0) / 1000), first = !Core.gems.bossWon(grade, topic), i;
+    var secs = Math.round((now() - t0) / 1000), first = !Core.gems.bossWon(grade, topic), i;
     if (first) for (i = 1; i <= 3; i++) Core.gems.add('boss_g' + grade + '_t' + topic + '_' + i);
     setBug('is-down');
     screen('<h2>Em đã thắng BOSS Bọ Lỗi!</h2><p class="boss-lead">Em đánh bại Bọ Lỗi của chủ đề ' + topic + ' với <b>' + hpMax + '/' + hpMax + ' điểm</b> trong <b>' + secs + '</b> giây, còn <b>' + hearts + '</b> HP.</p>' +
@@ -222,9 +245,11 @@
     if (Core.react) Core.react('win');
     if (Core.checkBadges) setTimeout(function () { Core.checkBadges(); }, 1300);
   }
-  function lose() {
+  /* timeUp: the 20 minutes ran out before the bug lost all its HP */
+  function lose(timeUp) {
+    stopClock();
     if (Core.music) Core.music(null);
-    screen('<h2>BOSS thắng lần này</h2><p class="boss-lead">Em được <b>' + (hpMax - hp) + '/' + hpMax + ' điểm</b>. Không sao cả! Em xem lại các bài của chủ đề ' + topic + ' rồi đấu lại nha. BOSS còn <b>' + hp + '</b> HP.</p>' +
+    screen((timeUp ? '<h2>Hết giờ! BOSS thắng lần này</h2><p class="boss-lead">Hết ' + LIMIT / 60 + ' phút rồi. ' : '<h2>BOSS thắng lần này</h2><p class="boss-lead">') + 'Em được <b>' + (hpMax - hp) + '/' + hpMax + ' điểm</b>. Không sao cả! Em xem lại các bài của chủ đề ' + topic + ' rồi đấu lại nha. BOSS còn <b>' + hp + '</b> HP.</p>' +
       '<div class="bip-actions"><a class="btn" href="index.html">&lsaquo; Về trang chủ</a><button class="btn btn-primary" id="boss-again" type="button">Đấu lại</button></div>');
     Core.on(document.getElementById('boss-again'), ready);
   }
