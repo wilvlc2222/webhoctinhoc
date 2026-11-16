@@ -70,7 +70,10 @@ Phạm vi master đã duyệt: **chỉ đổi lời dẫn, ví dụ, tên ngư�
 ## 7. Cửa hàng VIP để tiêu kim cương (master giao 2026-11-16, chưa làm)
 
 - [ ] **Xây cửa hàng VIP**: nơi em học sinh tiêu kim cương đã kiếm được.
-- [ ] **Hai cấp độ donate**:
-  - Cấp 1, giá ×1: mở khoá BOSS mà không cần đủ sao của chủ đề.
-  - Cấp 2, giá ×4: một món xịn xò hơn (master chưa chốt là món gì).
-- Cần master chốt trước khi làm: giá ×1 là bao nhiêu kim cương; món ×4 là gì; "donate" là trả bằng kim cương trong trò chơi hay bằng tiền thật.
+- [ ] **Hai cấp độ donate, trả bằng tiền thật** (master chốt 2026-11-16):
+  - **4 đô la**: mở khoá BOSS ngay, không cần đủ sao của chủ đề.
+  - **20 đô la**: chủ yếu để ủng hộ; có thêm món gì đó cho vui cũng được, không bắt buộc phải có.
+- Cần chốt trước khi làm:
+  - Nhận tiền qua đâu (chuyển khoản / mã QR, MoMo, PayPal, Stripe…) và ai là người trả: phụ huynh hay thầy cô, không phải em học sinh.
+  - Trang đang là web tĩnh trên GitHub Pages, không tự biết ai đã trả tiền. Cách đơn giản nhất: master nhận tiền rồi phát mã mở khoá, hoặc bật cờ VIP cho học sinh trong Google Sheet.
+  - 4 đô la mở một BOSS hay mọi BOSS; có hạn dùng không.
