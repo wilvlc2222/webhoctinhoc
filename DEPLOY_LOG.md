@@ -311,3 +311,14 @@
 - Mọi trang đổi `main.css` / `core.js` → `?v=1116c`.
 - Kiểm tra trên máy tính: manifest và icon tải được, nút cài ẩn đúng lúc; 800×1280 và 1280×720 mở Solo BOSS thì trang khoá cuộn, đóng thì mở lại; không lỗi console. Chưa bấm cài thật và chưa vuốt thật trên Tab A8 / iPad.
 - Gộp vào `main` (fast-forward) và push cùng ngày.
+
+## 2026-11-16 – UI/UX: trang chủ màn dọc, bản đồ 4 cột, nút Cài đặt
+
+- Master giao mục 8 trong `plan.md`; giữa chừng master dặn thêm: nút Solo BOSS quá dài, không cần tổng sao cả lớp.
+- Trang chủ màn dọc / màn hẹp (`main.css`): `.home-cols` thành cột, `.home-side { display: contents }`, `order` đưa bài học lên ngay sau ô "Ai đang học"; chú thích chủ đề và dòng ghi chú SGK xuống dưới. Có tên rồi thì giấu dòng chào `.hero p` ở mọi màn. Máy tính bảng cầm dọc: ô học sinh chia hai cột (`#who-box.who-in`). Ở 800×1280 bài 1 từ y≈979 lên y≈468.
+- Bỏ ô "Cả lớp … sao" (`classGoal()` và CSS `.class-goal`, `.goal-*`). Nút Solo BOSS vừa chữ (`fit-content`), không kéo hết ô.
+- Bản đồ bài học (`index.html`): `mapCols()` = 6 trên khung ngang, 4 trên máy tính bảng cầm dọc rộng ≥600px, 0 (danh sách) cho màn hình mực và điện thoại; `data-layout` thay `data-wide`, xoay máy hoặc bật màn hình mực thì vẽ lại. Nút "Xem danh sách / Xem bản đồ" hiện ở màn dọc ≥600px, ẩn khi màn hình mực.
+- Nút bánh răng "Cài đặt" (`core.js` `settingsMenu()`): nhạc nền, âm thanh, xem danh sách/bản đồ, cài ứng dụng, màn hình mực vào một bảng thả xuống; Hướng dẫn, Túi đồ, sao bài học ở ngoài. Nút nhạc / âm thanh có chữ "bật/tắt" trong bảng (`sound.js`), Túi đồ đứng trước bánh răng (`mascot.js`). Chạm ngoài hoặc Esc thì đóng.
+- Mọi trang đổi `main.css` / `core.js` → `?v=1116d`.
+- Kiểm tra trên máy tính: `tools/fit.html?pages=l4&solve=1` → `ALL OK (17 pages)`; 800×1280 không tràn ngang ở mọi bước Lớp 4 và trang Solo BOSS; bảng Cài đặt đủ nút ở trang chủ và trang bài học.
+- Chưa commit, chưa đưa lên mạng.

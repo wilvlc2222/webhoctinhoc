@@ -78,11 +78,16 @@ Phạm vi master đã duyệt: **chỉ đổi lời dẫn, ví dụ, tên ngư�
   - Trang đang là web tĩnh trên GitHub Pages, không tự biết ai đã trả tiền. Cách đơn giản nhất: master nhận tiền rồi phát mã mở khoá, hoặc bật cờ VIP cho học sinh trong Google Sheet.
   - Mở khoá có hạn dùng không (theo năm học, hay mãi mãi).
 
-## 8. Cải thiện UI/UX (master giao 2026-11-16; làm ở phiên mới, chưa sửa dòng code nào)
+## 8. Cải thiện UI/UX (master giao 2026-11-16)
 
-Master chọn cả bốn việc. Em mới rà trang chủ, chưa làm:
+Ba việc đầu đã làm 2026-11-16 (ghi trong `DEPLOY_LOG.md`), chưa commit, chưa đưa lên mạng:
 
-- [ ] **Trang chủ màn dọc: đưa bài học lên gần.** Ở 800×1280 bài 1 nằm tận y≈950. Hướng làm: trong `@media (max-width: 899px), (orientation: portrait)` cho `.home-cols` thành flex cột, `.home-side { display: contents }`, dùng `order` để `#topic-legend` và `.home-note` xuống dưới `.home-main`; khi đã có tên thì giấu `.hero p` (màn ngang đã làm vậy, `main.css` ~dòng 1745); gom ô "Ai đang học" gọn lại (`index.html` ~dòng 313–331, `.who-stats`, `.who-foot`).
-- [ ] **Bản đồ bài học ở màn dọc.** `mapHTML()` trong `index.html` đang cứng 6 cột, viewBox 600, chỉ chạy khi `isWide()`. Hướng làm: thêm tham số số cột (4 cột cho máy tính bảng cầm dọc, rộng ≥600px, không phải màn hình mực), `left = x / cols %`, viewBox `cols*100`; `data-wide` đổi thành tên kiểu bố cục để xoay máy thì vẽ lại; cho hiện `#view-toggle` ở màn dọc (`main.css` dòng 1718, 1744). Màn hình mực giữ danh sách.
-- [ ] **Gọn thanh trên.** Gom nút ít dùng (nhạc, âm thanh, Màn hình mực, Cài ứng dụng, Xem danh sách) vào một nút bánh răng "Cài đặt"; giữ Hướng dẫn và Túi đồ ở ngoài. Nút nhạc / âm thanh do `sound.js` gắn vào, Túi đồ do `mascot.js`.
-- [ ] **Rà màn bài học và trận Solo BOSS** ở ngang và dọc, báo danh sách chỗ cần sửa trước khi làm.
+- [x] Trang chủ màn dọc: bài học lên ngay sau ô "Ai đang học" (800×1280: bài 1 ở y≈468, trước y≈979). Bỏ tổng sao cả lớp, nút Solo BOSS vừa chữ (master dặn thêm).
+- [x] Bản đồ bài học 4 cột cho máy tính bảng cầm dọc (`mapCols()` trong `index.html`); màn hình mực và điện thoại giữ danh sách.
+- [x] Nút bánh răng "Cài đặt" gom nhạc, âm thanh, bản đồ/danh sách, cài ứng dụng, màn hình mực (`core.js` `settingsMenu()`).
+- [ ] **Rà màn bài học và Solo BOSS** — đã rà, chờ master chọn chỗ nào sửa:
+  - Ngang 1280×720: `tools/fit.html?pages=l4&solve=1` → `ALL OK (17 pages)`. Không thấy chỗ cần sửa.
+  - Dọc 800×1280: không bước nào của Lớp 4 tràn ngang. Thanh trên trang bài học cao 110px (hai hàng: tên bài; sao, tên học sinh, Túi đồ, Cài đặt).
+  - Bài 13 bước 4: hai cột xếp chồng nên dài 2276px, phải cuộn nhiều. Hướng sửa: ở màn dọc ≥600px giữ hai cột hoặc thu gọn cột bên.
+  - Solo BOSS màn dọc: khối Bọ Lỗi + thanh máu chiếm 386px trên cùng, câu hỏi bắt đầu từ y≈460. Hướng sửa: ở màn dọc xếp Bọ Lỗi nhỏ bên trái, thanh máu bên phải, một hàng ~120px. Chưa đo lúc đang đấu (cần tên thử `__` đủ sao, dùng `tools/bossplay.js`).
+  - Khung ngang, trang chủ ở chế độ bản đồ: 17 bài thành 3 hàng × 204px nên phần bài học phải cuộn trong khung. Hướng sửa (nếu master muốn): hạ `rowH` hoặc thu nhỏ nút bản đồ.

@@ -234,7 +234,7 @@
   var SLASH = '<path d="M4 4l16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
   function paintMusic(b) {
     var on = musicOn();
-    b.innerHTML = NOTE + (on ? '' : SLASH) + '</svg>';
+    b.innerHTML = NOTE + (on ? '' : SLASH) + '</svg><span class="set-label">Nhạc nền: ' + (on ? 'bật' : 'tắt') + '</span>';
     b.setAttribute('aria-pressed', on ? 'true' : 'false');
     b.setAttribute('title', on ? 'Nhạc nền: đang bật' : 'Nhạc nền: đang tắt');
     b.setAttribute('aria-label', on ? 'Nhạc nền đang bật, bấm để tắt' : 'Nhạc nền đang tắt, bấm để bật');
@@ -245,7 +245,7 @@
   var CROSS = '<path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
   function paint(b) {
     var on = isOn();
-    b.innerHTML = ICON + (on ? WAVES : CROSS);
+    b.innerHTML = ICON + (on ? WAVES : CROSS) + '<span class="set-label">Âm thanh: ' + (on ? 'bật' : 'tắt') + '</span>';
     b.setAttribute('aria-pressed', on ? 'true' : 'false');
     b.setAttribute('title', on ? 'Âm thanh: đang bật' : 'Âm thanh: đang tắt');
     b.setAttribute('aria-label', on ? 'Âm thanh đang bật, bấm để tắt' : 'Âm thanh đang tắt, bấm để bật');
@@ -256,12 +256,14 @@
     var b = document.createElement('button');
     b.className = 'btn btn-small snd-toggle'; b.type = 'button';
     paint(b);
-    eink.parentNode.insertBefore(b, eink);
+    /* inside the settings panel (core.js) when it is there already: music and sound go first */
+    var panel = document.querySelector('.settings-panel');
+    if (panel) panel.insertBefore(b, panel.firstChild); else eink.parentNode.insertBefore(b, eink);
     b.addEventListener('click', function () { setOn(!isOn()); paint(b); if (isOn()) Core.sound('good'); }, false);
     var mb = document.createElement('button');
     mb.className = 'btn btn-small snd-toggle mus-toggle'; mb.type = 'button';
     paintMusic(mb);
-    eink.parentNode.insertBefore(mb, b);
+    b.parentNode.insertBefore(mb, b);
     mb.addEventListener('click', function () {
       try { localStorage.setItem(MKEY, musicOn() ? '0' : '1'); } catch (e) {}
       paintMusic(mb);

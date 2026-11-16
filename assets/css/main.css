@@ -1458,6 +1458,23 @@ html.eink .bip-wr-left { background: #fff; border: 2px solid #000; }
 .lesson-top .topbar-right .star-ico { width: 20px; height: 20px; }
 .lesson-top #eink-toggle { padding: 4px 8px; font-size: 14px; }
 .lesson-top .bip-avatar, .lesson-top .snd-toggle { min-width: 36px; padding: 0 4px; }
+.set-label { display: none; }
+
+/* settings gear (core.js settingsMenu): the seldom-used switches in one panel under it */
+.settings { position: relative; }
+.settings-btn { gap: 6px; padding: 0 10px; }
+.settings-btn[aria-expanded="true"] { --edge: #134a8e; border-color: var(--primary); background: #e7f5ff; }
+.lesson-top .settings-label { display: none; }
+.lesson-top .settings-btn { min-width: 36px; padding: 0 6px; }
+.settings-panel { position: absolute; right: 0; top: calc(100% + 8px); z-index: 80; display: flex; flex-direction: column; gap: 6px; width: 240px; padding: 10px;
+  border: 2px solid var(--line); border-radius: 14px; background: #fff; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18); }
+.settings-panel[hidden] { display: none; }
+.settings-panel .btn { justify-content: flex-start; gap: 8px; width: 100%; min-height: 44px; padding: 4px 12px; font-size: 16px; text-align: left; }
+.lesson-top .settings-panel #eink-toggle { padding: 4px 12px; font-size: 16px; }
+.settings-panel .snd-toggle svg { flex: none; }
+.settings-panel .set-label { display: inline; }
+html.eink .settings-panel { border: 3px solid #000; box-shadow: none; }
+html.eink .settings-btn[aria-expanded="true"] { background: #000; color: #fff; }
 
 /* ===== Home page lesson grid (index.html) =====
    Equal cards: big title on the first line; below it a small "Chủ đề N" tag on
@@ -1618,7 +1635,7 @@ html.eink .badge-cell.is-on { background: #fff; border-color: #000; border-width
 html.eink .game-toast { border-color: #000; box-shadow: none; }
 
 /* home page learner card (index.html renderNames), top to bottom:
-   who (avatar, name, code) → own numbers (stars, gems, badges) → Solo BOSS → class goal → saved? → switch learner */
+   who (avatar, name, code) → own numbers (stars, gems, badges) → Solo BOSS → saved? → switch learner */
 .who-id { display: flex; align-items: center; gap: 12px; margin: 4px 0 12px; }
 .who-avatar { flex: none; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 50%;
   background: var(--primary); color: #fff; font-size: 24px; font-weight: 800; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18); }
@@ -1641,13 +1658,7 @@ button.who-stat { cursor: pointer; box-shadow: 0 3px 0 #d3c8b2; transition: tran
 button.who-stat small { color: var(--primary); }
 @media (hover: hover) { button.who-stat:hover { transform: translateY(-2px); box-shadow: 0 5px 0 #d3c8b2; } }
 button.who-stat:active { transform: translateY(3px); box-shadow: 0 0 0 #d3c8b2; }
-.btn.who-boss { display: flex; width: 100%; font-size: 18px; }
-.class-goal { margin-top: 12px; padding: 8px 10px; border-radius: 12px; background: #fff8e6; font-size: 14px; line-height: 1.3; }
-.class-goal:empty { display: none; }
-.goal-head { display: flex; justify-content: space-between; gap: 8px; font-weight: 700; }
-.goal-head small { font-size: 13px; color: var(--muted); }
-.goal-bar { display: block; height: 12px; margin-top: 5px; overflow: hidden; border: 2px solid #f0d9a8; border-radius: 99px; background: #fff; }
-.goal-bar span { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #ffd43b, #f59f00); }
+.btn.who-boss { display: flex; width: -webkit-fit-content; width: fit-content; margin: 0 auto; padding: 0 26px; font-size: 18px; }
 .profile-box .sync-state { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 13px; color: var(--muted); }
 .profile-box .sync-state::before { content: ""; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--good); }
 .profile-box .sync-state[data-s="busy"]::before { background: var(--star); }
@@ -1658,10 +1669,8 @@ button.who-stat:active { transform: translateY(3px); box-shadow: 0 0 0 #d3c8b2; 
 .who-foot .who-del { flex: 0 1 auto; color: var(--bad); }
 html.eink .who-avatar { background: #fff; color: #000; border: 3px solid #000; box-shadow: none; }
 html.eink .who-key .who-code { border: 2px solid #000; }
-html.eink .who-stat, html.eink .class-goal { background: #fff; border: 2px solid #000; box-shadow: none; transform: none; }
+html.eink .who-stat { background: #fff; border: 2px solid #000; box-shadow: none; transform: none; }
 html.eink button.who-stat small, html.eink .who-foot .who-del { color: #000; }
-html.eink .goal-bar { border-color: #000; }
-html.eink .goal-bar span { background: #000; }
 html.eink .profile-box .sync-state::before { background: #000; }
 /* the 1280×720 stage: the left column is short, so the card is tighter (about as tall as the old card) */
 @media (min-width: 900px) and (orientation: landscape) {
@@ -1677,8 +1686,6 @@ html.eink .profile-box .sync-state::before { background: #000; }
   .who-stat-n { font-size: 18px; }
   .who-stat .stat-ico, .who-stat .gem-ico { width: 20px; height: 20px; }
   .btn.who-boss { min-height: 44px; }
-  .class-goal { margin-top: 8px; padding: 6px 10px; font-size: 13px; }
-  .goal-bar { height: 10px; margin-top: 3px; }
   .profile-box .sync-state { margin-top: 6px; }
   .who-foot { margin-top: 8px; padding-top: 8px; }
   .who-foot .btn { min-height: 36px; font-size: 14px; }
@@ -1740,9 +1747,40 @@ html.eink .map-dot { border-color: #000; box-shadow: none; }
 html.eink .map-node.is-current .map-dot { border-width: 6px; box-shadow: none; }
 html.eink .map-t { background: #fff; }
 html.eink .map-stars .star-count::before { color: #000; }
-@media (min-width: 900px) and (orientation: landscape) {
+/* map or list: the wide stage and upright tablets (mapCols() in index.html); e-ink always gets the list */
+@media (min-width: 900px) and (orientation: landscape), (orientation: portrait) and (min-width: 600px) {
   #view-toggle { display: inline-flex; }
-  .home-side:not(.no-learner) .hero p { display: none; }
+}
+html.eink #view-toggle { display: none; }
+/* once a learner is in, the welcome line is not needed: the lessons come up sooner */
+.home-side:not(.no-learner) .hero p { display: none; }
+
+/* home page, portrait and narrow screens: one column, lessons right after the learner card,
+   the topic key and the textbook note go below the lessons. (A browser without display:contents
+   just keeps the old order.) */
+@media (max-width: 899px), (orientation: portrait) {
+  .home-cols { display: flex; flex-direction: column; }
+  .home-side { display: contents; }
+  .home-side > .hero { order: 1; padding: 14px 0 6px; }
+  .home-side > .hero h1 { margin: 0; font-size: 28px; }
+  .home-side > .profile-box { order: 2; margin-bottom: 0; }
+  .home-side > .grade-tabs { order: 3; margin: 12px 0 4px; }
+  .home-main { order: 4; }
+  .home-side > .topic-legend { order: 5; margin-top: 14px; font-size: 14px; line-height: 22px; }
+  .home-side > .home-note { order: 6; }
+}
+/* portrait tablets: the learner card in two columns (who | numbers, Solo BOSS | switch learner, then saved) */
+@media (orientation: portrait) and (min-width: 600px) {
+  .profile-box { padding: 12px 16px; }
+  .profile-box h2 { margin: 0 0 6px; font-size: 20px; }
+  #who-box.who-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 8px 16px; align-items: center; }
+  #who-box.who-in > .who-id { grid-column: 1; margin: 0; }
+  #who-box.who-in > .who-stats { grid-column: 2; margin: 0; }
+  #who-box.who-in > .who-boss { grid-column: 1; justify-self: start; min-height: 46px; margin: 0; }
+  #who-box.who-in > .sync-state { grid-column: 1 / -1; order: 1; margin: 0; }   /* last, under both columns */
+  #who-box.who-in > .who-foot { grid-column: 2; margin: 0; padding: 0; border-top: 0; }
+  #who-box.who-in .who-stat { min-height: 50px; padding: 4px; }
+  #who-box.who-in .who-foot .btn { min-height: 38px; }
 }
 
 /* ===== Boss challenge (thuthach.html) ===== */

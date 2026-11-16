@@ -38,7 +38,7 @@
     var btn = document.getElementById('eink-toggle');
     if (btn) {
       btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      btn.innerHTML = on ? 'Màn hình mực: BẬT' : 'Màn hình mực: tắt';
+      btn.innerHTML = on ? 'Màn hình mực: bật' : 'Màn hình mực: tắt';
     }
     if (Core.isStage) fitStage();   /* not on the first call: the stage code below is not set up yet */
   }
@@ -512,9 +512,35 @@
     host.appendChild(wrap);
   };
 
+  /* ---------- settings menu: the gear in the top bar ----------
+     The buttons a learner seldom needs (music, sound, map or list, install, e-ink) go into one panel
+     under the gear; Hướng dẫn, Túi đồ and the lesson stars stay in the bar. sound.js puts its two
+     buttons at the top of the panel when it runs later; mascot.js puts Túi đồ before the gear. */
+  var GEAR = '<svg class="gear-ico" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="7.6" stroke-dasharray="3 2.97"/></g></svg>';
+  function settingsMenu() {
+    var eink = document.getElementById('eink-toggle');
+    if (!eink || document.querySelector('.settings')) return;
+    var wrap = Core.el('div', 'settings',
+      '<button class="btn btn-small settings-btn" type="button" aria-haspopup="true" aria-expanded="false" title="Cài đặt">' + GEAR +
+      '<span class="settings-label">Cài đặt</span></button><div class="settings-panel" hidden></div>');
+    eink.parentNode.insertBefore(wrap, eink);
+    var btn = wrap.firstChild, panel = wrap.lastChild;
+    var picks = ['.mus-toggle', '.snd-toggle:not(.mus-toggle)', '#view-toggle', '#install-btn', '#eink-toggle'];
+    for (var i = 0; i < picks.length; i++) {
+      var b = document.querySelector('.topbar ' + picks[i]);
+      if (b) panel.appendChild(b);
+    }
+    function show(on) { panel.hidden = !on; btn.setAttribute('aria-expanded', on ? 'true' : 'false'); }
+    Core.on(btn, function () { show(panel.hidden); });
+    /* a tap anywhere else, or Esc, closes it; taps inside keep it open so the learner sees the switch change */
+    document.addEventListener('click', function (e) { if (!panel.hidden && !wrap.contains(e.target)) show(false); }, false);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.keyCode === 27) show(false); }, false);
+  }
+
   /* ---------- page boot ---------- */
   document.addEventListener('DOMContentLoaded', function () {
     applyEink();
+    settingsMenu();
     /* a lesson needs a learner: without a name, go to the home page to enter one.
        (Pages shown inside a frame, like tools/fit.html, are left alone.) */
     var framed = false;

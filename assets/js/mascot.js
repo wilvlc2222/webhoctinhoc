@@ -266,7 +266,8 @@
     if (eink && !document.querySelector('.bip-avatar')) {
       var b = E('button', 'btn btn-small bip-avatar', '<span class="bip-mini"></span><span class="bip-label">Túi đồ</span>');
       b.setAttribute('data-bip', '1'); b.setAttribute('title', 'Tủ đồ của Bíp'); b.setAttribute('aria-label', 'Tủ đồ của Bíp'); b.type = 'button';
-      eink.parentNode.insertBefore(b, eink);
+      var at = document.querySelector('.topbar .settings') || eink;   /* Túi đồ stays in the bar, before the gear (core.js) */
+      at.parentNode.insertBefore(b, at);
       Core.on(b, Core.wardrobe);
     }
     var hero = document.querySelector('.hero');

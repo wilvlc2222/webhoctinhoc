@@ -6,7 +6,7 @@
 <title>Tin học vui – Lớp 4, Lớp 5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1116c">
+<link rel="stylesheet" href="assets/css/main.css?v=1116d">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <script src="assets/js/errbox.js?v=1114j"></script>
 <script src="assets/js/icons.js?v=1114j" onerror="__miss(this)"></script>
 <script src="assets/js/lessons.js?v=1114j" onerror="__miss(this)"></script>
-<script src="assets/js/core.js?v=1116c" onerror="__miss(this)"></script>
+<script src="assets/js/core.js?v=1116d" onerror="__miss(this)"></script>
 </head>
 <body>
 <header class="topbar">
@@ -72,11 +72,21 @@
     if (window.Core && Core.isStage) return Core.isStage();
     return !!(window.matchMedia && window.matchMedia('(min-width: 900px) and (orientation: landscape)').matches);
   }
+  /* the adventure map: 6 columns on the wide stage, 4 on a tablet held upright (600px or wider);
+     e-ink screens and phones get the plain list (0) */
+  function mapCols() {
+    if (isWide()) return 6;
+    if (Core.isEink && Core.isEink()) return 0;
+    return window.innerWidth >= 600 && window.innerHeight > window.innerWidth ? 4 : 0;
+  }
+  /* which layout the lessons were drawn for: turning the tablet or switching e-ink redraws them */
+  function layoutKind() { return isWide() ? 'wide' : mapCols() ? 'tall' : 'narrow'; }
   var shownGrade = null;
-  window.addEventListener('resize', function () {
+  function relayout() {
     var host = document.getElementById('lessons');
-    if (shownGrade && host.getAttribute('data-wide') !== (isWide() ? '1' : '0')) renderLessons(shownGrade);
-  });
+    if (shownGrade && host.getAttribute('data-layout') !== layoutKind()) renderLessons(shownGrade);
+  }
+  window.addEventListener('resize', relayout);
 
   function renderLessons(grade) {
     shownGrade = grade;
@@ -102,15 +112,15 @@
       }
     }
     var html = '', half = Math.ceil(cards.length / 2), view = getView();
-    if (isWide() && view === 'map') {
-      html = mapHTML(topics);
+    if (mapCols() && view === 'map') {
+      html = mapHTML(topics, mapCols());
     } else if (isWide()) {
       for (var r = 0; r < half; r++) html += '<div class="lesson-row">' + cards[r] + (cards[half + r] || '<span class="lesson-gap"></span>') + '</div>';
     } else {
       html = '<div class="lesson-flat">' + cards.join('') + '</div>';
     }
     host.innerHTML = html;
-    host.setAttribute('data-wide', isWide() ? '1' : '0');
+    host.setAttribute('data-layout', layoutKind());
     var lg = document.getElementById('topic-legend');
     if (lg) lg.innerHTML = legend;
     var tabs = document.querySelectorAll('[data-grade]');
@@ -122,11 +132,11 @@
     if (Core.refreshBip) Core.refreshBip();
   }
 
-  /* ---------- adventure map (wide stage only): the lessons along a winding road, Bíp at the next lesson to do ---------- */
+  /* ---------- adventure map (wide stage and upright tablets): the lessons along a winding road, Bíp at the next lesson to do ---------- */
   var VIEW_KEY = 'whth-view';
   function getView() { var v = 'map'; try { v = localStorage.getItem(VIEW_KEY) || 'map'; } catch (e) {} return v; }
-  function mapHTML(topics) {
-    var nodes = [], i, j, n, cols = 6, rowH = 204, pts = [], html = '', cur = -1;
+  function mapHTML(topics, cols) {
+    var nodes = [], i, j, n, rowH = 204, pts = [], html = '', cur = -1;
     for (i = 0; i < topics.length; i++) for (j = 0; j < topics[i].lessons.length; j++) nodes.push({ l: topics[i].lessons[j], tp: i + 1 });
     if (Core.currentName()) for (n = 0; n < nodes.length && cur < 0; n++) if (Core.countStars(nodes[n].l.id) < nodes[n].l.stars) cur = n;
     for (n = 0; n < nodes.length; n++) {
@@ -134,13 +144,13 @@
       if (r % 2) c = cols - 1 - c;
       var x = (c + 0.5) * 100, y = 46 + r * rowH;
       pts.push(x + ',' + y);
-      html += '<a class="map-node' + (n === cur ? ' is-current' : '') + '" href="' + l.href + '" title="' + topics[nodes[n].tp - 1].topic + '" style="left:' + (x / 6).toFixed(2) + '%;top:' + (y - 30) + 'px">' +
+      html += '<a class="map-node' + (n === cur ? ' is-current' : '') + '" href="' + l.href + '" title="' + topics[nodes[n].tp - 1].topic + '" style="left:' + (x / cols).toFixed(2) + '%;top:' + (y - 30) + 'px">' +
         (n === cur ? '<span class="map-bip" data-bip="1"><span class="bip-mini"></span></span>' : '') +
         '<span class="map-dot lesson-num tp-' + nodes[n].tp + '">' + l.n + '</span><span class="map-t">' + l.t + '</span>' +
         '<span class="stars map-stars" data-stars-for="' + l.id + '" data-stars-total="' + l.stars + '"></span></a>';
     }
     var H = Math.ceil(nodes.length / cols) * rowH;
-    return '<div class="lesson-map" style="height:' + H + 'px"><svg class="map-path" viewBox="0 0 600 ' + H + '" preserveAspectRatio="none" aria-hidden="true">' +
+    return '<div class="lesson-map" style="height:' + H + 'px"><svg class="map-path" viewBox="0 0 ' + cols * 100 + ' ' + H + '" preserveAspectRatio="none" aria-hidden="true">' +
       '<polyline class="map-road" points="' + pts.join(' ') + '"/><polyline class="map-dash" points="' + pts.join(' ') + '"/></svg>' + html + '</div>';
   }
 
@@ -166,29 +176,6 @@
     function close() { if (m.parentNode) document.body.removeChild(m); }
     Core.on(document.getElementById('boss-close'), close);
     Core.on(m, function (e) { if (e && e.target === m) close(); });
-  }
-
-  /* ---------- class goal: totals from the teacher's sheet (needs the "stats" action in tools/sheet-sync.gs) ---------- */
-  function classGoal() {
-    var el = document.getElementById('class-goal');
-    if (!el || !Core.sync || !Core.sync.on) return;
-    function paint(d) {
-      if (!d || !(d.learners > 0)) { el.innerHTML = ''; return; }
-      var goal = Math.max(100, Math.ceil((d.stars + 1) / 100) * 100);
-      el.innerHTML = '<span class="goal-head"><span>Cả lớp <small>(' + d.learners + ' bạn)</small></span>' +
-        '<span><b>' + d.stars + '</b> / ' + goal + ' sao</span></span>' +
-        '<span class="goal-bar" role="img" aria-label="Cả lớp có ' + d.stars + ' trên ' + goal + ' sao"><span style="width:' + Math.round(d.stars / goal * 100) + '%"></span></span>';
-    }
-    var cached = null;
-    try { cached = JSON.parse(localStorage.getItem('whth-class') || 'null'); } catch (e) {}
-    if (cached) paint(cached);
-    if (cached && new Date().getTime() - cached.at < 5 * 60 * 1000) return;
-    Core.sync.stats(function (err, res) {
-      if (err || !res) return;
-      var d = { learners: res.learners, stars: res.stars, at: new Date().getTime() };
-      try { localStorage.setItem('whth-class', JSON.stringify(d)); } catch (e) {}
-      paint(d);
-    });
   }
 
   /* ---------- who is learning: a name is needed to start, and each name has a 4-digit code ---------- */
@@ -282,6 +269,7 @@
       return;
     }
     var box = document.getElementById('who-box');
+    box.className = '';
     box.innerHTML = '<div id="code-ask"><form id="del-form" autocomplete="off"><label for="del-key">Xoá tên <b>' + esc(name) + '</b> khỏi máy này cần <b>mật khẩu của thầy cô</b>:</label>' +
       '<div class="who-row"><input class="input" id="del-key" type="password" placeholder="Mật khẩu giáo viên" aria-label="Mật khẩu giáo viên">' +
       '<button class="btn btn-primary" type="submit" id="del-go">Xoá tên</button></div></form></div>' +
@@ -309,9 +297,10 @@
 
   function renderNames() {
     var p = Core.profiles(), cur = p.current, box = document.getElementById('who-box');
+    box.className = cur ? 'who-in' : '';   /* main.css lays the learner card out in two columns on portrait tablets */
     if (cur) {
       /* layout, top to bottom: who (name + code) → what I have (stars, gems, badges) → play (Solo BOSS)
-         → the class together → saved or not → switch learner (least used, so last and quiet) */
+         → saved or not → switch learner (least used, so last and quiet) */
       var code = Core.codeOf(cur);
       box.innerHTML = '<div class="who-id">' +
           '<span class="who-avatar av-' + avatarHue(cur) + '" aria-hidden="true">' + esc(cur.charAt(0).toUpperCase()) + '</span>' +
@@ -323,7 +312,6 @@
             '<button class="who-stat" id="who-badges" type="button"><span class="who-stat-n">' + MEDAL_ICO + '<b>' + Core.badgeCount() + '</b></span><small>Huy hiệu ›</small></button>' : '') +
         '</div>' +
         (Core.gems ? '<button class="btn btn-boss who-boss" id="who-boss" type="button">' + (Core.swordsIcon || '') + 'Solo BOSS</button>' : '') +
-        '<div class="class-goal" id="class-goal"></div>' +
         '<p class="sync-state" data-sync-state></p>' +
         '<div class="who-foot"><button class="btn btn-small" id="who-out" type="button">Bạn khác vào học</button>' +
         '<button class="btn btn-small who-del" id="who-del" type="button">Xoá tên này</button></div>';
@@ -332,7 +320,6 @@
         Core.on(document.getElementById('who-badges'), Core.badges);
         Core.on(document.getElementById('who-boss'), bossMenu);
       }
-      classGoal();
       Core.on(document.getElementById('who-out'), function () { Core.logout(); refresh(); });
       Core.on(document.getElementById('who-del'), function () { teacherDelete(cur); });
       /* the sheet gave this learner another code (the first one was somebody else's): show it once, big */
@@ -435,6 +422,9 @@
       }
     }
     document.getElementById('gate-note').addEventListener('click', nudge, false);
+    /* core.js switches e-ink first (its listener is older), then the lessons follow */
+    var et = document.getElementById('eink-toggle');
+    if (et) et.addEventListener('click', relayout, false);
     Core.on(document.getElementById('view-toggle'), function () {
       try { localStorage.setItem(VIEW_KEY, getView() === 'map' ? 'list' : 'map'); } catch (e) {}
       renderLessons(shownGrade);
