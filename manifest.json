@@ -1,0 +1,17 @@
+{
+  "name": "Tin học vui – Lớp 4, Lớp 5",
+  "short_name": "Tin học vui",
+  "description": "Học Tin học lớp 4 và lớp 5 bằng cách chạm, xếp, thử và chơi.",
+  "lang": "vi",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fbf6ec",
+  "theme_color": "#1f6fd1",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

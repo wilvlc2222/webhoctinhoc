@@ -7,11 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/main.css?v=1116a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#1f6fd1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Tin học vui">
 <!-- ?v=... makes readers that keep old files (Kindle) fetch the new ones; change it when these files change -->
 <script src="assets/js/errbox.js?v=1114j"></script>
 <script src="assets/js/icons.js?v=1114j" onerror="__miss(this)"></script>
 <script src="assets/js/lessons.js?v=1114j" onerror="__miss(this)"></script>
-<script src="assets/js/core.js?v=1114k" onerror="__miss(this)"></script>
+<script src="assets/js/core.js?v=1116b" onerror="__miss(this)"></script>
 </head>
 <body>
 <header class="topbar">
@@ -21,6 +28,7 @@
       <span class="guide-arrow" aria-hidden="true">➜</span>
       <a class="btn btn-small btn-primary btn-guide" href="huongdan.html">Hướng dẫn</a>
       <button class="btn btn-small" id="view-toggle" type="button">Xem danh sách</button>
+      <button class="btn btn-small" id="install-btn" type="button" style="display:none">Cài ứng dụng</button>
       <button class="btn btn-small" id="eink-toggle" aria-pressed="false">Màn hình mực</button>
     </div>
   </div>

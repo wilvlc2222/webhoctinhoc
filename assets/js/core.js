@@ -553,4 +553,27 @@
       }
     }
   })();
+
+  /* ---------- install as an app (shortcut on the home screen) ----------
+     Chrome / Edge (Galaxy Tab, PC): the browser hands us an install prompt; the button opens it.
+     iPad Safari has no prompt: the button tells how to do it by hand. Kindle: no install, button stays hidden. */
+  (function () {
+    var btn = document.getElementById('install-btn'), deferred = null;
+    if (!btn) return;
+    var standalone = navigator.standalone === true ||
+      (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+    if (standalone) return;                       /* already running as the installed app */
+    var isIos = typeof navigator.standalone === 'boolean';   /* only iOS / iPadOS Safari has this field */
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      deferred = e;
+      btn.style.display = '';
+    }, false);
+    window.addEventListener('appinstalled', function () { btn.style.display = 'none'; deferred = null; }, false);
+    if (isIos) btn.style.display = '';
+    btn.addEventListener('click', function () {
+      if (deferred) { deferred.prompt(); deferred = null; btn.style.display = 'none'; return; }
+      if (isIos) window.alert('Để cài lên iPad: chạm nút Chia sẻ (ô vuông có mũi tên lên) trong Safari, rồi chọn "Thêm vào Màn hình chính".');
+    }, false);
+  })();
 })();
