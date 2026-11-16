@@ -554,6 +554,37 @@
     }
   })();
 
+  /* ---------- popups (.bip-modal): the page behind must not scroll ----------
+     Every popup is a .bip-modal appended to <body> (index.html, game.js, mascot.js). While one is there,
+     <html> gets .has-modal (main.css turns scrolling off). Older iPads ignore overflow:hidden on the page,
+     so a swipe that is not inside a scrollable popup card is cancelled too. */
+  (function () {
+    function sync() {
+      var open = !!document.querySelector('.bip-modal'), c = document.documentElement.className;
+      var has = /(^|\s)has-modal(\s|$)/.test(c);
+      if (open && !has) document.documentElement.className = c + ' has-modal';
+      if (!open && has) document.documentElement.className = c.replace(/(^|\s)has-modal(?=\s|$)/g, '');
+    }
+    function start() {
+      if (!window.MutationObserver || !document.body) return;
+      new MutationObserver(sync).observe(document.body, { childList: true });
+      sync();
+    }
+    if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, false);
+    function onMove(e) {
+      var t = e.target, inModal = false;
+      while (t && t !== document) {
+        var cls = typeof t.className === 'string' ? t.className : '';
+        if (/(^|\s)bip-card(\s|$)/.test(cls) && t.scrollHeight > t.clientHeight + 1) return;   /* the card itself scrolls */
+        if (/(^|\s)bip-modal(\s|$)/.test(cls)) { inModal = true; break; }
+        t = t.parentNode;
+      }
+      if (inModal && e.cancelable) e.preventDefault();
+    }
+    try { document.addEventListener('touchmove', onMove, { passive: false }); }
+    catch (err) { document.addEventListener('touchmove', onMove, false); }
+  })();
+
   /* ---------- install as an app (shortcut on the home screen) ----------
      Chrome / Edge (Galaxy Tab, PC): the browser hands us an install prompt; the button opens it.
      iPad Safari has no prompt: the button tells how to do it by hand. Kindle: no install, button stays hidden. */

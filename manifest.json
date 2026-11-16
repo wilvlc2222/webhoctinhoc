@@ -1,7 +1,7 @@
 {
   "name": "Tin học vui – Lớp 4, Lớp 5",
   "short_name": "Tin học vui",
-  "description": "Học Tin học lớp 4 và lớp 5 bằng cách chạm, xếp, thử và chơi.",
+  "description": "Vừa học vừa chơi cùng Bíp: chạm, xếp, thử và chơi.",
   "lang": "vi",
   "start_url": "./index.html",
   "scope": "./",

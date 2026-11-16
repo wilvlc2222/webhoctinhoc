@@ -1397,6 +1397,10 @@ html.eink .step-dot.active { transform: none; }
 @keyframes orbit { 0%, 100% { transform: translate(-30px, 0) scale(0.8); } 25% { transform: translate(0, 7px) scale(1.15); } 50% { transform: translate(30px, 0) scale(0.8); } 75% { transform: translate(0, -7px) scale(0.6); } }
 
 /* modals */
+/* while a popup is open the page behind must not scroll (core.js puts .has-modal on <html>) */
+html.has-modal, html.has-modal body { overflow: hidden !important; }
+html.has-modal body > main { overflow: hidden !important; }
+.bip-modal, .bip-card { overscroll-behavior: contain; }
 .bip-modal { position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
   padding: 12px; background: rgba(29, 36, 51, 0.45); }
 .bip-card { position: relative; max-width: 100%; max-height: 100%; overflow: auto; padding: 14px 20px 16px; border-radius: 20px;
