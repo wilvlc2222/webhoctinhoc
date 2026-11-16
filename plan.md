@@ -77,3 +77,12 @@ Phạm vi master đã duyệt: **chỉ đổi lời dẫn, ví dụ, tên ngư�
   - Nhận tiền qua đâu (chuyển khoản / mã QR, MoMo, PayPal, Stripe…) và ai là người trả: phụ huynh hay thầy cô, không phải em học sinh.
   - Trang đang là web tĩnh trên GitHub Pages, không tự biết ai đã trả tiền. Cách đơn giản nhất: master nhận tiền rồi phát mã mở khoá, hoặc bật cờ VIP cho học sinh trong Google Sheet.
   - Mở khoá có hạn dùng không (theo năm học, hay mãi mãi).
+
+## 8. Cải thiện UI/UX (master giao 2026-11-16; làm ở phiên mới, chưa sửa dòng code nào)
+
+Master chọn cả bốn việc. Em mới rà trang chủ, chưa làm:
+
+- [ ] **Trang chủ màn dọc: đưa bài học lên gần.** Ở 800×1280 bài 1 nằm tận y≈950. Hướng làm: trong `@media (max-width: 899px), (orientation: portrait)` cho `.home-cols` thành flex cột, `.home-side { display: contents }`, dùng `order` để `#topic-legend` và `.home-note` xuống dưới `.home-main`; khi đã có tên thì giấu `.hero p` (màn ngang đã làm vậy, `main.css` ~dòng 1745); gom ô "Ai đang học" gọn lại (`index.html` ~dòng 313–331, `.who-stats`, `.who-foot`).
+- [ ] **Bản đồ bài học ở màn dọc.** `mapHTML()` trong `index.html` đang cứng 6 cột, viewBox 600, chỉ chạy khi `isWide()`. Hướng làm: thêm tham số số cột (4 cột cho máy tính bảng cầm dọc, rộng ≥600px, không phải màn hình mực), `left = x / cols %`, viewBox `cols*100`; `data-wide` đổi thành tên kiểu bố cục để xoay máy thì vẽ lại; cho hiện `#view-toggle` ở màn dọc (`main.css` dòng 1718, 1744). Màn hình mực giữ danh sách.
+- [ ] **Gọn thanh trên.** Gom nút ít dùng (nhạc, âm thanh, Màn hình mực, Cài ứng dụng, Xem danh sách) vào một nút bánh răng "Cài đặt"; giữ Hướng dẫn và Túi đồ ở ngoài. Nút nhạc / âm thanh do `sound.js` gắn vào, Túi đồ do `mascot.js`.
+- [ ] **Rà màn bài học và trận Solo BOSS** ở ngang và dọc, báo danh sách chỗ cần sửa trước khi làm.
