@@ -331,3 +331,4 @@
 - `thuthach.html` + `main.css`, Solo BOSS màn dọc / màn hẹp từ 600px: khối Bọ Lỗi thành một dải (bọ 104px bên trái; tên, chủ đề, HP của BOSS, HP của em, điểm, đồng hồ bên phải). Thêm class `boss-stat-hp`, `boss-stat-score`, `boss-stat-me`. Điện thoại dưới 600px giữ như cũ.
 - Mọi trang đổi `main.css?v=1116d` → `?v=1116e`.
 - Kiểm tra trên máy tính: `tools/fit.html?pages=l4&solve=1` → `ALL OK (17 pages)`; 800×1280 bài 13 bước 4 từ 2350px còn 1280px, bài 13–16 mọi bước không tràn ngang, không cao quá 1280px; Solo BOSS 800×1280 và 1024×1366 khối trên cao 193px, câu hỏi ở y≈313; 1280×720 Solo BOSS không đổi; bản đồ 800×1280 với tên thử 6 bài đủ sao: đường cam tới bài 7 (chỗ Bíp). Chưa thử máy thật.
+- Gộp vào `main` (fast-forward) và push cùng ngày.
