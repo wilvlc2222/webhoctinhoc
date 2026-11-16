@@ -293,3 +293,11 @@
 - `mascot.js`: nút Bíp có thêm chữ "Túi đồ"; trang bài học (`.lesson-top`) giấu chữ, chỉ giữ icon.
 - Mọi trang đổi `core.js` / `main.css` `?v=1114j` → `?v=1114k`.
 - Kiểm tra ở 1024px: đúng thứ tự, không tràn ngang, animation `guide-nudge` chạy.
+
+## 2026-11-16 – Màn hình dọc: Galaxy Tab A8, iPad, Kindle PPW5
+
+- Master yêu cầu: tối ưu hiển thị khi cầm máy dọc.
+- `main.css`: màn dọc (hoặc hẹp hơn 900px) thì tiêu đề bài có hàng riêng, sao + tên + nút xuống hàng hai; trước đây 13 sao ép tiêu đề thành mỗi dòng một chữ (đầu trang cao tới 258px, giờ 110px). Máy tính bảng cầm dọc (không phải màn hình mực): trang cao tối thiểu một màn hình, thanh chuyển bước nằm sát đáy.
+- Mọi trang đổi `main.css?v=1114k` → `?v=1116a`.
+- Kiểm tra: quét mọi bước Lớp 4, trang chủ, hướng dẫn, Solo BOSS ở 744×1133 và 1024×1366: không tràn ngang; 758×1024 màn hình mực: tiêu đề một hàng; 1280×720 màn ngang không đổi. Chưa quét Lớp 5, chưa thử máy thật.
+- Gộp vào `main` (fast-forward) và push cùng ngày.
