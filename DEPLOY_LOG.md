@@ -321,4 +321,4 @@
 - Nút bánh răng "Cài đặt" (`core.js` `settingsMenu()`): nhạc nền, âm thanh, xem danh sách/bản đồ, cài ứng dụng, màn hình mực vào một bảng thả xuống; Hướng dẫn, Túi đồ, sao bài học ở ngoài. Nút nhạc / âm thanh có chữ "bật/tắt" trong bảng (`sound.js`), Túi đồ đứng trước bánh răng (`mascot.js`). Chạm ngoài hoặc Esc thì đóng.
 - Mọi trang đổi `main.css` / `core.js` → `?v=1116d`.
 - Kiểm tra trên máy tính: `tools/fit.html?pages=l4&solve=1` → `ALL OK (17 pages)`; 800×1280 không tràn ngang ở mọi bước Lớp 4 và trang Solo BOSS; bảng Cài đặt đủ nút ở trang chủ và trang bài học.
-- Chưa commit, chưa đưa lên mạng.
+- Gộp vào `main` (fast-forward) và push cùng ngày.

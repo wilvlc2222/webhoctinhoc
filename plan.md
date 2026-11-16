@@ -80,7 +80,7 @@ Phạm vi master đã duyệt: **chỉ đổi lời dẫn, ví dụ, tên ngư�
 
 ## 8. Cải thiện UI/UX (master giao 2026-11-16)
 
-Ba việc đầu đã làm 2026-11-16 (ghi trong `DEPLOY_LOG.md`), chưa commit, chưa đưa lên mạng:
+Ba việc đầu đã làm và đưa lên mạng 2026-11-16 (ghi trong `DEPLOY_LOG.md`):
 
 - [x] Trang chủ màn dọc: bài học lên ngay sau ô "Ai đang học" (800×1280: bài 1 ở y≈468, trước y≈979). Bỏ tổng sao cả lớp, nút Solo BOSS vừa chữ (master dặn thêm).
 - [x] Bản đồ bài học 4 cột cho máy tính bảng cầm dọc (`mapCols()` trong `index.html`); màn hình mực và điện thoại giữ danh sách.
