@@ -85,9 +85,8 @@ Ba việc đầu đã làm và đưa lên mạng 2026-11-16 (ghi trong `DEPLOY_L
 - [x] Trang chủ màn dọc: bài học lên ngay sau ô "Ai đang học" (800×1280: bài 1 ở y≈468, trước y≈979). Bỏ tổng sao cả lớp, nút Solo BOSS vừa chữ (master dặn thêm).
 - [x] Bản đồ bài học 4 cột cho máy tính bảng cầm dọc (`mapCols()` trong `index.html`); màn hình mực và điện thoại giữ danh sách.
 - [x] Nút bánh răng "Cài đặt" gom nhạc, âm thanh, bản đồ/danh sách, cài ứng dụng, màn hình mực (`core.js` `settingsMenu()`).
-- [ ] **Rà màn bài học và Solo BOSS** — đã rà, chờ master chọn chỗ nào sửa:
-  - Ngang 1280×720: `tools/fit.html?pages=l4&solve=1` → `ALL OK (17 pages)`. Không thấy chỗ cần sửa.
-  - Dọc 800×1280: không bước nào của Lớp 4 tràn ngang. Thanh trên trang bài học cao 110px (hai hàng: tên bài; sao, tên học sinh, Túi đồ, Cài đặt).
-  - Bài 13 bước 4: hai cột xếp chồng nên dài 2276px, phải cuộn nhiều. Hướng sửa: ở màn dọc ≥600px giữ hai cột hoặc thu gọn cột bên.
-  - Solo BOSS màn dọc: khối Bọ Lỗi + thanh máu chiếm 386px trên cùng, câu hỏi bắt đầu từ y≈460. Hướng sửa: ở màn dọc xếp Bọ Lỗi nhỏ bên trái, thanh máu bên phải, một hàng ~120px. Chưa đo lúc đang đấu (cần tên thử `__` đủ sao, dùng `tools/bossplay.js`).
-  - Khung ngang, trang chủ ở chế độ bản đồ: 17 bài thành 3 hàng × 204px nên phần bài học phải cuộn trong khung. Hướng sửa (nếu master muốn): hạ `rowH` hoặc thu nhỏ nút bản đồ.
+- [x] **Rà màn bài học và Solo BOSS** — xong 2026-11-16 (chi tiết trong `DEPLOY_LOG.md`):
+  - Bài 13 bước 4 (và mọi khung Scratch ở màn dọc 600–899px): bảng khối + vùng code chung một hàng cao 404px, sân khấu + ô nhân vật một hàng bên dưới. Trang 800×1280 từ 2350px còn 1280px; bài 13–16 không bước nào cao quá một màn hình.
+  - Solo BOSS màn dọc (≥600px): Bọ Lỗi nhỏ bên trái, tên, HP, điểm, đồng hồ bên phải; khối cao 193px (trước 386px), câu hỏi bắt đầu ở y≈313 (trước y≈460).
+  - Bản đồ bài học: đoạn đường Bíp đã đi (từ bài 1 tới chỗ Bíp đứng) tô màu cam đậm (`.map-walked`); học xong hết thì tô cả đường (master dặn thêm).
+- [ ] **Master xem thử trên máy thật** 3 chỗ trên. Còn chưa làm (nếu master muốn): khung ngang, trang chủ ở chế độ bản đồ, 17 bài thành 3 hàng × 204px nên phải cuộn trong khung; hướng sửa là hạ `rowH` hoặc thu nhỏ nút bản đồ.

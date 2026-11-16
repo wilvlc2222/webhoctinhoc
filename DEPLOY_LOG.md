@@ -322,3 +322,12 @@
 - Mọi trang đổi `main.css` / `core.js` → `?v=1116d`.
 - Kiểm tra trên máy tính: `tools/fit.html?pages=l4&solve=1` → `ALL OK (17 pages)`; 800×1280 không tràn ngang ở mọi bước Lớp 4 và trang Solo BOSS; bảng Cài đặt đủ nút ở trang chủ và trang bài học.
 - Gộp vào `main` (fast-forward) và push cùng ngày.
+
+## 2026-11-16 – Bản đồ tô đường đã đi, Scratch và Solo BOSS gọn ở màn dọc
+
+- Master yêu cầu: làm tiếp hai chỗ sửa còn lại của lần rà UI/UX; trên bản đồ, đoạn đường Bíp đã học xong tô đậm.
+- `index.html` `mapHTML()`: thêm `polyline.map-walked` từ bài 1 tới bài Bíp đang đứng (học xong hết thì cả đường; chưa có tên thì không có). `main.css`: màu `#e0a43c`, màn hình mực `#555`.
+- `main.css`, khung Scratch ở 600–899px: bảng khối + vùng code một hàng cao 404px (code cuộn bên trong như màn ngang), sân khấu và ô nhân vật một hàng bên dưới. Trước đây ba phần xếp chồng, vùng code dài 1179px.
+- `thuthach.html` + `main.css`, Solo BOSS màn dọc / màn hẹp từ 600px: khối Bọ Lỗi thành một dải (bọ 104px bên trái; tên, chủ đề, HP của BOSS, HP của em, điểm, đồng hồ bên phải). Thêm class `boss-stat-hp`, `boss-stat-score`, `boss-stat-me`. Điện thoại dưới 600px giữ như cũ.
+- Mọi trang đổi `main.css?v=1116d` → `?v=1116e`.
+- Kiểm tra trên máy tính: `tools/fit.html?pages=l4&solve=1` → `ALL OK (17 pages)`; 800×1280 bài 13 bước 4 từ 2350px còn 1280px, bài 13–16 mọi bước không tràn ngang, không cao quá 1280px; Solo BOSS 800×1280 và 1024×1366 khối trên cao 193px, câu hỏi ở y≈313; 1280×720 Solo BOSS không đổi; bản đồ 800×1280 với tên thử 6 bài đủ sao: đường cam tới bài 7 (chỗ Bíp). Chưa thử máy thật.

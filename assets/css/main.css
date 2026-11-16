@@ -1184,6 +1184,17 @@ html.eink .sc-inner { border-left: 3px solid #000; }
   .sc-palwrap { flex-basis: auto; height: 240px; }
   .sc-codewrap { min-height: 220px; }
 }
+/* upright tablets: blocks and code side by side at the wide height (the code scrolls inside, as on the
+   wide stage), the stage on its own row below; stacking all three made bài 13 bước 4 2276px tall */
+@media (min-width: 600px) and (max-width: 899px) {
+  .sc-body { flex-direction: row; flex-wrap: wrap; }
+  .sc-palwrap { flex: 0 0 240px; height: 404px; }
+  .sc-codewrap { flex: 1 1 0; height: 404px; }
+  .sc-right { flex: 0 0 100%; border-left: 0; border-top: 1px solid #c5d6ee; display: grid; grid-template-columns: auto 1fr; align-content: start; }
+  .sc-stagebar, .sc-stage, .sc-keypad { grid-column: 1; }
+  .sc-spritepane { grid-column: 2; grid-row: 1 / span 3; border-top: 0; border-left: 1px solid #e9ecef; margin-top: 0; }
+  .sc.is-full .sc-right { display: flex; }
+}
 
 .cols > .col-tasks { flex: 0 0 270px; min-width: 0; }
 @media (max-width: 899px) { .cols > .col-tasks { flex-basis: auto; } }
@@ -1729,6 +1740,7 @@ html.eink .boss-list li.is-locked .boss-name, html.eink .boss-list li.is-locked 
 .map-path { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
 .map-path polyline { fill: none; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .map-road { stroke: #e9dfc8; stroke-width: 22; }
+.map-walked { stroke: #e0a43c; stroke-width: 22; }
 .map-dash { stroke: #fff; stroke-width: 3; stroke-dasharray: 2 12; }
 .map-node { position: absolute; width: 138px; margin-left: -69px; display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: var(--ink); }
 .map-dot { width: 60px; height: 60px; border: 4px solid #fff; border-radius: 50%; font-size: 22px; box-shadow: 0 4px 0 rgba(29, 36, 51, 0.25); transition: transform 0.15s; }
@@ -1743,6 +1755,7 @@ html.eink .boss-list li.is-locked .boss-name, html.eink .boss-list li.is-locked 
 .map-bip { position: absolute; left: 50%; top: -14px; margin-left: 20px; z-index: 2; pointer-events: none; }
 .map-bip .bip-mini { width: 46px; height: 52px; }
 html.eink .map-road { stroke: #ccc; }
+html.eink .map-walked { stroke: #555; }
 html.eink .map-dot { border-color: #000; box-shadow: none; }
 html.eink .map-node.is-current .map-dot { border-width: 6px; box-shadow: none; }
 html.eink .map-t { background: #fff; }
@@ -1863,6 +1876,22 @@ html.eink .boss-reward { color: #000; }
   .boss-cols { display: flex; gap: 20px; align-items: flex-start; padding-top: 14px; }
   .boss-side { flex: 0 0 260px; margin: 0; }
   .boss-main { flex: 1 1 0; min-width: 0; }
+}
+/* upright tablets (and narrow screens 600px or wider): one compact band, the bug small on the left,
+   name, topic, HP bars, score and clock on the right, so the question starts near the top (was y≈460) */
+@media (min-width: 600px) and (max-width: 899px), (min-width: 600px) and (orientation: portrait) {
+  .boss-side { display: grid; grid-template-columns: 104px max-content 1fr 1fr; column-gap: 14px; align-items: center; text-align: left; padding: 10px 16px; }
+  .boss-bug { grid-column: 1; grid-row: 1 / span 4; }
+  .boss-bug svg { width: 104px; height: 96px; }
+  .boss-title { grid-column: 2; grid-row: 1; font-size: 24px; }
+  .boss-vn { grid-column: 3 / span 2; grid-row: 1; }
+  .boss-topic { grid-column: 2 / span 3; grid-row: 2; margin: 0 0 2px; }
+  .boss-stat { margin-top: 4px; }
+  .boss-stat-hp { grid-column: 2 / span 2; grid-row: 3; }
+  .boss-stat-me { grid-column: 4; grid-row: 3; }
+  .boss-stat-score { grid-column: 2 / span 2; grid-row: 4; }
+  .boss-time { grid-column: 4; grid-row: 4; justify-content: flex-start; }
+  .boss-hp { justify-content: flex-start; }
 }
 .hero { overflow: hidden; }
 /* floating labels on the feedback line: combo and gem (game.js) */

@@ -6,7 +6,7 @@
 <title>Tin học vui – Lớp 4, Lớp 5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1116d">
+<link rel="stylesheet" href="assets/css/main.css?v=1116e">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -150,8 +150,12 @@
         '<span class="stars map-stars" data-stars-for="' + l.id + '" data-stars-total="' + l.stars + '"></span></a>';
     }
     var H = Math.ceil(nodes.length / cols) * rowH;
+    /* the stretch Bíp has already walked: from lesson 1 to where Bíp stands now (the whole road once every lesson is done) */
+    var walked = !Core.currentName() ? [] : cur < 0 ? pts : pts.slice(0, cur + 1);
     return '<div class="lesson-map" style="height:' + H + 'px"><svg class="map-path" viewBox="0 0 ' + cols * 100 + ' ' + H + '" preserveAspectRatio="none" aria-hidden="true">' +
-      '<polyline class="map-road" points="' + pts.join(' ') + '"/><polyline class="map-dash" points="' + pts.join(' ') + '"/></svg>' + html + '</div>';
+      '<polyline class="map-road" points="' + pts.join(' ') + '"/>' +
+      (walked.length > 1 ? '<polyline class="map-walked" points="' + walked.join(' ') + '"/>' : '') +
+      '<polyline class="map-dash" points="' + pts.join(' ') + '"/></svg>' + html + '</div>';
   }
 
   /* ---------- boss challenges: one per topic (thuthach.html) ---------- */
