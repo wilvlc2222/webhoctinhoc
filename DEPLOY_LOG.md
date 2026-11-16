@@ -301,3 +301,13 @@
 - Mọi trang đổi `main.css?v=1114k` → `?v=1116a`.
 - Kiểm tra: quét mọi bước Lớp 4, trang chủ, hướng dẫn, Solo BOSS ở 744×1133 và 1024×1366: không tràn ngang; 758×1024 màn hình mực: tiêu đề một hàng; 1280×720 màn ngang không đổi. Chưa quét Lớp 5, chưa thử máy thật.
 - Gộp vào `main` (fast-forward) và push cùng ngày.
+
+## 2026-11-16 – Cài như ứng dụng, popup khoá cuộn nền, lời chào mới
+
+- Master yêu cầu: cài được và có biểu tượng ngoài màn hình chính; popup Solo BOSS mở mà vuốt vẫn cuộn trang phía sau; lời chào không ghi cứng "Tin học lớp 4 và lớp 5" vì sau này có nhiều môn, nhiều trình độ.
+- `manifest.json`, `assets/icons/` (Bíp trên nền xanh, vẽ bằng `tools/make-icons.ps1`), thẻ manifest / icon / apple-touch ở mọi trang. Nút "Cài ứng dụng" ở trang chủ (`core.js`): Chrome / Edge mở hộp cài; iPad hiện lời chỉ "Thêm vào Màn hình chính"; Kindle ẩn nút. Chưa có service worker, cài xong vẫn cần mạng.
+- `core.js` gắn `has-modal` lên `<html>` khi có `.bip-modal`, `main.css` tắt cuộn trang phía sau; vuốt ngoài thẻ popup bị huỷ (iPad đời cũ).
+- `index.html`: lời chào mới "Cùng Bíp vừa học vừa chơi bằng cách chạm, xếp, thử nha. Em chọn lớp rồi chọn bài để bắt đầu."
+- Mọi trang đổi `main.css` / `core.js` → `?v=1116c`.
+- Kiểm tra trên máy tính: manifest và icon tải được, nút cài ẩn đúng lúc; 800×1280 và 1280×720 mở Solo BOSS thì trang khoá cuộn, đóng thì mở lại; không lỗi console. Chưa bấm cài thật và chưa vuốt thật trên Tab A8 / iPad.
+- Gộp vào `main` (fast-forward) và push cùng ngày.
