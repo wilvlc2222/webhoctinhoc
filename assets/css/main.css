@@ -395,7 +395,9 @@ html.eink .light span[class^="on-"] { background: #000; color: #fff; }
 @media (min-width: 900px) and (orientation: landscape) {
   .lesson-title h1 { font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
-@media (max-width: 680px) {
+/* narrow or portrait (Galaxy Tab A8, iPads, Kindle PPW5 held upright): the title gets its own row,
+   stars + learner + buttons go to a second row, so 13 stars never squeeze the title to one word per line */
+@media (max-width: 899px), (orientation: portrait) {
   .lesson-top .wrap { flex-wrap: wrap; }
   .lesson-title { flex-basis: calc(100% - 60px); }
   .lesson-top .topbar-right { flex: 1 1 100%; }
@@ -528,6 +530,15 @@ html.eink .quiz-pip.active { background: #000; color: #fff; }
   html:not(.eink) body > header { flex: none; }
   html:not(.eink) body > main { flex: 1 1 auto; min-height: 0; overflow-y: auto; width: 100%; }
   html:not(.eink) body > .step-nav { flex: none; position: static; }
+}
+
+/* ===== Portrait tablets (Galaxy Tab A8 800x1280, iPads 744-1032 wide): normal scrolling page,
+   but the page is at least one screen tall, so the step nav sits on the bottom edge
+   instead of floating in the middle under a short step. (E-ink keeps plain block flow, below.) */
+@media (orientation: portrait) and (min-width: 600px) {
+  html:not(.eink) body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+  html:not(.eink) body > header, html:not(.eink) body > .step-nav, html:not(.eink) body > footer { flex: none; }
+  html:not(.eink) body > main { flex: 1 0 auto; width: 100%; }
 }
 
 /* E-ink (Kindle Paperwhite, etc.): ALWAYS natural document flow, no transforms, no fixed stage */
