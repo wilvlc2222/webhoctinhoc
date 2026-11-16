@@ -67,7 +67,7 @@ Phạm vi master đã duyệt: **chỉ đổi lời dẫn, ví dụ, tên ngư�
 - Ước lượng: lớp 4 khoảng 80 lượt gọi, 60–80% một khung 5 tiếng nếu chia 4–5 phiên ngắn; lớp 5 gấp đôi.
 - Mỗi lần đổi tệp nhớ đổi số `?v=` ở mọi trang (xem `DEPLOY_LOG.md` 2026-11-13).
 
-## 7. Cửa hàng VIP để tiêu kim cương (master giao 2026-11-16, chưa làm)
+## 7. Cửa hàng VIP để tiêu kim cương (master giao 2026-11-16; để sau, hoàn thiện chương trình trước)
 
 - [ ] **Xây cửa hàng VIP**: nơi em học sinh tiêu kim cương đã kiếm được.
 - [ ] **Hai cấp độ donate, trả bằng tiền thật** (master chốt 2026-11-16):
