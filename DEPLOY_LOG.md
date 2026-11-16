@@ -332,3 +332,16 @@
 - Mọi trang đổi `main.css?v=1116d` → `?v=1116e`.
 - Kiểm tra trên máy tính: `tools/fit.html?pages=l4&solve=1` → `ALL OK (17 pages)`; 800×1280 bài 13 bước 4 từ 2350px còn 1280px, bài 13–16 mọi bước không tràn ngang, không cao quá 1280px; Solo BOSS 800×1280 và 1024×1366 khối trên cao 193px, câu hỏi ở y≈313; 1280×720 Solo BOSS không đổi; bản đồ 800×1280 với tên thử 6 bài đủ sao: đường cam tới bài 7 (chỗ Bíp). Chưa thử máy thật.
 - Gộp vào `main` (fast-forward) và push cùng ngày.
+
+## 2026-11-16 – Rà UI/UX toàn bộ bằng máy quét, sửa chỗ tràn trên điện thoại, nút nhỏ, phím Esc
+
+- Master yêu cầu: rà lại UI/UX, đồ cho trẻ em phải không lỗi.
+- Công cụ mới `tools/uiscan.js` (cách dùng ở đầu tệp): quét 39 trang × 4 cỡ màn hình (1280×720, 800×1280, 375×667, 1024×768), từng bước. Lần đầu: 0 lỗi script, 0 ảnh hỏng, 0 chữ bị cắt; khung 1280×720 đạt cả 35 bài.
+- Tràn ngang trên điện thoại (375px), đã sửa: lớp 4 bài 2 (trò ngón tay: hai bàn tay xếp chồng dưới 520px, `main.css`), lớp 4 bài 14 (sơ đồ màn hình Scratch: cột co được, `minmax`), lớp 5 bài 1 (mê cung: ô 23px và xếp dọc dưới 520px, `--mz`), lớp 5 bài 4 (hàng sao ở đầu bài xuống dòng được), lớp 5 bài 5 (ba hình trong sách co được).
+- Nút quá nhỏ cho ngón tay (chỉ trên máy cảm ứng, `@media (pointer: coarse)` cuối `main.css`): nút ▾ và × trong khối Scratch, nút Quay lại của trình duyệt giả, nút Tìm của File Explorer, ô màu và nét vẽ của Paint, thanh tua video. Hình không đổi, chỉ vùng chạm rộng ra (lớp `::after` vô hình), không đè lên nút bên cạnh.
+- `core.js`: phím Esc trên máy tính đóng popup trên cùng bằng nút "Đóng ✕" / "Để sau" của nó (Tủ đồ, Solo BOSS, huy hiệu, lên cấp); popup không có nút đóng thì giữ nguyên.
+- Soát chữ lớp 4 tìm từ miền Bắc còn sót (bố, hỏng, thế nào, nhé…): không còn (chỉ gặp "rô-bốt", "ngôn ngữ", "ngôi sao").
+- Không sửa (cố ý): nút và chữ nhỏ bên trong phần mềm giả (Scratch, PowerPoint, Paint, File Explorer) vì giống phần mềm thật trong SGK; trên 1024×768 cả khung 1280×720 thu nhỏ 0,8 nên mọi thứ nhỏ theo.
+- Mọi trang đổi `main.css?v=1116e` → `?v=1116f`, `core.js?v=1116d` → `?v=1116e`.
+- Kiểm tra trên máy tính: `tools/fit.html?pages=all&solve=1` → `ALL OK (35 pages)`; quét lại 8 trang ở 375×667, 360×640, 800×1280: không còn tràn ngang; `tools/bossplay.js?g=4`: 6 chủ đề thắng/thua đúng, không lỗi; trang chủ 800×1280: Cài đặt mở/đóng (Esc, chạm ngoài), Tủ đồ và Solo BOSS đóng bằng Esc. Chưa thử trên máy thật.
+- Chưa commit.

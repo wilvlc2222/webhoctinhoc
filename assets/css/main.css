@@ -401,6 +401,7 @@ html.eink .light span[class^="on-"] { background: #000; color: #fff; }
   .lesson-top .wrap { flex-wrap: wrap; }
   .lesson-title { flex-basis: calc(100% - 60px); }
   .lesson-top .topbar-right { flex: 1 1 100%; }
+  .lesson-top .topbar-right .stars { flex-wrap: wrap; }
 }
 
 /* step heading: phase badge + title on one line */
@@ -634,7 +635,8 @@ html.eink .kbd-dot { background: #000; }
 .fg-hand { flex: 1 1 0; }
 .fg-hand-title { font-weight: 800; color: var(--muted); font-size: 15px; margin-bottom: 4px; text-align: center; }
 .fg-row { display: flex; gap: 6px; }
-.fg-btn { flex: 1 1 0; padding: 6px 4px; color: #fff; border-color: rgba(0,0,0,0.2); border-radius: 12px; font-size: 15px; }
+@media (max-width: 520px) { .fg-hands { flex-direction: column; gap: 10px; } }
+.fg-btn { flex: 1 1 0; min-width: 0; padding: 6px 4px; color: #fff; border-color: rgba(0,0,0,0.2); border-radius: 12px; font-size: 15px; }
 .fg-btn.is-wrong { animation: shake 0.4s; }
 html.eink .fg-btn { background: #fff; color: #000; border-color: #000; }
 
@@ -1933,3 +1935,13 @@ html.eink .tc.bronze { background: #fff; outline: 2px solid #000; outline-offset
 #new-code { flex: 0 1 96px; }
 #add-name .who-row { margin-bottom: 8px; }
 #who-fb .btn { margin-top: 4px; }
+
+/* fingers (tablets): the tiny controls inside the software look-alikes keep their real look,
+   but get a bigger invisible area to tap, so a child does not have to hit a 16px dot */
+@media (pointer: coarse) {
+  .sc-pick, .sc-unnest, .br-btn, .xp-search-go, .pt-cell, .pt-size, .pl-seg { position: relative; }
+  .sc-pick::after, .sc-unnest::after, .br-btn::after, .xp-search-go::after { content: ""; position: absolute; inset: -7px; }
+  .pt-cell::after { content: ""; position: absolute; inset: -3px; }
+  .pt-size::after { content: ""; position: absolute; inset: -2px -4px; }
+  .pl-seg::after { content: ""; position: absolute; left: 0; right: 0; top: -10px; bottom: -4px; }
+}

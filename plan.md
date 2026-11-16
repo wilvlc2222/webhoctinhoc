@@ -89,4 +89,5 @@ Ba việc đầu đã làm và đưa lên mạng 2026-11-16 (ghi trong `DEPLOY_L
   - Bài 13 bước 4 (và mọi khung Scratch ở màn dọc 600–899px): bảng khối + vùng code chung một hàng cao 404px, sân khấu + ô nhân vật một hàng bên dưới. Trang 800×1280 từ 2350px còn 1280px; bài 13–16 không bước nào cao quá một màn hình.
   - Solo BOSS màn dọc (≥600px): Bọ Lỗi nhỏ bên trái, tên, HP, điểm, đồng hồ bên phải; khối cao 193px (trước 386px), câu hỏi bắt đầu ở y≈313 (trước y≈460).
   - Bản đồ bài học: đoạn đường Bíp đã đi (từ bài 1 tới chỗ Bíp đứng) tô màu cam đậm (`.map-walked`); học xong hết thì tô cả đường (master dặn thêm).
+- [x] **Rà UI/UX toàn bộ bằng máy quét** — xong 2026-11-16 (chi tiết trong `DEPLOY_LOG.md`): sửa 5 trang tràn ngang trên điện thoại, nới vùng chạm của các nút tí hon trên máy cảm ứng, phím Esc đóng popup. Lần sau rà lại: `tools/uiscan.js` (cách dùng ở đầu tệp).
 - [ ] **Master xem thử trên máy thật** 3 chỗ trên. Còn chưa làm (nếu master muốn): khung ngang, trang chủ ở chế độ bản đồ, 17 bài thành 3 hàng × 204px nên phải cuộn trong khung; hướng sửa là hạ `rowH` hoặc thu nhỏ nút bản đồ.

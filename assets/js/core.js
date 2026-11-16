@@ -609,6 +609,14 @@
     }
     try { document.addEventListener('touchmove', onMove, { passive: false }); }
     catch (err) { document.addEventListener('touchmove', onMove, false); }
+    /* Esc (PC keyboard) presses the top popup's own close button ("Đóng ✕" / "Để sau");
+       a popup without one (a result the learner must read) stays open */
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' && e.keyCode !== 27) return;
+      var all = document.querySelectorAll('.bip-modal'), top = all[all.length - 1];
+      var b = top && top.querySelector('[data-k="close"], [data-k="later"], #boss-close');
+      if (b) { e.preventDefault(); b.click(); }
+    }, false);
   })();
 
   /* ---------- install as an app (shortcut on the home screen) ----------
