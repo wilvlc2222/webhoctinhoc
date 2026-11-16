@@ -66,3 +66,11 @@ Phạm vi master đã duyệt: **chỉ đổi lời dẫn, ví dụ, tên ngư�
 - [ ] Bước 4: lớp 5, sau khi lớp 4 xong.
 - Ước lượng: lớp 4 khoảng 80 lượt gọi, 60–80% một khung 5 tiếng nếu chia 4–5 phiên ngắn; lớp 5 gấp đôi.
 - Mỗi lần đổi tệp nhớ đổi số `?v=` ở mọi trang (xem `DEPLOY_LOG.md` 2026-11-13).
+
+## 7. Cửa hàng VIP để tiêu kim cương (master giao 2026-11-16, chưa làm)
+
+- [ ] **Xây cửa hàng VIP**: nơi em học sinh tiêu kim cương đã kiếm được.
+- [ ] **Hai cấp độ donate**:
+  - Cấp 1, giá ×1: mở khoá BOSS mà không cần đủ sao của chủ đề.
+  - Cấp 2, giá ×4: một món xịn xò hơn (master chưa chốt là món gì).
+- Cần master chốt trước khi làm: giá ×1 là bao nhiêu kim cương; món ×4 là gì; "donate" là trả bằng kim cương trong trò chơi hay bằng tiền thật.
