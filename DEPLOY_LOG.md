@@ -344,4 +344,4 @@
 - Không sửa (cố ý): nút và chữ nhỏ bên trong phần mềm giả (Scratch, PowerPoint, Paint, File Explorer) vì giống phần mềm thật trong SGK; trên 1024×768 cả khung 1280×720 thu nhỏ 0,8 nên mọi thứ nhỏ theo.
 - Mọi trang đổi `main.css?v=1116e` → `?v=1116f`, `core.js?v=1116d` → `?v=1116e`.
 - Kiểm tra trên máy tính: `tools/fit.html?pages=all&solve=1` → `ALL OK (35 pages)`; quét lại 8 trang ở 375×667, 360×640, 800×1280: không còn tràn ngang; `tools/bossplay.js?g=4`: 6 chủ đề thắng/thua đúng, không lỗi; trang chủ 800×1280: Cài đặt mở/đóng (Esc, chạm ngoài), Tủ đồ và Solo BOSS đóng bằng Esc. Chưa thử trên máy thật.
-- Chưa commit.
+- Gộp vào `main` (fast-forward) và push ngày 2026-11-17.
