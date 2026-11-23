@@ -1916,6 +1916,12 @@ html.eink .gem-chip { background: #fff; border-color: #000; color: #000; }
 .teach-tabs .btn[aria-pressed="true"] { --edge: #134a8e; background: var(--primary); border-color: var(--primary); color: var(--primary-ink); }
 .teach-find { flex: 0 1 200px; min-height: 40px; }
 .teach-sum { margin: 6px 0; font-size: 15px; }
+.teach-hits { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; margin: 10px 0 4px; }
+.teach-hit { flex: 1 1 180px; display: flex; flex-direction: column; padding: 8px 12px; border: 2px solid var(--line); border-radius: 12px; background: var(--paper); }
+.teach-hit span { font-size: 14px; color: var(--muted); }
+.teach-hit b { font-size: 28px; line-height: 1.2; }
+.teach-hit small { font-size: 13px; color: var(--muted); }
+.teach-hits .teach-note { flex: 1 1 100%; margin: 0; }
 .teach-scroll { overflow-x: auto; border: 2px solid var(--line); border-radius: 12px; background: var(--paper); }
 .teach-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .teach-table th, .teach-table td { padding: 4px 6px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); text-align: center; white-space: nowrap; }

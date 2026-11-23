@@ -84,3 +84,12 @@ Bản script mới nhất có thêm ba việc. Dán lại `tools/sheet-sync.gs` 
 - **Xoá tên khỏi máy** cần mật khẩu giáo viên (ô B1 của trang tính CaiDat). Xoá khỏi máy không xoá dòng trong bảng tính.
 
 Các dòng cũ trong bảng vẫn dùng được. Nếu hai dòng cũ trùng mã, em học sau sẽ được đổi sang mã mới khi máy gửi kết quả.
+
+## Lượt truy cập, lượt đăng nhập
+
+Cần dán lại `sheet-sync.gs` và **triển khai phiên bản mới** (Triển khai → Quản lý các lần triển khai → Chỉnh sửa → Phiên bản mới). URL giữ nguyên.
+
+- Script tự tạo trang tính **LuotTruyCap**, mỗi ngày một dòng: Ngày, Lượt truy cập, Lượt đăng nhập. Không có tên học sinh.
+- **Lượt truy cập**: một trình duyệt mở trang web, tính một lần cho tới khi đóng trình duyệt (mở thêm bài học không tính thêm). Trang giáo viên không tính.
+- **Lượt đăng nhập**: học sinh vào bằng tên và mã số, chọn tên của mình, hoặc lấy lại sao từ máy khác.
+- Trang giáo viên hiện ba ô ở đầu: truy cập hôm nay, đăng nhập hôm nay (kèm số 7 ngày và tất cả), và số em học hôm nay.

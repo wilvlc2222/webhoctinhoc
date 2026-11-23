@@ -345,3 +345,13 @@
 - Mọi trang đổi `main.css?v=1116e` → `?v=1116f`, `core.js?v=1116d` → `?v=1116e`.
 - Kiểm tra trên máy tính: `tools/fit.html?pages=all&solve=1` → `ALL OK (35 pages)`; quét lại 8 trang ở 375×667, 360×640, 800×1280: không còn tràn ngang; `tools/bossplay.js?g=4`: 6 chủ đề thắng/thua đúng, không lỗi; trang chủ 800×1280: Cài đặt mở/đóng (Esc, chạm ngoài), Tủ đồ và Solo BOSS đóng bằng Esc. Chưa thử trên máy thật.
 - Gộp vào `main` (fast-forward) và push ngày 2026-11-17.
+
+## 2026-11-23 – Đếm lượt truy cập, lượt đăng nhập
+
+- Master yêu cầu: thêm chỉ số đo lượt truy cập, lượt đăng nhập.
+- `sync.js`: gửi `{action:'hit', kind:'visit'}` một lần mỗi phiên trình duyệt (`sessionStorage` `whth-visit`), `kind:'login'` khi `addProfile` / `useProfile` / `restoreProfile` có tên (cùng tên trong 5 giây tính một). Không gửi tên. Trang giáo viên và `tools/` không đếm.
+- `tools/sheet-sync.gs`: action `hit` cộng vào trang tính mới `LuotTruyCap` (Ngày, Lượt truy cập, Lượt đăng nhập; mỗi ngày một dòng); `list` trả thêm `hits` (hôm nay, 7 ngày, tất cả).
+- `giaovien.html`: ba ô ở đầu bảng: truy cập hôm nay, đăng nhập hôm nay (kèm 7 ngày, tất cả), số em học hôm nay (từ "Học gần nhất"). Script cũ thì hiện lời nhắc dán lại script.
+- Mọi trang đổi `core.js?v=1116e` → `?v=1123a`, `main.css?v=1116f` → `?v=1123a`.
+- Kiểm tra trên máy tính (chặn gửi thật): ba lần đăng nhập liền → một gói `hit login`; trang giáo viên với dữ liệu giả hiện đúng ba ô, không tràn ngang. Chưa thử với Sheet thật: master cần dán lại `sheet-sync.gs` và triển khai phiên bản mới.
+- Gộp vào `main` (fast-forward) và push ngày 2026-11-23.

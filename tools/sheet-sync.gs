@@ -97,6 +97,57 @@ function stats() {
   return { ok: true, learners: last - 1, stars: stars };
 }
 
+/* ---------- visits and logins, one row per day (sheet "LuotTruyCap") ----------
+   A visit = a browser that opens the site (counted once until the browser is closed).
+   A login = a learner who types the name and code, or picks the name on the home page.
+   No names here: only the date and two numbers. */
+var HITS_NAME = 'LuotTruyCap';
+function hitsSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(), sh = ss.getSheetByName(HITS_NAME);
+  if (!sh) {
+    sh = ss.insertSheet(HITS_NAME);
+    sh.getRange(1, 1, 1, 3).setValues([['Ngày', 'Lượt truy cập', 'Lượt đăng nhập']]).setFontWeight('bold');
+    sh.setFrozenRows(1);
+    sh.getRange('A:A').setNumberFormat('@');   /* keep "2026-11-23" as text, not a date */
+  }
+  return sh;
+}
+function today() { return Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd'); }
+function hit(req) {
+  var col = req.kind === 'visit' ? 2 : req.kind === 'login' ? 3 : 0;
+  if (!col) return { ok: false, error: 'bad kind' };
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var sh = hitsSheet(), last = sh.getLastRow(), day = today();
+    /* days go down the sheet in order, so today is the last row or a new one */
+    if (last < 2 || String(sh.getRange(last, 1).getValue()) !== day) {
+      last++;
+      sh.getRange(last, 1, 1, 3).setValues([[day, 0, 0]]);
+    }
+    var cell = sh.getRange(last, col);
+    cell.setValue((Number(cell.getValue()) || 0) + 1);
+    return { ok: true };
+  } finally {
+    lock.releaseLock();
+  }
+}
+/* today, the last 7 days (today included) and all days, for the teacher page */
+function hitStats() {
+  var sh = hitsSheet(), last = sh.getLastRow(), out = { today: [0, 0], week: [0, 0], all: [0, 0], days: [] };
+  if (last < 2) return out;
+  var v = sh.getRange(2, 1, last - 1, 3).getValues(), now = new Date(), tz = Session.getScriptTimeZone(), week = {}, i;
+  for (i = 0; i < 7; i++) week[Utilities.formatDate(new Date(now.getTime() - i * 864e5), tz, 'yyyy-MM-dd')] = 1;
+  var day = today();
+  for (i = 0; i < v.length; i++) {
+    var d = String(v[i][0]), a = Number(v[i][1]) || 0, b = Number(v[i][2]) || 0;
+    out.all[0] += a; out.all[1] += b;
+    if (week[d]) { out.week[0] += a; out.week[1] += b; out.days.push([d, a, b]); }
+    if (d === day) { out.today[0] += a; out.today[1] += b; }
+  }
+  return out;
+}
+
 /* ---------- teacher page (giaovien.html) ----------
    The teacher's password is typed by the teacher into cell B1 of the sheet "CaiDat".
    It is checked here, on Google's side, and is never part of the web page. */
@@ -123,7 +174,7 @@ function list(req) {
       rows.push({ name: String(r[0]), code: String(r[1]), total: Number(r[2]) || 0, started: r[5], last: r[6], lessons: lessons });
     }
   }
-  return { ok: true, rows: rows };
+  return { ok: true, rows: rows, hits: hitStats() };
 }
 
 /* is this name already in the class? (answers yes or no only: no code, no stars)
@@ -177,6 +228,7 @@ function handle(req) {
   if (req.action === "list") return list(req);
   if (req.action === "exists") return nameExists(req);
   if (req.action === "checkKey") return checkKey(req);
+  if (req.action === "hit") return hit(req);
   var name = cleanName(req.name), code = String(req.code || '');
   if (!name || !/^\d{4}$/.test(code)) return { ok: false, error: 'bad name or code' };
   var lock = LockService.getScriptLock();

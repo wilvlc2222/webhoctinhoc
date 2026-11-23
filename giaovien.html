@@ -7,7 +7,7 @@
 <title>Dành cho giáo viên – Tin học vui</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;subset=vietnamese&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=1116f">
+<link rel="stylesheet" href="assets/css/main.css?v=1123a">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <meta name="apple-mobile-web-app-title" content="Tin học vui">
 <script src="assets/js/errbox.js?v=1114j"></script>
 <script src="assets/js/icons.js?v=1114j"></script>
-<script src="assets/js/core.js?v=1116e"></script>
+<script src="assets/js/core.js?v=1123a"></script>
 </head>
 <body>
 <header class="topbar">
@@ -59,6 +59,7 @@
       <button class="btn btn-small" id="teach-reload" type="button">Tải lại</button>
       <button class="btn btn-small" id="teach-csv" type="button">Tải tệp CSV</button>
     </div>
+    <div class="teach-hits" id="teach-hits"></div>
     <p class="teach-sum" id="teach-sum"></p>
     <div class="teach-scroll"><table class="teach-table" id="teach-table"></table></div>
     <p class="teach-note">Mỗi ô bài học là số sao đã đạt. Màu ô: <span class="tc gold">vàng</span> đủ sao, <span class="tc silver">bạc</span> từ 70%, <span class="tc bronze">đồng</span> từ 40%. Bấm vào tiêu đề cột để sắp xếp.</p>
@@ -67,7 +68,7 @@
 
 <script>
 (function () {
-  var key = '', rows = [], grade = 4, sort = { k: 'last', dir: -1 }, started = false;
+  var key = '', rows = [], hits = null, grade = 4, sort = { k: 'last', dir: -1 }, started = false;
 
   function esc(s) { var d = document.createElement('div'); d.appendChild(document.createTextNode(s == null ? '' : String(s))); return d.innerHTML; }
   function when(v) {
@@ -158,11 +159,31 @@
         return;
       }
       rows = res.rows || [];
+      hits = res.hits || null;
+      drawHits();
       document.getElementById('teach-key').value = '';
       document.getElementById('teach-login').style.display = 'none';
       document.getElementById('teach-board').style.display = '';
       draw();
     });
+  }
+
+  /* visits and logins (sheet "LuotTruyCap"), and how many learners studied today (from "Học gần nhất") */
+  function drawHits() {
+    var el = document.getElementById('teach-hits'), now = new Date(), today = 0, i, d;
+    for (i = 0; i < rows.length; i++) {
+      d = rows[i].last ? new Date(rows[i].last) : null;
+      if (d && d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth() && d.getDate() === now.getDate()) today++;
+    }
+    function tile(title, n, sub) { return '<div class="teach-hit"><span>' + title + '</span><b>' + n + '</b><small>' + sub + '</small></div>'; }
+    if (!hits) {
+      el.innerHTML = tile('Học hôm nay', today, 'em') +
+        '<p class="teach-note">Chưa đếm lượt truy cập: thầy cô dán lại tệp <code>tools/sheet-sync.gs</code> và triển khai phiên bản mới.</p>';
+      return;
+    }
+    el.innerHTML = tile('Truy cập hôm nay', hits.today[0], '7 ngày: ' + hits.week[0] + ' · tất cả: ' + hits.all[0]) +
+      tile('Đăng nhập hôm nay', hits.today[1], '7 ngày: ' + hits.week[1] + ' · tất cả: ' + hits.all[1]) +
+      tile('Học hôm nay', today, 'em có sao mới hoặc vừa vào học');
   }
 
   /* CSV for a spreadsheet program; the leading mark makes Excel read the Vietnamese letters */

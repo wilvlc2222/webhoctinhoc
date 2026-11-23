@@ -117,12 +117,26 @@
     if (isNew) soon(Core.currentName(), 2500);
     return isNew;
   };
+  /* counters for the teacher page (sheet "LuotTruyCap"): only the kind of event is sent, no name */
+  function hit(kind) { post({ action: 'hit', kind: kind }, function () {}); }
+  /* not the teacher page, not the test tools (asked late: this file runs before the page body exists) */
+  function counted() { return !document.getElementById('teach-board') && !/\/tools\//.test(location.pathname); }
+  var lastLogin = { name: '', t: 0 };
+  /* a learner gets in: typed the name and code, picked the name, or got the stars back from another device.
+     One flow can call two of these in a row, so the same name within 5 seconds counts once. */
+  function loginHit(name) {
+    if (!counted() || skip(name)) return;
+    var t = new Date().getTime();
+    if (lastLogin.name === name && t - lastLogin.t < 5000) return;
+    lastLogin = { name: name, t: t };
+    hit('login');
+  }
   /* a new learner, or a learner coming back → send / fetch right away, so the teacher sees who joined */
-  ['addProfile', 'useProfile'].forEach(function (k) {
+  ['addProfile', 'useProfile', 'restoreProfile'].forEach(function (k) {
     var f = Core[k];
     Core[k] = function () {
       var r = f.apply(Core, arguments), name = Core.currentName();
-      if (name) soon(name, 300);
+      if (name) { loginHit(name); if (k !== 'restoreProfile') soon(name, 300); }
       paint();
       return r;
     };
@@ -137,6 +151,10 @@
   });
   function start() {
     var name = Core.currentName();
+    /* one visit per browser until it is closed (opening more lessons does not add more) */
+    try {
+      if (counted() && !sessionStorage.getItem('whth-visit')) { sessionStorage.setItem('whth-visit', '1'); hit('visit'); }
+    } catch (e) {}
     /* on every page: send what is still waiting; on the home page also fetch stars earned on other devices */
     if (!skip(name) && (readDirty()[name] || document.getElementById('lessons'))) push(name);
     /* controls that only make sense with a server (home page: "Em đã có mã số") */
